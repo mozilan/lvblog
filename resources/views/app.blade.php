@@ -8,7 +8,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet" type="text/css"/>
+    <link href="{{ mix('css/app.css') }}" rel="stylesheet" type="text/css"/>
 
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
 
@@ -26,7 +26,7 @@
     <router-view></router-view>
 </div>
 
-<script type="text/javascript" src="{{ asset('js/app.js') }}"></script>
+<script type="text/javascript" src="{{ mix('js/app.js') }}"></script>
 
 </body>
 </html>
