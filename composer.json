@@ -12,6 +12,7 @@
         "dingo/api": "^2.3",
         "doctrine/dbal": "^2.9",
         "fideloper/proxy": "^4.0",
+        "gregwar/captcha": "^1.1",
         "laravel/framework": "5.8.*",
         "laravel/tinker": "^1.0",
         "overtrue/easy-sms": "^1.1"
