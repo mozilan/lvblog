@@ -20,7 +20,7 @@ return [
         'errorlog' => [
             'file' => '/tmp/easy-sms.log',
         ],
-        'qcloud' => [
+        'qcloud' => [ 
             'sdk_app_id' => env('QCLOUD_SDK_APP_ID'), // SDK APP ID
             'app_key' => env('QCLOUD_APP_KEY'), // APP KEY
             'sign_name' => '', // 短信签名，如果使用默认签名，该字段可缺省（对应官方文档中的sign）
