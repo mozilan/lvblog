@@ -119,6 +119,7 @@
                     resource: '',
                     desc: ''
                 },
+                //Label宽度
                 formLabelWidth: '55px',
                 phone: '',
                 captcha_code: '',
@@ -134,6 +135,10 @@
                         text: ''
                     },
                     captcha_code: {
+                        id_valid: true,
+                        text: ''
+                    },
+                    verification_code: {
                         id_valid: true,
                         text: ''
                     },
