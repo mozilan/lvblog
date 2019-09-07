@@ -1,5 +1,5 @@
 /**
- * Imports the Roast API URL from the config.
+ * Imports the LvBlog API URL from the config.
  */
 import { LVBLOG_CONFIG } from '../config.js';
 
@@ -23,7 +23,7 @@ export default {
             }
         );
     },
-    signIn: function (verification_key, verification_code, name, password) {
+    postSignIn: function (verification_key, verification_code, name, password) {
         return axios.post(LVBLOG_CONFIG.API_URL + '/users',
             {
                 verification_key: verification_key,

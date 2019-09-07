@@ -15,12 +15,6 @@
         background-color: #f9f9f9;
         padding: 30px 0;
     }
-    .navBarWrap {
-        position:fixed;
-        top:0;
-        z-index:999;
-        width: 100%;
-    }
 </style>
 
 <template>
@@ -34,12 +28,14 @@
                     <router-view></router-view>
                 </el-col>
             </el-row>
+            <LFooter></LFooter>
         </el-container>
         <Register></Register>
     </div>
 </template>
 
 <script>
+    import LFooter from '../components/L-footer'
     import Navigation from '../components/global/NavigationModal';
     //import LoginModal from '../../../../CloudStation/blumer-blog/resources/js/components/global/RegisterModal.vue';
     import Register from '../components/global/RegisterModal';
@@ -57,7 +53,8 @@
         components: {
             Navigation,
             //LoginModal,
-            Register
+            Register,
+            LFooter,
         }
     }
 </script>

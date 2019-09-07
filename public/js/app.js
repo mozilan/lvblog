@@ -3596,10 +3596,50 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
+      captcha_button_show: true,
+      captcha_loading: false,
+      message_loading: false,
+      loader: '',
+      captcha_show: false,
+      fullscreenLoading: false,
       dialogFormVisible: false,
       form: {
         name: '',
@@ -3611,10 +3651,11 @@ __webpack_require__.r(__webpack_exports__);
         resource: '',
         desc: ''
       },
+      //Label宽度
       formLabelWidth: '55px',
       phone: '',
       captcha_code: '',
-      captcha_code_url: 'data:image/jpeg;base64,/9j/4AAQSkZJRgABAQEAYABgAAD//gA7Q1JFQVRPUjogZ2QtanBlZyB2MS4wICh1c2luZyBJSkcgSlBFRyB2ODApLCBxdWFsaXR5ID0gOTAK/9sAQwADAgIDAgIDAwMDBAMDBAUIBQUEBAUKBwcGCAwKDAwLCgsLDQ4SEA0OEQ4LCxAWEBETFBUVFQwPFxgWFBgSFBUU/9sAQwEDBAQFBAUJBQUJFA0LDRQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQU/8AAEQgAKACWAwERAAIRAQMRAf/EAB8AAAEFAQEBAQEBAAAAAAAAAAABAgMEBQYHCAkKC//EALUQAAIBAwMCBAMFBQQEAAABfQECAwAEEQUSITFBBhNRYQcicRQygZGhCCNCscEVUtHwJDNicoIJChYXGBkaJSYnKCkqNDU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6g4SFhoeIiYqSk5SVlpeYmZqio6Slpqeoqaqys7S1tre4ubrCw8TFxsfIycrS09TV1tfY2drh4uPk5ebn6Onq8fLz9PX29/j5+v/EAB8BAAMBAQEBAQEBAQEAAAAAAAABAgMEBQYHCAkKC//EALURAAIBAgQEAwQHBQQEAAECdwABAgMRBAUhMQYSQVEHYXETIjKBCBRCkaGxwQkjM1LwFWJy0QoWJDThJfEXGBkaJicoKSo1Njc4OTpDREVGR0hJSlNUVVZXWFlaY2RlZmdoaWpzdHV2d3h5eoKDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uLj5OXm5+jp6vLz9PX29/j5+v/aAAwDAQACEQMRAD8A+xassKACgAoAKAPOPCfxcEmpjw/4vtP+Ec8S7gqxMCbe5zyDE4LDptyC3U4GecK5wU8T73s6y5Zfg/Q9HpneFABQAUAFABQAUAFAFXUtWsdGtjcaheW9jbjrLcyrGo/EkCgmUoxV5Ox5Nr/7T3hywuZLXSbK+1yZCP3lvGBER7HOT+VRzdjgnj6MJcqu/QxpP2l9VlT7Xb+C9QOlgbGuSjHbIOoyBt4BHGc80XZH1+O/s5W7/wBf5npdtq/irULaIpp8FuzKJA7EYII6fePPNK8j2l7Nq9zr493lrvxvwM49a0MR1ABQAUAFABQBh+LPBWi+N9Oaz1iwhu02lUkZB5kWcZKN1U8Dp6UjGpShWVpq55uPh/8AELwA3leEfEUOq6HF80Wl6uMyIDxsV8fdUAEYZRnPy+qs0cPscRR0oyvHszB1X9oTxX4KvVi8TeH9JXa2yWCy1BDOpPzD5A7kAKCCSMZI5HSi9jCWNq0narFfJ6nQaJ+1N4O1COIX4vdJlYZfzYTIin2KZJ/75FHMjeGY0ZfFdG/p/wC0B4C1HIXX44HBwVuIpI/1K4P4GndG0cbQl9o5nXP2qfDVlM9vpVhf6zdb9kexVjikOcDDEluf92k5IwlmFO/LBNs898Y/FP4o2EdvPNqdnpy3kvkx2tjAjEE+7qx/JqjmbMcTLGUEnOSV+iOq03wT8YdGt0lsPFMl0xRWMOpMsgOeoy+/+lP3joWGxEEnCrf1X/DiX9n8Y9HtjNc+LbG2t25PmRRF1z2A8sk+nWtIxnN2R24XLcxxlRUqE07+W34Gx4V/Z40XV7eDWPFN3qGu6jcjzJEuZykYzz0XDfrj2olFRbROJyqjh8RKnKTnZ2v3PXND0LT/AA3pkWn6XaR2VlFnZDEMAZOT+ZNI1hCNOPLFWReplhQAUAFABQAUAFAHiHxn8VeI9U8d6R4H8M3v9nXFzCJ57lW2nktgZ6gAKTx6ipfY8jFVKkqsaFJ2uef+INZ+JngjXtI8PXfipmgvZR9n1FGEwbLAEMzDPynGVPr3zS1OSo8VQnGlKW/UufFpfHPgrRrPUtT+IF1d3F3c+Q9vpX7iNFCk7gylecAcbRyTz6juVio4ijFSnUevbQ4TTdM8S6Np3/CWS+G7a/08fvJ7jVLf7T5wJxubzM8nPVcVKOZUqtOKryimvPX8z3pvh1D8V/BWn3co0+CG6tFNuY7NFe1H3lRGAyFDdgQOTxTs31PoHTw+Jor3N1p5HiXjP9nvxd4VtH1GdI9VtgcySWLNJIgAJLMpAOMDsT1FDTPnquCq01zPX0Mu41/S/EvgMw6peSweJtMcLZvIrFZoQP8AV5A+UjHGfb14WgSrqrRUZu0o7HXaD4xl+L/jfwLZagFRdKjJuXYgLIVOd31IVfxzVbmsKrxVWmpdNz6N+JnjhPh74SuNYMJuCrLGiDoSx6n9au6W59G61KhadZNx623PF9L+N/g+fVYr/XLjUb25J3ELbjyk9B1BOPQDH1reVdJcsFZHu4rizDU6TwmXwcId+vn/AMPue/eG/E+meLdLj1DSbtLu0fgOnGD6EHkH2Nc54EKkaq5ou5qUzQKACgAoAKACgAoAq6lPd29tusrRby4JAEbyiJR7lsHA+gJ9qCZNpe6rnzV8X9L1vwn490zxnq+n/aLBj5M62lyZFTliFDFAQNrYBKjlTx0zm13PIxM6lCvDEcu2mhy/xV8feFvFX/CNSaHDcW80MhluxPn91kr8oJ6ngkkcdKVl0OfF42OI5Guh6D+0JomjH4baPrGlYmie/hPmrIXV0Mcme/rim4pao7cxqe1oRle6v/md98TZrNfgnfxySwWwl0weSjME3EICFUdz7CrextiGvq7u+gz4O+IbLSfgvouoajcpaWdvCVkmkOFUBiKFsLCzUcPGUnoZvxusPF2q6ENY8Ja5s0pLQtPaQEBpl5O9Wxz8p6ZHSk79DPFqrKPPSlpYf8B9A8N6x8LNPA0yC8V3c3AvYllJl3DceR0yq4/3R6ULYeDhTlQWl/USb9mbwnea1qV9cid4btt6W0beWsBzk7SPX0oshPAUnJyfU89+M/hLxf4K8D3FlLra674S86NYhdc3duxORlscqDlfvHqOBSdzixVOtSpuLleP4nRfCTTPhj4o8C2GjyQabLrE1uBdLcoq3Xm5CsVc8j5iNu09COOtNWN8NHDVKShpfr3Kv7JbvHH4ntNxMUU6FVJ4BOQf5CiJOW6c6PoWqPbCgAoAKACgAoAKACgCK6tIL63eC5hjuIJBh4pVDKw9CDwaBNJqzOVm+EPgyaO5T/hG9PjFwmxzFCEOP9nH3fwxSsjmeGou/urUytd+BHhbVvC6aJb2radFGysk8RLSDByeWznIyPxosZzwdKUORKx1OleCdC0a3WK20q0DeWInmeFWkkUDHzsRlvxoOiNKEVojN1v4VeFdb0u6sjodhaGeMx+fa2qRyJ6EMoB460WRE8PSnFx5UeNXPg34t+GdKl8I6XJDqGiS5ihvAV3JEf4ck5Tj2OOxpa7HlOli6cfZR1Xc9L+HHgrxJ4B8JWmkwnSAYdzSbmlkMrseTuwu3Gc42tnGMjO4NaHfQpVKNNQVjpvsfihP3h1TTJ5O0IsXijx7nzGbP5fSg6LVd7r7v+Ccd8WtG17xZ4GvtJvbK3gMjI8Vzp7TXXzqwOHiWLeoIBGV3c4oepy4mFSpScJL7rv8LGdpnw48C+KfDOmaXqDWv9u2llEkt3bk290GjjEYY7gGIXjG4EcLkUrIiNChUgoy+JL0Za+AvwwuPh7FrUs19b3sV5MFhNu+8bULDJI789PahKxWDw7oczbvc9Zqj0goAKACgD//2Q==',
+      captchas_url: '',
       captcha_key: '',
       verification_key: '',
       verification_code: '',
@@ -3629,6 +3670,10 @@ __webpack_require__.r(__webpack_exports__);
           id_valid: true,
           text: ''
         },
+        verification_code: {
+          id_valid: true,
+          text: ''
+        },
         name: {
           id_valid: true,
           text: ''
@@ -3639,6 +3684,229 @@ __webpack_require__.r(__webpack_exports__);
         }
       }
     };
+  },
+  methods: {
+    getCaptchas: function getCaptchas() {
+      if (this.phone.trim() === '') {
+        this.validations.phone.text = '请输入手机号';
+        this.openMessage(this.validations.phone.text, 'warning');
+        return false;
+      }
+
+      this.captcha_loading = true;
+      this.$store.dispatch('loadCaptchas', {
+        phone: this.phone
+      });
+    },
+    getMessages: function getMessages() {
+      var _this = this;
+
+      if (this.captcha_code.trim() === '') {
+        this.validations.captcha_code.text = '请输入图形验证码';
+        this.openMessage(this.validations.captcha_code.text, 'warning');
+        return false;
+      }
+
+      this.message_loading = true;
+      this.$store.dispatch('loadVerificationCodes', {
+        phone: this.phone,
+        captcha_key: this.captcha_key,
+        captcha_code: this.captcha_code
+      });
+      setTimeout(function () {
+        _this.message_loading = false;
+      }, 10000);
+    },
+    openMessage: function openMessage(title, type) {
+      this.$message({
+        message: title,
+        type: type
+      });
+    },
+    submitRegisterByPhone: function submitRegisterByPhone() {
+      if (this.validateRegisterByPhone()) {
+        this.$store.dispatch('freshUserVerificationCodeLoadStatus');
+        this.$store.dispatch('registerByPhone', {
+          name: this.name,
+          password: this.password,
+          verification_key: this.verification_key,
+          verification_code: this.verification_code
+        });
+      }
+    },
+    validateRegisterByPhone: function validateRegisterByPhone() {
+      var validateRegisterForm = true;
+
+      if (this.phone.trim() === '') {
+        validateRegisterForm = false;
+        this.validations.phone.is_valid = false;
+        this.validations.phone.text = '请输入手机号';
+        this.openMessage(this.validations.phone.text, 'warning');
+        return validateRegisterForm;
+      }
+
+      if (!this.phone.trim().match(/^1[3456789]\d{9}$/)) {
+        validateRegisterForm = false;
+        this.validations.phone.is_valid = false;
+        this.validations.phone.text = '手机号格式不正确';
+        this.openMessage(this.validations.phone.text, 'warning');
+        return validateRegisterForm;
+      }
+
+      if (this.captcha_code.trim() === '') {
+        validateRegisterForm = false;
+        this.validations.captcha_code.is_valid = false;
+        this.validations.captcha_code.text = '请输入图形验证码';
+        this.openMessage(this.validations.captcha_code.text, 'warning');
+        return validateRegisterForm;
+      }
+
+      if (this.verification_code.trim() === '') {
+        validateRegisterForm = false;
+        this.validations.verification_code.is_valid = false;
+        this.validations.verification_code.text = '请输入手机验证码';
+        this.openMessage(this.validations.verification_code.text, 'warning');
+        return validateRegisterForm;
+      }
+
+      if (this.name.trim() === '') {
+        validateRegisterForm = false;
+        this.validations.name.is_valid = false;
+        this.validations.name.text = '请输入用户名';
+        this.openMessage(this.validations.name.text, 'warning');
+        return validateRegisterForm;
+      }
+
+      if (!this.name.trim().match(/(^[a-zA-Z0-9_-]{6,12}$)/)) {
+        validateRegisterForm = false;
+        this.validations.name.is_valid = false;
+        this.validations.name.text = '用户名必须 6到12位,字母,数字,下划线,减号';
+        this.openMessage(this.validations.name.text, 'warning');
+        return validateRegisterForm;
+      }
+
+      if (this.password.trim() === '') {
+        validateRegisterForm = false;
+        this.validations.password.is_valid = false;
+        this.validations.password.text = '请输入密码';
+        this.openMessage(this.validations.password.text, 'warning');
+        return validateRegisterForm;
+      }
+
+      if (!this.password.trim().match(/(^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z_]{6,20}$)/)) {
+        validateRegisterForm = false;
+        this.validations.password.is_valid = false;
+        this.validations.password.text = '密码最少6位，要同时含有数字和字母';
+        this.openMessage(this.validations.password.text, 'warning');
+        return validateRegisterForm;
+      }
+
+      return validateRegisterForm;
+    }
+  },
+  computed: {
+    captchaLoadStatus: function captchaLoadStatus() {
+      if (this.$store.getters.getCaptchaLoadStatus == 1) {
+        this.loader = this.$loading({
+          lock: true,
+          text: '正在获取图形验证码',
+          spinner: 'el-icon-loading',
+          background: 'rgba(0, 0, 0, 0.7)'
+        });
+      }
+
+      if (this.$store.getters.getCaptchaLoadStatus == 2) {
+        //this.fullscreenLoading = false;
+        this.loader.close();
+        this.openMessage('获取图形验证码成功！', 'success');
+        this.captcha_button_show = false;
+        this.captcha_show = true;
+        this.captcha_loading = false;
+        this.$store.dispatch('freshUserCaptchaLoadStatus');
+      }
+
+      if (this.$store.getters.getCaptchaLoadStatus == 3) {
+        //this.fullscreenLoading = false;
+        this.loader.close();
+        this.openMessage('此手机号已经注册!', 'error');
+        this.captcha_loading = false;
+      }
+
+      return this.$store.getters.getCaptchaLoadStatus;
+    },
+    captchas: function captchas() {
+      var captchas = this.$store.getters.getCaptchas;
+      this.captcha_key = captchas.captcha_key;
+      this.captchas_url = captchas.captcha_image_content;
+    },
+    verificationCodeLoadStatus: function verificationCodeLoadStatus() {
+      if (this.$store.getters.getVerificationCodeLoadStatus == 1) {
+        this.loader = this.$loading({
+          lock: true,
+          text: '正在发送短信验证码',
+          spinner: 'el-icon-loading',
+          background: 'rgba(0, 0, 0, 0.7)'
+        });
+      }
+
+      if (this.$store.getters.getVerificationCodeLoadStatus == 2) {
+        //this.fullscreenLoading = false;
+        this.loader.close(); //this.message_loading = false;
+
+        this.openMessage('短信验证码已发送到您的手机！', 'success');
+        this.captcha_show = true;
+      }
+
+      if (this.$store.getters.getVerificationCodeLoadStatus == 3) {
+        //this.fullscreenLoading = false;
+        this.loader.close();
+        this.openMessage('图形验证码不正确！', 'error');
+        this.captcha_button_show = true;
+        this.captcha_show = false;
+        this.$store.dispatch('freshUserCaptchaLoadStatus');
+      }
+
+      return this.$store.getters.getVerificationCodeLoadStatus;
+    },
+    messages: function messages() {
+      var messages = this.$store.getters.getVerificationCodes;
+      this.verification_key = messages.key;
+    },
+    registerByPhoneStatus: function registerByPhoneStatus() {
+      if (this.$store.getters.getRegisterByPhoneStatus == 1) {
+        this.loader = this.$loading({
+          lock: true,
+          text: 'Loading',
+          spinner: 'el-icon-loading',
+          background: 'rgba(0, 0, 0, 0.7)'
+        });
+      }
+
+      if (this.$store.getters.getRegisterByPhoneStatus == 2) {
+        //this.fullscreenLoading = false;
+        this.phone = '';
+        this.captcha_code = '';
+        this.captchas_url = '';
+        this.captcha_key = '';
+        this.verification_key = '';
+        this.verification_code = '';
+        this.name = '';
+        this.password = '';
+        this.captcha_button_show = true;
+        this.captcha_show = false;
+        this.loader.close();
+        this.openMessage('注册成功！', 'success');
+        this.dialogFormVisible = false;
+      }
+
+      if (this.$store.getters.getRegisterByPhoneStatus == 3) {
+        //this.fullscreenLoading = false;
+        this.loader.close();
+        this.openMessage('注册失败!', 'error');
+      }
+
+      return this.$store.getters.getRegisterStatus;
+    }
   },
   mounted: function mounted() {
     _event_bus_js__WEBPACK_IMPORTED_MODULE_0__["EventBus"].$on('prompt-signin', function () {
@@ -3705,7 +3973,6 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_friend__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../components/friend */ "./resources/js/components/friend.vue");
 /* harmony import */ var _components_tag__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/tag */ "./resources/js/components/tag.vue");
-/* harmony import */ var _components_L_footer__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/L-footer */ "./resources/js/components/L-footer.vue");
 //
 //
 //
@@ -3921,15 +4188,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'index',
   components: {
     Friend: _components_friend__WEBPACK_IMPORTED_MODULE_0__["default"],
-    Tag: _components_tag__WEBPACK_IMPORTED_MODULE_1__["default"],
-    LFooter: _components_L_footer__WEBPACK_IMPORTED_MODULE_2__["default"]
+    Tag: _components_tag__WEBPACK_IMPORTED_MODULE_1__["default"]
   }
 });
 
@@ -3944,8 +4209,9 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _components_global_NavigationModal__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../components/global/NavigationModal */ "./resources/js/components/global/NavigationModal.vue");
-/* harmony import */ var _components_global_RegisterModal__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/global/RegisterModal */ "./resources/js/components/global/RegisterModal.vue");
+/* harmony import */ var _components_L_footer__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../components/L-footer */ "./resources/js/components/L-footer.vue");
+/* harmony import */ var _components_global_NavigationModal__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/global/NavigationModal */ "./resources/js/components/global/NavigationModal.vue");
+/* harmony import */ var _components_global_RegisterModal__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/global/RegisterModal */ "./resources/js/components/global/RegisterModal.vue");
 //
 //
 //
@@ -3982,11 +4248,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
+
  //import LoginModal from '../../../../CloudStation/blumer-blog/resources/js/components/global/RegisterModal.vue';
 
 
@@ -4001,9 +4263,10 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   components: {
-    Navigation: _components_global_NavigationModal__WEBPACK_IMPORTED_MODULE_0__["default"],
+    Navigation: _components_global_NavigationModal__WEBPACK_IMPORTED_MODULE_1__["default"],
     //LoginModal,
-    Register: _components_global_RegisterModal__WEBPACK_IMPORTED_MODULE_1__["default"]
+    Register: _components_global_RegisterModal__WEBPACK_IMPORTED_MODULE_2__["default"],
+    LFooter: _components_L_footer__WEBPACK_IMPORTED_MODULE_0__["default"]
   }
 });
 
@@ -5977,7 +6240,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n#chang-jian-ye-mian-bu-ju + .demo-container .el-footer, #chang-jian-ye-mian-bu-ju + .demo-container .el-header {\n    text-align: center;\n}\n#chang-jian-ye-mian-bu-ju + .demo-container .el-main {\n    background-color: #e9eef3;\n    color: #333;\n    text-align: center;\n    line-height: 160px;\n}\n.app{\n     font-family: \"microsoft yahei\";\n}\n#content{\n    background-color: #f9f9f9;\n    padding: 30px 0;\n}\n.navBarWrap {\n    position:fixed;\n    top:0;\n    z-index:999;\n    width: 100%;\n}\n", ""]);
+exports.push([module.i, "\n#chang-jian-ye-mian-bu-ju + .demo-container .el-footer, #chang-jian-ye-mian-bu-ju + .demo-container .el-header {\n    text-align: center;\n}\n#chang-jian-ye-mian-bu-ju + .demo-container .el-main {\n    background-color: #e9eef3;\n    color: #333;\n    text-align: center;\n    line-height: 160px;\n}\n.app{\n     font-family: \"microsoft yahei\";\n}\n#content{\n    background-color: #f9f9f9;\n    padding: 30px 0;\n}\n", ""]);
 
 // exports
 
@@ -61779,6 +62042,1191 @@ exports.default = {
 
 /***/ }),
 
+/***/ "./node_modules/es6-promise/dist/es6-promise.js":
+/*!******************************************************!*\
+  !*** ./node_modules/es6-promise/dist/es6-promise.js ***!
+  \******************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+/* WEBPACK VAR INJECTION */(function(process, global) {/*!
+ * @overview es6-promise - a tiny implementation of Promises/A+.
+ * @copyright Copyright (c) 2014 Yehuda Katz, Tom Dale, Stefan Penner and contributors (Conversion to ES6 API by Jake Archibald)
+ * @license   Licensed under MIT license
+ *            See https://raw.githubusercontent.com/stefanpenner/es6-promise/master/LICENSE
+ * @version   v4.2.8+1e68dce6
+ */
+
+(function (global, factory) {
+	 true ? module.exports = factory() :
+	undefined;
+}(this, (function () { 'use strict';
+
+function objectOrFunction(x) {
+  var type = typeof x;
+  return x !== null && (type === 'object' || type === 'function');
+}
+
+function isFunction(x) {
+  return typeof x === 'function';
+}
+
+
+
+var _isArray = void 0;
+if (Array.isArray) {
+  _isArray = Array.isArray;
+} else {
+  _isArray = function (x) {
+    return Object.prototype.toString.call(x) === '[object Array]';
+  };
+}
+
+var isArray = _isArray;
+
+var len = 0;
+var vertxNext = void 0;
+var customSchedulerFn = void 0;
+
+var asap = function asap(callback, arg) {
+  queue[len] = callback;
+  queue[len + 1] = arg;
+  len += 2;
+  if (len === 2) {
+    // If len is 2, that means that we need to schedule an async flush.
+    // If additional callbacks are queued before the queue is flushed, they
+    // will be processed by this flush that we are scheduling.
+    if (customSchedulerFn) {
+      customSchedulerFn(flush);
+    } else {
+      scheduleFlush();
+    }
+  }
+};
+
+function setScheduler(scheduleFn) {
+  customSchedulerFn = scheduleFn;
+}
+
+function setAsap(asapFn) {
+  asap = asapFn;
+}
+
+var browserWindow = typeof window !== 'undefined' ? window : undefined;
+var browserGlobal = browserWindow || {};
+var BrowserMutationObserver = browserGlobal.MutationObserver || browserGlobal.WebKitMutationObserver;
+var isNode = typeof self === 'undefined' && typeof process !== 'undefined' && {}.toString.call(process) === '[object process]';
+
+// test for web worker but not in IE10
+var isWorker = typeof Uint8ClampedArray !== 'undefined' && typeof importScripts !== 'undefined' && typeof MessageChannel !== 'undefined';
+
+// node
+function useNextTick() {
+  // node version 0.10.x displays a deprecation warning when nextTick is used recursively
+  // see https://github.com/cujojs/when/issues/410 for details
+  return function () {
+    return process.nextTick(flush);
+  };
+}
+
+// vertx
+function useVertxTimer() {
+  if (typeof vertxNext !== 'undefined') {
+    return function () {
+      vertxNext(flush);
+    };
+  }
+
+  return useSetTimeout();
+}
+
+function useMutationObserver() {
+  var iterations = 0;
+  var observer = new BrowserMutationObserver(flush);
+  var node = document.createTextNode('');
+  observer.observe(node, { characterData: true });
+
+  return function () {
+    node.data = iterations = ++iterations % 2;
+  };
+}
+
+// web worker
+function useMessageChannel() {
+  var channel = new MessageChannel();
+  channel.port1.onmessage = flush;
+  return function () {
+    return channel.port2.postMessage(0);
+  };
+}
+
+function useSetTimeout() {
+  // Store setTimeout reference so es6-promise will be unaffected by
+  // other code modifying setTimeout (like sinon.useFakeTimers())
+  var globalSetTimeout = setTimeout;
+  return function () {
+    return globalSetTimeout(flush, 1);
+  };
+}
+
+var queue = new Array(1000);
+function flush() {
+  for (var i = 0; i < len; i += 2) {
+    var callback = queue[i];
+    var arg = queue[i + 1];
+
+    callback(arg);
+
+    queue[i] = undefined;
+    queue[i + 1] = undefined;
+  }
+
+  len = 0;
+}
+
+function attemptVertx() {
+  try {
+    var vertx = Function('return this')().require('vertx');
+    vertxNext = vertx.runOnLoop || vertx.runOnContext;
+    return useVertxTimer();
+  } catch (e) {
+    return useSetTimeout();
+  }
+}
+
+var scheduleFlush = void 0;
+// Decide what async method to use to triggering processing of queued callbacks:
+if (isNode) {
+  scheduleFlush = useNextTick();
+} else if (BrowserMutationObserver) {
+  scheduleFlush = useMutationObserver();
+} else if (isWorker) {
+  scheduleFlush = useMessageChannel();
+} else if (browserWindow === undefined && "function" === 'function') {
+  scheduleFlush = attemptVertx();
+} else {
+  scheduleFlush = useSetTimeout();
+}
+
+function then(onFulfillment, onRejection) {
+  var parent = this;
+
+  var child = new this.constructor(noop);
+
+  if (child[PROMISE_ID] === undefined) {
+    makePromise(child);
+  }
+
+  var _state = parent._state;
+
+
+  if (_state) {
+    var callback = arguments[_state - 1];
+    asap(function () {
+      return invokeCallback(_state, child, callback, parent._result);
+    });
+  } else {
+    subscribe(parent, child, onFulfillment, onRejection);
+  }
+
+  return child;
+}
+
+/**
+  `Promise.resolve` returns a promise that will become resolved with the
+  passed `value`. It is shorthand for the following:
+
+  ```javascript
+  let promise = new Promise(function(resolve, reject){
+    resolve(1);
+  });
+
+  promise.then(function(value){
+    // value === 1
+  });
+  ```
+
+  Instead of writing the above, your code now simply becomes the following:
+
+  ```javascript
+  let promise = Promise.resolve(1);
+
+  promise.then(function(value){
+    // value === 1
+  });
+  ```
+
+  @method resolve
+  @static
+  @param {Any} value value that the returned promise will be resolved with
+  Useful for tooling.
+  @return {Promise} a promise that will become fulfilled with the given
+  `value`
+*/
+function resolve$1(object) {
+  /*jshint validthis:true */
+  var Constructor = this;
+
+  if (object && typeof object === 'object' && object.constructor === Constructor) {
+    return object;
+  }
+
+  var promise = new Constructor(noop);
+  resolve(promise, object);
+  return promise;
+}
+
+var PROMISE_ID = Math.random().toString(36).substring(2);
+
+function noop() {}
+
+var PENDING = void 0;
+var FULFILLED = 1;
+var REJECTED = 2;
+
+function selfFulfillment() {
+  return new TypeError("You cannot resolve a promise with itself");
+}
+
+function cannotReturnOwn() {
+  return new TypeError('A promises callback cannot return that same promise.');
+}
+
+function tryThen(then$$1, value, fulfillmentHandler, rejectionHandler) {
+  try {
+    then$$1.call(value, fulfillmentHandler, rejectionHandler);
+  } catch (e) {
+    return e;
+  }
+}
+
+function handleForeignThenable(promise, thenable, then$$1) {
+  asap(function (promise) {
+    var sealed = false;
+    var error = tryThen(then$$1, thenable, function (value) {
+      if (sealed) {
+        return;
+      }
+      sealed = true;
+      if (thenable !== value) {
+        resolve(promise, value);
+      } else {
+        fulfill(promise, value);
+      }
+    }, function (reason) {
+      if (sealed) {
+        return;
+      }
+      sealed = true;
+
+      reject(promise, reason);
+    }, 'Settle: ' + (promise._label || ' unknown promise'));
+
+    if (!sealed && error) {
+      sealed = true;
+      reject(promise, error);
+    }
+  }, promise);
+}
+
+function handleOwnThenable(promise, thenable) {
+  if (thenable._state === FULFILLED) {
+    fulfill(promise, thenable._result);
+  } else if (thenable._state === REJECTED) {
+    reject(promise, thenable._result);
+  } else {
+    subscribe(thenable, undefined, function (value) {
+      return resolve(promise, value);
+    }, function (reason) {
+      return reject(promise, reason);
+    });
+  }
+}
+
+function handleMaybeThenable(promise, maybeThenable, then$$1) {
+  if (maybeThenable.constructor === promise.constructor && then$$1 === then && maybeThenable.constructor.resolve === resolve$1) {
+    handleOwnThenable(promise, maybeThenable);
+  } else {
+    if (then$$1 === undefined) {
+      fulfill(promise, maybeThenable);
+    } else if (isFunction(then$$1)) {
+      handleForeignThenable(promise, maybeThenable, then$$1);
+    } else {
+      fulfill(promise, maybeThenable);
+    }
+  }
+}
+
+function resolve(promise, value) {
+  if (promise === value) {
+    reject(promise, selfFulfillment());
+  } else if (objectOrFunction(value)) {
+    var then$$1 = void 0;
+    try {
+      then$$1 = value.then;
+    } catch (error) {
+      reject(promise, error);
+      return;
+    }
+    handleMaybeThenable(promise, value, then$$1);
+  } else {
+    fulfill(promise, value);
+  }
+}
+
+function publishRejection(promise) {
+  if (promise._onerror) {
+    promise._onerror(promise._result);
+  }
+
+  publish(promise);
+}
+
+function fulfill(promise, value) {
+  if (promise._state !== PENDING) {
+    return;
+  }
+
+  promise._result = value;
+  promise._state = FULFILLED;
+
+  if (promise._subscribers.length !== 0) {
+    asap(publish, promise);
+  }
+}
+
+function reject(promise, reason) {
+  if (promise._state !== PENDING) {
+    return;
+  }
+  promise._state = REJECTED;
+  promise._result = reason;
+
+  asap(publishRejection, promise);
+}
+
+function subscribe(parent, child, onFulfillment, onRejection) {
+  var _subscribers = parent._subscribers;
+  var length = _subscribers.length;
+
+
+  parent._onerror = null;
+
+  _subscribers[length] = child;
+  _subscribers[length + FULFILLED] = onFulfillment;
+  _subscribers[length + REJECTED] = onRejection;
+
+  if (length === 0 && parent._state) {
+    asap(publish, parent);
+  }
+}
+
+function publish(promise) {
+  var subscribers = promise._subscribers;
+  var settled = promise._state;
+
+  if (subscribers.length === 0) {
+    return;
+  }
+
+  var child = void 0,
+      callback = void 0,
+      detail = promise._result;
+
+  for (var i = 0; i < subscribers.length; i += 3) {
+    child = subscribers[i];
+    callback = subscribers[i + settled];
+
+    if (child) {
+      invokeCallback(settled, child, callback, detail);
+    } else {
+      callback(detail);
+    }
+  }
+
+  promise._subscribers.length = 0;
+}
+
+function invokeCallback(settled, promise, callback, detail) {
+  var hasCallback = isFunction(callback),
+      value = void 0,
+      error = void 0,
+      succeeded = true;
+
+  if (hasCallback) {
+    try {
+      value = callback(detail);
+    } catch (e) {
+      succeeded = false;
+      error = e;
+    }
+
+    if (promise === value) {
+      reject(promise, cannotReturnOwn());
+      return;
+    }
+  } else {
+    value = detail;
+  }
+
+  if (promise._state !== PENDING) {
+    // noop
+  } else if (hasCallback && succeeded) {
+    resolve(promise, value);
+  } else if (succeeded === false) {
+    reject(promise, error);
+  } else if (settled === FULFILLED) {
+    fulfill(promise, value);
+  } else if (settled === REJECTED) {
+    reject(promise, value);
+  }
+}
+
+function initializePromise(promise, resolver) {
+  try {
+    resolver(function resolvePromise(value) {
+      resolve(promise, value);
+    }, function rejectPromise(reason) {
+      reject(promise, reason);
+    });
+  } catch (e) {
+    reject(promise, e);
+  }
+}
+
+var id = 0;
+function nextId() {
+  return id++;
+}
+
+function makePromise(promise) {
+  promise[PROMISE_ID] = id++;
+  promise._state = undefined;
+  promise._result = undefined;
+  promise._subscribers = [];
+}
+
+function validationError() {
+  return new Error('Array Methods must be provided an Array');
+}
+
+var Enumerator = function () {
+  function Enumerator(Constructor, input) {
+    this._instanceConstructor = Constructor;
+    this.promise = new Constructor(noop);
+
+    if (!this.promise[PROMISE_ID]) {
+      makePromise(this.promise);
+    }
+
+    if (isArray(input)) {
+      this.length = input.length;
+      this._remaining = input.length;
+
+      this._result = new Array(this.length);
+
+      if (this.length === 0) {
+        fulfill(this.promise, this._result);
+      } else {
+        this.length = this.length || 0;
+        this._enumerate(input);
+        if (this._remaining === 0) {
+          fulfill(this.promise, this._result);
+        }
+      }
+    } else {
+      reject(this.promise, validationError());
+    }
+  }
+
+  Enumerator.prototype._enumerate = function _enumerate(input) {
+    for (var i = 0; this._state === PENDING && i < input.length; i++) {
+      this._eachEntry(input[i], i);
+    }
+  };
+
+  Enumerator.prototype._eachEntry = function _eachEntry(entry, i) {
+    var c = this._instanceConstructor;
+    var resolve$$1 = c.resolve;
+
+
+    if (resolve$$1 === resolve$1) {
+      var _then = void 0;
+      var error = void 0;
+      var didError = false;
+      try {
+        _then = entry.then;
+      } catch (e) {
+        didError = true;
+        error = e;
+      }
+
+      if (_then === then && entry._state !== PENDING) {
+        this._settledAt(entry._state, i, entry._result);
+      } else if (typeof _then !== 'function') {
+        this._remaining--;
+        this._result[i] = entry;
+      } else if (c === Promise$1) {
+        var promise = new c(noop);
+        if (didError) {
+          reject(promise, error);
+        } else {
+          handleMaybeThenable(promise, entry, _then);
+        }
+        this._willSettleAt(promise, i);
+      } else {
+        this._willSettleAt(new c(function (resolve$$1) {
+          return resolve$$1(entry);
+        }), i);
+      }
+    } else {
+      this._willSettleAt(resolve$$1(entry), i);
+    }
+  };
+
+  Enumerator.prototype._settledAt = function _settledAt(state, i, value) {
+    var promise = this.promise;
+
+
+    if (promise._state === PENDING) {
+      this._remaining--;
+
+      if (state === REJECTED) {
+        reject(promise, value);
+      } else {
+        this._result[i] = value;
+      }
+    }
+
+    if (this._remaining === 0) {
+      fulfill(promise, this._result);
+    }
+  };
+
+  Enumerator.prototype._willSettleAt = function _willSettleAt(promise, i) {
+    var enumerator = this;
+
+    subscribe(promise, undefined, function (value) {
+      return enumerator._settledAt(FULFILLED, i, value);
+    }, function (reason) {
+      return enumerator._settledAt(REJECTED, i, reason);
+    });
+  };
+
+  return Enumerator;
+}();
+
+/**
+  `Promise.all` accepts an array of promises, and returns a new promise which
+  is fulfilled with an array of fulfillment values for the passed promises, or
+  rejected with the reason of the first passed promise to be rejected. It casts all
+  elements of the passed iterable to promises as it runs this algorithm.
+
+  Example:
+
+  ```javascript
+  let promise1 = resolve(1);
+  let promise2 = resolve(2);
+  let promise3 = resolve(3);
+  let promises = [ promise1, promise2, promise3 ];
+
+  Promise.all(promises).then(function(array){
+    // The array here would be [ 1, 2, 3 ];
+  });
+  ```
+
+  If any of the `promises` given to `all` are rejected, the first promise
+  that is rejected will be given as an argument to the returned promises's
+  rejection handler. For example:
+
+  Example:
+
+  ```javascript
+  let promise1 = resolve(1);
+  let promise2 = reject(new Error("2"));
+  let promise3 = reject(new Error("3"));
+  let promises = [ promise1, promise2, promise3 ];
+
+  Promise.all(promises).then(function(array){
+    // Code here never runs because there are rejected promises!
+  }, function(error) {
+    // error.message === "2"
+  });
+  ```
+
+  @method all
+  @static
+  @param {Array} entries array of promises
+  @param {String} label optional string for labeling the promise.
+  Useful for tooling.
+  @return {Promise} promise that is fulfilled when all `promises` have been
+  fulfilled, or rejected if any of them become rejected.
+  @static
+*/
+function all(entries) {
+  return new Enumerator(this, entries).promise;
+}
+
+/**
+  `Promise.race` returns a new promise which is settled in the same way as the
+  first passed promise to settle.
+
+  Example:
+
+  ```javascript
+  let promise1 = new Promise(function(resolve, reject){
+    setTimeout(function(){
+      resolve('promise 1');
+    }, 200);
+  });
+
+  let promise2 = new Promise(function(resolve, reject){
+    setTimeout(function(){
+      resolve('promise 2');
+    }, 100);
+  });
+
+  Promise.race([promise1, promise2]).then(function(result){
+    // result === 'promise 2' because it was resolved before promise1
+    // was resolved.
+  });
+  ```
+
+  `Promise.race` is deterministic in that only the state of the first
+  settled promise matters. For example, even if other promises given to the
+  `promises` array argument are resolved, but the first settled promise has
+  become rejected before the other promises became fulfilled, the returned
+  promise will become rejected:
+
+  ```javascript
+  let promise1 = new Promise(function(resolve, reject){
+    setTimeout(function(){
+      resolve('promise 1');
+    }, 200);
+  });
+
+  let promise2 = new Promise(function(resolve, reject){
+    setTimeout(function(){
+      reject(new Error('promise 2'));
+    }, 100);
+  });
+
+  Promise.race([promise1, promise2]).then(function(result){
+    // Code here never runs
+  }, function(reason){
+    // reason.message === 'promise 2' because promise 2 became rejected before
+    // promise 1 became fulfilled
+  });
+  ```
+
+  An example real-world use case is implementing timeouts:
+
+  ```javascript
+  Promise.race([ajax('foo.json'), timeout(5000)])
+  ```
+
+  @method race
+  @static
+  @param {Array} promises array of promises to observe
+  Useful for tooling.
+  @return {Promise} a promise which settles in the same way as the first passed
+  promise to settle.
+*/
+function race(entries) {
+  /*jshint validthis:true */
+  var Constructor = this;
+
+  if (!isArray(entries)) {
+    return new Constructor(function (_, reject) {
+      return reject(new TypeError('You must pass an array to race.'));
+    });
+  } else {
+    return new Constructor(function (resolve, reject) {
+      var length = entries.length;
+      for (var i = 0; i < length; i++) {
+        Constructor.resolve(entries[i]).then(resolve, reject);
+      }
+    });
+  }
+}
+
+/**
+  `Promise.reject` returns a promise rejected with the passed `reason`.
+  It is shorthand for the following:
+
+  ```javascript
+  let promise = new Promise(function(resolve, reject){
+    reject(new Error('WHOOPS'));
+  });
+
+  promise.then(function(value){
+    // Code here doesn't run because the promise is rejected!
+  }, function(reason){
+    // reason.message === 'WHOOPS'
+  });
+  ```
+
+  Instead of writing the above, your code now simply becomes the following:
+
+  ```javascript
+  let promise = Promise.reject(new Error('WHOOPS'));
+
+  promise.then(function(value){
+    // Code here doesn't run because the promise is rejected!
+  }, function(reason){
+    // reason.message === 'WHOOPS'
+  });
+  ```
+
+  @method reject
+  @static
+  @param {Any} reason value that the returned promise will be rejected with.
+  Useful for tooling.
+  @return {Promise} a promise rejected with the given `reason`.
+*/
+function reject$1(reason) {
+  /*jshint validthis:true */
+  var Constructor = this;
+  var promise = new Constructor(noop);
+  reject(promise, reason);
+  return promise;
+}
+
+function needsResolver() {
+  throw new TypeError('You must pass a resolver function as the first argument to the promise constructor');
+}
+
+function needsNew() {
+  throw new TypeError("Failed to construct 'Promise': Please use the 'new' operator, this object constructor cannot be called as a function.");
+}
+
+/**
+  Promise objects represent the eventual result of an asynchronous operation. The
+  primary way of interacting with a promise is through its `then` method, which
+  registers callbacks to receive either a promise's eventual value or the reason
+  why the promise cannot be fulfilled.
+
+  Terminology
+  -----------
+
+  - `promise` is an object or function with a `then` method whose behavior conforms to this specification.
+  - `thenable` is an object or function that defines a `then` method.
+  - `value` is any legal JavaScript value (including undefined, a thenable, or a promise).
+  - `exception` is a value that is thrown using the throw statement.
+  - `reason` is a value that indicates why a promise was rejected.
+  - `settled` the final resting state of a promise, fulfilled or rejected.
+
+  A promise can be in one of three states: pending, fulfilled, or rejected.
+
+  Promises that are fulfilled have a fulfillment value and are in the fulfilled
+  state.  Promises that are rejected have a rejection reason and are in the
+  rejected state.  A fulfillment value is never a thenable.
+
+  Promises can also be said to *resolve* a value.  If this value is also a
+  promise, then the original promise's settled state will match the value's
+  settled state.  So a promise that *resolves* a promise that rejects will
+  itself reject, and a promise that *resolves* a promise that fulfills will
+  itself fulfill.
+
+
+  Basic Usage:
+  ------------
+
+  ```js
+  let promise = new Promise(function(resolve, reject) {
+    // on success
+    resolve(value);
+
+    // on failure
+    reject(reason);
+  });
+
+  promise.then(function(value) {
+    // on fulfillment
+  }, function(reason) {
+    // on rejection
+  });
+  ```
+
+  Advanced Usage:
+  ---------------
+
+  Promises shine when abstracting away asynchronous interactions such as
+  `XMLHttpRequest`s.
+
+  ```js
+  function getJSON(url) {
+    return new Promise(function(resolve, reject){
+      let xhr = new XMLHttpRequest();
+
+      xhr.open('GET', url);
+      xhr.onreadystatechange = handler;
+      xhr.responseType = 'json';
+      xhr.setRequestHeader('Accept', 'application/json');
+      xhr.send();
+
+      function handler() {
+        if (this.readyState === this.DONE) {
+          if (this.status === 200) {
+            resolve(this.response);
+          } else {
+            reject(new Error('getJSON: `' + url + '` failed with status: [' + this.status + ']'));
+          }
+        }
+      };
+    });
+  }
+
+  getJSON('/posts.json').then(function(json) {
+    // on fulfillment
+  }, function(reason) {
+    // on rejection
+  });
+  ```
+
+  Unlike callbacks, promises are great composable primitives.
+
+  ```js
+  Promise.all([
+    getJSON('/posts'),
+    getJSON('/comments')
+  ]).then(function(values){
+    values[0] // => postsJSON
+    values[1] // => commentsJSON
+
+    return values;
+  });
+  ```
+
+  @class Promise
+  @param {Function} resolver
+  Useful for tooling.
+  @constructor
+*/
+
+var Promise$1 = function () {
+  function Promise(resolver) {
+    this[PROMISE_ID] = nextId();
+    this._result = this._state = undefined;
+    this._subscribers = [];
+
+    if (noop !== resolver) {
+      typeof resolver !== 'function' && needsResolver();
+      this instanceof Promise ? initializePromise(this, resolver) : needsNew();
+    }
+  }
+
+  /**
+  The primary way of interacting with a promise is through its `then` method,
+  which registers callbacks to receive either a promise's eventual value or the
+  reason why the promise cannot be fulfilled.
+   ```js
+  findUser().then(function(user){
+    // user is available
+  }, function(reason){
+    // user is unavailable, and you are given the reason why
+  });
+  ```
+   Chaining
+  --------
+   The return value of `then` is itself a promise.  This second, 'downstream'
+  promise is resolved with the return value of the first promise's fulfillment
+  or rejection handler, or rejected if the handler throws an exception.
+   ```js
+  findUser().then(function (user) {
+    return user.name;
+  }, function (reason) {
+    return 'default name';
+  }).then(function (userName) {
+    // If `findUser` fulfilled, `userName` will be the user's name, otherwise it
+    // will be `'default name'`
+  });
+   findUser().then(function (user) {
+    throw new Error('Found user, but still unhappy');
+  }, function (reason) {
+    throw new Error('`findUser` rejected and we're unhappy');
+  }).then(function (value) {
+    // never reached
+  }, function (reason) {
+    // if `findUser` fulfilled, `reason` will be 'Found user, but still unhappy'.
+    // If `findUser` rejected, `reason` will be '`findUser` rejected and we're unhappy'.
+  });
+  ```
+  If the downstream promise does not specify a rejection handler, rejection reasons will be propagated further downstream.
+   ```js
+  findUser().then(function (user) {
+    throw new PedagogicalException('Upstream error');
+  }).then(function (value) {
+    // never reached
+  }).then(function (value) {
+    // never reached
+  }, function (reason) {
+    // The `PedgagocialException` is propagated all the way down to here
+  });
+  ```
+   Assimilation
+  ------------
+   Sometimes the value you want to propagate to a downstream promise can only be
+  retrieved asynchronously. This can be achieved by returning a promise in the
+  fulfillment or rejection handler. The downstream promise will then be pending
+  until the returned promise is settled. This is called *assimilation*.
+   ```js
+  findUser().then(function (user) {
+    return findCommentsByAuthor(user);
+  }).then(function (comments) {
+    // The user's comments are now available
+  });
+  ```
+   If the assimliated promise rejects, then the downstream promise will also reject.
+   ```js
+  findUser().then(function (user) {
+    return findCommentsByAuthor(user);
+  }).then(function (comments) {
+    // If `findCommentsByAuthor` fulfills, we'll have the value here
+  }, function (reason) {
+    // If `findCommentsByAuthor` rejects, we'll have the reason here
+  });
+  ```
+   Simple Example
+  --------------
+   Synchronous Example
+   ```javascript
+  let result;
+   try {
+    result = findResult();
+    // success
+  } catch(reason) {
+    // failure
+  }
+  ```
+   Errback Example
+   ```js
+  findResult(function(result, err){
+    if (err) {
+      // failure
+    } else {
+      // success
+    }
+  });
+  ```
+   Promise Example;
+   ```javascript
+  findResult().then(function(result){
+    // success
+  }, function(reason){
+    // failure
+  });
+  ```
+   Advanced Example
+  --------------
+   Synchronous Example
+   ```javascript
+  let author, books;
+   try {
+    author = findAuthor();
+    books  = findBooksByAuthor(author);
+    // success
+  } catch(reason) {
+    // failure
+  }
+  ```
+   Errback Example
+   ```js
+   function foundBooks(books) {
+   }
+   function failure(reason) {
+   }
+   findAuthor(function(author, err){
+    if (err) {
+      failure(err);
+      // failure
+    } else {
+      try {
+        findBoooksByAuthor(author, function(books, err) {
+          if (err) {
+            failure(err);
+          } else {
+            try {
+              foundBooks(books);
+            } catch(reason) {
+              failure(reason);
+            }
+          }
+        });
+      } catch(error) {
+        failure(err);
+      }
+      // success
+    }
+  });
+  ```
+   Promise Example;
+   ```javascript
+  findAuthor().
+    then(findBooksByAuthor).
+    then(function(books){
+      // found books
+  }).catch(function(reason){
+    // something went wrong
+  });
+  ```
+   @method then
+  @param {Function} onFulfilled
+  @param {Function} onRejected
+  Useful for tooling.
+  @return {Promise}
+  */
+
+  /**
+  `catch` is simply sugar for `then(undefined, onRejection)` which makes it the same
+  as the catch block of a try/catch statement.
+  ```js
+  function findAuthor(){
+  throw new Error('couldn't find that author');
+  }
+  // synchronous
+  try {
+  findAuthor();
+  } catch(reason) {
+  // something went wrong
+  }
+  // async with promises
+  findAuthor().catch(function(reason){
+  // something went wrong
+  });
+  ```
+  @method catch
+  @param {Function} onRejection
+  Useful for tooling.
+  @return {Promise}
+  */
+
+
+  Promise.prototype.catch = function _catch(onRejection) {
+    return this.then(null, onRejection);
+  };
+
+  /**
+    `finally` will be invoked regardless of the promise's fate just as native
+    try/catch/finally behaves
+  
+    Synchronous example:
+  
+    ```js
+    findAuthor() {
+      if (Math.random() > 0.5) {
+        throw new Error();
+      }
+      return new Author();
+    }
+  
+    try {
+      return findAuthor(); // succeed or fail
+    } catch(error) {
+      return findOtherAuther();
+    } finally {
+      // always runs
+      // doesn't affect the return value
+    }
+    ```
+  
+    Asynchronous example:
+  
+    ```js
+    findAuthor().catch(function(reason){
+      return findOtherAuther();
+    }).finally(function(){
+      // author was either found, or not
+    });
+    ```
+  
+    @method finally
+    @param {Function} callback
+    @return {Promise}
+  */
+
+
+  Promise.prototype.finally = function _finally(callback) {
+    var promise = this;
+    var constructor = promise.constructor;
+
+    if (isFunction(callback)) {
+      return promise.then(function (value) {
+        return constructor.resolve(callback()).then(function () {
+          return value;
+        });
+      }, function (reason) {
+        return constructor.resolve(callback()).then(function () {
+          throw reason;
+        });
+      });
+    }
+
+    return promise.then(callback, callback);
+  };
+
+  return Promise;
+}();
+
+Promise$1.prototype.then = then;
+Promise$1.all = all;
+Promise$1.race = race;
+Promise$1.resolve = resolve$1;
+Promise$1.reject = reject$1;
+Promise$1._setScheduler = setScheduler;
+Promise$1._setAsap = setAsap;
+Promise$1._asap = asap;
+
+/*global self*/
+function polyfill() {
+  var local = void 0;
+
+  if (typeof global !== 'undefined') {
+    local = global;
+  } else if (typeof self !== 'undefined') {
+    local = self;
+  } else {
+    try {
+      local = Function('return this')();
+    } catch (e) {
+      throw new Error('polyfill failed because global object is unavailable in this environment');
+    }
+  }
+
+  var P = local.Promise;
+
+  if (P) {
+    var promiseToString = null;
+    try {
+      promiseToString = Object.prototype.toString.call(P.resolve());
+    } catch (e) {
+      // silently ignored
+    }
+
+    if (promiseToString === '[object Promise]' && !P.cast) {
+      return;
+    }
+  }
+
+  local.Promise = Promise$1;
+}
+
+// Strange compat..
+Promise$1.polyfill = polyfill;
+Promise$1.Promise = Promise$1;
+
+return Promise$1;
+
+})));
+
+
+
+//# sourceMappingURL=es6-promise.map
+
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../../process/browser.js */ "./node_modules/process/browser.js"), __webpack_require__(/*! ./../../webpack/buildin/global.js */ "./node_modules/webpack/buildin/global.js")))
+
+/***/ }),
+
 /***/ "./node_modules/jquery/dist/jquery.js":
 /*!********************************************!*\
   !*** ./node_modules/jquery/dist/jquery.js ***!
@@ -92737,23 +94185,57 @@ var render = function() {
                           }
                         },
                         [
-                          _c("el-image", {
-                            staticStyle: {
-                              width: "45%",
-                              height: "40px",
-                              float: "left"
+                          _c(
+                            "el-button",
+                            {
+                              directives: [
+                                {
+                                  name: "show",
+                                  rawName: "v-show",
+                                  value: _vm.captcha_button_show,
+                                  expression: "captcha_button_show"
+                                }
+                              ],
+                              staticStyle: { float: "right" },
+                              attrs: {
+                                type: "primary",
+                                loading: _vm.captcha_loading
+                              },
+                              on: { click: _vm.getCaptchas }
                             },
-                            attrs: { src: _vm.captcha_code_url }
+                            [
+                              _vm._v(
+                                _vm._s(
+                                  _vm.captcha_loading
+                                    ? "获取中 ..."
+                                    : "获取验证码"
+                                )
+                              )
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c("el-image", {
+                            directives: [
+                              {
+                                name: "show",
+                                rawName: "v-show",
+                                value: _vm.captcha_show,
+                                expression: "captcha_show"
+                              }
+                            ],
+                            staticStyle: {
+                              width: "auto",
+                              height: "40px",
+                              float: "right"
+                            },
+                            attrs: { src: _vm.captchas_url },
+                            on: { click: _vm.getCaptchas }
                           }),
                           _vm._v(" "),
                           _c("el-input", {
-                            staticStyle: {
-                              width: "50%",
-                              float: "left",
-                              "margin-left": "5px"
-                            },
+                            staticStyle: { width: "50%", float: "left" },
                             attrs: {
-                              placeholder: "图片验证码",
+                              placeholder: "请输入图片验证码",
                               "suffix-icon": "el-icon-picture"
                             },
                             model: {
@@ -92779,16 +94261,18 @@ var render = function() {
                         "el-form-item",
                         {
                           attrs: {
-                            label: "短信",
+                            label: "短信码",
                             "label-width": _vm.formLabelWidth
                           }
                         },
                         [
                           _c("el-input", {
+                            staticStyle: { width: "50%", float: "left" },
                             attrs: {
                               placeholder: "请输入短信验证码",
                               "suffix-icon": "el-icon-message"
                             },
+                            on: { focus: function($event) {} },
                             model: {
                               value: _vm.verification_code,
                               callback: function($$v) {
@@ -92796,7 +94280,28 @@ var render = function() {
                               },
                               expression: "verification_code"
                             }
-                          })
+                          }),
+                          _vm._v(" "),
+                          _c(
+                            "el-button",
+                            {
+                              staticStyle: { float: "right" },
+                              attrs: {
+                                type: "primary",
+                                loading: _vm.message_loading
+                              },
+                              on: { click: _vm.getMessages }
+                            },
+                            [
+                              _vm._v(
+                                _vm._s(
+                                  _vm.message_loading
+                                    ? "10秒倒计时 ..."
+                                    : "发送短信码"
+                                )
+                              )
+                            ]
+                          )
                         ],
                         1
                       )
@@ -92896,17 +94401,80 @@ var render = function() {
                       staticClass: "bl-right",
                       staticStyle: { float: "right" },
                       attrs: { type: "primary" },
-                      on: {
-                        click: function($event) {
-                          _vm.dialogFormVisible = false
-                        }
-                      }
+                      on: { click: _vm.submitRegisterByPhone }
                     },
-                    [_vm._v("确 定")]
+                    [_vm._v("确定")]
                   )
                 ],
                 1
-              )
+              ),
+              _vm._v(" "),
+              _c("span", {
+                directives: [
+                  {
+                    name: "loading",
+                    rawName: "v-loading.fullscreen.lock",
+                    value: _vm.fullscreenLoading,
+                    expression: "fullscreenLoading",
+                    modifiers: { fullscreen: true, lock: true }
+                  }
+                ]
+              }),
+              _vm._v(" "),
+              _c("span", {
+                directives: [
+                  {
+                    name: "show",
+                    rawName: "v-show",
+                    value: _vm.registerByPhoneStatus == 1,
+                    expression: "registerByPhoneStatus == 1"
+                  }
+                ]
+              }),
+              _vm._v(" "),
+              _c("span", {
+                directives: [
+                  {
+                    name: "show",
+                    rawName: "v-show",
+                    value: _vm.captchaLoadStatus == 1,
+                    expression: "captchaLoadStatus == 1"
+                  }
+                ]
+              }),
+              _vm._v(" "),
+              _c("span", {
+                directives: [
+                  {
+                    name: "show",
+                    rawName: "v-show",
+                    value: _vm.verificationCodeLoadStatus == 1,
+                    expression: "verificationCodeLoadStatus == 1"
+                  }
+                ]
+              }),
+              _vm._v(" "),
+              _c("span", {
+                directives: [
+                  {
+                    name: "show",
+                    rawName: "v-show",
+                    value: _vm.captchas,
+                    expression: "captchas"
+                  }
+                ]
+              }),
+              _vm._v(" "),
+              _c("span", {
+                directives: [
+                  {
+                    name: "show",
+                    rawName: "v-show",
+                    value: _vm.messages,
+                    expression: "messages"
+                  }
+                ]
+              })
             ],
             1
           )
@@ -93553,7 +95121,7 @@ var render = function() {
                 [
                   _c("el-pagination", {
                     attrs: {
-                      background: "#f9f9f9",
+                      background: "",
                       layout: "prev, pager, next",
                       total: 50
                     }
@@ -93579,9 +95147,7 @@ var render = function() {
           )
         ],
         1
-      ),
-      _vm._v(" "),
-      _c("LFooter")
+      )
     ],
     1
   )
@@ -93632,7 +95198,9 @@ var render = function() {
               )
             ],
             1
-          )
+          ),
+          _vm._v(" "),
+          _c("LFooter")
         ],
         1
       ),
@@ -108616,6 +110184,1037 @@ if (false) {} else {
 
 /***/ }),
 
+/***/ "./node_modules/vuex/dist/vuex.esm.js":
+/*!********************************************!*\
+  !*** ./node_modules/vuex/dist/vuex.esm.js ***!
+  \********************************************/
+/*! exports provided: default, Store, install, mapState, mapMutations, mapGetters, mapActions, createNamespacedHelpers */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* WEBPACK VAR INJECTION */(function(global) {/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Store", function() { return Store; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "install", function() { return install; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "mapState", function() { return mapState; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "mapMutations", function() { return mapMutations; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "mapGetters", function() { return mapGetters; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "mapActions", function() { return mapActions; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createNamespacedHelpers", function() { return createNamespacedHelpers; });
+/**
+ * vuex v3.1.1
+ * (c) 2019 Evan You
+ * @license MIT
+ */
+function applyMixin (Vue) {
+  var version = Number(Vue.version.split('.')[0]);
+
+  if (version >= 2) {
+    Vue.mixin({ beforeCreate: vuexInit });
+  } else {
+    // override init and inject vuex init procedure
+    // for 1.x backwards compatibility.
+    var _init = Vue.prototype._init;
+    Vue.prototype._init = function (options) {
+      if ( options === void 0 ) options = {};
+
+      options.init = options.init
+        ? [vuexInit].concat(options.init)
+        : vuexInit;
+      _init.call(this, options);
+    };
+  }
+
+  /**
+   * Vuex init hook, injected into each instances init hooks list.
+   */
+
+  function vuexInit () {
+    var options = this.$options;
+    // store injection
+    if (options.store) {
+      this.$store = typeof options.store === 'function'
+        ? options.store()
+        : options.store;
+    } else if (options.parent && options.parent.$store) {
+      this.$store = options.parent.$store;
+    }
+  }
+}
+
+var target = typeof window !== 'undefined'
+  ? window
+  : typeof global !== 'undefined'
+    ? global
+    : {};
+var devtoolHook = target.__VUE_DEVTOOLS_GLOBAL_HOOK__;
+
+function devtoolPlugin (store) {
+  if (!devtoolHook) { return }
+
+  store._devtoolHook = devtoolHook;
+
+  devtoolHook.emit('vuex:init', store);
+
+  devtoolHook.on('vuex:travel-to-state', function (targetState) {
+    store.replaceState(targetState);
+  });
+
+  store.subscribe(function (mutation, state) {
+    devtoolHook.emit('vuex:mutation', mutation, state);
+  });
+}
+
+/**
+ * Get the first item that pass the test
+ * by second argument function
+ *
+ * @param {Array} list
+ * @param {Function} f
+ * @return {*}
+ */
+
+/**
+ * forEach for object
+ */
+function forEachValue (obj, fn) {
+  Object.keys(obj).forEach(function (key) { return fn(obj[key], key); });
+}
+
+function isObject (obj) {
+  return obj !== null && typeof obj === 'object'
+}
+
+function isPromise (val) {
+  return val && typeof val.then === 'function'
+}
+
+function assert (condition, msg) {
+  if (!condition) { throw new Error(("[vuex] " + msg)) }
+}
+
+function partial (fn, arg) {
+  return function () {
+    return fn(arg)
+  }
+}
+
+// Base data struct for store's module, package with some attribute and method
+var Module = function Module (rawModule, runtime) {
+  this.runtime = runtime;
+  // Store some children item
+  this._children = Object.create(null);
+  // Store the origin module object which passed by programmer
+  this._rawModule = rawModule;
+  var rawState = rawModule.state;
+
+  // Store the origin module's state
+  this.state = (typeof rawState === 'function' ? rawState() : rawState) || {};
+};
+
+var prototypeAccessors = { namespaced: { configurable: true } };
+
+prototypeAccessors.namespaced.get = function () {
+  return !!this._rawModule.namespaced
+};
+
+Module.prototype.addChild = function addChild (key, module) {
+  this._children[key] = module;
+};
+
+Module.prototype.removeChild = function removeChild (key) {
+  delete this._children[key];
+};
+
+Module.prototype.getChild = function getChild (key) {
+  return this._children[key]
+};
+
+Module.prototype.update = function update (rawModule) {
+  this._rawModule.namespaced = rawModule.namespaced;
+  if (rawModule.actions) {
+    this._rawModule.actions = rawModule.actions;
+  }
+  if (rawModule.mutations) {
+    this._rawModule.mutations = rawModule.mutations;
+  }
+  if (rawModule.getters) {
+    this._rawModule.getters = rawModule.getters;
+  }
+};
+
+Module.prototype.forEachChild = function forEachChild (fn) {
+  forEachValue(this._children, fn);
+};
+
+Module.prototype.forEachGetter = function forEachGetter (fn) {
+  if (this._rawModule.getters) {
+    forEachValue(this._rawModule.getters, fn);
+  }
+};
+
+Module.prototype.forEachAction = function forEachAction (fn) {
+  if (this._rawModule.actions) {
+    forEachValue(this._rawModule.actions, fn);
+  }
+};
+
+Module.prototype.forEachMutation = function forEachMutation (fn) {
+  if (this._rawModule.mutations) {
+    forEachValue(this._rawModule.mutations, fn);
+  }
+};
+
+Object.defineProperties( Module.prototype, prototypeAccessors );
+
+var ModuleCollection = function ModuleCollection (rawRootModule) {
+  // register root module (Vuex.Store options)
+  this.register([], rawRootModule, false);
+};
+
+ModuleCollection.prototype.get = function get (path) {
+  return path.reduce(function (module, key) {
+    return module.getChild(key)
+  }, this.root)
+};
+
+ModuleCollection.prototype.getNamespace = function getNamespace (path) {
+  var module = this.root;
+  return path.reduce(function (namespace, key) {
+    module = module.getChild(key);
+    return namespace + (module.namespaced ? key + '/' : '')
+  }, '')
+};
+
+ModuleCollection.prototype.update = function update$1 (rawRootModule) {
+  update([], this.root, rawRootModule);
+};
+
+ModuleCollection.prototype.register = function register (path, rawModule, runtime) {
+    var this$1 = this;
+    if ( runtime === void 0 ) runtime = true;
+
+  if (true) {
+    assertRawModule(path, rawModule);
+  }
+
+  var newModule = new Module(rawModule, runtime);
+  if (path.length === 0) {
+    this.root = newModule;
+  } else {
+    var parent = this.get(path.slice(0, -1));
+    parent.addChild(path[path.length - 1], newModule);
+  }
+
+  // register nested modules
+  if (rawModule.modules) {
+    forEachValue(rawModule.modules, function (rawChildModule, key) {
+      this$1.register(path.concat(key), rawChildModule, runtime);
+    });
+  }
+};
+
+ModuleCollection.prototype.unregister = function unregister (path) {
+  var parent = this.get(path.slice(0, -1));
+  var key = path[path.length - 1];
+  if (!parent.getChild(key).runtime) { return }
+
+  parent.removeChild(key);
+};
+
+function update (path, targetModule, newModule) {
+  if (true) {
+    assertRawModule(path, newModule);
+  }
+
+  // update target module
+  targetModule.update(newModule);
+
+  // update nested modules
+  if (newModule.modules) {
+    for (var key in newModule.modules) {
+      if (!targetModule.getChild(key)) {
+        if (true) {
+          console.warn(
+            "[vuex] trying to add a new module '" + key + "' on hot reloading, " +
+            'manual reload is needed'
+          );
+        }
+        return
+      }
+      update(
+        path.concat(key),
+        targetModule.getChild(key),
+        newModule.modules[key]
+      );
+    }
+  }
+}
+
+var functionAssert = {
+  assert: function (value) { return typeof value === 'function'; },
+  expected: 'function'
+};
+
+var objectAssert = {
+  assert: function (value) { return typeof value === 'function' ||
+    (typeof value === 'object' && typeof value.handler === 'function'); },
+  expected: 'function or object with "handler" function'
+};
+
+var assertTypes = {
+  getters: functionAssert,
+  mutations: functionAssert,
+  actions: objectAssert
+};
+
+function assertRawModule (path, rawModule) {
+  Object.keys(assertTypes).forEach(function (key) {
+    if (!rawModule[key]) { return }
+
+    var assertOptions = assertTypes[key];
+
+    forEachValue(rawModule[key], function (value, type) {
+      assert(
+        assertOptions.assert(value),
+        makeAssertionMessage(path, key, type, value, assertOptions.expected)
+      );
+    });
+  });
+}
+
+function makeAssertionMessage (path, key, type, value, expected) {
+  var buf = key + " should be " + expected + " but \"" + key + "." + type + "\"";
+  if (path.length > 0) {
+    buf += " in module \"" + (path.join('.')) + "\"";
+  }
+  buf += " is " + (JSON.stringify(value)) + ".";
+  return buf
+}
+
+var Vue; // bind on install
+
+var Store = function Store (options) {
+  var this$1 = this;
+  if ( options === void 0 ) options = {};
+
+  // Auto install if it is not done yet and `window` has `Vue`.
+  // To allow users to avoid auto-installation in some cases,
+  // this code should be placed here. See #731
+  if (!Vue && typeof window !== 'undefined' && window.Vue) {
+    install(window.Vue);
+  }
+
+  if (true) {
+    assert(Vue, "must call Vue.use(Vuex) before creating a store instance.");
+    assert(typeof Promise !== 'undefined', "vuex requires a Promise polyfill in this browser.");
+    assert(this instanceof Store, "store must be called with the new operator.");
+  }
+
+  var plugins = options.plugins; if ( plugins === void 0 ) plugins = [];
+  var strict = options.strict; if ( strict === void 0 ) strict = false;
+
+  // store internal state
+  this._committing = false;
+  this._actions = Object.create(null);
+  this._actionSubscribers = [];
+  this._mutations = Object.create(null);
+  this._wrappedGetters = Object.create(null);
+  this._modules = new ModuleCollection(options);
+  this._modulesNamespaceMap = Object.create(null);
+  this._subscribers = [];
+  this._watcherVM = new Vue();
+
+  // bind commit and dispatch to self
+  var store = this;
+  var ref = this;
+  var dispatch = ref.dispatch;
+  var commit = ref.commit;
+  this.dispatch = function boundDispatch (type, payload) {
+    return dispatch.call(store, type, payload)
+  };
+  this.commit = function boundCommit (type, payload, options) {
+    return commit.call(store, type, payload, options)
+  };
+
+  // strict mode
+  this.strict = strict;
+
+  var state = this._modules.root.state;
+
+  // init root module.
+  // this also recursively registers all sub-modules
+  // and collects all module getters inside this._wrappedGetters
+  installModule(this, state, [], this._modules.root);
+
+  // initialize the store vm, which is responsible for the reactivity
+  // (also registers _wrappedGetters as computed properties)
+  resetStoreVM(this, state);
+
+  // apply plugins
+  plugins.forEach(function (plugin) { return plugin(this$1); });
+
+  var useDevtools = options.devtools !== undefined ? options.devtools : Vue.config.devtools;
+  if (useDevtools) {
+    devtoolPlugin(this);
+  }
+};
+
+var prototypeAccessors$1 = { state: { configurable: true } };
+
+prototypeAccessors$1.state.get = function () {
+  return this._vm._data.$$state
+};
+
+prototypeAccessors$1.state.set = function (v) {
+  if (true) {
+    assert(false, "use store.replaceState() to explicit replace store state.");
+  }
+};
+
+Store.prototype.commit = function commit (_type, _payload, _options) {
+    var this$1 = this;
+
+  // check object-style commit
+  var ref = unifyObjectStyle(_type, _payload, _options);
+    var type = ref.type;
+    var payload = ref.payload;
+    var options = ref.options;
+
+  var mutation = { type: type, payload: payload };
+  var entry = this._mutations[type];
+  if (!entry) {
+    if (true) {
+      console.error(("[vuex] unknown mutation type: " + type));
+    }
+    return
+  }
+  this._withCommit(function () {
+    entry.forEach(function commitIterator (handler) {
+      handler(payload);
+    });
+  });
+  this._subscribers.forEach(function (sub) { return sub(mutation, this$1.state); });
+
+  if (
+     true &&
+    options && options.silent
+  ) {
+    console.warn(
+      "[vuex] mutation type: " + type + ". Silent option has been removed. " +
+      'Use the filter functionality in the vue-devtools'
+    );
+  }
+};
+
+Store.prototype.dispatch = function dispatch (_type, _payload) {
+    var this$1 = this;
+
+  // check object-style dispatch
+  var ref = unifyObjectStyle(_type, _payload);
+    var type = ref.type;
+    var payload = ref.payload;
+
+  var action = { type: type, payload: payload };
+  var entry = this._actions[type];
+  if (!entry) {
+    if (true) {
+      console.error(("[vuex] unknown action type: " + type));
+    }
+    return
+  }
+
+  try {
+    this._actionSubscribers
+      .filter(function (sub) { return sub.before; })
+      .forEach(function (sub) { return sub.before(action, this$1.state); });
+  } catch (e) {
+    if (true) {
+      console.warn("[vuex] error in before action subscribers: ");
+      console.error(e);
+    }
+  }
+
+  var result = entry.length > 1
+    ? Promise.all(entry.map(function (handler) { return handler(payload); }))
+    : entry[0](payload);
+
+  return result.then(function (res) {
+    try {
+      this$1._actionSubscribers
+        .filter(function (sub) { return sub.after; })
+        .forEach(function (sub) { return sub.after(action, this$1.state); });
+    } catch (e) {
+      if (true) {
+        console.warn("[vuex] error in after action subscribers: ");
+        console.error(e);
+      }
+    }
+    return res
+  })
+};
+
+Store.prototype.subscribe = function subscribe (fn) {
+  return genericSubscribe(fn, this._subscribers)
+};
+
+Store.prototype.subscribeAction = function subscribeAction (fn) {
+  var subs = typeof fn === 'function' ? { before: fn } : fn;
+  return genericSubscribe(subs, this._actionSubscribers)
+};
+
+Store.prototype.watch = function watch (getter, cb, options) {
+    var this$1 = this;
+
+  if (true) {
+    assert(typeof getter === 'function', "store.watch only accepts a function.");
+  }
+  return this._watcherVM.$watch(function () { return getter(this$1.state, this$1.getters); }, cb, options)
+};
+
+Store.prototype.replaceState = function replaceState (state) {
+    var this$1 = this;
+
+  this._withCommit(function () {
+    this$1._vm._data.$$state = state;
+  });
+};
+
+Store.prototype.registerModule = function registerModule (path, rawModule, options) {
+    if ( options === void 0 ) options = {};
+
+  if (typeof path === 'string') { path = [path]; }
+
+  if (true) {
+    assert(Array.isArray(path), "module path must be a string or an Array.");
+    assert(path.length > 0, 'cannot register the root module by using registerModule.');
+  }
+
+  this._modules.register(path, rawModule);
+  installModule(this, this.state, path, this._modules.get(path), options.preserveState);
+  // reset store to update getters...
+  resetStoreVM(this, this.state);
+};
+
+Store.prototype.unregisterModule = function unregisterModule (path) {
+    var this$1 = this;
+
+  if (typeof path === 'string') { path = [path]; }
+
+  if (true) {
+    assert(Array.isArray(path), "module path must be a string or an Array.");
+  }
+
+  this._modules.unregister(path);
+  this._withCommit(function () {
+    var parentState = getNestedState(this$1.state, path.slice(0, -1));
+    Vue.delete(parentState, path[path.length - 1]);
+  });
+  resetStore(this);
+};
+
+Store.prototype.hotUpdate = function hotUpdate (newOptions) {
+  this._modules.update(newOptions);
+  resetStore(this, true);
+};
+
+Store.prototype._withCommit = function _withCommit (fn) {
+  var committing = this._committing;
+  this._committing = true;
+  fn();
+  this._committing = committing;
+};
+
+Object.defineProperties( Store.prototype, prototypeAccessors$1 );
+
+function genericSubscribe (fn, subs) {
+  if (subs.indexOf(fn) < 0) {
+    subs.push(fn);
+  }
+  return function () {
+    var i = subs.indexOf(fn);
+    if (i > -1) {
+      subs.splice(i, 1);
+    }
+  }
+}
+
+function resetStore (store, hot) {
+  store._actions = Object.create(null);
+  store._mutations = Object.create(null);
+  store._wrappedGetters = Object.create(null);
+  store._modulesNamespaceMap = Object.create(null);
+  var state = store.state;
+  // init all modules
+  installModule(store, state, [], store._modules.root, true);
+  // reset vm
+  resetStoreVM(store, state, hot);
+}
+
+function resetStoreVM (store, state, hot) {
+  var oldVm = store._vm;
+
+  // bind store public getters
+  store.getters = {};
+  var wrappedGetters = store._wrappedGetters;
+  var computed = {};
+  forEachValue(wrappedGetters, function (fn, key) {
+    // use computed to leverage its lazy-caching mechanism
+    // direct inline function use will lead to closure preserving oldVm.
+    // using partial to return function with only arguments preserved in closure enviroment.
+    computed[key] = partial(fn, store);
+    Object.defineProperty(store.getters, key, {
+      get: function () { return store._vm[key]; },
+      enumerable: true // for local getters
+    });
+  });
+
+  // use a Vue instance to store the state tree
+  // suppress warnings just in case the user has added
+  // some funky global mixins
+  var silent = Vue.config.silent;
+  Vue.config.silent = true;
+  store._vm = new Vue({
+    data: {
+      $$state: state
+    },
+    computed: computed
+  });
+  Vue.config.silent = silent;
+
+  // enable strict mode for new vm
+  if (store.strict) {
+    enableStrictMode(store);
+  }
+
+  if (oldVm) {
+    if (hot) {
+      // dispatch changes in all subscribed watchers
+      // to force getter re-evaluation for hot reloading.
+      store._withCommit(function () {
+        oldVm._data.$$state = null;
+      });
+    }
+    Vue.nextTick(function () { return oldVm.$destroy(); });
+  }
+}
+
+function installModule (store, rootState, path, module, hot) {
+  var isRoot = !path.length;
+  var namespace = store._modules.getNamespace(path);
+
+  // register in namespace map
+  if (module.namespaced) {
+    store._modulesNamespaceMap[namespace] = module;
+  }
+
+  // set state
+  if (!isRoot && !hot) {
+    var parentState = getNestedState(rootState, path.slice(0, -1));
+    var moduleName = path[path.length - 1];
+    store._withCommit(function () {
+      Vue.set(parentState, moduleName, module.state);
+    });
+  }
+
+  var local = module.context = makeLocalContext(store, namespace, path);
+
+  module.forEachMutation(function (mutation, key) {
+    var namespacedType = namespace + key;
+    registerMutation(store, namespacedType, mutation, local);
+  });
+
+  module.forEachAction(function (action, key) {
+    var type = action.root ? key : namespace + key;
+    var handler = action.handler || action;
+    registerAction(store, type, handler, local);
+  });
+
+  module.forEachGetter(function (getter, key) {
+    var namespacedType = namespace + key;
+    registerGetter(store, namespacedType, getter, local);
+  });
+
+  module.forEachChild(function (child, key) {
+    installModule(store, rootState, path.concat(key), child, hot);
+  });
+}
+
+/**
+ * make localized dispatch, commit, getters and state
+ * if there is no namespace, just use root ones
+ */
+function makeLocalContext (store, namespace, path) {
+  var noNamespace = namespace === '';
+
+  var local = {
+    dispatch: noNamespace ? store.dispatch : function (_type, _payload, _options) {
+      var args = unifyObjectStyle(_type, _payload, _options);
+      var payload = args.payload;
+      var options = args.options;
+      var type = args.type;
+
+      if (!options || !options.root) {
+        type = namespace + type;
+        if ( true && !store._actions[type]) {
+          console.error(("[vuex] unknown local action type: " + (args.type) + ", global type: " + type));
+          return
+        }
+      }
+
+      return store.dispatch(type, payload)
+    },
+
+    commit: noNamespace ? store.commit : function (_type, _payload, _options) {
+      var args = unifyObjectStyle(_type, _payload, _options);
+      var payload = args.payload;
+      var options = args.options;
+      var type = args.type;
+
+      if (!options || !options.root) {
+        type = namespace + type;
+        if ( true && !store._mutations[type]) {
+          console.error(("[vuex] unknown local mutation type: " + (args.type) + ", global type: " + type));
+          return
+        }
+      }
+
+      store.commit(type, payload, options);
+    }
+  };
+
+  // getters and state object must be gotten lazily
+  // because they will be changed by vm update
+  Object.defineProperties(local, {
+    getters: {
+      get: noNamespace
+        ? function () { return store.getters; }
+        : function () { return makeLocalGetters(store, namespace); }
+    },
+    state: {
+      get: function () { return getNestedState(store.state, path); }
+    }
+  });
+
+  return local
+}
+
+function makeLocalGetters (store, namespace) {
+  var gettersProxy = {};
+
+  var splitPos = namespace.length;
+  Object.keys(store.getters).forEach(function (type) {
+    // skip if the target getter is not match this namespace
+    if (type.slice(0, splitPos) !== namespace) { return }
+
+    // extract local getter type
+    var localType = type.slice(splitPos);
+
+    // Add a port to the getters proxy.
+    // Define as getter property because
+    // we do not want to evaluate the getters in this time.
+    Object.defineProperty(gettersProxy, localType, {
+      get: function () { return store.getters[type]; },
+      enumerable: true
+    });
+  });
+
+  return gettersProxy
+}
+
+function registerMutation (store, type, handler, local) {
+  var entry = store._mutations[type] || (store._mutations[type] = []);
+  entry.push(function wrappedMutationHandler (payload) {
+    handler.call(store, local.state, payload);
+  });
+}
+
+function registerAction (store, type, handler, local) {
+  var entry = store._actions[type] || (store._actions[type] = []);
+  entry.push(function wrappedActionHandler (payload, cb) {
+    var res = handler.call(store, {
+      dispatch: local.dispatch,
+      commit: local.commit,
+      getters: local.getters,
+      state: local.state,
+      rootGetters: store.getters,
+      rootState: store.state
+    }, payload, cb);
+    if (!isPromise(res)) {
+      res = Promise.resolve(res);
+    }
+    if (store._devtoolHook) {
+      return res.catch(function (err) {
+        store._devtoolHook.emit('vuex:error', err);
+        throw err
+      })
+    } else {
+      return res
+    }
+  });
+}
+
+function registerGetter (store, type, rawGetter, local) {
+  if (store._wrappedGetters[type]) {
+    if (true) {
+      console.error(("[vuex] duplicate getter key: " + type));
+    }
+    return
+  }
+  store._wrappedGetters[type] = function wrappedGetter (store) {
+    return rawGetter(
+      local.state, // local state
+      local.getters, // local getters
+      store.state, // root state
+      store.getters // root getters
+    )
+  };
+}
+
+function enableStrictMode (store) {
+  store._vm.$watch(function () { return this._data.$$state }, function () {
+    if (true) {
+      assert(store._committing, "do not mutate vuex store state outside mutation handlers.");
+    }
+  }, { deep: true, sync: true });
+}
+
+function getNestedState (state, path) {
+  return path.length
+    ? path.reduce(function (state, key) { return state[key]; }, state)
+    : state
+}
+
+function unifyObjectStyle (type, payload, options) {
+  if (isObject(type) && type.type) {
+    options = payload;
+    payload = type;
+    type = type.type;
+  }
+
+  if (true) {
+    assert(typeof type === 'string', ("expects string as the type, but found " + (typeof type) + "."));
+  }
+
+  return { type: type, payload: payload, options: options }
+}
+
+function install (_Vue) {
+  if (Vue && _Vue === Vue) {
+    if (true) {
+      console.error(
+        '[vuex] already installed. Vue.use(Vuex) should be called only once.'
+      );
+    }
+    return
+  }
+  Vue = _Vue;
+  applyMixin(Vue);
+}
+
+/**
+ * Reduce the code which written in Vue.js for getting the state.
+ * @param {String} [namespace] - Module's namespace
+ * @param {Object|Array} states # Object's item can be a function which accept state and getters for param, you can do something for state and getters in it.
+ * @param {Object}
+ */
+var mapState = normalizeNamespace(function (namespace, states) {
+  var res = {};
+  normalizeMap(states).forEach(function (ref) {
+    var key = ref.key;
+    var val = ref.val;
+
+    res[key] = function mappedState () {
+      var state = this.$store.state;
+      var getters = this.$store.getters;
+      if (namespace) {
+        var module = getModuleByNamespace(this.$store, 'mapState', namespace);
+        if (!module) {
+          return
+        }
+        state = module.context.state;
+        getters = module.context.getters;
+      }
+      return typeof val === 'function'
+        ? val.call(this, state, getters)
+        : state[val]
+    };
+    // mark vuex getter for devtools
+    res[key].vuex = true;
+  });
+  return res
+});
+
+/**
+ * Reduce the code which written in Vue.js for committing the mutation
+ * @param {String} [namespace] - Module's namespace
+ * @param {Object|Array} mutations # Object's item can be a function which accept `commit` function as the first param, it can accept anthor params. You can commit mutation and do any other things in this function. specially, You need to pass anthor params from the mapped function.
+ * @return {Object}
+ */
+var mapMutations = normalizeNamespace(function (namespace, mutations) {
+  var res = {};
+  normalizeMap(mutations).forEach(function (ref) {
+    var key = ref.key;
+    var val = ref.val;
+
+    res[key] = function mappedMutation () {
+      var args = [], len = arguments.length;
+      while ( len-- ) args[ len ] = arguments[ len ];
+
+      // Get the commit method from store
+      var commit = this.$store.commit;
+      if (namespace) {
+        var module = getModuleByNamespace(this.$store, 'mapMutations', namespace);
+        if (!module) {
+          return
+        }
+        commit = module.context.commit;
+      }
+      return typeof val === 'function'
+        ? val.apply(this, [commit].concat(args))
+        : commit.apply(this.$store, [val].concat(args))
+    };
+  });
+  return res
+});
+
+/**
+ * Reduce the code which written in Vue.js for getting the getters
+ * @param {String} [namespace] - Module's namespace
+ * @param {Object|Array} getters
+ * @return {Object}
+ */
+var mapGetters = normalizeNamespace(function (namespace, getters) {
+  var res = {};
+  normalizeMap(getters).forEach(function (ref) {
+    var key = ref.key;
+    var val = ref.val;
+
+    // The namespace has been mutated by normalizeNamespace
+    val = namespace + val;
+    res[key] = function mappedGetter () {
+      if (namespace && !getModuleByNamespace(this.$store, 'mapGetters', namespace)) {
+        return
+      }
+      if ( true && !(val in this.$store.getters)) {
+        console.error(("[vuex] unknown getter: " + val));
+        return
+      }
+      return this.$store.getters[val]
+    };
+    // mark vuex getter for devtools
+    res[key].vuex = true;
+  });
+  return res
+});
+
+/**
+ * Reduce the code which written in Vue.js for dispatch the action
+ * @param {String} [namespace] - Module's namespace
+ * @param {Object|Array} actions # Object's item can be a function which accept `dispatch` function as the first param, it can accept anthor params. You can dispatch action and do any other things in this function. specially, You need to pass anthor params from the mapped function.
+ * @return {Object}
+ */
+var mapActions = normalizeNamespace(function (namespace, actions) {
+  var res = {};
+  normalizeMap(actions).forEach(function (ref) {
+    var key = ref.key;
+    var val = ref.val;
+
+    res[key] = function mappedAction () {
+      var args = [], len = arguments.length;
+      while ( len-- ) args[ len ] = arguments[ len ];
+
+      // get dispatch function from store
+      var dispatch = this.$store.dispatch;
+      if (namespace) {
+        var module = getModuleByNamespace(this.$store, 'mapActions', namespace);
+        if (!module) {
+          return
+        }
+        dispatch = module.context.dispatch;
+      }
+      return typeof val === 'function'
+        ? val.apply(this, [dispatch].concat(args))
+        : dispatch.apply(this.$store, [val].concat(args))
+    };
+  });
+  return res
+});
+
+/**
+ * Rebinding namespace param for mapXXX function in special scoped, and return them by simple object
+ * @param {String} namespace
+ * @return {Object}
+ */
+var createNamespacedHelpers = function (namespace) { return ({
+  mapState: mapState.bind(null, namespace),
+  mapGetters: mapGetters.bind(null, namespace),
+  mapMutations: mapMutations.bind(null, namespace),
+  mapActions: mapActions.bind(null, namespace)
+}); };
+
+/**
+ * Normalize the map
+ * normalizeMap([1, 2, 3]) => [ { key: 1, val: 1 }, { key: 2, val: 2 }, { key: 3, val: 3 } ]
+ * normalizeMap({a: 1, b: 2, c: 3}) => [ { key: 'a', val: 1 }, { key: 'b', val: 2 }, { key: 'c', val: 3 } ]
+ * @param {Array|Object} map
+ * @return {Object}
+ */
+function normalizeMap (map) {
+  return Array.isArray(map)
+    ? map.map(function (key) { return ({ key: key, val: key }); })
+    : Object.keys(map).map(function (key) { return ({ key: key, val: map[key] }); })
+}
+
+/**
+ * Return a function expect two param contains namespace and map. it will normalize the namespace and then the param's function will handle the new namespace and the map.
+ * @param {Function} fn
+ * @return {Function}
+ */
+function normalizeNamespace (fn) {
+  return function (namespace, map) {
+    if (typeof namespace !== 'string') {
+      map = namespace;
+      namespace = '';
+    } else if (namespace.charAt(namespace.length - 1) !== '/') {
+      namespace += '/';
+    }
+    return fn(namespace, map)
+  }
+}
+
+/**
+ * Search a special module from store by namespace. if module not exist, print error message.
+ * @param {Object} store
+ * @param {String} helper
+ * @param {String} namespace
+ * @return {Object}
+ */
+function getModuleByNamespace (store, helper, namespace) {
+  var module = store._modulesNamespaceMap[namespace];
+  if ( true && !module) {
+    console.error(("[vuex] module namespace not found in " + helper + "(): " + namespace));
+  }
+  return module
+}
+
+var index_esm = {
+  Store: Store,
+  install: install,
+  version: '3.1.1',
+  mapState: mapState,
+  mapMutations: mapMutations,
+  mapGetters: mapGetters,
+  mapActions: mapActions,
+  createNamespacedHelpers: createNamespacedHelpers
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (index_esm);
+
+
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../../webpack/buildin/global.js */ "./node_modules/webpack/buildin/global.js")))
+
+/***/ }),
+
 /***/ "./node_modules/webpack/buildin/global.js":
 /*!***********************************!*\
   !*** (webpack)/buildin/global.js ***!
@@ -108757,6 +111356,48 @@ module.exports = "/images/vue.jpg?52a341ad3b0b705827ace812e601985e";
 
 /***/ }),
 
+/***/ "./resources/js/api/users.js":
+/*!***********************************!*\
+  !*** ./resources/js/api/users.js ***!
+  \***********************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _config_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../config.js */ "./resources/js/config.js");
+/**
+ * Imports the LvBlog API URL from the config.
+ */
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  /**
+   * Post /captchas
+   */
+  getCaptchas: function getCaptchas(phone) {
+    return axios.post(_config_js__WEBPACK_IMPORTED_MODULE_0__["LVBLOG_CONFIG"].API_URL + '/captchas/', {
+      phone: phone
+    });
+  },
+  getVerificationCodes: function getVerificationCodes(captcha_key, captcha_code, phone) {
+    return axios.post(_config_js__WEBPACK_IMPORTED_MODULE_0__["LVBLOG_CONFIG"].API_URL + '/verificationCodes/', {
+      captcha_key: captcha_key,
+      captcha_code: captcha_code,
+      phone: phone
+    });
+  },
+  postSignIn: function postSignIn(verification_key, verification_code, name, password) {
+    return axios.post(_config_js__WEBPACK_IMPORTED_MODULE_0__["LVBLOG_CONFIG"].API_URL + '/users', {
+      verification_key: verification_key,
+      verification_code: verification_code,
+      name: name,
+      password: password
+    });
+  }
+});
+
+/***/ }),
+
 /***/ "./resources/js/app.js":
 /*!*****************************!*\
   !*** ./resources/js/app.js ***!
@@ -108773,6 +111414,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var element_ui_lib_theme_chalk_index_css__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! element-ui/lib/theme-chalk/index.css */ "./node_modules/element-ui/lib/theme-chalk/index.css");
 /* harmony import */ var element_ui_lib_theme_chalk_index_css__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(element_ui_lib_theme_chalk_index_css__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var _routes_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./routes.js */ "./resources/js/routes.js");
+/* harmony import */ var _store_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./store.js */ "./resources/js/store.js");
 window._ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
 
 try {
@@ -108805,9 +111447,11 @@ if (token) {
 
 
 
+
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(element_ui__WEBPACK_IMPORTED_MODULE_1___default.a);
 var app = new vue__WEBPACK_IMPORTED_MODULE_0___default.a({
-  router: _routes_js__WEBPACK_IMPORTED_MODULE_3__["default"]
+  router: _routes_js__WEBPACK_IMPORTED_MODULE_3__["default"],
+  store: _store_js__WEBPACK_IMPORTED_MODULE_4__["default"]
 }).$mount('#app');
 
 /***/ }),
@@ -109247,6 +111891,37 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/config.js":
+/*!********************************!*\
+  !*** ./resources/js/config.js ***!
+  \********************************/
+/*! exports provided: LVBLOG_CONFIG */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LVBLOG_CONFIG", function() { return LVBLOG_CONFIG; });
+/**
+ * Defines the API route we are using.
+ */
+var api_url = '';
+
+switch ("development") {
+  case 'development':
+    api_url = 'http://www.mozilan.com/api';
+    break;
+
+  case 'production':
+    api_url = 'http://www.mozilan.com/api';
+    break;
+}
+
+var LVBLOG_CONFIG = {
+  API_URL: api_url
+};
+
+/***/ }),
+
 /***/ "./resources/js/event-bus.js":
 /*!***********************************!*\
   !*** ./resources/js/event-bus.js ***!
@@ -109261,6 +111936,132 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_0__);
 
 var EventBus = new vue__WEBPACK_IMPORTED_MODULE_0___default.a();
+
+/***/ }),
+
+/***/ "./resources/js/modules/users.js":
+/*!***************************************!*\
+  !*** ./resources/js/modules/users.js ***!
+  \***************************************/
+/*! exports provided: users */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "users", function() { return users; });
+/* harmony import */ var _api_users__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../api/users */ "./resources/js/api/users.js");
+/*
+|-------------------------------------------------------------------------------
+| VUEX modules/users.js
+|-------------------------------------------------------------------------------
+| The Vuex data store for the users
+*/
+
+/**
+    status = 0 -> 数据尚未加载
+    status = 1 -> 数据开始加载
+    status = 2 -> 数据加载成功
+    status = 3 -> 数据加载失败
+*/
+
+var users = {
+  state: {
+    //图形验证码
+    captchas: [],
+    //图形验证码加载状态
+    captchaLoadStatus: 0,
+    //短信验证码
+    verificationCodes: [],
+    //短信验证码加载状态
+    verificationCodeLoadStatus: 0,
+    //手机号注册
+    registerByPhoneStatus: 0
+  },
+  actions: {
+    loadCaptchas: function loadCaptchas(_ref, data) {
+      var commit = _ref.commit;
+      commit('setCaptchaLoadStatus', 1);
+      _api_users__WEBPACK_IMPORTED_MODULE_0__["default"].getCaptchas(data.phone).then(function (response) {
+        commit('setCaptchas', response.data);
+        commit('setCaptchaLoadStatus', 2);
+      })["catch"](function (error) {
+        console.log(error);
+        commit('setCaptchas', []);
+        commit('setCaptchaLoadStatus', 3);
+      });
+    },
+    loadVerificationCodes: function loadVerificationCodes(_ref2, data) {
+      var commit = _ref2.commit;
+      commit('setVerificationCodeLoadStatus', 1);
+      _api_users__WEBPACK_IMPORTED_MODULE_0__["default"].getVerificationCodes(data.captcha_key, data.captcha_code, data.phone).then(function (response) {
+        commit('setVerificationCodes', response.data);
+        commit('setVerificationCodeLoadStatus', 2);
+      })["catch"](function (error) {
+        console.log(error);
+        commit('setVerificationCodes', []);
+        commit('setVerificationCodeLoadStatus', 3);
+      });
+    },
+    freshUserCaptchaLoadStatus: function freshUserCaptchaLoadStatus(_ref3) {
+      var commit = _ref3.commit;
+      commit('setPrimalCaptchaLoadStatus', 0);
+    },
+    freshUserVerificationCodeLoadStatus: function freshUserVerificationCodeLoadStatus(_ref4) {
+      var commit = _ref4.commit;
+      commit('setPrimalVerificationCodeLoadStatus', 0);
+    },
+    registerByPhone: function registerByPhone(_ref5, data) {
+      var commit = _ref5.commit;
+      commit('setRegisterByPhoneStatus', 1);
+      _api_users__WEBPACK_IMPORTED_MODULE_0__["default"].postSignIn(data.verification_key, data.verification_code, data.name, data.password).then(function (response) {
+        commit('setRegisterByPhoneStatus', 2);
+      })["catch"](function (error) {
+        console.log(error);
+        commit('setRegisterByPhoneStatus', 3);
+      });
+    }
+  },
+  mutations: {
+    setPrimalCaptchaLoadStatus: function setPrimalCaptchaLoadStatus(state, status) {
+      state.captchaLoadStatus = status;
+    },
+    setPrimalVerificationCodeLoadStatus: function setPrimalVerificationCodeLoadStatus(state, status) {
+      state.verificationCodeLoadStatus = status;
+    },
+    setCaptchaLoadStatus: function setCaptchaLoadStatus(state, status) {
+      state.captchaLoadStatus = status;
+    },
+    setCaptchas: function setCaptchas(state, capchas) {
+      state.captchas = capchas;
+    },
+    setVerificationCodeLoadStatus: function setVerificationCodeLoadStatus(state, status) {
+      state.verificationCodeLoadStatus = status;
+    },
+    setVerificationCodes: function setVerificationCodes(state, verificationCodes) {
+      state.verificationCodes = verificationCodes;
+    },
+    setRegisterByPhoneStatus: function setRegisterByPhoneStatus(state, status) {
+      state.registerByPhoneStatus = status;
+    }
+  },
+  getters: {
+    getCaptchaLoadStatus: function getCaptchaLoadStatus(state) {
+      return state.captchaLoadStatus;
+    },
+    getCaptchas: function getCaptchas(state) {
+      return state.captchas;
+    },
+    getVerificationCodeLoadStatus: function getVerificationCodeLoadStatus(state) {
+      return state.verificationCodeLoadStatus;
+    },
+    getVerificationCodes: function getVerificationCodes(state) {
+      return state.verificationCodes;
+    },
+    getRegisterByPhoneStatus: function getRegisterByPhoneStatus(state) {
+      return state.registerByPhoneStatus;
+    }
+  }
+};
 
 /***/ }),
 
@@ -109485,6 +112286,55 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vue_router__WEBPACK_IMPORTED_MODU
       components: vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('Index', __webpack_require__(/*! ./pages/Index.vue */ "./resources/js/pages/Index.vue"))
     }]
   }]
+}));
+
+/***/ }),
+
+/***/ "./resources/js/store.js":
+/*!*******************************!*\
+  !*** ./resources/js/store.js ***!
+  \*******************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+/* harmony import */ var _modules_users__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./modules/users */ "./resources/js/modules/users.js");
+/*
+ |-------------------------------------------------------------------------------
+ | VUEX store.js
+ |-------------------------------------------------------------------------------
+ | Builds the data store from all of the modules for the Roast app.
+ */
+
+/**
+ * Adds the promise polyfill for IE 11
+ */
+__webpack_require__(/*! es6-promise */ "./node_modules/es6-promise/dist/es6-promise.js").polyfill();
+/**
+ * Import Vue and Vuex
+ */
+
+
+
+
+/**
+ * Initializes Vuex on Vue.
+ */
+
+vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__["default"]);
+
+/**
+ * Export our data store.
+ */
+
+/* harmony default export */ __webpack_exports__["default"] = (new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
+  modules: {
+    users: _modules_users__WEBPACK_IMPORTED_MODULE_2__["users"]
+  }
 }));
 
 /***/ }),

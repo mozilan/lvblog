@@ -197,7 +197,7 @@
                     <img class="star" src="../../assets/star.png" />
                 </el-row>
                 <div class="block pagination">
-                    <el-pagination background="#f9f9f9" layout="prev, pager, next" :total="50">
+                    <el-pagination background="" layout="prev, pager, next" :total="50">
                     </el-pagination>
                 </div>
             </el-col>
@@ -210,19 +210,19 @@
                 </div>
             </el-col>
         </el-row>
-        <LFooter></LFooter>
+
     </div>
 </template>
 <script>
     import Friend from '../components/friend'
     import Tag from '../components/tag'
-    import LFooter from '../components/L-footer'
+
     export default {
         name: 'index',
         components: {
             Friend,
             Tag,
-            LFooter,
+
         },
     }
 </script>
