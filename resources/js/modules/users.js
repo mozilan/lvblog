@@ -54,14 +54,17 @@ export const users = {
                     commit('setVerificationCodeLoadStatus', 3);
                 });
         },
-        freshUserCaptchaLoadStatus({commit}){
-            commit('setPrimalCaptchaLoadStatus', 0);
+        freshCaptchaStatus({commit}){
+            commit('setCaptchas', []);
+            commit('setCaptchaLoadStatus', 0);
         },
-        freshUserVerificationCodeLoadStatus({commit}){
-            commit('setPrimalVerificationCodeLoadStatus', 0);
+        freshVerificationCodeStatus({commit}){
+            commit('setVerificationCodes', []);
+            commit('setVerificationCodeLoadStatus', 0);
         },
-
-
+        freshRegisterByPhoneStatus({commit}){
+            commit( 'setRegisterByPhoneStatus',0);
+        },
         registerByPhone( {commit},data){
             commit( 'setRegisterByPhoneStatus', 1);
             UserAPI.postSignIn( data.verification_key,data.verification_code, data.name,data.password)
@@ -75,12 +78,6 @@ export const users = {
         }
     },
         mutations:{
-            setPrimalCaptchaLoadStatus(state,status){
-              state.captchaLoadStatus = status;
-            },
-            setPrimalVerificationCodeLoadStatus(state,status){
-              state.verificationCodeLoadStatus = status;
-            },
             setCaptchaLoadStatus(state,status){
                 state.captchaLoadStatus = status;
             },
@@ -95,7 +92,7 @@ export const users = {
             },
             setRegisterByPhoneStatus(state , status){
                 state.registerByPhoneStatus = status;
-            }
+            },
         },
         getters:{
             getCaptchaLoadStatus( state ){

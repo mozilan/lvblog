@@ -3693,6 +3693,7 @@ __webpack_require__.r(__webpack_exports__);
         return false;
       }
 
+      this.$store.dispatch('freshVerificationCodeStatus');
       this.captcha_loading = true;
       this.$store.dispatch('loadCaptchas', {
         phone: this.phone
@@ -3707,6 +3708,9 @@ __webpack_require__.r(__webpack_exports__);
         return false;
       }
 
+      this.captcha_button_show = true;
+      this.captcha_show = false;
+      this.$store.dispatch('freshCaptchaStatus');
       this.message_loading = true;
       this.$store.dispatch('loadVerificationCodes', {
         phone: this.phone,
@@ -3725,7 +3729,7 @@ __webpack_require__.r(__webpack_exports__);
     },
     submitRegisterByPhone: function submitRegisterByPhone() {
       if (this.validateRegisterByPhone()) {
-        this.$store.dispatch('freshUserVerificationCodeLoadStatus');
+        this.$store.dispatch('freshVerificationCodeStatus');
         this.$store.dispatch('registerByPhone', {
           name: this.name,
           password: this.password,
@@ -3816,17 +3820,14 @@ __webpack_require__.r(__webpack_exports__);
       }
 
       if (this.$store.getters.getCaptchaLoadStatus == 2) {
-        //this.fullscreenLoading = false;
         this.loader.close();
         this.openMessage('获取图形验证码成功！', 'success');
         this.captcha_button_show = false;
         this.captcha_show = true;
         this.captcha_loading = false;
-        this.$store.dispatch('freshUserCaptchaLoadStatus');
       }
 
       if (this.$store.getters.getCaptchaLoadStatus == 3) {
-        //this.fullscreenLoading = false;
         this.loader.close();
         this.openMessage('此手机号已经注册!', 'error');
         this.captcha_loading = false;
@@ -3850,20 +3851,13 @@ __webpack_require__.r(__webpack_exports__);
       }
 
       if (this.$store.getters.getVerificationCodeLoadStatus == 2) {
-        //this.fullscreenLoading = false;
-        this.loader.close(); //this.message_loading = false;
-
+        this.loader.close();
         this.openMessage('短信验证码已发送到您的手机！', 'success');
-        this.captcha_show = true;
       }
 
       if (this.$store.getters.getVerificationCodeLoadStatus == 3) {
-        //this.fullscreenLoading = false;
         this.loader.close();
         this.openMessage('图形验证码不正确！', 'error');
-        this.captcha_button_show = true;
-        this.captcha_show = false;
-        this.$store.dispatch('freshUserCaptchaLoadStatus');
       }
 
       return this.$store.getters.getVerificationCodeLoadStatus;
@@ -3897,12 +3891,14 @@ __webpack_require__.r(__webpack_exports__);
         this.loader.close();
         this.openMessage('注册成功！', 'success');
         this.dialogFormVisible = false;
+        this.$store.dispatch('freshRegisterByPhoneStatus');
       }
 
       if (this.$store.getters.getRegisterByPhoneStatus == 3) {
         //this.fullscreenLoading = false;
         this.loader.close();
         this.openMessage('注册失败!', 'error');
+        this.$store.dispatch('freshRegisterByPhoneStatus');
       }
 
       return this.$store.getters.getRegisterStatus;
@@ -112002,16 +111998,22 @@ var users = {
         commit('setVerificationCodeLoadStatus', 3);
       });
     },
-    freshUserCaptchaLoadStatus: function freshUserCaptchaLoadStatus(_ref3) {
+    freshCaptchaStatus: function freshCaptchaStatus(_ref3) {
       var commit = _ref3.commit;
-      commit('setPrimalCaptchaLoadStatus', 0);
+      commit('setCaptchas', []);
+      commit('setCaptchaLoadStatus', 0);
     },
-    freshUserVerificationCodeLoadStatus: function freshUserVerificationCodeLoadStatus(_ref4) {
+    freshVerificationCodeStatus: function freshVerificationCodeStatus(_ref4) {
       var commit = _ref4.commit;
-      commit('setPrimalVerificationCodeLoadStatus', 0);
+      commit('setVerificationCodes', []);
+      commit('setVerificationCodeLoadStatus', 0);
     },
-    registerByPhone: function registerByPhone(_ref5, data) {
+    freshRegisterByPhoneStatus: function freshRegisterByPhoneStatus(_ref5) {
       var commit = _ref5.commit;
+      commit('setRegisterByPhoneStatus', 0);
+    },
+    registerByPhone: function registerByPhone(_ref6, data) {
+      var commit = _ref6.commit;
       commit('setRegisterByPhoneStatus', 1);
       _api_users__WEBPACK_IMPORTED_MODULE_0__["default"].postSignIn(data.verification_key, data.verification_code, data.name, data.password).then(function (response) {
         commit('setRegisterByPhoneStatus', 2);
@@ -112022,12 +112024,6 @@ var users = {
     }
   },
   mutations: {
-    setPrimalCaptchaLoadStatus: function setPrimalCaptchaLoadStatus(state, status) {
-      state.captchaLoadStatus = status;
-    },
-    setPrimalVerificationCodeLoadStatus: function setPrimalVerificationCodeLoadStatus(state, status) {
-      state.verificationCodeLoadStatus = status;
-    },
     setCaptchaLoadStatus: function setCaptchaLoadStatus(state, status) {
       state.captchaLoadStatus = status;
     },

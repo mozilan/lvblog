@@ -200,6 +200,7 @@
                     this.openMessage(this.validations.phone.text,'warning');
                     return false;
                 }
+                this.$store.dispatch('freshVerificationCodeStatus');
                 this.captcha_loading=true;
                 this.$store.dispatch('loadCaptchas',{
                     phone: this.phone,
@@ -211,6 +212,9 @@
                     this.openMessage(this.validations.captcha_code.text,'warning');
                     return false;
                 }
+                this.captcha_button_show = true;
+                this.captcha_show = false;
+                this.$store.dispatch('freshCaptchaStatus');
                 this.message_loading = true;
                 this.$store.dispatch('loadVerificationCodes',{
                     phone: this.phone,
@@ -229,7 +233,7 @@
             },
             submitRegisterByPhone: function () {
                 if(this.validateRegisterByPhone()) {
-                    this.$store.dispatch('freshUserVerificationCodeLoadStatus');
+                    this.$store.dispatch('freshVerificationCodeStatus');
                     this.$store.dispatch('registerByPhone', {
                         name: this.name,
                         password: this.password,
@@ -310,16 +314,13 @@
                     });
                 }
                 if (this.$store.getters.getCaptchaLoadStatus == 2){
-                    //this.fullscreenLoading = false;
                     this.loader.close();
                     this.openMessage('获取图形验证码成功！','success');
                     this.captcha_button_show = false;
                     this.captcha_show = true;
                     this.captcha_loading=false;
-                    this.$store.dispatch('freshUserCaptchaLoadStatus');
                 }
                 if (this.$store.getters.getCaptchaLoadStatus == 3){
-                    //this.fullscreenLoading = false;
                     this.loader.close();
                     this.openMessage('此手机号已经注册!','error');
                     this.captcha_loading = false;
@@ -341,19 +342,12 @@
                     });
                 }
                 if (this.$store.getters.getVerificationCodeLoadStatus == 2){
-                    //this.fullscreenLoading = false;
                     this.loader.close();
-                    //this.message_loading = false;
                     this.openMessage('短信验证码已发送到您的手机！','success');
-                    this.captcha_show=true;
                 }
                 if (this.$store.getters.getVerificationCodeLoadStatus == 3){
-                    //this.fullscreenLoading = false;
                     this.loader.close();
                     this.openMessage('图形验证码不正确！','error');
-                    this.captcha_button_show = true;
-                    this.captcha_show = false;
-                    this.$store.dispatch('freshUserCaptchaLoadStatus');
                 }
                 return this.$store.getters.getVerificationCodeLoadStatus;
             },
@@ -385,11 +379,13 @@
                     this.loader.close();
                     this.openMessage('注册成功！','success');
                     this.dialogFormVisible = false;
+                    this.$store.dispatch('freshRegisterByPhoneStatus');
                 }
                 if (this.$store.getters.getRegisterByPhoneStatus == 3){
                     //this.fullscreenLoading = false;
                     this.loader.close();
                     this.openMessage('注册失败!','error');
+                    this.$store.dispatch('freshRegisterByPhoneStatus');
                 }
                 return this.$store.getters.getRegisterStatus;
             },
