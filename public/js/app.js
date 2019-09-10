@@ -6160,7 +6160,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.L-footer[data-v-4bfe94f2]{\r\n\tpadding: 20px;\r\n\ttext-align: center;\r\n\tcolor: #fff;\r\n\tbackground-color: #555;\n}\n.main[data-v-4bfe94f2]{\r\n\twidth: 70%;\r\n\tmargin: 0 auto;\r\n\tcolor: #ccc;\n}\n.out-link[data-v-4bfe94f2]{\r\n\ttext-decoration: none;\r\n\tcolor: #ccc;\n}\n.out-link[data-v-4bfe94f2]:hover{\r\n\tcolor: #ffffff;\n}\n.item-col[data-v-4bfe94f2]{\r\n\ttext-align: left;\n}\n.item-col.weside[data-v-4bfe94f2]{\r\n\tfont-size: 14px;\n}\n.item-col .title[data-v-4bfe94f2]{\r\n\tcolor: #ddd;\r\n\tmargin-bottom: 10px;\n}\n.item span[data-v-4bfe94f2]{\r\n\tmargin-right: 5px;\n}\r\n", ""]);
+exports.push([module.i, "\n.L-footer[data-v-4bfe94f2]{\n\tpadding: 20px;\n\ttext-align: center;\n\tcolor: #fff;\n\tbackground-color: #555;\n}\n.main[data-v-4bfe94f2]{\n\twidth: 70%;\n\tmargin: 0 auto;\n\tcolor: #ccc;\n}\n.out-link[data-v-4bfe94f2]{\n\ttext-decoration: none;\n\tcolor: #ccc;\n}\n.out-link[data-v-4bfe94f2]:hover{\n\tcolor: #ffffff;\n}\n.item-col[data-v-4bfe94f2]{\n\ttext-align: left;\n}\n.item-col.weside[data-v-4bfe94f2]{\n\tfont-size: 14px;\n}\n.item-col .title[data-v-4bfe94f2]{\n\tcolor: #ddd;\n\tmargin-bottom: 10px;\n}\n.item span[data-v-4bfe94f2]{\n\tmargin-right: 5px;\n}\n", ""]);
 
 // exports
 
@@ -6179,7 +6179,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.box-card .item a[data-v-ca0d44ae]{\r\n\ttext-decoration: none;\r\n\t/*color: #F56C6C;*/\n}\n.box-card span[data-v-ca0d44ae]{\r\n\tfont-weight: bold;\n}\n.card-icon[data-v-ca0d44ae]{\r\n\twidth: 20px;\r\n\theight: 20px;\r\n\tmargin-right: 10px;\n}\r\n", ""]);
+exports.push([module.i, "\n.box-card .item a[data-v-ca0d44ae]{\n\ttext-decoration: none;\n\t/*color: #F56C6C;*/\n}\n.box-card span[data-v-ca0d44ae]{\n\tfont-weight: bold;\n}\n.card-icon[data-v-ca0d44ae]{\n\twidth: 20px;\n\theight: 20px;\n\tmargin-right: 10px;\n}\n", ""]);
 
 // exports
 
@@ -93912,19 +93912,17 @@ var render = function() {
                 [
                   _c("div", { staticClass: "item" }, [
                     _c("i", { staticClass: "el-icon-caret-right" }),
-                    _vm._v(
-                      "\r\n\t\t\t\t\t本站已稳定运行1天4时36分22秒\r\n\t\t\t\t"
-                    )
+                    _vm._v("\n\t\t\t\t\t本站已稳定运行1天4时36分22秒\n\t\t\t\t")
                   ]),
                   _vm._v(" "),
                   _c("div", { staticClass: "item" }, [
                     _c("i", { staticClass: "el-icon-caret-right" }),
-                    _vm._v("\r\n\t\t\t\t\tmozilan@aliyun.com\r\n\t\t\t\t")
+                    _vm._v("\n\t\t\t\t\tmozilan@aliyun.com\n\t\t\t\t")
                   ]),
                   _vm._v(" "),
                   _c("div", { staticClass: "item" }, [
                     _c("i", { staticClass: "el-icon-caret-right" }),
-                    _vm._v("\r\n\t\t\t\t\t© 蓝默空间-博客\r\n\t\t\t\t")
+                    _vm._v("\n\t\t\t\t\t© 蓝默空间-博客\n\t\t\t\t")
                   ])
                 ]
               )
