@@ -33,4 +33,12 @@ export default {
             }
         );
     },
+    postSignUp: function (username, password) {
+        return axios.post(LVBLOG_CONFIG.API_URL + '/authorizations',
+            {
+                username:username,
+                password: password,
+            }
+        );
+    },
 }

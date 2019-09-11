@@ -26,6 +26,10 @@ export const users = {
         verificationCodeLoadStatus:0,
         //手机号注册
         registerByPhoneStatus:0,
+        //登录状态
+        loginStatus:0,
+        // 存储token
+        Authorization: localStorage.getItem('Authorization') ? localStorage.getItem('Authorization') : '',
     },
     actions: {
         loadCaptchas({commit},data){
@@ -45,7 +49,7 @@ export const users = {
             commit('setVerificationCodeLoadStatus', 1);
             UserAPI.getVerificationCodes(data.captcha_key, data.captcha_code, data.phone)
                 .then(function (response) {
-                    commit('setVerificationCodes', response.data);
+                    commit('setVerificationCodes', 'Bearer '+response.data);
                     commit('setVerificationCodeLoadStatus', 2);
                 })
                 .catch(function (error) {
@@ -75,6 +79,19 @@ export const users = {
                     console.log(error);
                     commit( 'setRegisterByPhoneStatus',3);
                 })
+        },
+        login({commit},data){
+            commit('setLoginStatus',1);
+            UserAPI.postSignUp( data.username,data.password)
+                .then(function ( response ) {
+                    // console.log(response);
+                    commit( 'setLoginStatus' , 2);
+                    commit('setLoginToken','Bearer ' + response.data.access_token);
+                })
+                .catch(function (error) {
+                    console.log(error);
+                    commit( 'setLoginStatus',3);
+                })
         }
     },
         mutations:{
@@ -93,6 +110,14 @@ export const users = {
             setRegisterByPhoneStatus(state , status){
                 state.registerByPhoneStatus = status;
             },
+            setLoginStatus(state , status){
+                state.loginStatus = status;
+            },
+            // 修改token，并将token存入localStorage
+            setLoginToken (state, access_token) {
+                state.Authorization = access_token;
+                localStorage.setItem('Authorization', access_token);
+            }
         },
         getters:{
             getCaptchaLoadStatus( state ){
@@ -107,8 +132,11 @@ export const users = {
             getVerificationCodes( state ){
                 return state.verificationCodes;
             },
-            getRegisterByPhoneStatus( state ){
-                return state.registerByPhoneStatus;
-            }
+            getLoginStatus( state ){
+                return state.loginStatus;
+            },
+            getLoginToken( state ){
+                return state.Authorization;
+            },
         }
 };

@@ -38,7 +38,7 @@
 </style>
 
 <template>
-    <el-dialog title="用户注册" :visible.sync="dialogFormVisible">
+    <el-dialog title="用户注册" :visible.sync="registerDialogFormVisible">
         <el-container style="display:block">
             <el-row>
                 <el-form :model="form">
@@ -110,7 +110,7 @@
                     </el-col>
                 </el-form>
                 <el-col :xs="24" :sm="24" :md="24" :lg="24">
-                        <el-button @click="dialogFormVisible = false" style="float:left">取 消</el-button>
+                        <el-button @click="registerDialogFormVisible = false" style="float:left">取 消</el-button>
                         <el-button class="bl-right" type="primary" @click="submitRegisterByPhone" style="float:right">确定</el-button>
                 </el-col>
                 <span
@@ -148,7 +148,7 @@
                 loader:'',
                 captcha_show: false,
                 fullscreenLoading: false,
-                dialogFormVisible: false,
+                registerDialogFormVisible: false,
                 form: {
                     name: '',
                     region: '',
@@ -378,7 +378,7 @@
                     this.captcha_show = false;
                     this.loader.close();
                     this.openMessage('注册成功！','success');
-                    this.dialogFormVisible = false;
+                    this.registerDialogFormVisible = false;
                     this.$store.dispatch('freshRegisterByPhoneStatus');
                 }
                 if (this.$store.getters.getRegisterByPhoneStatus == 3){
@@ -391,8 +391,8 @@
             },
         },
         mounted() {
-            EventBus.$on('prompt-signin', function () {
-                this.dialogFormVisible = true;
+            EventBus.$on('prompt-register', function () {
+                this.registerDialogFormVisible = true;
             }.bind(this));
         },
     }

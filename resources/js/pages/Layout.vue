@@ -31,14 +31,15 @@
             <LFooter></LFooter>
         </el-container>
         <Register></Register>
+        <Login></Login>
     </div>
 </template>
 
 <script>
     import LFooter from '../components/L-footer'
     import Navigation from '../components/global/NavigationModal';
-    //import LoginModal from '../../../../CloudStation/blumer-blog/resources/js/components/global/RegisterModal.vue';
     import Register from '../components/global/RegisterModal';
+    import Login from '../components/global/LoginModal';
     export default {
         data() {
             return {
@@ -52,9 +53,9 @@
         },
         components: {
             Navigation,
-            //LoginModal,
             Register,
             LFooter,
+            Login,
         }
     }
 </script>

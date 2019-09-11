@@ -26,8 +26,17 @@
             <el-menu-item index="3"><a href="/">运维</a></el-menu-item>
             <el-menu-item index="4"><a href="/">算法</a></el-menu-item>
             <el-menu-item index="5"><a href="/">分享</a></el-menu-item>
-            <el-menu-item index="8" @click="signin">注册
-            </el-menu-item>
+            <el-menu-item index="6" @click="register" v-if="tokenStatus == ''">注册</el-menu-item>
+            <el-menu-item index="7" @click="login" v-if="tokenStatus == ''">登录</el-menu-item>
+            <el-submenu index="8" v-if="tokenStatus != ''">
+                <template slot="title">
+                    <el-image style="width: 40px; height: 40px;border:3px solid #409eff;border-radius:30px" :src="avatar_url">
+                    </el-image>
+                </template>
+                <el-menu-item index="8-1">写博客</el-menu-item>
+                <el-menu-item index="8-2">个人中心</el-menu-item>
+                <el-menu-item index="8-3" @click="logout()">退出登录</el-menu-item>
+            </el-submenu>
         </el-menu>
     </div>
 </template>
@@ -38,15 +47,27 @@
         data() {
             return {
                 activeIndex: '1',
+                avatar_url: "https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg",
             };
         },
         methods: {
-            signin() {
-                EventBus.$emit('prompt-signin');
+            register() {
+                EventBus.$emit('prompt-register');
+            },
+            login() {
+                EventBus.$emit('prompt-login');
             },
             handleSelect(key, keyPath) {
                 // console.log(key, keyPath);
             },
+            logout(){
+
+            }
         },
+        computed:{
+            tokenStatus(){
+                return this.$store.getters.getLoginToken;
+            }
+        }
     }
 </script>
