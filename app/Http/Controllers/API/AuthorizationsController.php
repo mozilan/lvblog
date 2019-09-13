@@ -46,17 +46,19 @@ class AuthorizationsController extends Controller
     }
     public function socialStore($type, SocialAuthorizationRequest $request)
     {
-        if (!in_array($type, ['weixin'])) {
-            return $this->response->errorBadRequest();
-        }
+//        if (!in_array($type, ['weixin'])) {
+//            return $this->response->errorBadRequest();
+//        }
 
         $driver = \Socialite::driver($type);
+
         try {
             if ($code = $request->code) {
                 $response = $driver->getAccessTokenResponse($code);
                 $token = array_get($response, 'access_token');
             } else {
                 $token = $request->access_token;
+
                 if ($type == 'weixin') {
                     $driver->setOpenId($request->openid);
                 }
@@ -66,28 +68,27 @@ class AuthorizationsController extends Controller
         } catch (\Exception $e) {
             return $this->response->errorUnauthorized('参数错误，未获取用户信息');
         }
+        
+        // 在本地 users 表中查询该用户来判断是否已存在
+        $user = User::where( 'provider_id', '=', $oauthUser->id )
+            ->where( 'provider', '=', $type )
+            ->first();
+        if ($user == null) {
+            // 如果该用户不存在则将其保存到 users 表
+            $newUser = new User();
 
-        switch ($type) {
-            case 'weixin':
-                $unionid = $oauthUser->offsetExists('unionid') ? $oauthUser->offsetGet('unionid') : null;
+            $newUser->name        = $type=='weibo'?$oauthUser->getNickname():$oauthUser->getName();
+            $newUser->email       = $oauthUser->getEmail() == '' ? '' : $oauthUser->getEmail();
+            $newUser->avatar      = $oauthUser->getAvatar();
+            $newUser->password    = '';
+            $newUser->provider    = $type;
+            $newUser->provider_id = $oauthUser->getId();
 
-                if ($unionid) {
-                    $user = User::where('provider_id', $unionid)->first();
-                } else {
-                    $user = User::where('provider_id', $oauthUser->getId())->where('provider',$type)->first();
-                }
-                // 没有用户，默认创建一个用户
-                if (!$user) {
-                    $user = User::create([
-                        'name' => $oauthUser->getNickname(),
-                        'avatar' => $oauthUser->getAvatar(),
-                        'provider_id' => $oauthUser->getId(),
-                        'provider' => $type,
-                    ]);
-                }
-                break;
+            $newUser->save();
+            $user = $newUser;
         }
 
-        return $this->response->array(['token' => $user->id]);
+        $token=\Auth::guard('api')->fromUser($user);
+        return $this->respondWithToken($token);
     }
 }

@@ -209,20 +209,21 @@
                     <Friend></Friend>
                 </div>
             </el-col>
+            <Oauth></Oauth>
         </el-row>
-
     </div>
 </template>
 <script>
     import Friend from '../components/friend'
     import Tag from '../components/tag'
+    import Oauth from '../components/Oauth'
 
     export default {
         name: 'index',
         components: {
             Friend,
             Tag,
-
+            Oauth,
         },
     }
 </script>

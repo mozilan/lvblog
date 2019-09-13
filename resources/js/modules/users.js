@@ -30,6 +30,7 @@ export const users = {
         loginStatus:0,
         // 存储token
         Authorization: localStorage.getItem('Authorization') ? localStorage.getItem('Authorization') : '',
+
     },
     actions: {
         loadCaptchas({commit},data){
@@ -92,7 +93,21 @@ export const users = {
                     console.log(error);
                     commit( 'setLoginStatus',3);
                 })
-        }
+        },
+        loginByOauth({commit},data){
+            commit('setLoginStatus',1);
+                    UserAPI.postSignInByOauth( data.code,data.social_type)
+                    .then(function ( response ) {
+                        // console.log(response);
+                        commit( 'setLoginStatus' , 2);
+                        commit('setLoginToken','Bearer ' + response.data.access_token);
+                    })
+                    .catch(function (error) {
+                        console.log(error);
+                        commit( 'setLoginStatus',3);
+                    });
+
+        },
     },
         mutations:{
             setCaptchaLoadStatus(state,status){

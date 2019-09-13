@@ -41,4 +41,11 @@ export default {
             }
         );
     },
+    postSignInByOauth: function (code,social_type) {
+        return axios.post(LVBLOG_CONFIG.API_URL + '/socials/'+social_type+'/authorizations',
+            {
+                code:code,
+            }
+        );
+    },
 }

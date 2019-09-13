@@ -12,3 +12,4 @@
 */
 
 Route::get('/', 'Web\AppController@getApp');
+Route::get( '/auth/{social}', 'Web\AuthenticationController@getSocialRedirect' );
