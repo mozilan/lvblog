@@ -26,11 +26,11 @@
             <el-menu-item index="3"><a href="/">运维</a></el-menu-item>
             <el-menu-item index="4"><a href="/">算法</a></el-menu-item>
             <el-menu-item index="5"><a href="/">分享</a></el-menu-item>
-            <el-menu-item index="6" @click="register" v-if="tokenStatus == ''">注册</el-menu-item>
-            <el-menu-item index="7" @click="login" v-if="tokenStatus == ''">登录</el-menu-item>
-            <el-submenu index="8" v-if="tokenStatus != ''">
+            <el-menu-item index="6" @click="register" v-if="tokenStatus == '' ">注册</el-menu-item>
+            <el-menu-item index="7" @click="login" v-if="tokenStatus == '' ">登录</el-menu-item>
+            <el-submenu index="8" v-if="tokenStatus != '' ">
                 <template slot="title">
-                    <el-image style="width: 40px; height: 40px;border:3px solid #409eff;border-radius:30px" :src="avatar_url">
+                    <el-image style="width: 40px; height: 40px;border:3px solid #409eff;border-radius:30px" :src="user.avatar">
                     </el-image>
                 </template>
                 <el-menu-item index="8-1">写博客</el-menu-item>
@@ -51,6 +51,11 @@
             };
         },
         methods: {
+            showLoginForm(){
+                if(this.$route.query.login != null){
+                    this.login();
+                }
+            },
             register() {
                 EventBus.$emit('prompt-register');
             },
@@ -67,7 +72,19 @@
         computed:{
             tokenStatus(){
                 return this.$store.getters.getLoginToken;
+            },
+            user(){
+                return this.$store.getters.getUser;
             }
-        }
+        },
+        created:function () {
+            if(localStorage.getItem('Authorization') != null && this.$store.getters.getUserLoadStatus() != 2){
+                this.$store.dispatch('loadUser');
+            }
+            this.showLoginForm();
+        },
+        watch:{
+            '$route':'showLoginForm'
+        },
     }
 </script>

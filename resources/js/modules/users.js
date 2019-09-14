@@ -30,7 +30,8 @@ export const users = {
         loginStatus:0,
         // 存储token
         Authorization: localStorage.getItem('Authorization') ? localStorage.getItem('Authorization') : '',
-
+        user: {},
+        userLoadStatus:0
     },
     actions: {
         loadCaptchas({commit},data){
@@ -41,7 +42,6 @@ export const users = {
                     commit('setCaptchaLoadStatus', 2);
                 })
                 .catch(function (error){
-                    console.log(error);
                     commit('setCaptchas', []);
                     commit('setCaptchaLoadStatus', 3);
                 });
@@ -50,11 +50,10 @@ export const users = {
             commit('setVerificationCodeLoadStatus', 1);
             UserAPI.getVerificationCodes(data.captcha_key, data.captcha_code, data.phone)
                 .then(function (response) {
-                    commit('setVerificationCodes', 'Bearer '+response.data);
+                    commit('setVerificationCodes',response.data.key);
                     commit('setVerificationCodeLoadStatus', 2);
                 })
                 .catch(function (error) {
-                    console.log(error);
                     commit('setVerificationCodes', []);
                     commit('setVerificationCodeLoadStatus', 3);
                 });
@@ -64,7 +63,6 @@ export const users = {
             commit('setCaptchaLoadStatus', 0);
         },
         freshVerificationCodeStatus({commit}){
-            commit('setVerificationCodes', []);
             commit('setVerificationCodeLoadStatus', 0);
         },
         freshRegisterByPhoneStatus({commit}){
@@ -77,7 +75,6 @@ export const users = {
                     commit( 'setRegisterByPhoneStatus' , 2);
                 })
                 .catch(function (error) {
-                    console.log(error);
                     commit( 'setRegisterByPhoneStatus',3);
                 })
         },
@@ -85,12 +82,11 @@ export const users = {
             commit('setLoginStatus',1);
             UserAPI.postSignUp( data.username,data.password)
                 .then(function ( response ) {
-                    // console.log(response);
                     commit( 'setLoginStatus' , 2);
-                    commit('setLoginToken','Bearer ' + response.data.access_token);
+                    commit('setLoginToken','Bearer ' + response.data.meta.access_token);
+                    commit( 'setUser' , response.data.data);
                 })
                 .catch(function (error) {
-                    console.log(error);
                     commit( 'setLoginStatus',3);
                 })
         },
@@ -98,16 +94,26 @@ export const users = {
             commit('setLoginStatus',1);
                     UserAPI.postSignInByOauth( data.code,data.social_type)
                     .then(function ( response ) {
-                        // console.log(response);
                         commit( 'setLoginStatus' , 2);
-                        commit('setLoginToken','Bearer ' + response.data.access_token);
+                        commit('setLoginToken','Bearer ' + response.data.meta.access_token);
+                        commit( 'setUser' , response.data.data);
                     })
                     .catch(function (error) {
-                        console.log(error);
                         commit( 'setLoginStatus',3);
                     });
 
         },
+        loadUser({commit}){
+            commit('setUserLoadStatus',1);
+                UserAPI.getLoadUser()
+                    .then(function (reponse) {
+                        commit('setUserLoadStatus',2);
+                        commit( 'setUser' , response.data.data);
+                    })
+                    .catch(function (error) {
+                        commit('setUserLoadStatus',3);
+                    });
+        }
     },
         mutations:{
             setCaptchaLoadStatus(state,status){
@@ -132,6 +138,12 @@ export const users = {
             setLoginToken (state, access_token) {
                 state.Authorization = access_token;
                 localStorage.setItem('Authorization', access_token);
+            },
+            setUser (state, data) {
+                state.user = data;
+            },
+            setUserLoadStatus(state,status){
+                state.userLoadStatus = status;
             }
         },
         getters:{
@@ -153,5 +165,16 @@ export const users = {
             getLoginToken( state ){
                 return state.Authorization;
             },
+            getRegisterByPhoneStatus (state){
+                return state.registerByPhoneStatus;
+            },
+            getUser(state){
+                return state.user;
+            },
+            getUserLoadStatus(state){
+                return function(){
+                    return state.userLoadStatus;
+                }
+            }
         }
 };

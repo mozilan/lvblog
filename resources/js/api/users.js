@@ -48,4 +48,8 @@ export default {
             }
         );
     },
+    getLoadUser: function () {
+        return axios.get(LVBLOG_CONFIG.API_URL + '/user',
+        );
+    },
 }

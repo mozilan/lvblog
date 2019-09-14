@@ -129,9 +129,6 @@
                 <span
                     v-show="captchas">
                 </span>
-                <span
-                    v-show="messages">
-                </span>
             </el-row>
         </el-container>
     </el-dialog>
@@ -159,7 +156,6 @@
                     resource: '',
                     desc: ''
                 },
-                //Label宽度
                 formLabelWidth: '55px',
                 phone: '',
                 captcha_code: '',
@@ -343,6 +339,7 @@
                 }
                 if (this.$store.getters.getVerificationCodeLoadStatus == 2){
                     this.loader.close();
+                    this.verification_key = this.$store.getters.getVerificationCodes;
                     this.openMessage('短信验证码已发送到您的手机！','success');
                 }
                 if (this.$store.getters.getVerificationCodeLoadStatus == 3){
@@ -350,10 +347,6 @@
                     this.openMessage('图形验证码不正确！','error');
                 }
                 return this.$store.getters.getVerificationCodeLoadStatus;
-            },
-            messages(){
-                const messages = this.$store.getters.getVerificationCodes;
-                this.verification_key = messages.key;
             },
             registerByPhoneStatus(){
                 if (this.$store.getters.getRegisterByPhoneStatus == 1){
@@ -382,7 +375,6 @@
                     this.$store.dispatch('freshRegisterByPhoneStatus');
                 }
                 if (this.$store.getters.getRegisterByPhoneStatus == 3){
-                    //this.fullscreenLoading = false;
                     this.loader.close();
                     this.openMessage('注册失败!','error');
                     this.$store.dispatch('freshRegisterByPhoneStatus');

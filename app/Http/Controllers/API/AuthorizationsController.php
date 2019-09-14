@@ -6,6 +6,7 @@ use App\Http\Requests\Api\AuthorizationRequest;
 use App\Http\Requests\Api\SocialAuthorizationRequest;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
+use App\Transformers\UserTransformer;
 
 class AuthorizationsController extends Controller
 {
@@ -18,20 +19,22 @@ class AuthorizationsController extends Controller
             $credentials['phone'] = $username;
 
         $credentials['password'] = $request->password;
-
         if (!$token = \Auth::guard('api')->attempt($credentials)) {
             return $this->response->errorUnauthorized('用户名或密码错误');
         }
-
-        return $this->respondWithToken($token);
+        filter_var($username, FILTER_VALIDATE_EMAIL) ? $username_type = 'email': $username_type = 'phone';
+        $user = User::where($username_type,$username)->first();
+        return $this->respondWithUserTransformer($user,$token);
     }
-    protected function respondWithToken($token)
+    protected function respondWithUserTransformer($user,$token)
     {
-        return $this->response->array([
-            'access_token' => $token,
-            'token_type' => 'Bearer',
-            'expires_in' => \Auth::guard('api')->factory()->getTTL() * 60
-        ]);
+        return $this->response->item($user, new UserTransformer())
+            ->setMeta([
+                'access_token' => $token,
+                'token_type' => 'Bearer',
+                'expires_in' => \Auth::guard('api')->factory()->getTTL() * 60
+            ])
+            ->setStatusCode(201);
     }
     public function update()
     {
@@ -87,8 +90,7 @@ class AuthorizationsController extends Controller
             $newUser->save();
             $user = $newUser;
         }
-
         $token=\Auth::guard('api')->fromUser($user);
-        return $this->respondWithToken($token);
+        return $this->respondWithUserTransformer($user,$token);
     }
 }

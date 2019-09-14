@@ -3,6 +3,7 @@
 </template>
 
 <script>
+    import {EventBus} from '../event-bus.js';
     export default {
         name: "Oauth",
         methods:{
@@ -37,14 +38,13 @@
             }
         },
         created(){
-            if(this.getUrlParams('code') != ''){
-                console.log(this.getUrlParams('code'));
+            if(this.getUrlParams('code') != null){
                 this.$store.dispatch('loginByOauth', {
                     social_type : this.getUrlParams('social_type'),
                     code : this.getUrlParams('code'),
                 });
             }
-        }
+        },
     }
 </script>
 
