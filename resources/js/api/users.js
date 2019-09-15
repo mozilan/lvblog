@@ -52,4 +52,5 @@ export default {
         return axios.get(LVBLOG_CONFIG.API_URL + '/user',
         );
     },
+
 }

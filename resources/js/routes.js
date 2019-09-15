@@ -18,7 +18,7 @@ function requireAuth(to, from, next) {
         if (store.getters.getUserLoadStatus() === 2 && store.getters.getUser !== '') {
                 next();
             } else {
-                next('/index/?login=1');
+                next('/blog/?login=1');
             }
     }
         let token = localStorage.getItem('Authorization');
@@ -53,6 +53,7 @@ export default new VueRouter({
             children: [
                 {
                     path: 'index',
+                    redirect: {name: 'blog'},
                     name: 'index',
                     components: Vue.component( 'Index', require( './pages/Index.vue' ) )
                 },
@@ -63,22 +64,19 @@ export default new VueRouter({
                     beforeEnter: requireAuth
                 },
                 {
-                    path: 'home',
-                    name: 'home',
-                    components: Vue.component( 'Home', require( './pages/Home' ) ),
-                    beforeEnter: requireAuth
+                    path: 'blog',
+                    name: 'blog',
+                    components: Vue.component( 'Home', require( './pages/Blog' ) ),
                 },
                 {
                     path: 'archive',
                     name: 'archive',
                     components: Vue.component( 'Archive', require( './pages/Archive' ) ),
-                    beforeEnter: requireAuth
                 },
                 {
                     path: 'about',
                     name: 'about',
                     components: Vue.component( 'About', require( './pages/About' ) ),
-                    beforeEnter: requireAuth
                 },
             ]
         }

@@ -21,11 +21,13 @@ import Vuex from 'vuex'
  */
 Vue.use( Vuex );
 import { users } from './modules/users'
+import { categories } from './modules/categories'
 /**
  * Export our data store.
  */
 export default new Vuex.Store({
     modules: {
-        users
+        users,
+        categories
     }
 });
