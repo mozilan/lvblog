@@ -4150,7 +4150,7 @@ __webpack_require__.r(__webpack_exports__);
 
       if (this.$store.getters.getCaptchaLoadStatus == 3) {
         this.loader.close();
-        this.openMessage('此手机号已经注册!', 'error');
+        this.openMessage(this.$store.getters.getCaptchaError);
         this.captcha_loading = false;
       }
 
@@ -4179,7 +4179,7 @@ __webpack_require__.r(__webpack_exports__);
 
       if (this.$store.getters.getVerificationCodeLoadStatus == 3) {
         this.loader.close();
-        this.openMessage('图形验证码不正确！', 'error');
+        this.openMessage(this.$store.getters.getVerificationCodeError, 'error');
       }
 
       return this.$store.getters.getVerificationCodeLoadStatus;
@@ -4214,7 +4214,7 @@ __webpack_require__.r(__webpack_exports__);
 
       if (this.$store.getters.getRegisterByPhoneStatus == 3) {
         this.loader.close();
-        this.openMessage('注册失败!', 'error');
+        this.openMessage(this.$store.getters.getRegisterByPhoneError, 'error');
         this.$store.dispatch('freshRegisterByPhoneStatus');
       }
 
@@ -112875,11 +112875,14 @@ var users = {
     //图形验证码加载状态
     captchaLoadStatus: 0,
     //短信验证码
+    captchaError: '',
     verificationCodes: [],
     //短信验证码加载状态
     verificationCodeLoadStatus: 0,
+    verificationCodeError: '',
     //手机号注册
     registerByPhoneStatus: 0,
+    registerByPhoneError: '',
     //登录状态
     loginStatus: 0,
     // 存储token
@@ -112897,6 +112900,7 @@ var users = {
         commit('setCaptchaLoadStatus', 2);
       })["catch"](function (error) {
         commit('setCaptchas', []);
+        commit('setCaptchasError', error.response.data.errors[Object.keys(error.response.data.errors)[0]].toString());
         commit('setCaptchaLoadStatus', 3);
       });
     },
@@ -112908,6 +112912,7 @@ var users = {
         commit('setVerificationCodeLoadStatus', 2);
       })["catch"](function (error) {
         commit('setVerificationCodes', []);
+        commit('setVerificationCodeError', error.response.data.message);
         commit('setVerificationCodeLoadStatus', 3);
       });
     },
@@ -112925,11 +112930,15 @@ var users = {
       commit('setRegisterByPhoneStatus', 0);
     },
     registerByPhone: function registerByPhone(_ref6, data) {
-      var commit = _ref6.commit;
+      var commit = _ref6.commit,
+          dispatch = _ref6.dispatch;
       commit('setRegisterByPhoneStatus', 1);
       _api_users__WEBPACK_IMPORTED_MODULE_0__["default"].postSignIn(data.verification_key, data.verification_code, data.name, data.password).then(function (response) {
         commit('setRegisterByPhoneStatus', 2);
+        commit('setLoginToken', 'Bearer ' + response.data.meta.access_token);
+        dispatch('loadUser');
       })["catch"](function (error) {
+        commit('setRegisterByPhoneError', error.response.data.errors[Object.keys(error.response.data.errors)[0]].toString());
         commit('setRegisterByPhoneStatus', 3);
       });
     },
@@ -112967,11 +112976,6 @@ var users = {
           commit('setLoginToken', '');
         }
 
-        console.log(error);
-        console.log(error.response.data);
-        console.log(error.response.status);
-        console.log(error.response.headers);
-        console.log('Error', error.message);
         commit('setUserLoadStatus', 3);
       });
     },
@@ -112998,14 +113002,23 @@ var users = {
     setCaptchas: function setCaptchas(state, capchas) {
       state.captchas = capchas;
     },
+    setCaptchasError: function setCaptchasError(state, error) {
+      state.captchaError = error;
+    },
     setVerificationCodeLoadStatus: function setVerificationCodeLoadStatus(state, status) {
       state.verificationCodeLoadStatus = status;
     },
     setVerificationCodes: function setVerificationCodes(state, verificationCodes) {
       state.verificationCodes = verificationCodes;
     },
+    setVerificationCodeError: function setVerificationCodeError(state, error) {
+      state.verificationCodeError = error;
+    },
     setRegisterByPhoneStatus: function setRegisterByPhoneStatus(state, status) {
       state.registerByPhoneStatus = status;
+    },
+    setRegisterByPhoneError: function setRegisterByPhoneError(state, error) {
+      state.registerByPhoneError = error;
     },
     setLoginStatus: function setLoginStatus(state, status) {
       state.loginStatus = status;
@@ -113032,11 +113045,17 @@ var users = {
     getCaptchas: function getCaptchas(state) {
       return state.captchas;
     },
+    getCaptchaError: function getCaptchaError(state) {
+      return state.captchaError;
+    },
     getVerificationCodeLoadStatus: function getVerificationCodeLoadStatus(state) {
       return state.verificationCodeLoadStatus;
     },
     getVerificationCodes: function getVerificationCodes(state) {
       return state.verificationCodes;
+    },
+    getVerificationCodeError: function getVerificationCodeError(state) {
+      return state.verificationCodeError;
     },
     getLoginStatus: function getLoginStatus(state) {
       return state.loginStatus;
@@ -113046,6 +113065,9 @@ var users = {
     },
     getRegisterByPhoneStatus: function getRegisterByPhoneStatus(state) {
       return state.registerByPhoneStatus;
+    },
+    getRegisterByPhoneError: function getRegisterByPhoneError(state) {
+      return state.registerByPhoneError;
     },
     getUser: function getUser(state) {
       return state.user;

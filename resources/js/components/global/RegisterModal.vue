@@ -318,7 +318,7 @@
                 }
                 if (this.$store.getters.getCaptchaLoadStatus == 3){
                     this.loader.close();
-                    this.openMessage('此手机号已经注册!','error');
+                    this.openMessage(this.$store.getters.getCaptchaError);
                     this.captcha_loading = false;
                 }
                 return this.$store.getters.getCaptchaLoadStatus;
@@ -344,7 +344,7 @@
                 }
                 if (this.$store.getters.getVerificationCodeLoadStatus == 3){
                     this.loader.close();
-                    this.openMessage('图形验证码不正确！','error');
+                    this.openMessage(this.$store.getters.getVerificationCodeError,'error');
                 }
                 return this.$store.getters.getVerificationCodeLoadStatus;
             },
@@ -376,7 +376,7 @@
                 }
                 if (this.$store.getters.getRegisterByPhoneStatus == 3){
                     this.loader.close();
-                    this.openMessage('注册失败!','error');
+                    this.openMessage(this.$store.getters.getRegisterByPhoneError,'error');
                     this.$store.dispatch('freshRegisterByPhoneStatus');
                 }
                 return this.$store.getters.getRegisterStatus;

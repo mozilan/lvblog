@@ -21,11 +21,14 @@ export const users = {
         //图形验证码加载状态
         captchaLoadStatus:0,
         //短信验证码
+        captchaError:'',
         verificationCodes:[],
         //短信验证码加载状态
         verificationCodeLoadStatus:0,
+        verificationCodeError:'',
         //手机号注册
         registerByPhoneStatus:0,
+        registerByPhoneError:'',
         //登录状态
         loginStatus:0,
         // 存储token
@@ -44,6 +47,7 @@ export const users = {
                 })
                 .catch(function (error){
                     commit('setCaptchas', []);
+                    commit('setCaptchasError', error.response.data.errors[Object.keys(error.response.data.errors)[0]].toString());
                     commit('setCaptchaLoadStatus', 3);
                 });
         },
@@ -56,6 +60,7 @@ export const users = {
                 })
                 .catch(function (error) {
                     commit('setVerificationCodes', []);
+                    commit('setVerificationCodeError', error.response.data.message);
                     commit('setVerificationCodeLoadStatus', 3);
                 });
         },
@@ -69,13 +74,16 @@ export const users = {
         freshRegisterByPhoneStatus({commit}){
             commit( 'setRegisterByPhoneStatus',0);
         },
-        registerByPhone( {commit},data){
+        registerByPhone( {commit , dispatch},data){
             commit( 'setRegisterByPhoneStatus', 1);
             UserAPI.postSignIn( data.verification_key,data.verification_code, data.name,data.password)
                 .then(function ( response ) {
                     commit( 'setRegisterByPhoneStatus' , 2);
+                    commit('setLoginToken','Bearer ' + response.data.meta.access_token);
+                    dispatch('loadUser');
                 })
-                .catch(function (error) {
+                .catch(function (error){
+                    commit('setRegisterByPhoneError', error.response.data.errors[Object.keys(error.response.data.errors)[0]].toString());
                     commit( 'setRegisterByPhoneStatus',3);
                 })
         },
@@ -102,7 +110,6 @@ export const users = {
                     .catch(function (error) {
                         commit( 'setLoginStatus',3);
                     });
-
         },
         loadUser({commit}){
             commit('setUserLoadStatus',1);
@@ -116,11 +123,6 @@ export const users = {
                             localStorage.removeItem('Authorization');
                             commit('setLoginToken','');
                         }
-                        console.log(error);
-                        console.log(error.response.data);
-                        console.log(error.response.status);
-                        console.log(error.response.headers);
-                        console.log('Error', error.message);
                         commit('setUserLoadStatus',3);
                     });
         },
@@ -144,14 +146,23 @@ export const users = {
             setCaptchas(state,capchas){
                 state.captchas = capchas;
             },
+            setCaptchasError(state,error){
+                state.captchaError = error;
+            },
             setVerificationCodeLoadStatus(state,status){
                 state.verificationCodeLoadStatus = status;
             },
             setVerificationCodes(state,verificationCodes){
                 state.verificationCodes = verificationCodes;
             },
+            setVerificationCodeError( state , error ){
+                state.verificationCodeError = error;
+            },
             setRegisterByPhoneStatus(state , status){
                 state.registerByPhoneStatus = status;
+            },
+            setRegisterByPhoneError(state , error ){
+                state.registerByPhoneError = error;
             },
             setLoginStatus(state , status){
                 state.loginStatus = status;
@@ -178,11 +189,17 @@ export const users = {
             getCaptchas( state ){
                 return state.captchas;
             },
+            getCaptchaError( state ){
+                return state.captchaError;
+            },
             getVerificationCodeLoadStatus( state ){
                 return state.verificationCodeLoadStatus;
             },
             getVerificationCodes( state ){
                 return state.verificationCodes;
+            },
+            getVerificationCodeError( state ){
+                return state.verificationCodeError;
             },
             getLoginStatus( state ){
                 return state.loginStatus;
@@ -192,6 +209,9 @@ export const users = {
             },
             getRegisterByPhoneStatus (state){
                 return state.registerByPhoneStatus;
+            },
+            getRegisterByPhoneError( state ){
+                return state.registerByPhoneError;
             },
             getUser(state){
                 return state.user;
