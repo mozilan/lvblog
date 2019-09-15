@@ -50,6 +50,7 @@ $api->version('v1', [
         // 删除token
         $api->delete('authorizations/current', 'AuthorizationsController@destroy')
             ->name('api.authorizations.destroy');
+        //获取某一用户所有分类
         $api->get('categories/{user_id}', 'CategoriesController@index')
             ->name('api.categories.index');
         // 需要 token 验证的接口
@@ -57,6 +58,12 @@ $api->version('v1', [
             // 当前登录用户信息
             $api->get('user', 'UsersController@me')
                 ->name('api.user.show');
+            //用户新建分类
+            $api->post('categories', 'CategoriesController@store')
+                ->name('api.categories.store');
+            //用户删除分类
+            $api->delete('categories/{id}', 'CategoriesController@destroy')
+                ->name('api.categories.destroy');
         });
     });
 });
