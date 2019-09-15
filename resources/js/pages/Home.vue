@@ -3,7 +3,7 @@
         <el-card class="box-card">
             <div slot="header" class="d-flex align-items-center">
                 <img class="card-icon" src="../../assets/lianjie.png"/>
-                <span>写博客</span>
+                <span>个人中心</span>
             </div>
         </el-card>
     </div>
@@ -11,7 +11,7 @@
 
 <script>
     export default {
-        name: "Edit"
+        name: "Home"
     }
 </script>
 

@@ -38,7 +38,7 @@
 </style>
 
 <template>
-    <el-dialog title="用户登录" :visible.sync="loginDialogFormVisible">
+    <el-dialog title="用户登录" :close="redirectToIndex" :visible.sync="loginDialogFormVisible">
         <el-container style="display:block">
         <el-row>
             <el-form :model="form">
@@ -84,7 +84,7 @@
 <!--                </el-link>-->
 <!--            </el-col>-->
             <el-col :xs="24" :sm="24" :md="24" :lg="24">
-                <el-button @click="loginDialogFormVisible = false">取 消</el-button>
+                <el-button @click="hideLoginDialogForm">取 消</el-button>
                 <el-button class="bl-right" type="primary" @click="submitLogin">确 定</el-button>
             </el-col>
             <span
@@ -127,17 +127,19 @@
             }
         },
         methods: {
-            showLoginForm(){
+            redirectToIndex(){
                 if(this.$route.query.login != null){
-                    this.openMessage('请先登录！','warning');
-                    this.loginDialogFormVisible = true;
+                    this.$router.push({name:'index'});
                 }
             },
-            openMessage: function (title, type) {
-                this.$message({
-                    message: title,
-                    type: type
-                });
+            hideLoginDialogForm(){
+                this.loginDialogFormVisible = false;
+                this.$router.push({name:'index'});
+            },
+            showLoginForm(){
+                if(this.$route.query.login != null){
+                    this.loginDialogFormVisible = true;
+                }
             },
             submitLogin: function () {
                 if (this.validateLogin()) {

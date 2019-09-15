@@ -26,7 +26,6 @@ function requireAuth(to, from, next) {
     if (token === 'null' || token === '') {
             proceed()
     } else {
-        console.log(token);
         store.dispatch('loadUser');
         // 监听用户信息加载状态，加载完成后调用 proceed 方法继续后续操作
         store.watch(store.getters.getUserLoadStatus, function () {
@@ -61,6 +60,24 @@ export default new VueRouter({
                     path: 'edit',
                     name: 'edit',
                     components: Vue.component( 'Edit', require( './pages/Edit' ) ),
+                    beforeEnter: requireAuth
+                },
+                {
+                    path: 'home',
+                    name: 'home',
+                    components: Vue.component( 'Home', require( './pages/Home' ) ),
+                    beforeEnter: requireAuth
+                },
+                {
+                    path: 'archive',
+                    name: 'archive',
+                    components: Vue.component( 'Archive', require( './pages/Archive' ) ),
+                    beforeEnter: requireAuth
+                },
+                {
+                    path: 'about',
+                    name: 'about',
+                    components: Vue.component( 'About', require( './pages/About' ) ),
                     beforeEnter: requireAuth
                 },
             ]
