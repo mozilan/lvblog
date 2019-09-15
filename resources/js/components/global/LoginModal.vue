@@ -127,6 +127,12 @@
             }
         },
         methods: {
+            showLoginForm(){
+                if(this.$route.query.login != null){
+                    this.openMessage('请先登录！','warning');
+                    this.loginDialogFormVisible = true;
+                }
+            },
             openMessage: function (title, type) {
                 this.$message({
                     message: title,
@@ -186,6 +192,12 @@
             EventBus.$on('prompt-login', function () {
                 this.loginDialogFormVisible = true;
             }.bind(this));
-        }
+        },
+        created() {
+            this.showLoginForm();
+        },
+        watch:{
+            '$route':'showLoginForm'
+        },
     }
 </script>

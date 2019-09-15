@@ -15,7 +15,7 @@ function requireAuth(to, from, next) {
     function proceed() {
         // 如果用户信息已经加载并且不为空则说明该用户已登录，可以继续访问路由，否则跳转到首页
         // 这个功能类似 Laravel 中的 auth 中间件
-        if (store.getters.getUserLoadStatus() === 2 && store.getters.getUser != '') {
+        if (store.getters.getUserLoadStatus() === 2 && store.getters.getUser !== '') {
                 next();
             } else {
                 next('/index/?login=1');
@@ -23,17 +23,18 @@ function requireAuth(to, from, next) {
     }
         let token = localStorage.getItem('Authorization');
 
-        if (token === 'null' || token === '') {
-            store.dispatch('loadUser');
-            // 监听用户信息加载状态，加载完成后调用 proceed 方法继续后续操作
-            store.watch(store.getters.getUserLoadStatus, function () {
-                if (store.getters.getUserLoadStatus() === 2) {
-                    proceed();
-                }
-            });
-        } else {
+    if (token === 'null' || token === '') {
             proceed()
-        }
+    } else {
+        console.log(token);
+        store.dispatch('loadUser');
+        // 监听用户信息加载状态，加载完成后调用 proceed 方法继续后续操作
+        store.watch(store.getters.getUserLoadStatus, function () {
+            if (store.getters.getUserLoadStatus() === 2) {
+                proceed();
+            }
+        });
+    }
 }
 /**
  * Extends Vue to use Vue Router

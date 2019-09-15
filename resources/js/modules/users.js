@@ -31,7 +31,8 @@ export const users = {
         // 存储token
         Authorization: localStorage.getItem('Authorization') ? localStorage.getItem('Authorization') : '',
         user: {},
-        userLoadStatus:0
+        userLoadStatus:0,
+        logoutStatus:0,
     },
     actions: {
         loadCaptchas({commit},data){
@@ -106,13 +107,34 @@ export const users = {
         loadUser({commit}){
             commit('setUserLoadStatus',1);
                 UserAPI.getLoadUser()
-                    .then(function (reponse) {
+                    .then(function (response) {
                         commit('setUserLoadStatus',2);
                         commit( 'setUser' , response.data.data);
                     })
                     .catch(function (error) {
+                        if(error.response.status == 401){
+                            localStorage.removeItem('Authorization');
+                            commit('setLoginToken','');
+                        }
+                        console.log(error);
+                        console.log(error.response.data);
+                        console.log(error.response.status);
+                        console.log(error.response.headers);
+                        console.log('Error', error.message);
                         commit('setUserLoadStatus',3);
                     });
+        },
+        logout({commit,dispatch}){
+            commit('setLogoutStatus',1);
+            try {
+                localStorage.removeItem('Authorization');
+                commit('setLoginToken', '');
+                dispatch('loadUser');
+                commit('setLogoutStatus', 2);
+                commit( 'setLoginStatus',0);
+            }catch (e) {
+                commit('setLogoutStatus', 3);
+            }
         }
     },
         mutations:{
@@ -144,6 +166,9 @@ export const users = {
             },
             setUserLoadStatus(state,status){
                 state.userLoadStatus = status;
+            },
+            setLogoutStatus(state,status){
+                state.loginStatus = status;
             }
         },
         getters:{
@@ -175,6 +200,9 @@ export const users = {
                 return function(){
                     return state.userLoadStatus;
                 }
+            },
+            getLogoutStatus(state){
+                return state.logoutStatus;
             }
         }
 };

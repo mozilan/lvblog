@@ -3624,6 +3624,12 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   methods: {
+    showLoginForm: function showLoginForm() {
+      if (this.$route.query.login != null) {
+        this.openMessage('请先登录！', 'warning');
+        this.loginDialogFormVisible = true;
+      }
+    },
     openMessage: function openMessage(title, type) {
       this.$message({
         message: title,
@@ -3689,6 +3695,12 @@ __webpack_require__.r(__webpack_exports__);
     _event_bus_js__WEBPACK_IMPORTED_MODULE_0__["EventBus"].$on('prompt-login', function () {
       this.loginDialogFormVisible = true;
     }.bind(this));
+  },
+  created: function created() {
+    this.showLoginForm();
+  },
+  watch: {
+    '$route': 'showLoginForm'
   }
 });
 
@@ -3756,10 +3768,11 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   methods: {
-    showLoginForm: function showLoginForm() {
-      if (this.$route.query.login != null) {
-        this.login();
-      }
+    openMessage: function openMessage(title, type) {
+      this.$message({
+        message: title,
+        type: type
+      });
     },
     register: function register() {
       _event_bus_js__WEBPACK_IMPORTED_MODULE_0__["EventBus"].$emit('prompt-register');
@@ -3769,7 +3782,12 @@ __webpack_require__.r(__webpack_exports__);
     },
     handleSelect: function handleSelect(key, keyPath) {// console.log(key, keyPath);
     },
-    logout: function logout() {}
+    logout: function logout() {
+      this.$store.dispatch('logout');
+      this.$router.push({
+        name: 'index'
+      });
+    }
   },
   computed: {
     tokenStatus: function tokenStatus() {
@@ -3780,14 +3798,9 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   created: function created() {
-    if (localStorage.getItem('Authorization') != null && this.$store.getters.getUserLoadStatus() != 2) {
+    if (localStorage.getItem('Authorization') != null && this.$store.getters.getUserLoadStatus() !== 2) {
       this.$store.dispatch('loadUser');
     }
-
-    this.showLoginForm();
-  },
-  watch: {
-    '$route': 'showLoginForm'
   }
 });
 
@@ -94644,7 +94657,7 @@ var render = function() {
             _c("a", { attrs: { href: "/" } }, [_vm._v("分享")])
           ]),
           _vm._v(" "),
-          _vm.tokenStatus == ""
+          _vm.tokenStatus === ""
             ? _c(
                 "el-menu-item",
                 { attrs: { index: "6" }, on: { click: _vm.register } },
@@ -94652,7 +94665,7 @@ var render = function() {
               )
             : _vm._e(),
           _vm._v(" "),
-          _vm.tokenStatus == ""
+          _vm.tokenStatus === ""
             ? _c(
                 "el-menu-item",
                 { attrs: { index: "7" }, on: { click: _vm.login } },
@@ -94660,7 +94673,7 @@ var render = function() {
               )
             : _vm._e(),
           _vm._v(" "),
-          _vm.tokenStatus != ""
+          _vm.tokenStatus !== ""
             ? _c(
                 "el-submenu",
                 { attrs: { index: "8" } },
@@ -94682,13 +94695,27 @@ var render = function() {
                     1
                   ),
                   _vm._v(" "),
-                  _c("el-menu-item", { attrs: { index: "8-1" } }, [
-                    _vm._v("写博客")
-                  ]),
+                  _c(
+                    "el-menu-item",
+                    { attrs: { index: "8-1" } },
+                    [
+                      _c("router-link", { attrs: { to: { name: "edit" } } }, [
+                        _vm._v("写博客")
+                      ])
+                    ],
+                    1
+                  ),
                   _vm._v(" "),
-                  _c("el-menu-item", { attrs: { index: "8-2" } }, [
-                    _vm._v("个人中心")
-                  ]),
+                  _c(
+                    "el-menu-item",
+                    { attrs: { index: "8-2" } },
+                    [
+                      _c("router-link", { attrs: { to: { name: "edit" } } }, [
+                        _vm._v("home")
+                      ])
+                    ],
+                    1
+                  ),
                   _vm._v(" "),
                   _c(
                     "el-menu-item",
@@ -112510,14 +112537,15 @@ __webpack_require__.r(__webpack_exports__);
 /*!************************************************************!*\
   !*** ./resources/js/components/global/NavigationModal.vue ***!
   \************************************************************/
-/*! exports provided: default */
+/*! no static exports found */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _NavigationModal_vue_vue_type_template_id_7cc0e810___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./NavigationModal.vue?vue&type=template&id=7cc0e810& */ "./resources/js/components/global/NavigationModal.vue?vue&type=template&id=7cc0e810&");
 /* harmony import */ var _NavigationModal_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./NavigationModal.vue?vue&type=script&lang=js& */ "./resources/js/components/global/NavigationModal.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _NavigationModal_vue_vue_type_style_index_0_lang_scss___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./NavigationModal.vue?vue&type=style&index=0&lang=scss& */ "./resources/js/components/global/NavigationModal.vue?vue&type=style&index=0&lang=scss&");
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _NavigationModal_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _NavigationModal_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+/* harmony import */ var _NavigationModal_vue_vue_type_style_index_0_lang_scss___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./NavigationModal.vue?vue&type=style&index=0&lang=scss& */ "./resources/js/components/global/NavigationModal.vue?vue&type=style&index=0&lang=scss&");
 /* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
@@ -112549,7 +112577,7 @@ component.options.__file = "resources/js/components/global/NavigationModal.vue"
 /*!*************************************************************************************!*\
   !*** ./resources/js/components/global/NavigationModal.vue?vue&type=script&lang=js& ***!
   \*************************************************************************************/
-/*! exports provided: default */
+/*! no static exports found */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -112857,7 +112885,8 @@ var users = {
     // 存储token
     Authorization: localStorage.getItem('Authorization') ? localStorage.getItem('Authorization') : '',
     user: {},
-    userLoadStatus: 0
+    userLoadStatus: 0,
+    logoutStatus: 0
   },
   actions: {
     loadCaptchas: function loadCaptchas(_ref, data) {
@@ -112929,12 +112958,37 @@ var users = {
     loadUser: function loadUser(_ref9) {
       var commit = _ref9.commit;
       commit('setUserLoadStatus', 1);
-      _api_users__WEBPACK_IMPORTED_MODULE_0__["default"].getLoadUser().then(function (reponse) {
+      _api_users__WEBPACK_IMPORTED_MODULE_0__["default"].getLoadUser().then(function (response) {
         commit('setUserLoadStatus', 2);
         commit('setUser', response.data.data);
       })["catch"](function (error) {
+        if (error.response.status == 401) {
+          localStorage.removeItem('Authorization');
+          commit('setLoginToken', '');
+        }
+
+        console.log(error);
+        console.log(error.response.data);
+        console.log(error.response.status);
+        console.log(error.response.headers);
+        console.log('Error', error.message);
         commit('setUserLoadStatus', 3);
       });
+    },
+    logout: function logout(_ref10) {
+      var commit = _ref10.commit,
+          dispatch = _ref10.dispatch;
+      commit('setLogoutStatus', 1);
+
+      try {
+        localStorage.removeItem('Authorization');
+        commit('setLoginToken', '');
+        dispatch('loadUser');
+        commit('setLogoutStatus', 2);
+        commit('setLoginStatus', 0);
+      } catch (e) {
+        commit('setLogoutStatus', 3);
+      }
     }
   },
   mutations: {
@@ -112966,6 +113020,9 @@ var users = {
     },
     setUserLoadStatus: function setUserLoadStatus(state, status) {
       state.userLoadStatus = status;
+    },
+    setLogoutStatus: function setLogoutStatus(state, status) {
+      state.loginStatus = status;
     }
   },
   getters: {
@@ -112997,6 +113054,9 @@ var users = {
       return function () {
         return state.userLoadStatus;
       };
+    },
+    getLogoutStatus: function getLogoutStatus(state) {
+      return state.logoutStatus;
     }
   }
 };
@@ -113277,7 +113337,7 @@ function requireAuth(to, from, next) {
   function proceed() {
     // 如果用户信息已经加载并且不为空则说明该用户已登录，可以继续访问路由，否则跳转到首页
     // 这个功能类似 Laravel 中的 auth 中间件
-    if (_store_js__WEBPACK_IMPORTED_MODULE_2__["default"].getters.getUserLoadStatus() === 2 && _store_js__WEBPACK_IMPORTED_MODULE_2__["default"].getters.getUser != '') {
+    if (_store_js__WEBPACK_IMPORTED_MODULE_2__["default"].getters.getUserLoadStatus() === 2 && _store_js__WEBPACK_IMPORTED_MODULE_2__["default"].getters.getUser !== '') {
       next();
     } else {
       next('/index/?login=1');
@@ -113287,6 +113347,9 @@ function requireAuth(to, from, next) {
   var token = localStorage.getItem('Authorization');
 
   if (token === 'null' || token === '') {
+    proceed();
+  } else {
+    console.log(token);
     _store_js__WEBPACK_IMPORTED_MODULE_2__["default"].dispatch('loadUser'); // 监听用户信息加载状态，加载完成后调用 proceed 方法继续后续操作
 
     _store_js__WEBPACK_IMPORTED_MODULE_2__["default"].watch(_store_js__WEBPACK_IMPORTED_MODULE_2__["default"].getters.getUserLoadStatus, function () {
@@ -113294,8 +113357,6 @@ function requireAuth(to, from, next) {
         proceed();
       }
     });
-  } else {
-    proceed();
   }
 }
 /**

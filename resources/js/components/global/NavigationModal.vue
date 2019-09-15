@@ -26,15 +26,15 @@
             <el-menu-item index="3"><a href="/">运维</a></el-menu-item>
             <el-menu-item index="4"><a href="/">算法</a></el-menu-item>
             <el-menu-item index="5"><a href="/">分享</a></el-menu-item>
-            <el-menu-item index="6" @click="register" v-if="tokenStatus == '' ">注册</el-menu-item>
-            <el-menu-item index="7" @click="login" v-if="tokenStatus == '' ">登录</el-menu-item>
-            <el-submenu index="8" v-if="tokenStatus != '' ">
+            <el-menu-item index="6" @click="register" v-if="tokenStatus === '' ">注册</el-menu-item>
+            <el-menu-item index="7" @click="login" v-if="tokenStatus === '' ">登录</el-menu-item>
+            <el-submenu index="8" v-if="tokenStatus !== '' ">
                 <template slot="title">
                     <el-image style="width: 40px; height: 40px;border:3px solid #409eff;border-radius:30px" :src="user.avatar">
                     </el-image>
                 </template>
-                <el-menu-item index="8-1">写博客</el-menu-item>
-                <el-menu-item index="8-2">个人中心</el-menu-item>
+                <el-menu-item index="8-1"><router-link :to="{ name:'edit' }">写博客</router-link></el-menu-item>
+                <el-menu-item index="8-2"><router-link :to="{ name:'edit' }">home</router-link></el-menu-item>
                 <el-menu-item index="8-3" @click="logout()">退出登录</el-menu-item>
             </el-submenu>
         </el-menu>
@@ -51,22 +51,24 @@
             };
         },
         methods: {
-            showLoginForm(){
-                if(this.$route.query.login != null){
-                    this.login();
-                }
+            openMessage: function (title, type) {
+                this.$message({
+                    message: title,
+                    type: type
+                });
             },
             register() {
                 EventBus.$emit('prompt-register');
             },
-            login() {
+            login(){
                 EventBus.$emit('prompt-login');
             },
             handleSelect(key, keyPath) {
                 // console.log(key, keyPath);
             },
             logout(){
-
+                this.$store.dispatch('logout');
+                this.$router.push({name:'index'});
             }
         },
         computed:{
@@ -78,13 +80,9 @@
             }
         },
         created:function () {
-            if(localStorage.getItem('Authorization') != null && this.$store.getters.getUserLoadStatus() != 2){
+            if(localStorage.getItem('Authorization') != null && this.$store.getters.getUserLoadStatus() !== 2){
                 this.$store.dispatch('loadUser');
             }
-            this.showLoginForm();
-        },
-        watch:{
-            '$route':'showLoginForm'
         },
     }
 </script>
