@@ -67,6 +67,12 @@ $api->version('v1', [
             //用户删除分类
             $api->delete('categories/{id}', 'CategoriesController@destroy')
                 ->name('api.categories.destroy');
+            // 图片资源
+            $api->post('images', 'ImagesController@store')
+                ->name('api.images.store');
+            // 发布文章
+            $api->post('articles', 'ArticlesController@store')
+                ->name('api.topics.store');
         });
     });
 });

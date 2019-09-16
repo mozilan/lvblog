@@ -75,10 +75,5 @@
                 return this.$store.getters.getUser;
             }
         },
-        created:function () {
-            if(localStorage.getItem('Authorization') != null && this.$store.getters.getUserLoadStatus() !== 2){
-                this.$store.dispatch('loadUser');
-            }
-        },
     }
 </script>

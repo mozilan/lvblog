@@ -23,6 +23,7 @@ Vue.use( Vuex );
 import { users } from './modules/users'
 import { categories } from './modules/categories'
 import { tags } from './modules/tags'
+import { images } from './modules/images'
 /**
  * Export our data store.
  */
@@ -30,6 +31,7 @@ export default new Vuex.Store({
     modules: {
         users,
         categories,
-        tags
+        tags,
+        images
     }
 });

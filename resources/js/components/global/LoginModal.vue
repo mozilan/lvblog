@@ -127,6 +127,12 @@
             }
         },
         methods: {
+            openMessage: function (title, type) {
+                this.$message({
+                    message: title,
+                    type: type
+                });
+            },
             redirectToIndex(){
                 if(this.$route.query.login != null){
                     this.$router.push({name:'index'});
