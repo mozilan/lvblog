@@ -14,6 +14,7 @@ class CategoryTransformer extends TransformerAbstract
             'user_id' => $category->user_id,
             'name' => $category->name,
             'description' => $category->description,
+            'count' => $category->article()->count(),
         ];
     }
 }
