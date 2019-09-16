@@ -5,14 +5,8 @@
 				<img class="card-icon" src="../../assets/biaoqian.png" />
 				<span>标签云</span>
 			</div>
-			<div class="text item">
-				<el-tag size="mini" class="tag-item" @click="tag('PHP')">PHP[12]</el-tag>
-				<el-tag size="mini" class="tag-item" type="success" @click="tag('SpringBoot')">Laravel[8]</el-tag>
-				<el-tag size="mini" class="tag-item" type="info" @click="tag('HTML')">HTML[8]</el-tag>
-				<el-tag size="mini" class="tag-item" type="warning" @click="tag('Mysql')">Mysql[5]</el-tag>
-				<el-tag size="mini" class="tag-item" type="danger" @click="tag('Vue')">Vue[3]</el-tag>
-				<el-tag size="mini" class="tag-item" type="info" @click="tag('jQuery')">jQuery[6]</el-tag>
-				<el-tag size="mini" class="tag-item" type="success" @click="tag('SpringCloud')">Linux[9]</el-tag>
+			<div class="text item" v-for="tag in tags ">
+				<el-tag size="mini" class="tag-item">{{tag.name}}[{{tag.count}}]</el-tag>
 			</div>
 		</el-card>
 	</div>
@@ -22,14 +16,16 @@
 	export default {
 		name: 'tag',
 		methods: {
-			tag(name) {
-				this.$router.push({
-					name: 'tag',
-					params: {
-						'name': name
-					}
-				});
+		},
+		computed:{
+			tags(){
+				return this.$store.getters.getTags;
 			}
+		},
+		created() {
+			this.$store.dispatch('loadTags', {
+				id: this.$route.query.user != null ? this.$route.query.user : 1,
+			});
 		}
 	}
 </script>

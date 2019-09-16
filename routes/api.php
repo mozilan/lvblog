@@ -53,6 +53,9 @@ $api->version('v1', [
         //获取某一用户所有分类
         $api->get('categories/{user_id}', 'CategoriesController@index')
             ->name('api.categories.index');
+        //获取某一用户所有文章标签
+        $api->get('tags/{user_id}', 'TagsController@index')
+            ->name('api.tags.index');
         // 需要 token 验证的接口
         $api->group(['middleware' => 'api.auth'], function($api) {
             // 当前登录用户信息

@@ -58,4 +58,8 @@ class User extends Authenticatable implements MustVerifyEmailContract, JWTSubjec
     {
         return $this->hasMany(Category::class);
     }
+    public function tag()
+    {
+        return $this->hasMany(Tag::class);
+    }
 }

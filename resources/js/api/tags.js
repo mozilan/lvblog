@@ -4,7 +4,7 @@
 import { LVBLOG_CONFIG } from '../config.js';
 
 export default {
-    getCategories: function(user_id){
-        return axios.get(LVBLOG_CONFIG.API_URL + '/categories/'+ user_id);
+    getTags: function(user_id){
+        return axios.get(LVBLOG_CONFIG.API_URL + '/tags/'+ user_id);
     }
 }

@@ -3369,7 +3369,7 @@ __webpack_require__.r(__webpack_exports__);
     return {};
   },
   computed: {
-    cate: function cate() {
+    categories: function categories() {
       return this.$store.getters.getCategories;
     }
   },
@@ -4299,23 +4299,18 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'tag',
-  methods: {
-    tag: function tag(name) {
-      this.$router.push({
-        name: 'tag',
-        params: {
-          'name': name
-        }
-      });
+  methods: {},
+  computed: {
+    tags: function tags() {
+      return this.$store.getters.getTags;
     }
+  },
+  created: function created() {
+    this.$store.dispatch('loadTags', {
+      id: this.$route.query.user != null ? this.$route.query.user : 1
+    });
   }
 });
 
@@ -94934,14 +94929,14 @@ var render = function() {
             ]
           ),
           _vm._v(" "),
-          _vm._l(_vm.cate, function(cat) {
+          _vm._l(_vm.categories, function(category) {
             return _c(
               "div",
               { staticClass: "text item" },
               [
                 _c("a", { attrs: { href: "#" } }, [
                   _c("span", { staticStyle: { float: "left" } }, [
-                    _vm._v(_vm._s(cat.name))
+                    _vm._v(_vm._s(category.name))
                   ])
                 ]),
                 _vm._v(" "),
@@ -94953,7 +94948,7 @@ var render = function() {
                     attrs: { size: "mini", type: "success" },
                     on: { click: function($event) {} }
                   },
-                  [_vm._v("[" + _vm._s(cat.count) + "]")]
+                  [_vm._v("[" + _vm._s(category.count) + "]")]
                 ),
                 _vm._v(" "),
                 _c("div", { staticStyle: { clear: "both" } })
@@ -95877,129 +95872,44 @@ var render = function() {
     "div",
     { staticClass: "tag" },
     [
-      _c("el-card", { staticClass: "box-card" }, [
-        _c(
-          "div",
-          {
-            staticClass: "d-flex align-items-center",
-            attrs: { slot: "header" },
-            slot: "header"
-          },
-          [
-            _c("img", {
-              staticClass: "card-icon",
-              attrs: { src: __webpack_require__(/*! ../../assets/biaoqian.png */ "./resources/assets/biaoqian.png") }
-            }),
-            _vm._v(" "),
-            _c("span", [_vm._v("标签云")])
-          ]
-        ),
-        _vm._v(" "),
-        _c(
-          "div",
-          { staticClass: "text item" },
-          [
-            _c(
-              "el-tag",
-              {
-                staticClass: "tag-item",
-                attrs: { size: "mini" },
-                on: {
-                  click: function($event) {
-                    return _vm.tag("PHP")
-                  }
-                }
-              },
-              [_vm._v("PHP[12]")]
-            ),
-            _vm._v(" "),
-            _c(
-              "el-tag",
-              {
-                staticClass: "tag-item",
-                attrs: { size: "mini", type: "success" },
-                on: {
-                  click: function($event) {
-                    return _vm.tag("SpringBoot")
-                  }
-                }
-              },
-              [_vm._v("Laravel[8]")]
-            ),
-            _vm._v(" "),
-            _c(
-              "el-tag",
-              {
-                staticClass: "tag-item",
-                attrs: { size: "mini", type: "info" },
-                on: {
-                  click: function($event) {
-                    return _vm.tag("HTML")
-                  }
-                }
-              },
-              [_vm._v("HTML[8]")]
-            ),
-            _vm._v(" "),
-            _c(
-              "el-tag",
-              {
-                staticClass: "tag-item",
-                attrs: { size: "mini", type: "warning" },
-                on: {
-                  click: function($event) {
-                    return _vm.tag("Mysql")
-                  }
-                }
-              },
-              [_vm._v("Mysql[5]")]
-            ),
-            _vm._v(" "),
-            _c(
-              "el-tag",
-              {
-                staticClass: "tag-item",
-                attrs: { size: "mini", type: "danger" },
-                on: {
-                  click: function($event) {
-                    return _vm.tag("Vue")
-                  }
-                }
-              },
-              [_vm._v("Vue[3]")]
-            ),
-            _vm._v(" "),
-            _c(
-              "el-tag",
-              {
-                staticClass: "tag-item",
-                attrs: { size: "mini", type: "info" },
-                on: {
-                  click: function($event) {
-                    return _vm.tag("jQuery")
-                  }
-                }
-              },
-              [_vm._v("jQuery[6]")]
-            ),
-            _vm._v(" "),
-            _c(
-              "el-tag",
-              {
-                staticClass: "tag-item",
-                attrs: { size: "mini", type: "success" },
-                on: {
-                  click: function($event) {
-                    return _vm.tag("SpringCloud")
-                  }
-                }
-              },
-              [_vm._v("Linux[9]")]
+      _c(
+        "el-card",
+        { staticClass: "box-card" },
+        [
+          _c(
+            "div",
+            {
+              staticClass: "d-flex align-items-center",
+              attrs: { slot: "header" },
+              slot: "header"
+            },
+            [
+              _c("img", {
+                staticClass: "card-icon",
+                attrs: { src: __webpack_require__(/*! ../../assets/biaoqian.png */ "./resources/assets/biaoqian.png") }
+              }),
+              _vm._v(" "),
+              _c("span", [_vm._v("标签云")])
+            ]
+          ),
+          _vm._v(" "),
+          _vm._l(_vm.tags, function(tag) {
+            return _c(
+              "div",
+              { staticClass: "text item" },
+              [
+                _c(
+                  "el-tag",
+                  { staticClass: "tag-item", attrs: { size: "mini" } },
+                  [_vm._v(_vm._s(tag.name) + "[" + _vm._s(tag.count) + "]")]
+                )
+              ],
+              1
             )
-          ],
-          1
-        )
-      ])
+          })
+        ],
+        2
+      )
     ],
     1
   )
@@ -96796,9 +96706,9 @@ var render = function() {
             [
               _c("div", { staticClass: "item" }, [_c("Tag")], 1),
               _vm._v(" "),
-              _c("div", { staticClass: "item" }, [_c("Friend")], 1),
+              _c("div", { staticClass: "item" }, [_c("Category")], 1),
               _vm._v(" "),
-              _c("div", { staticClass: "item" }, [_c("Category")], 1)
+              _c("div", { staticClass: "item" }, [_c("Friend")], 1)
             ]
           ),
           _vm._v(" "),
@@ -113591,6 +113501,28 @@ module.exports = "/images/vue.jpg?52a341ad3b0b705827ace812e601985e";
 
 /***/ }),
 
+/***/ "./resources/js/api/Tags.js":
+/*!**********************************!*\
+  !*** ./resources/js/api/Tags.js ***!
+  \**********************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _config_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../config.js */ "./resources/js/config.js");
+/**
+ * Imports the LvBlog API URL from the config.
+ */
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  getTags: function getTags(user_id) {
+    return axios.get(_config_js__WEBPACK_IMPORTED_MODULE_0__["LVBLOG_CONFIG"].API_URL + '/tags/' + user_id);
+  }
+});
+
+/***/ }),
+
 /***/ "./resources/js/api/categories.js":
 /*!****************************************!*\
   !*** ./resources/js/api/categories.js ***!
@@ -114526,6 +114458,69 @@ var categories = {
 
 /***/ }),
 
+/***/ "./resources/js/modules/tags.js":
+/*!**************************************!*\
+  !*** ./resources/js/modules/tags.js ***!
+  \**************************************/
+/*! exports provided: tags */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "tags", function() { return tags; });
+/* harmony import */ var _api_Tags__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../api/Tags */ "./resources/js/api/Tags.js");
+/*
+|-------------------------------------------------------------------------------
+| VUEX modules/users.js
+|-------------------------------------------------------------------------------
+| The Vuex data store for the Tags
+*/
+
+/**
+ status = 0 -> 数据尚未加载
+ status = 1 -> 数据开始加载
+ status = 2 -> 数据加载成功
+ status = 3 -> 数据加载失败
+ */
+
+var tags = {
+  state: {
+    //分类
+    Tags: [],
+    TagsLoadStatus: 0
+  },
+  actions: {
+    loadTags: function loadTags(_ref, data) {
+      var commit = _ref.commit;
+      commit('setTagsLoadStatus', 1);
+      _api_Tags__WEBPACK_IMPORTED_MODULE_0__["default"].getTags(data.id).then(function (response) {
+        commit('setTags', response.data.data);
+        commit('setTagsLoadStatus', 2);
+      })["catch"](function (error) {
+        commit('setTagsLoadStatus', 3);
+      });
+    }
+  },
+  mutations: {
+    setTagsLoadStatus: function setTagsLoadStatus(state, status) {
+      state.TagsLoadStatus = status;
+    },
+    setTags: function setTags(state, Tags) {
+      state.Tags = Tags;
+    }
+  },
+  getters: {
+    getTags: function getTags(state) {
+      return state.Tags;
+    },
+    getTagsLoadStatus: function getTagsLoadStatus(state) {
+      return state.TagsLoadStatus;
+    }
+  }
+};
+
+/***/ }),
+
 /***/ "./resources/js/modules/users.js":
 /*!***************************************!*\
   !*** ./resources/js/modules/users.js ***!
@@ -115386,6 +115381,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
 /* harmony import */ var _modules_users__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./modules/users */ "./resources/js/modules/users.js");
 /* harmony import */ var _modules_categories__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./modules/categories */ "./resources/js/modules/categories.js");
+/* harmony import */ var _modules_tags__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./modules/tags */ "./resources/js/modules/tags.js");
 /*
  |-------------------------------------------------------------------------------
  | VUEX store.js
@@ -115411,6 +115407,7 @@ __webpack_require__(/*! es6-promise */ "./node_modules/es6-promise/dist/es6-prom
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__["default"]);
 
 
+
 /**
  * Export our data store.
  */
@@ -115418,7 +115415,8 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
 /* harmony default export */ __webpack_exports__["default"] = (new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
   modules: {
     users: _modules_users__WEBPACK_IMPORTED_MODULE_2__["users"],
-    categories: _modules_categories__WEBPACK_IMPORTED_MODULE_3__["categories"]
+    categories: _modules_categories__WEBPACK_IMPORTED_MODULE_3__["categories"],
+    tags: _modules_tags__WEBPACK_IMPORTED_MODULE_4__["tags"]
   }
 }));
 

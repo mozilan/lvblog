@@ -206,10 +206,10 @@
                     <Tag></Tag>
                 </div>
                 <div class="item">
-                    <Friend></Friend>
+                    <Category></Category>
                 </div>
                 <div class="item">
-                    <Category></Category>
+                    <Friend></Friend>
                 </div>
             </el-col>
             <Oauth></Oauth>
