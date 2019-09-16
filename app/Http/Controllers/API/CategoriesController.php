@@ -21,9 +21,15 @@ class CategoriesController extends Controller
             if (Category::where('user_id', $this->user()->id)->where('name',$request->get('name'))->exists()) {
                 return response()->json(['message' => '分类名称已经存在'], 422);
             }
+            $category = Category::create([
+                'user_id'=> \Auth::guard('api')->user()->id,
+                'name' => $request->name,
+                'description' => $request->description,
+            ]);
         }catch (\Exception $e){
             return response()->json(['message' => '服务器错误'], 500);
         }
+
         return $this->response->collection(Category::where('user_id',$this->user()->id)->get(), new CategoryTransformer())
         ->setStatusCode(201);
     }

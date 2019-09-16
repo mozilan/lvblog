@@ -31,6 +31,15 @@ export const categories = {
                 .catch(function (error){
                      commit('setCategoriesLoadStatus', 3);
                 });
+        },
+        addCategories({commit,dispatch},data){
+            CategoryAPI.postCategories(data.name)
+                .then(function (response) {
+                    commit('setCategories', response.data.data);
+                })
+                .catch(function (error){
+
+                });
         }
     },
     mutations:{

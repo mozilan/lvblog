@@ -19,6 +19,7 @@ class CreateCategoriesTable extends Migration
             $table->string('name')->index()->comment('名称');
             $table->text('description')->nullable()->comment('描述');
             $table->integer('post_count')->default(0)->comment('博客数');
+            $table->timestamps();
         });
     }
 

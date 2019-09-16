@@ -6,5 +6,10 @@ import { LVBLOG_CONFIG } from '../config.js';
 export default {
     getCategories: function(user_id){
         return axios.get(LVBLOG_CONFIG.API_URL + '/categories/'+ user_id);
+    },
+    postCategories: function(name){
+        return axios.post(LVBLOG_CONFIG.API_URL + '/categories',{
+            name:name,
+        });
     }
 }

@@ -4732,6 +4732,84 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 // Local Registration
 
 
@@ -4743,8 +4821,6 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
-      pos: '',
-      posStatus: 0,
       markdownOption: {
         bold: true,
         // 粗体
@@ -4813,8 +4889,32 @@ __webpack_require__.r(__webpack_exports__);
         preview: true // 预览
 
       },
-      handbook: "#### 开始你的创作 ####"
+      categoryDynamicTags: [],
+      categoryInputVisible: false,
+      categoryInputValue: '',
+      tagInputVisible: false,
+      tagInputValue: '',
+      tagDynamicTags: [],
+      form: {
+        title: '',
+        handbook: "#### 开始你的创作",
+        tags: '',
+        category: '',
+        "public": true
+      }
     };
+  },
+  watch: {
+    categoryDynamicTags: function categoryDynamicTags(val) {
+      this.$store.dispatch('addCategories', {
+        name: val[0]
+      });
+    }
+  },
+  computed: {
+    categories: function categories() {
+      return this.$store.getters.getCategories;
+    }
   },
   methods: {
     // 绑定@imgAdd event
@@ -4828,7 +4928,59 @@ __webpack_require__.r(__webpack_exports__);
           this.$refs.md.$img2Url(pos, this.$store.getters.getImages);
         }
       });
-    }
+    },
+    tagHandleClose: function tagHandleClose(tag) {
+      this.tagDynamicTags.splice(this.tagDynamicTags.indexOf(tag), 1);
+    },
+    tagShowInput: function tagShowInput() {
+      var _this = this;
+
+      this.tagInputVisible = true;
+      this.$nextTick(function (_) {
+        _this.$refs.saveTagInput.$refs.input.focus();
+      });
+    },
+    tagHandleInputConfirm: function tagHandleInputConfirm() {
+      var tagInputValue = this.tagInputValue;
+
+      if (tagInputValue && this.tagDynamicTags.length < 3 && !this.tagDynamicTags.includes(tagInputValue)) {
+        this.tagDynamicTags.push(tagInputValue);
+      }
+
+      this.tagInputVisible = false;
+      this.tagInputValue = '';
+    },
+    handleClose: function handleClose(category) {
+      this.categoryDynamicTags.splice(this.categoryDynamicTags.indexOf(category), 1);
+    },
+    showInput: function showInput() {
+      var _this2 = this;
+
+      this.categoryInputVisible = true;
+      this.$nextTick(function (_) {
+        _this2.$refs.saveCategoryInput.$refs.input.focus();
+      });
+    },
+    handleInputConfirm: function handleInputConfirm() {
+      var categoryInputValue = this.categoryInputValue;
+
+      if (categoryInputValue && this.categoryDynamicTags.length < 1 && !this.categories.includes(categoryInputValue)) {
+        this.categoryDynamicTags.push(categoryInputValue);
+        this.$store.dispatch('loadCategories', {
+          id: this.$store.getters.getUser.id
+        });
+      }
+
+      this.categoryInputVisible = false;
+      this.categoryInputValue = '';
+    },
+    publishArticle: function publishArticle() {},
+    saveArticle: function saveArticle() {}
+  },
+  created: function created() {
+    this.$store.dispatch('loadCategories', {
+      id: this.$store.getters.getUser.id
+    });
   }
 });
 
@@ -7232,7 +7384,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n#editor {\n     margin: auto;\n     width: 80%;\n     height: 580px;\n}\n", ""]);
+exports.push([module.i, "\n#editor {\n     margin: auto;\n     width: 80%;\n     height: 580px;\n}\n.el-tag + .el-tag {\n     margin-left: 10px;\n}\n.button-new-tag {\n     margin-left: 10px;\n     height: 32px;\n     line-height: 30px;\n     padding-top: 0;\n     padding-bottom: 0;\n}\n.input-new-tag {\n     width: 90px;\n     margin-left: 10px;\n     vertical-align: bottom;\n}\n", ""]);
 
 // exports
 
@@ -97022,22 +97174,275 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c(
-    "div",
-    { attrs: { id: "editor" } },
+    "el-container",
+    { staticStyle: { display: "block" } },
     [
-      _c("mavon-editor", {
-        ref: "md",
-        staticStyle: { height: "100%" },
-        attrs: { toolbars: _vm.markdownOption, ishljs: true },
-        on: { imgAdd: _vm.$imgAdd },
-        model: {
-          value: _vm.handbook,
-          callback: function($$v) {
-            _vm.handbook = $$v
-          },
-          expression: "handbook"
-        }
-      })
+      _c(
+        "el-row",
+        [
+          _c(
+            "el-form",
+            { attrs: { model: _vm.form } },
+            [
+              _c(
+                "el-col",
+                { attrs: { xs: 24, sm: 24, md: 24, lg: 24 } },
+                [
+                  _c(
+                    "el-form-item",
+                    { attrs: { label: "" } },
+                    [
+                      _c("el-input", {
+                        attrs: {
+                          placeholder: "请输入文章标题",
+                          "suffix-icon": "el-icon-bank-card"
+                        },
+                        model: {
+                          value: _vm.form.title,
+                          callback: function($$v) {
+                            _vm.$set(_vm.form, "title", $$v)
+                          },
+                          expression: "form.title"
+                        }
+                      })
+                    ],
+                    1
+                  )
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c("mavon-editor", {
+                ref: "md",
+                staticStyle: { height: "100%" },
+                attrs: { toolbars: _vm.markdownOption, ishljs: true },
+                on: { imgAdd: _vm.$imgAdd },
+                model: {
+                  value: _vm.form.handbook,
+                  callback: function($$v) {
+                    _vm.$set(_vm.form, "handbook", $$v)
+                  },
+                  expression: "form.handbook"
+                }
+              }),
+              _vm._v(" "),
+              _c(
+                "div",
+                { staticClass: "tag" },
+                [
+                  _vm._l(_vm.tagDynamicTags, function(tag) {
+                    return _c(
+                      "el-tag",
+                      {
+                        key: tag,
+                        attrs: { closable: "", "disable-transitions": false },
+                        on: {
+                          close: function($event) {
+                            return _vm.tagHandleClose(tag)
+                          }
+                        }
+                      },
+                      [
+                        _vm._v(
+                          "\n                         " +
+                            _vm._s(tag) +
+                            "\n                    "
+                        )
+                      ]
+                    )
+                  }),
+                  _vm._v(" "),
+                  _vm.tagInputVisible
+                    ? _c("el-input", {
+                        ref: "saveTagInput",
+                        staticClass: "input-new-tag",
+                        attrs: { size: "small" },
+                        on: { blur: _vm.tagHandleInputConfirm },
+                        nativeOn: {
+                          keyup: function($event) {
+                            if (
+                              !$event.type.indexOf("key") &&
+                              _vm._k(
+                                $event.keyCode,
+                                "enter",
+                                13,
+                                $event.key,
+                                "Enter"
+                              )
+                            ) {
+                              return null
+                            }
+                            return _vm.tagHandleInputConfirm($event)
+                          }
+                        },
+                        model: {
+                          value: _vm.tagInputValue,
+                          callback: function($$v) {
+                            _vm.tagInputValue = $$v
+                          },
+                          expression: "tagInputValue"
+                        }
+                      })
+                    : _c(
+                        "el-button",
+                        {
+                          staticClass: "button-new-tag",
+                          attrs: { size: "small" },
+                          on: { click: _vm.tagShowInput }
+                        },
+                        [_vm._v("+ 新标签")]
+                      )
+                ],
+                2
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                { staticClass: "category" },
+                [
+                  _vm._l(_vm.categoryDynamicTags, function(category) {
+                    return _c(
+                      "el-tag",
+                      {
+                        key: category,
+                        attrs: { closable: "", "disable-transitions": false },
+                        on: {
+                          close: function($event) {
+                            return _vm.handleClose(category)
+                          }
+                        }
+                      },
+                      [
+                        _vm._v(
+                          "\n                         " +
+                            _vm._s(category) +
+                            "\n                    "
+                        )
+                      ]
+                    )
+                  }),
+                  _vm._v(" "),
+                  _vm.categoryInputVisible
+                    ? _c("el-input", {
+                        ref: "saveCategoryInput",
+                        staticClass: "input-new-tag",
+                        attrs: { size: "small" },
+                        on: { blur: _vm.handleInputConfirm },
+                        nativeOn: {
+                          keyup: function($event) {
+                            if (
+                              !$event.type.indexOf("key") &&
+                              _vm._k(
+                                $event.keyCode,
+                                "enter",
+                                13,
+                                $event.key,
+                                "Enter"
+                              )
+                            ) {
+                              return null
+                            }
+                            return _vm.handleInputConfirm($event)
+                          }
+                        },
+                        model: {
+                          value: _vm.categoryInputValue,
+                          callback: function($$v) {
+                            _vm.categoryInputValue = $$v
+                          },
+                          expression: "categoryInputValue"
+                        }
+                      })
+                    : _c(
+                        "el-button",
+                        {
+                          staticClass: "button-new-tag",
+                          attrs: { size: "small" },
+                          on: { click: _vm.showInput }
+                        },
+                        [_vm._v("+ New Tag")]
+                      ),
+                  _vm._v(" "),
+                  _c(
+                    "el-select",
+                    {
+                      attrs: { placeholder: "请选择" },
+                      model: {
+                        value: _vm.form.category,
+                        callback: function($$v) {
+                          _vm.$set(_vm.form, "category", $$v)
+                        },
+                        expression: "form.category"
+                      }
+                    },
+                    _vm._l(_vm.categories, function(item) {
+                      return _c("el-option", {
+                        key: item.id,
+                        attrs: { label: item.name, value: item.id }
+                      })
+                    }),
+                    1
+                  )
+                ],
+                2
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                { staticClass: "private" },
+                [
+                  _c("el-switch", {
+                    staticStyle: { display: "block" },
+                    attrs: {
+                      "active-color": "#13ce66",
+                      "inactive-color": "#ff4949",
+                      "active-text": "公开",
+                      "inactive-text": "私有"
+                    },
+                    model: {
+                      value: _vm.form.public,
+                      callback: function($$v) {
+                        _vm.$set(_vm.form, "public", $$v)
+                      },
+                      expression: "form.public"
+                    }
+                  })
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "el-col",
+                { attrs: { xs: 24, sm: 24, md: 24, lg: 24 } },
+                [
+                  _c(
+                    "el-button",
+                    {
+                      staticClass: "bl-right",
+                      attrs: { type: "primary" },
+                      on: { click: _vm.publishArticle }
+                    },
+                    [_vm._v("发布博客")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "el-button",
+                    {
+                      staticClass: "bl-right",
+                      attrs: { type: "primary" },
+                      on: { click: _vm.saveArticle }
+                    },
+                    [_vm._v("保存草稿")]
+                  )
+                ],
+                1
+              )
+            ],
+            1
+          )
+        ],
+        1
+      )
     ],
     1
   )
@@ -113860,6 +114265,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   getCategories: function getCategories(user_id) {
     return axios.get(_config_js__WEBPACK_IMPORTED_MODULE_0__["LVBLOG_CONFIG"].API_URL + '/categories/' + user_id);
+  },
+  postCategories: function postCategories(name) {
+    return axios.post(_config_js__WEBPACK_IMPORTED_MODULE_0__["LVBLOG_CONFIG"].API_URL + '/categories', {
+      name: name
+    });
   }
 });
 
@@ -114756,6 +115166,13 @@ var categories = {
       })["catch"](function (error) {
         commit('setCategoriesLoadStatus', 3);
       });
+    },
+    addCategories: function addCategories(_ref2, data) {
+      var commit = _ref2.commit,
+          dispatch = _ref2.dispatch;
+      _api_categories__WEBPACK_IMPORTED_MODULE_0__["default"].postCategories(data.name).then(function (response) {
+        commit('setCategories', response.data.data);
+      })["catch"](function (error) {});
     }
   },
   mutations: {
