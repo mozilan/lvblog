@@ -3359,33 +3359,20 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'category',
-  methods: {
-    category: function category(name) {
-      this.$router.push({
-        name: 'category',
-        params: {
-          'name': name
-        }
-      });
-    },
+  data: function data() {
+    return {};
+  },
+  computed: {
     cate: function cate() {
       return this.$store.getters.getCategories;
     }
   },
-  data: function data() {
-    return {
-      categories: [{
-        id: 1,
-        name: 'Laravel'
-      }, {
-        id: 2,
-        name: 'Bar'
-      }]
-    };
-  },
-  computed: {},
   created: function created() {
     this.$store.dispatch('loadCategories', {
       id: this.$route.query.user != null ? this.$route.query.user : 1
@@ -94947,25 +94934,32 @@ var render = function() {
             ]
           ),
           _vm._v(" "),
-          _vm._l(_vm.cate(), function(cat) {
-            return _c("div", { staticClass: "text item" }, [
-              _c(
-                "a",
-                { attrs: { href: "#" } },
-                [
-                  _c(
-                    "el-tag",
-                    {
-                      staticClass: "category-item",
-                      attrs: { size: "mini", type: "success" },
-                      on: { click: function($event) {} }
-                    },
-                    [_vm._v(_vm._s(cat.name) + "[12]")]
-                  )
-                ],
-                1
-              )
-            ])
+          _vm._l(_vm.cate, function(cat) {
+            return _c(
+              "div",
+              { staticClass: "text item" },
+              [
+                _c("a", { attrs: { href: "#" } }, [
+                  _c("span", { staticStyle: { float: "left" } }, [
+                    _vm._v(_vm._s(cat.name))
+                  ])
+                ]),
+                _vm._v(" "),
+                _c(
+                  "el-tag",
+                  {
+                    staticClass: "category-item",
+                    staticStyle: { float: "right" },
+                    attrs: { size: "mini", type: "success" },
+                    on: { click: function($event) {} }
+                  },
+                  [_vm._v("[" + _vm._s(cat.count) + "]")]
+                ),
+                _vm._v(" "),
+                _c("div", { staticStyle: { clear: "both" } })
+              ],
+              1
+            )
           })
         ],
         2

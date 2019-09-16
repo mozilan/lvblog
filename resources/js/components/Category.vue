@@ -5,7 +5,11 @@
 				<img class="card-icon" src="../../assets/biaoqian.png" />
 				<span>热门分类</span>
 			</div>
-		<div v-for="cat in cate()" class="text item"><a href="#"><el-tag size="mini" class="category-item" type="success"  @click="">{{cat.name}}[12]</el-tag></a></div>
+		<div v-for="cat in cate" class="text item">
+			<a href="#"><span style="float: left;">{{cat.name}}</span></a>
+			<el-tag style="float: right" size="mini" class="category-item" type="success"  @click="">[{{cat.count}}]</el-tag>
+			<div style="clear:both;"></div>
+		</div>
 		</el-card>
 	</div>
 </template>
@@ -13,29 +17,15 @@
 <script>
 	export default {
 		name: 'category',
-		methods: {
-			category(name) {
-				this.$router.push({
-					name: 'category',
-					params: {
-						'name': name
-					}
-				});
-			},
-			cate(){
-				return this.$store.getters.getCategories;
-			}
-		},
 		data(){
 			return{
-				categories: [
-					{ id : 1 , name:'Laravel'},
-					{ id : 2, name: 'Bar' }
-				],
+
 			}
 		},
 		computed:{
-
+			cate(){
+				return this.$store.getters.getCategories;
+			}
 		},
 		created() {
 			this.$store.dispatch('loadCategories', {
