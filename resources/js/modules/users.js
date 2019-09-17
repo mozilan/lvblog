@@ -96,8 +96,10 @@ export const users = {
                     commit( 'setUser' , response.data.data);
                 })
                 .catch(function (error) {
+                    commit( 'setUser' ,'');
+                    commit('setUserLoadStatus',3);
                     commit( 'setLoginStatus',3);
-                })
+        })
         },
         loginByOauth({commit},data){
             commit('setLoginStatus',1);

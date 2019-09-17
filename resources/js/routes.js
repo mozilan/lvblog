@@ -26,11 +26,17 @@ function requireAuth(to, from, next) {
     if (token === 'null' || token === '') {
             proceed()
     } else {
-        store.dispatch('loadUser');
-        // 监听用户信息加载状态，加载完成后调用 proceed 方法继续后续操作
-        store.watch(store.getters.getUserLoadStatus, function () {
-                proceed();
-        });
+        if(store.getters.getUserLoadStatus() === 0){
+            store.dispatch('loadUser');
+            // 监听用户信息加载状态，加载完成后调用 proceed 方法继续后续操作
+            store.watch(store.getters.getUserLoadStatus, function () {
+                if(store.getters.getUserLoadStatus() !== 1){
+                    proceed();
+                }
+            });
+        }else{
+            proceed();
+        }
     }
 }
 /**

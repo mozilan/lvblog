@@ -4912,12 +4912,11 @@ __webpack_require__.r(__webpack_exports__);
       categoryInputValue: '',
       tagInputVisible: false,
       tagInputValue: '',
-      tagDynamicTags: [],
       form: {
         title: '',
         handbook: "#### 开始你的创作",
-        tags: '',
-        category: '',
+        category_id: '',
+        tagDynamicTags: [],
         "public": true
       },
       categoryNameArr: []
@@ -4949,11 +4948,17 @@ __webpack_require__.r(__webpack_exports__);
       this.$watch(this.$store.getters.getImagesUpLoadStatus, function () {
         if (this.$store.getters.getImagesUpLoadStatus() === 2) {
           this.$refs.md.$img2Url(pos, this.$store.getters.getImages);
+        } else if (this.$store.getters.getImagesUpLoadStatus() === 3) {
+          this.$message({
+            message: "上传失败",
+            type: 'error'
+          });
+          this.$refs.md.$img2Url(pos, null);
         }
       });
     },
     tagHandleClose: function tagHandleClose(tag) {
-      this.tagDynamicTags.splice(this.tagDynamicTags.indexOf(tag), 1);
+      this.form.tagDynamicTags.splice(this.form.tagDynamicTags.indexOf(tag), 1);
     },
     tagShowInput: function tagShowInput() {
       var _this = this;
@@ -4976,8 +4981,8 @@ __webpack_require__.r(__webpack_exports__);
         return 0;
       }
 
-      if (tagInputValue && this.tagDynamicTags.length < 3 && !this.tagDynamicTags.includes(tagInputValue)) {
-        this.tagDynamicTags.push(tagInputValue);
+      if (tagInputValue && this.form.tagDynamicTags.length < 3 && !this.form.tagDynamicTags.includes(tagInputValue)) {
+        this.form.tagDynamicTags.push(tagInputValue);
       }
 
       this.tagInputVisible = false;
@@ -5053,8 +5058,16 @@ __webpack_require__.r(__webpack_exports__);
       this.categoryInputVisible = false;
       this.categoryInputValue = '';
     },
-    publishArticle: function publishArticle() {},
-    saveArticle: function saveArticle() {}
+    publishArticle: function publishArticle(target) {
+      console.log(this.form.tags);
+      this.$store.dispatch('addArticle', {
+        title: this.form.title,
+        body: this.form.handbook,
+        tags: this.form.tagDynamicTags,
+        category_id: this.form.category_id,
+        target: target
+      });
+    }
   },
   created: function created() {
     this.$store.dispatch('loadCategories', {
@@ -97320,7 +97333,7 @@ var render = function() {
                       "div",
                       { staticClass: "tag" },
                       [
-                        _vm._l(_vm.tagDynamicTags, function(tag) {
+                        _vm._l(_vm.form.tagDynamicTags, function(tag) {
                           return _c(
                             "el-tag",
                             {
@@ -97476,11 +97489,11 @@ var render = function() {
                           {
                             attrs: { placeholder: "请选择" },
                             model: {
-                              value: _vm.form.category,
+                              value: _vm.form.category_id,
                               callback: function($$v) {
-                                _vm.$set(_vm.form, "category", $$v)
+                                _vm.$set(_vm.form, "category_id", $$v)
                               },
-                              expression: "form.category"
+                              expression: "form.category_id"
                             }
                           },
                           _vm._l(_vm.categories, function(item) {
@@ -97543,7 +97556,11 @@ var render = function() {
                     {
                       staticClass: "bl-public",
                       attrs: { type: "primary" },
-                      on: { click: _vm.publishArticle }
+                      on: {
+                        click: function($event) {
+                          return _vm.publishArticle(0)
+                        }
+                      }
                     },
                     [_vm._v("发布博客")]
                   ),
@@ -97553,7 +97570,11 @@ var render = function() {
                     {
                       staticClass: "bl-save",
                       attrs: { type: "primary" },
-                      on: { click: _vm.saveArticle }
+                      on: {
+                        click: function($event) {
+                          return _vm.publishArticle(1)
+                        }
+                      }
                     },
                     [_vm._v("保存草稿")]
                   )
@@ -114371,6 +114392,40 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/api/articles.js":
+/*!**************************************!*\
+  !*** ./resources/js/api/articles.js ***!
+  \**************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _config_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../config.js */ "./resources/js/config.js");
+/**
+ * Imports the LvBlog API URL from the config.
+ */
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  getArticles: function getArticles() {
+    return axios.get(_config_js__WEBPACK_IMPORTED_MODULE_0__["LVBLOG_CONFIG"].API_URL + '/articles', {});
+  },
+  getArticle: function getArticle(id) {
+    return axios.get(_config_js__WEBPACK_IMPORTED_MODULE_0__["LVBLOG_CONFIG"].API_URL + '/articles', {});
+  },
+  postArticle: function postArticle(title, body, tags, category_id, target) {
+    return axios.post(_config_js__WEBPACK_IMPORTED_MODULE_0__["LVBLOG_CONFIG"].API_URL + '/articles', {
+      title: title,
+      body: body,
+      tags: tags,
+      category_id: category_id,
+      target: target
+    });
+  }
+});
+
+/***/ }),
+
 /***/ "./resources/js/api/categories.js":
 /*!****************************************!*\
   !*** ./resources/js/api/categories.js ***!
@@ -115248,6 +115303,105 @@ var EventBus = new vue__WEBPACK_IMPORTED_MODULE_0___default.a();
 
 /***/ }),
 
+/***/ "./resources/js/modules/articles.js":
+/*!******************************************!*\
+  !*** ./resources/js/modules/articles.js ***!
+  \******************************************/
+/*! exports provided: articles */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "articles", function() { return articles; });
+/* harmony import */ var _api_articles__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../api/articles */ "./resources/js/api/articles.js");
+/*
+|-------------------------------------------------------------------------------
+| VUEX modules/users.js
+|-------------------------------------------------------------------------------
+| The Vuex data store for the articles
+*/
+
+/**
+ status = 0 -> 数据尚未加载
+ status = 1 -> 数据开始加载
+ status = 2 -> 数据加载成功
+ status = 3 -> 数据加载失败
+ */
+
+var articles = {
+  state: {
+    //分类
+    articles: [],
+    articlesLoadStatus: 0,
+    article: '',
+    articleLoadStatus: 0,
+    articleAddStatus: 0,
+    articleAddResponseMessages: ''
+  },
+  actions: {
+    loadarticles: function loadarticles(_ref, data) {
+      var commit = _ref.commit;
+      commit('setarticlesLoadStatus', 1);
+      _api_articles__WEBPACK_IMPORTED_MODULE_0__["default"].getarticles(data.id).then(function (response) {
+        commit('setarticles', response.data.data);
+        commit('setarticlesLoadStatus', 2);
+      })["catch"](function (error) {
+        commit('setarticlesLoadStatus', 3);
+      });
+    },
+    addArticle: function addArticle(_ref2, data) {
+      var commit = _ref2.commit,
+          dispatch = _ref2.dispatch;
+      commit('setArticleAddStatus', 1);
+      _api_articles__WEBPACK_IMPORTED_MODULE_0__["default"].postArticle(data.title, data.body, data.tags, data.category_id, data.target).then(function (response) {
+        commit('setArticleAddStatus', 2);
+      })["catch"](function (error) {
+        commit('setArticleAddStatus', 3);
+        commit('setArticleAddResponseMessages', error.response.data.message);
+      });
+    },
+    initArticleAddStatus: function initArticleAddStatus(_ref3) {
+      var commit = _ref3.commit;
+      commit('setArticleAddStatus', 0);
+      commit('setArticleAddResponseMessages', '');
+    }
+  },
+  mutations: {
+    setarticlesLoadStatus: function setarticlesLoadStatus(state, status) {
+      state.articlesLoadStatus = status;
+    },
+    setarticles: function setarticles(state, articles) {
+      state.articles = articles;
+    },
+    setArticleAddStatus: function setArticleAddStatus(state, status) {
+      state.articleAddStatus = status;
+    },
+    setArticleAddResponseMessages: function setArticleAddResponseMessages(state, messages) {
+      state.articlesAddResponseMessages = messages;
+    }
+  },
+  getters: {
+    getArticles: function getArticles(state) {
+      return state.articles;
+    },
+    getArticlesLoadStatus: function getArticlesLoadStatus(state) {
+      return state.articlesLoadStatus;
+    },
+    getArticleAddStatus: function getArticleAddStatus(state) {
+      return function () {
+        return state.articleAddStatus;
+      };
+    },
+    getArticleAddResponseMessages: function getArticleAddResponseMessages(state) {
+      return function () {
+        return state.articlesAddResponseMessages;
+      };
+    }
+  }
+};
+
+/***/ }),
+
 /***/ "./resources/js/modules/categories.js":
 /*!********************************************!*\
   !*** ./resources/js/modules/categories.js ***!
@@ -115581,6 +115735,8 @@ var users = {
         commit('setLoginToken', 'Bearer ' + response.data.meta.access_token);
         commit('setUser', response.data.data);
       })["catch"](function (error) {
+        commit('setUser', '');
+        commit('setUserLoadStatus', 3);
         commit('setLoginStatus', 3);
       });
     },
@@ -116350,11 +116506,17 @@ function requireAuth(to, from, next) {
   if (token === 'null' || token === '') {
     proceed();
   } else {
-    _store_js__WEBPACK_IMPORTED_MODULE_2__["default"].dispatch('loadUser'); // 监听用户信息加载状态，加载完成后调用 proceed 方法继续后续操作
+    if (_store_js__WEBPACK_IMPORTED_MODULE_2__["default"].getters.getUserLoadStatus() === 0) {
+      _store_js__WEBPACK_IMPORTED_MODULE_2__["default"].dispatch('loadUser'); // 监听用户信息加载状态，加载完成后调用 proceed 方法继续后续操作
 
-    _store_js__WEBPACK_IMPORTED_MODULE_2__["default"].watch(_store_js__WEBPACK_IMPORTED_MODULE_2__["default"].getters.getUserLoadStatus, function () {
+      _store_js__WEBPACK_IMPORTED_MODULE_2__["default"].watch(_store_js__WEBPACK_IMPORTED_MODULE_2__["default"].getters.getUserLoadStatus, function () {
+        if (_store_js__WEBPACK_IMPORTED_MODULE_2__["default"].getters.getUserLoadStatus() !== 1) {
+          proceed();
+        }
+      });
+    } else {
       proceed();
-    });
+    }
   }
 }
 /**
@@ -116426,6 +116588,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modules_categories__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./modules/categories */ "./resources/js/modules/categories.js");
 /* harmony import */ var _modules_tags__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./modules/tags */ "./resources/js/modules/tags.js");
 /* harmony import */ var _modules_images__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./modules/images */ "./resources/js/modules/images.js");
+/* harmony import */ var _modules_articles__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./modules/articles */ "./resources/js/modules/articles.js");
 /*
  |-------------------------------------------------------------------------------
  | VUEX store.js
@@ -116453,6 +116616,7 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
 
 
 
+
 /**
  * Export our data store.
  */
@@ -116462,7 +116626,8 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
     users: _modules_users__WEBPACK_IMPORTED_MODULE_2__["users"],
     categories: _modules_categories__WEBPACK_IMPORTED_MODULE_3__["categories"],
     tags: _modules_tags__WEBPACK_IMPORTED_MODULE_4__["tags"],
-    images: _modules_images__WEBPACK_IMPORTED_MODULE_5__["images"]
+    images: _modules_images__WEBPACK_IMPORTED_MODULE_5__["images"],
+    articles: _modules_articles__WEBPACK_IMPORTED_MODULE_6__["articles"]
   }
 }));
 

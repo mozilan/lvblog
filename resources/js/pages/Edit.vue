@@ -17,7 +17,7 @@
                                    <div class="tag">
                                         <el-tag
                                                 :key="tag"
-                                                v-for="tag in tagDynamicTags"
+                                                v-for="tag in form.tagDynamicTags"
                                                 closable
                                                 :disable-transitions="false"
                                                 @close="tagHandleClose(tag)">
@@ -59,7 +59,7 @@
                                         >
                                         </el-input>
                                         <el-button v-else class="button-new-tag" size="small" @click="showInput">+ 添加分类</el-button>
-                                        <el-select v-model="form.category" placeholder="请选择">
+                                        <el-select v-model="form.category_id" placeholder="请选择">
                                              <el-option
                                                      v-for="item in categories"
                                                      :key="item.id"
@@ -84,8 +84,8 @@
                               </el-form-item>
                          </el-col>
                           <el-col :xs="24" :sm="24" :md="24" :lg="24">
-                              <el-button class="bl-public" type="primary" @click="publishArticle">发布博客</el-button>
-                              <el-button class="bl-save" type="primary" @click="saveArticle">保存草稿</el-button>
+                              <el-button class="bl-public" type="primary" @click="publishArticle(0)">发布博客</el-button>
+                              <el-button class="bl-save" type="primary" @click="publishArticle(1)">保存草稿</el-button>
                          </el-col>
                     </el-form>
                </el-row>
@@ -143,12 +143,11 @@
                     categoryInputValue: '',
                     tagInputVisible: false,
                     tagInputValue: '',
-                    tagDynamicTags: [],
                     form: {
                          title: '',
                          handbook: "#### 开始你的创作",
-                         tags: '',
-                         category:'',
+                         category_id:'',
+                         tagDynamicTags: [],
                          public:true,
                     },
                     categoryNameArr:[],
@@ -179,11 +178,17 @@
                     this.$watch(this.$store.getters.getImagesUpLoadStatus, function () {
                          if (this.$store.getters.getImagesUpLoadStatus() === 2) {
                               this.$refs.md.$img2Url(pos, this.$store.getters.getImages);
+                         }else if (this.$store.getters.getImagesUpLoadStatus() === 3) {
+                              this.$message({
+                                   message: "上传失败",
+                                   type: 'error'
+                              });
+                              this.$refs.md.$img2Url(pos, null);
                          }
                     });
                },
                tagHandleClose(tag) {
-                    this.tagDynamicTags.splice(this.tagDynamicTags.indexOf(tag), 1);
+                    this.form.tagDynamicTags.splice(this.form.tagDynamicTags.indexOf(tag), 1);
                },
                tagShowInput() {
                     this.tagInputVisible = true;
@@ -202,8 +207,8 @@
                          this.tagInputValue = '';
                          return 0;
                     }
-                    if(tagInputValue && this.tagDynamicTags.length < 3 && !this.tagDynamicTags.includes(tagInputValue)) {
-                         this.tagDynamicTags.push(tagInputValue);
+                    if(tagInputValue && this.form.tagDynamicTags.length < 3 && !this.form.tagDynamicTags.includes(tagInputValue)) {
+                         this.form.tagDynamicTags.push(tagInputValue);
                     }
                     this.tagInputVisible = false;
                     this.tagInputValue = '';
@@ -275,11 +280,15 @@
                     this.categoryInputVisible = false;
                     this.categoryInputValue = '';
                },
-               publishArticle(){
-
-               },
-               saveArticle(){
-
+               publishArticle(target){
+                    console.log(this.form.tags);
+                    this.$store.dispatch('addArticle',{
+                         title:this.form.title,
+                         body:this.form.handbook,
+                         tags:this.form.tagDynamicTags,
+                         category_id:this.form.category_id,
+                         target:target
+                    })
                },
           },
           created() {
