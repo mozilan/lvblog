@@ -19,7 +19,7 @@
 </style>
 <template>
     <div class="bl-header">
-        <h5 class="bl-logo "><a href="#">LvBlog</a></h5>
+        <h5 class="bl-logo "><a id="index" href="/">LvBlog</a></h5>
         <el-menu :default-active="activeIndex" class="el-menu-blumer" mode="horizontal" @select="handleSelect">
             <el-menu-item index="1"><router-link :to="{ name:'index' }">首页</router-link></el-menu-item>
             <el-menu-item index="2"><router-link :to="{ name:'archive' }">归档</router-link></el-menu-item>
@@ -65,6 +65,9 @@
             logout(){
                 this.$store.dispatch('logout');
                 this.$router.push({name:'index'});
+            },
+            loadUser(){
+                this.$store.dispatch('loadUser')
             }
         },
         computed:{
@@ -75,5 +78,10 @@
                 return this.$store.getters.getUser;
             }
         },
+        created(){
+            if(this.$store.getters.getUserLoadStatus() === 0){
+                this.loadUser();
+            }
+    },
     }
 </script>

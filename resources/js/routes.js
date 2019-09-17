@@ -29,9 +29,7 @@ function requireAuth(to, from, next) {
         store.dispatch('loadUser');
         // 监听用户信息加载状态，加载完成后调用 proceed 方法继续后续操作
         store.watch(store.getters.getUserLoadStatus, function () {
-            if (store.getters.getUserLoadStatus() === 2) {
                 proceed();
-            }
         });
     }
 }
@@ -85,6 +83,6 @@ export default new VueRouter({
                     components: Vue.component( 'About', require( './pages/About' ) ),
                 },
             ]
-        }
+        },
     ]
 });

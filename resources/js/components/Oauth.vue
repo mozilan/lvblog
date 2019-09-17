@@ -38,7 +38,7 @@
             }
         },
         created(){
-            if(this.getUrlParams('code') != null){
+            if(this.getUrlParams('code') != null && this.$store.getters. getLoginStatus !== 2){
                 this.$store.dispatch('loginByOauth', {
                     social_type : this.getUrlParams('social_type'),
                     code : this.getUrlParams('code'),

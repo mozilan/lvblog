@@ -2,7 +2,7 @@
           <el-container style="display:block">
                <el-row>
                     <el-form :model="form">
-                         <el-col :xs="24" :sm="24" :md="24" :lg="24">
+                         <el-col :xs="24" :sm="24" :md="24" :lg="24" class="bl-margin_bottom-title">
                               <el-form-item label="">
                                    <el-input
                                            placeholder="请输入文章标题"
@@ -12,70 +12,80 @@
                               </el-form-item>
                          </el-col>
                               <mavon-editor ref=md :toolbars="markdownOption" v-model="form.handbook" :ishljs = "true" @imgAdd="$imgAdd"  style="height: 100%"></mavon-editor>
-                         <div class="tag">
-                              <el-tag
-                                      :key="tag"
-                                      v-for="tag in tagDynamicTags"
-                                      closable
-                                      :disable-transitions="false"
-                                      @close="tagHandleClose(tag)">
-                                   {{tag}}
-                              </el-tag>
-                              <el-input
-                                      class="input-new-tag"
-                                      v-if="tagInputVisible"
-                                      v-model="tagInputValue"
-                                      ref="saveTagInput"
-                                      size="small"
-                                      @keyup.enter.native="tagHandleInputConfirm"
-                                      @blur="tagHandleInputConfirm"
-                              >
-                              </el-input>
-                              <el-button v-else class="button-new-tag" size="small" @click="tagShowInput">+ 新标签</el-button>
-                         </div>
-                         <div class="category">
-                              <el-tag
-                                      :key="category"
-                                      v-for="category in categoryDynamicTags"
-                                      closable
-                                      :disable-transitions="false"
-                                      @close="handleClose(category)">
-                                   {{category}}
-                              </el-tag>
-                              <el-input
-                                      class="input-new-tag"
-                                      v-if="categoryInputVisible"
-                                      v-model="categoryInputValue"
-                                      ref="saveCategoryInput"
-                                      size="small"
-                                      @keyup.enter.native="handleInputConfirm"
-                                      @blur="handleInputConfirm"
-                              >
-                              </el-input>
-                              <el-button v-else class="button-new-tag" size="small" @click="showInput">+ New Tag</el-button>
-                              <el-select v-model="form.category" placeholder="请选择">
-                                   <el-option
-                                           v-for="item in categories"
-                                           :key="item.id"
-                                           :label="item.name"
-                                           :value="item.id">
-                                   </el-option>
-                              </el-select>
-                         </div>
-                         <div class="private">
-                              <el-switch
-                                      style="display: block"
-                                      v-model="form.public"
-                                      active-color="#13ce66"
-                                      inactive-color="#ff4949"
-                                      active-text="公开"
-                                      inactive-text="私有">
-                              </el-switch>
-                         </div>
-
+                         <el-col :xs="24" :sm="24" :md="18" :lg="12" class="bl-margin-top">
+                              <el-form-item label="文章标签：">
+                                   <div class="tag">
+                                        <el-tag
+                                                :key="tag"
+                                                v-for="tag in tagDynamicTags"
+                                                closable
+                                                :disable-transitions="false"
+                                                @close="tagHandleClose(tag)">
+                                             {{tag}}
+                                        </el-tag>
+                                        <el-input
+                                                class="input-new-tag"
+                                                v-if="tagInputVisible"
+                                                v-model="tagInputValue"
+                                                ref="saveTagInput"
+                                                size="small"
+                                                @keyup.enter.native="tagHandleInputConfirm"
+                                                @blur="tagHandleInputConfirm"
+                                        >
+                                        </el-input>
+                                        <el-button v-else class="button-new-tag" size="small" @click="tagShowInput">+ 添加标签</el-button>
+                                   </div>
+                              </el-form-item>
+                         </el-col>
+                         <el-col :xs="24" :sm="24" :md="18" :lg="12" class="bl-margin-top">
+                              <el-form-item label="文章分类：">
+                                   <div class="category">
+                                        <el-tag
+                                                :key="category"
+                                                v-for="category in categoryDynamicTags"
+                                                closable
+                                                :disable-transitions="false"
+                                                @close="handleClose(category)">
+                                             {{category}}
+                                        </el-tag>
+                                        <el-input
+                                                class="input-new-tag"
+                                                v-if="categoryInputVisible"
+                                                v-model="categoryInputValue"
+                                                ref="saveCategoryInput"
+                                                size="small"
+                                                @keyup.enter.native="handleInputConfirm"
+                                                @blur="handleInputConfirm"
+                                        >
+                                        </el-input>
+                                        <el-button v-else class="button-new-tag" size="small" @click="showInput">+ 添加分类</el-button>
+                                        <el-select v-model="form.category" placeholder="请选择">
+                                             <el-option
+                                                     v-for="item in categories"
+                                                     :key="item.id"
+                                                     :label="item.name"
+                                                     :value="item.id">
+                                             </el-option>
+                                        </el-select>
+                                   </div>
+                              </el-form-item>
+                         </el-col><el-col :xs="24" :sm="18" :md="12" :lg="6">
+                              <el-form-item label="发布形式：">
+                                   <div class="private">
+                                        <el-switch
+                                                style="display: block;line-height:40px;"
+                                                v-model="form.public"
+                                                active-color="#13ce66"
+                                                inactive-color="#ff4949"
+                                                active-text="公开"
+                                                inactive-text="私有">
+                                        </el-switch>
+                                   </div>
+                              </el-form-item>
+                         </el-col>
                           <el-col :xs="24" :sm="24" :md="24" :lg="24">
-                              <el-button class="bl-right" type="primary" @click="publishArticle">发布博客</el-button>
-                              <el-button class="bl-right" type="primary" @click="saveArticle">保存草稿</el-button>
+                              <el-button class="bl-public" type="primary" @click="publishArticle">发布博客</el-button>
+                              <el-button class="bl-save" type="primary" @click="saveArticle">保存草稿</el-button>
                          </el-col>
                     </el-form>
                </el-row>
@@ -141,21 +151,25 @@
                          category:'',
                          public:true,
                     },
+                    categoryNameArr:[],
                };
           },
           watch: {
-               categoryDynamicTags:function (val) {
-                    this.$store.dispatch('addCategories', {
-                         name: val[0],
-                    })
-               }
           },
           computed:{
                categories(){
+                  this.categoryNameArr = [];
+                  let catArrObj = this.$store.getters.getCategories;
+                  for (let i in  catArrObj) {
+                       this.categoryNameArr.push(catArrObj[i].name);
+                  }
                   return this.$store.getters.getCategories;
-               }
+               },
           },
           methods: {
+               initCategoryAddStatus(){
+                 this.$store.dispatch('initCategoryAddStatus');
+               },
                // 绑定@imgAdd event
                $imgAdd(pos, $file) {
                     // 第一步.将图片上传到服务器.
@@ -179,7 +193,16 @@
                },
                tagHandleInputConfirm() {
                     let tagInputValue = this.tagInputValue;
-                    if (tagInputValue && this.tagDynamicTags.length<3 && !this.tagDynamicTags.includes(tagInputValue)) {
+                    if(tagInputValue.length > 10){
+                         this.$message({
+                              message: "标签名称不能超过10个单位长度",
+                              type: 'warning'
+                         });
+                         this.tagInputVisible = false;
+                         this.tagInputValue = '';
+                         return 0;
+                    }
+                    if(tagInputValue && this.tagDynamicTags.length < 3 && !this.tagDynamicTags.includes(tagInputValue)) {
                          this.tagDynamicTags.push(tagInputValue);
                     }
                     this.tagInputVisible = false;
@@ -196,11 +219,58 @@
                },
                handleInputConfirm() {
                     let categoryInputValue = this.categoryInputValue;
-                    if (categoryInputValue && this.categoryDynamicTags.length < 1 && !this.categories.includes(categoryInputValue)){
-                         this.categoryDynamicTags.push(categoryInputValue);
-                         this.$store.dispatch('loadCategories', {
-                              id: this.$store.getters.getUser.id,
+                    if(categoryInputValue === ''){
+                         this.$message({
+                              message: "分类名称不能为空",
+                              type: 'warning'
                          });
+                         this.categoryInputVisible = false;
+                         this.categoryInputValue = '';
+                         return 0;
+                    }else if(categoryInputValue.length > 10){
+                         this.$message({
+                              message: "分类名称不能超过10个单位长度",
+                              type: 'warning'
+                         });
+                         this.categoryInputVisible = false;
+                         this.categoryInputValue = '';
+                         return 0;
+                    }
+                    else if(this.categoryDynamicTags.length === 1){
+                         this.$message({
+                              message: "一次只能添加一个分类",
+                              type: 'warning'
+                         });
+                         this.categoryInputVisible = false;
+                         this.categoryInputValue = '';
+                    }
+                    else{
+                         if (categoryInputValue && !this.categoryNameArr.includes(categoryInputValue)){
+                              this.initCategoryAddStatus();
+                              this.$store.dispatch('addCategories', {
+                                   name: categoryInputValue,
+                              });
+                              this.$watch(this.$store.getters.getCategoriesAddStatus, function () {
+                                   if (this.$store.getters.getCategoriesAddStatus() === 2) {
+                                        this.categoryDynamicTags.push(categoryInputValue);
+                                        this.$store.dispatch('loadCategories', {
+                                             id: this.$store.getters.getUser.id,
+                                        });
+                                   }
+                                   if (this.$store.getters.getCategoriesAddStatus() === 3) {
+                                        this.categoryDynamicTags = [];
+                                        this.$message({
+                                             message: this.$store.getters.getCategoriesAddResponseMessages(),
+                                             type: 'error'
+                                        });
+                                   }
+                              });
+                         }else{
+                              this.$message({
+                                   message: "分类名称已存在",
+                                   type: 'warning'
+                              });
+                         }
                     }
                     this.categoryInputVisible = false;
                     this.categoryInputValue = '';
@@ -239,5 +309,27 @@
           width: 90px;
           margin-left: 10px;
           vertical-align: bottom;
+     }
+     .bl-public{
+          float: left;
+     }
+     .bl-save{
+          float: right;
+     }
+     .bl-margin-top{
+          margin-top: 40px ;
+     }
+     .button-new-tag{
+          margin-left:0;
+          height:40px;
+     }
+     .el-input--small .el-input__inner{
+          height: 40px;
+     }
+     .el-switch__label{
+          height:auto;
+     }
+     .bl-margin_bottom-title{
+          margin-bottom:15px;
      }
 </style>

@@ -3487,7 +3487,7 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   created: function created() {
-    if (this.getUrlParams('code') != null) {
+    if (this.getUrlParams('code') != null && this.$store.getters.getLoginStatus !== 2) {
       this.$store.dispatch('loginByOauth', {
         social_type: this.getUrlParams('social_type'),
         code: this.getUrlParams('code')
@@ -3839,6 +3839,9 @@ __webpack_require__.r(__webpack_exports__);
       this.$router.push({
         name: 'index'
       });
+    },
+    loadUser: function loadUser() {
+      this.$store.dispatch('loadUser');
     }
   },
   computed: {
@@ -3847,6 +3850,11 @@ __webpack_require__.r(__webpack_exports__);
     },
     user: function user() {
       return this.$store.getters.getUser;
+    }
+  },
+  created: function created() {
+    if (this.$store.getters.getUserLoadStatus() === 0) {
+      this.loadUser();
     }
   }
 });
@@ -4810,6 +4818,16 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 // Local Registration
 
 
@@ -4901,22 +4919,27 @@ __webpack_require__.r(__webpack_exports__);
         tags: '',
         category: '',
         "public": true
-      }
+      },
+      categoryNameArr: []
     };
   },
-  watch: {
-    categoryDynamicTags: function categoryDynamicTags(val) {
-      this.$store.dispatch('addCategories', {
-        name: val[0]
-      });
-    }
-  },
+  watch: {},
   computed: {
     categories: function categories() {
+      this.categoryNameArr = [];
+      var catArrObj = this.$store.getters.getCategories;
+
+      for (var i in catArrObj) {
+        this.categoryNameArr.push(catArrObj[i].name);
+      }
+
       return this.$store.getters.getCategories;
     }
   },
   methods: {
+    initCategoryAddStatus: function initCategoryAddStatus() {
+      this.$store.dispatch('initCategoryAddStatus');
+    },
     // 绑定@imgAdd event
     $imgAdd: function $imgAdd(pos, $file) {
       // 第一步.将图片上传到服务器.
@@ -4943,6 +4966,16 @@ __webpack_require__.r(__webpack_exports__);
     tagHandleInputConfirm: function tagHandleInputConfirm() {
       var tagInputValue = this.tagInputValue;
 
+      if (tagInputValue.length > 10) {
+        this.$message({
+          message: "标签名称不能超过10个单位长度",
+          type: 'warning'
+        });
+        this.tagInputVisible = false;
+        this.tagInputValue = '';
+        return 0;
+      }
+
       if (tagInputValue && this.tagDynamicTags.length < 3 && !this.tagDynamicTags.includes(tagInputValue)) {
         this.tagDynamicTags.push(tagInputValue);
       }
@@ -4964,11 +4997,57 @@ __webpack_require__.r(__webpack_exports__);
     handleInputConfirm: function handleInputConfirm() {
       var categoryInputValue = this.categoryInputValue;
 
-      if (categoryInputValue && this.categoryDynamicTags.length < 1 && !this.categories.includes(categoryInputValue)) {
-        this.categoryDynamicTags.push(categoryInputValue);
-        this.$store.dispatch('loadCategories', {
-          id: this.$store.getters.getUser.id
+      if (categoryInputValue === '') {
+        this.$message({
+          message: "分类名称不能为空",
+          type: 'warning'
         });
+        this.categoryInputVisible = false;
+        this.categoryInputValue = '';
+        return 0;
+      } else if (categoryInputValue.length > 10) {
+        this.$message({
+          message: "分类名称不能超过10个单位长度",
+          type: 'warning'
+        });
+        this.categoryInputVisible = false;
+        this.categoryInputValue = '';
+        return 0;
+      } else if (this.categoryDynamicTags.length === 1) {
+        this.$message({
+          message: "一次只能添加一个分类",
+          type: 'warning'
+        });
+        this.categoryInputVisible = false;
+        this.categoryInputValue = '';
+      } else {
+        if (categoryInputValue && !this.categoryNameArr.includes(categoryInputValue)) {
+          this.initCategoryAddStatus();
+          this.$store.dispatch('addCategories', {
+            name: categoryInputValue
+          });
+          this.$watch(this.$store.getters.getCategoriesAddStatus, function () {
+            if (this.$store.getters.getCategoriesAddStatus() === 2) {
+              this.categoryDynamicTags.push(categoryInputValue);
+              this.$store.dispatch('loadCategories', {
+                id: this.$store.getters.getUser.id
+              });
+            }
+
+            if (this.$store.getters.getCategoriesAddStatus() === 3) {
+              this.categoryDynamicTags = [];
+              this.$message({
+                message: this.$store.getters.getCategoriesAddResponseMessages(),
+                type: 'error'
+              });
+            }
+          });
+        } else {
+          this.$message({
+            message: "分类名称已存在",
+            type: 'warning'
+          });
+        }
       }
 
       this.categoryInputVisible = false;
@@ -7384,7 +7463,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n#editor {\n     margin: auto;\n     width: 80%;\n     height: 580px;\n}\n.el-tag + .el-tag {\n     margin-left: 10px;\n}\n.button-new-tag {\n     margin-left: 10px;\n     height: 32px;\n     line-height: 30px;\n     padding-top: 0;\n     padding-bottom: 0;\n}\n.input-new-tag {\n     width: 90px;\n     margin-left: 10px;\n     vertical-align: bottom;\n}\n", ""]);
+exports.push([module.i, "\n#editor {\n     margin: auto;\n     width: 80%;\n     height: 580px;\n}\n.el-tag + .el-tag {\n     margin-left: 10px;\n}\n.button-new-tag {\n     margin-left: 10px;\n     height: 32px;\n     line-height: 30px;\n     padding-top: 0;\n     padding-bottom: 0;\n}\n.input-new-tag {\n     width: 90px;\n     margin-left: 10px;\n     vertical-align: bottom;\n}\n.bl-public{\n     float: left;\n}\n.bl-save{\n     float: right;\n}\n.bl-margin-top{\n     margin-top: 40px ;\n}\n.button-new-tag{\n     margin-left:0;\n     height:40px;\n}\n.el-input--small .el-input__inner{\n     height: 40px;\n}\n.el-switch__label{\n     height:auto;\n}\n.bl-margin_bottom-title{\n     margin-bottom:15px;\n}\n", ""]);
 
 // exports
 
@@ -95895,7 +95974,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("h5", { staticClass: "bl-logo " }, [
-      _c("a", { attrs: { href: "#" } }, [_vm._v("LvBlog")])
+      _c("a", { attrs: { id: "index", href: "/" } }, [_vm._v("LvBlog")])
     ])
   }
 ]
@@ -97186,7 +97265,10 @@ var render = function() {
             [
               _c(
                 "el-col",
-                { attrs: { xs: 24, sm: 24, md: 24, lg: 24 } },
+                {
+                  staticClass: "bl-margin_bottom-title",
+                  attrs: { xs: 24, sm: 24, md: 24, lg: 24 }
+                },
                 [
                   _c(
                     "el-form-item",
@@ -97227,186 +97309,227 @@ var render = function() {
               }),
               _vm._v(" "),
               _c(
-                "div",
-                { staticClass: "tag" },
+                "el-col",
+                {
+                  staticClass: "bl-margin-top",
+                  attrs: { xs: 24, sm: 24, md: 18, lg: 12 }
+                },
                 [
-                  _vm._l(_vm.tagDynamicTags, function(tag) {
-                    return _c(
-                      "el-tag",
-                      {
-                        key: tag,
-                        attrs: { closable: "", "disable-transitions": false },
-                        on: {
-                          close: function($event) {
-                            return _vm.tagHandleClose(tag)
-                          }
-                        }
-                      },
+                  _c("el-form-item", { attrs: { label: "文章标签：" } }, [
+                    _c(
+                      "div",
+                      { staticClass: "tag" },
                       [
-                        _vm._v(
-                          "\n                         " +
-                            _vm._s(tag) +
-                            "\n                    "
-                        )
-                      ]
-                    )
-                  }),
-                  _vm._v(" "),
-                  _vm.tagInputVisible
-                    ? _c("el-input", {
-                        ref: "saveTagInput",
-                        staticClass: "input-new-tag",
-                        attrs: { size: "small" },
-                        on: { blur: _vm.tagHandleInputConfirm },
-                        nativeOn: {
-                          keyup: function($event) {
-                            if (
-                              !$event.type.indexOf("key") &&
-                              _vm._k(
-                                $event.keyCode,
-                                "enter",
-                                13,
-                                $event.key,
-                                "Enter"
+                        _vm._l(_vm.tagDynamicTags, function(tag) {
+                          return _c(
+                            "el-tag",
+                            {
+                              key: tag,
+                              attrs: {
+                                closable: "",
+                                "disable-transitions": false
+                              },
+                              on: {
+                                close: function($event) {
+                                  return _vm.tagHandleClose(tag)
+                                }
+                              }
+                            },
+                            [
+                              _vm._v(
+                                "\n                                   " +
+                                  _vm._s(tag) +
+                                  "\n                              "
                               )
-                            ) {
-                              return null
-                            }
-                            return _vm.tagHandleInputConfirm($event)
-                          }
-                        },
-                        model: {
-                          value: _vm.tagInputValue,
-                          callback: function($$v) {
-                            _vm.tagInputValue = $$v
-                          },
-                          expression: "tagInputValue"
-                        }
-                      })
-                    : _c(
-                        "el-button",
-                        {
-                          staticClass: "button-new-tag",
-                          attrs: { size: "small" },
-                          on: { click: _vm.tagShowInput }
-                        },
-                        [_vm._v("+ 新标签")]
-                      )
+                            ]
+                          )
+                        }),
+                        _vm._v(" "),
+                        _vm.tagInputVisible
+                          ? _c("el-input", {
+                              ref: "saveTagInput",
+                              staticClass: "input-new-tag",
+                              attrs: { size: "small" },
+                              on: { blur: _vm.tagHandleInputConfirm },
+                              nativeOn: {
+                                keyup: function($event) {
+                                  if (
+                                    !$event.type.indexOf("key") &&
+                                    _vm._k(
+                                      $event.keyCode,
+                                      "enter",
+                                      13,
+                                      $event.key,
+                                      "Enter"
+                                    )
+                                  ) {
+                                    return null
+                                  }
+                                  return _vm.tagHandleInputConfirm($event)
+                                }
+                              },
+                              model: {
+                                value: _vm.tagInputValue,
+                                callback: function($$v) {
+                                  _vm.tagInputValue = $$v
+                                },
+                                expression: "tagInputValue"
+                              }
+                            })
+                          : _c(
+                              "el-button",
+                              {
+                                staticClass: "button-new-tag",
+                                attrs: { size: "small" },
+                                on: { click: _vm.tagShowInput }
+                              },
+                              [_vm._v("+ 添加标签")]
+                            )
+                      ],
+                      2
+                    )
+                  ])
                 ],
-                2
+                1
               ),
               _vm._v(" "),
               _c(
-                "div",
-                { staticClass: "category" },
+                "el-col",
+                {
+                  staticClass: "bl-margin-top",
+                  attrs: { xs: 24, sm: 24, md: 18, lg: 12 }
+                },
                 [
-                  _vm._l(_vm.categoryDynamicTags, function(category) {
-                    return _c(
-                      "el-tag",
-                      {
-                        key: category,
-                        attrs: { closable: "", "disable-transitions": false },
-                        on: {
-                          close: function($event) {
-                            return _vm.handleClose(category)
-                          }
-                        }
-                      },
+                  _c("el-form-item", { attrs: { label: "文章分类：" } }, [
+                    _c(
+                      "div",
+                      { staticClass: "category" },
                       [
-                        _vm._v(
-                          "\n                         " +
-                            _vm._s(category) +
-                            "\n                    "
-                        )
-                      ]
-                    )
-                  }),
-                  _vm._v(" "),
-                  _vm.categoryInputVisible
-                    ? _c("el-input", {
-                        ref: "saveCategoryInput",
-                        staticClass: "input-new-tag",
-                        attrs: { size: "small" },
-                        on: { blur: _vm.handleInputConfirm },
-                        nativeOn: {
-                          keyup: function($event) {
-                            if (
-                              !$event.type.indexOf("key") &&
-                              _vm._k(
-                                $event.keyCode,
-                                "enter",
-                                13,
-                                $event.key,
-                                "Enter"
+                        _vm._l(_vm.categoryDynamicTags, function(category) {
+                          return _c(
+                            "el-tag",
+                            {
+                              key: category,
+                              attrs: {
+                                closable: "",
+                                "disable-transitions": false
+                              },
+                              on: {
+                                close: function($event) {
+                                  return _vm.handleClose(category)
+                                }
+                              }
+                            },
+                            [
+                              _vm._v(
+                                "\n                                   " +
+                                  _vm._s(category) +
+                                  "\n                              "
                               )
-                            ) {
-                              return null
+                            ]
+                          )
+                        }),
+                        _vm._v(" "),
+                        _vm.categoryInputVisible
+                          ? _c("el-input", {
+                              ref: "saveCategoryInput",
+                              staticClass: "input-new-tag",
+                              attrs: { size: "small" },
+                              on: { blur: _vm.handleInputConfirm },
+                              nativeOn: {
+                                keyup: function($event) {
+                                  if (
+                                    !$event.type.indexOf("key") &&
+                                    _vm._k(
+                                      $event.keyCode,
+                                      "enter",
+                                      13,
+                                      $event.key,
+                                      "Enter"
+                                    )
+                                  ) {
+                                    return null
+                                  }
+                                  return _vm.handleInputConfirm($event)
+                                }
+                              },
+                              model: {
+                                value: _vm.categoryInputValue,
+                                callback: function($$v) {
+                                  _vm.categoryInputValue = $$v
+                                },
+                                expression: "categoryInputValue"
+                              }
+                            })
+                          : _c(
+                              "el-button",
+                              {
+                                staticClass: "button-new-tag",
+                                attrs: { size: "small" },
+                                on: { click: _vm.showInput }
+                              },
+                              [_vm._v("+ 添加分类")]
+                            ),
+                        _vm._v(" "),
+                        _c(
+                          "el-select",
+                          {
+                            attrs: { placeholder: "请选择" },
+                            model: {
+                              value: _vm.form.category,
+                              callback: function($$v) {
+                                _vm.$set(_vm.form, "category", $$v)
+                              },
+                              expression: "form.category"
                             }
-                            return _vm.handleInputConfirm($event)
-                          }
-                        },
-                        model: {
-                          value: _vm.categoryInputValue,
-                          callback: function($$v) {
-                            _vm.categoryInputValue = $$v
                           },
-                          expression: "categoryInputValue"
-                        }
-                      })
-                    : _c(
-                        "el-button",
-                        {
-                          staticClass: "button-new-tag",
-                          attrs: { size: "small" },
-                          on: { click: _vm.showInput }
-                        },
-                        [_vm._v("+ New Tag")]
-                      ),
-                  _vm._v(" "),
-                  _c(
-                    "el-select",
-                    {
-                      attrs: { placeholder: "请选择" },
-                      model: {
-                        value: _vm.form.category,
-                        callback: function($$v) {
-                          _vm.$set(_vm.form, "category", $$v)
-                        },
-                        expression: "form.category"
-                      }
-                    },
-                    _vm._l(_vm.categories, function(item) {
-                      return _c("el-option", {
-                        key: item.id,
-                        attrs: { label: item.name, value: item.id }
-                      })
-                    }),
-                    1
-                  )
+                          _vm._l(_vm.categories, function(item) {
+                            return _c("el-option", {
+                              key: item.id,
+                              attrs: { label: item.name, value: item.id }
+                            })
+                          }),
+                          1
+                        )
+                      ],
+                      2
+                    )
+                  ])
                 ],
-                2
+                1
               ),
-              _vm._v(" "),
               _c(
-                "div",
-                { staticClass: "private" },
+                "el-col",
+                { attrs: { xs: 24, sm: 18, md: 12, lg: 6 } },
                 [
-                  _c("el-switch", {
-                    staticStyle: { display: "block" },
-                    attrs: {
-                      "active-color": "#13ce66",
-                      "inactive-color": "#ff4949",
-                      "active-text": "公开",
-                      "inactive-text": "私有"
-                    },
-                    model: {
-                      value: _vm.form.public,
-                      callback: function($$v) {
-                        _vm.$set(_vm.form, "public", $$v)
-                      },
-                      expression: "form.public"
-                    }
-                  })
+                  _c("el-form-item", { attrs: { label: "发布形式：" } }, [
+                    _c(
+                      "div",
+                      { staticClass: "private" },
+                      [
+                        _c("el-switch", {
+                          staticStyle: {
+                            display: "block",
+                            "line-height": "40px"
+                          },
+                          attrs: {
+                            "active-color": "#13ce66",
+                            "inactive-color": "#ff4949",
+                            "active-text": "公开",
+                            "inactive-text": "私有"
+                          },
+                          model: {
+                            value: _vm.form.public,
+                            callback: function($$v) {
+                              _vm.$set(_vm.form, "public", $$v)
+                            },
+                            expression: "form.public"
+                          }
+                        })
+                      ],
+                      1
+                    )
+                  ])
                 ],
                 1
               ),
@@ -97418,7 +97541,7 @@ var render = function() {
                   _c(
                     "el-button",
                     {
-                      staticClass: "bl-right",
+                      staticClass: "bl-public",
                       attrs: { type: "primary" },
                       on: { click: _vm.publishArticle }
                     },
@@ -97428,7 +97551,7 @@ var render = function() {
                   _c(
                     "el-button",
                     {
-                      staticClass: "bl-right",
+                      staticClass: "bl-save",
                       attrs: { type: "primary" },
                       on: { click: _vm.saveArticle }
                     },
@@ -115154,7 +115277,9 @@ var categories = {
   state: {
     //分类
     categories: [],
-    categoriesLoadStatus: 0
+    categoriesLoadStatus: 0,
+    categoriesAddStatus: 0,
+    categoriesAddResponseMessages: ''
   },
   actions: {
     loadCategories: function loadCategories(_ref, data) {
@@ -115170,9 +115295,19 @@ var categories = {
     addCategories: function addCategories(_ref2, data) {
       var commit = _ref2.commit,
           dispatch = _ref2.dispatch;
+      commit('setCategoriesAddStatus', 1);
       _api_categories__WEBPACK_IMPORTED_MODULE_0__["default"].postCategories(data.name).then(function (response) {
+        commit('setCategoriesAddStatus', 2);
         commit('setCategories', response.data.data);
-      })["catch"](function (error) {});
+      })["catch"](function (error) {
+        commit('setCategoriesAddStatus', 3);
+        commit('setCategoriesAddResponseMessages', error.response.data.message);
+      });
+    },
+    initCategoryAddStatus: function initCategoryAddStatus(_ref3) {
+      var commit = _ref3.commit;
+      commit('setCategoriesAddStatus', 0);
+      commit('setCategoriesAddResponseMessages', '');
     }
   },
   mutations: {
@@ -115181,6 +115316,12 @@ var categories = {
     },
     setCategories: function setCategories(state, categories) {
       state.categories = categories;
+    },
+    setCategoriesAddStatus: function setCategoriesAddStatus(state, status) {
+      state.categoriesAddStatus = status;
+    },
+    setCategoriesAddResponseMessages: function setCategoriesAddResponseMessages(state, messages) {
+      state.categoriesAddResponseMessages = messages;
     }
   },
   getters: {
@@ -115189,6 +115330,16 @@ var categories = {
     },
     getCategoriesLoadStatus: function getCategoriesLoadStatus(state) {
       return state.categoriesLoadStatus;
+    },
+    getCategoriesAddStatus: function getCategoriesAddStatus(state) {
+      return function () {
+        return state.categoriesAddStatus;
+      };
+    },
+    getCategoriesAddResponseMessages: function getCategoriesAddResponseMessages(state) {
+      return function () {
+        return state.categoriesAddResponseMessages;
+      };
     }
   }
 };
@@ -115451,7 +115602,7 @@ var users = {
         commit('setUserLoadStatus', 2);
         commit('setUser', response.data.data);
       })["catch"](function (error) {
-        if (error.response.status == 401) {
+        if (error.response.status === 401) {
           localStorage.removeItem('Authorization');
           commit('setLoginToken', '');
         }
@@ -116202,9 +116353,7 @@ function requireAuth(to, from, next) {
     _store_js__WEBPACK_IMPORTED_MODULE_2__["default"].dispatch('loadUser'); // 监听用户信息加载状态，加载完成后调用 proceed 方法继续后续操作
 
     _store_js__WEBPACK_IMPORTED_MODULE_2__["default"].watch(_store_js__WEBPACK_IMPORTED_MODULE_2__["default"].getters.getUserLoadStatus, function () {
-      if (_store_js__WEBPACK_IMPORTED_MODULE_2__["default"].getters.getUserLoadStatus() === 2) {
-        proceed();
-      }
+      proceed();
     });
   }
 }

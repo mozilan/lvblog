@@ -119,7 +119,7 @@ export const users = {
                         commit( 'setUser' , response.data.data);
                     })
                     .catch(function (error) {
-                        if(error.response.status == 401){
+                        if(error.response.status === 401){
                             localStorage.removeItem('Authorization');
                             commit('setLoginToken','');
                         }

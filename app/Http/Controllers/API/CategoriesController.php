@@ -18,7 +18,11 @@ class CategoriesController extends Controller
     public function store(CategoryRequest $request )
     {
         try{
-            if (Category::where('user_id', $this->user()->id)->where('name',$request->get('name'))->exists()) {
+            $maxCountCategory = 10;
+            if(Category::where('user_id', $this->user()->id)->count() >= $maxCountCategory){
+                return response()->json(['message' => '分类最多只能'.$maxCountCategory.'个'], 422);
+            }
+            if (Category::where('user_id', $this->user()->id)->where('name',$request->name)->exists()) {
                 return response()->json(['message' => '分类名称已经存在'], 422);
             }
             $category = Category::create([
@@ -29,11 +33,9 @@ class CategoriesController extends Controller
         }catch (\Exception $e){
             return response()->json(['message' => '服务器错误'], 500);
         }
-
         return $this->response->collection(Category::where('user_id',$this->user()->id)->get(), new CategoryTransformer())
         ->setStatusCode(201);
     }
-
     public function destroy($id)
     {
         try {

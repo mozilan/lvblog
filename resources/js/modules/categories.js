@@ -19,6 +19,8 @@ export const categories = {
         //分类
         categories: [],
         categoriesLoadStatus:0,
+        categoriesAddStatus:0,
+        categoriesAddResponseMessages:'',
     },
     actions:{
         loadCategories({commit},data){
@@ -33,13 +35,20 @@ export const categories = {
                 });
         },
         addCategories({commit,dispatch},data){
+            commit('setCategoriesAddStatus', 1);
             CategoryAPI.postCategories(data.name)
                 .then(function (response) {
+                    commit('setCategoriesAddStatus', 2);
                     commit('setCategories', response.data.data);
                 })
                 .catch(function (error){
-
+                    commit('setCategoriesAddStatus', 3);
+                    commit('setCategoriesAddResponseMessages', error.response.data.message);
                 });
+        },
+        initCategoryAddStatus({commit}){
+            commit('setCategoriesAddStatus', 0);
+            commit('setCategoriesAddResponseMessages', '');
         }
     },
     mutations:{
@@ -48,7 +57,13 @@ export const categories = {
         },
         setCategories(state,categories){
             state.categories = categories;
-        }
+        },
+        setCategoriesAddStatus(state,status){
+            state.categoriesAddStatus = status;
+        },
+        setCategoriesAddResponseMessages(state,messages){
+            state.categoriesAddResponseMessages = messages;
+        },
     },
     getters:{
         getCategories(state){
@@ -56,6 +71,16 @@ export const categories = {
         },
         getCategoriesLoadStatus(state){
             return state.categoriesLoadStatus;
+        },
+        getCategoriesAddStatus(state){
+            return function() {
+                return state.categoriesAddStatus;
+            }
+        },
+        getCategoriesAddResponseMessages(state){
+            return function() {
+                return state.categoriesAddResponseMessages;
+            }
         }
     }
 };
