@@ -31,6 +31,7 @@ export const users = {
         registerByPhoneError:'',
         //登录状态
         loginStatus:0,
+        loginErrors:'',
         // 存储token
         Authorization: localStorage.getItem('Authorization') ? localStorage.getItem('Authorization') : '',
         user: {},
@@ -96,9 +97,11 @@ export const users = {
                     commit( 'setUser' , response.data.data);
                 })
                 .catch(function (error) {
+                    commit('setUserLoadStatus',2);
                     commit( 'setUser' ,'');
                     commit('setUserLoadStatus',3);
                     commit( 'setLoginStatus',3);
+                    commit('setLoginErrors',error.response.data.message);
         })
         },
         loginByOauth({commit},data){
@@ -169,6 +172,9 @@ export const users = {
             setLoginStatus(state , status){
                 state.loginStatus = status;
             },
+            setLoginErrors(state , status){
+                state.loginErrors = status;
+            },
             // 修改token，并将token存入localStorage
             setLoginToken (state, access_token) {
                 state.Authorization = access_token;
@@ -205,6 +211,9 @@ export const users = {
             },
             getLoginStatus( state ){
                 return state.loginStatus;
+            },
+            getLoginErrors(state ){
+                return state.loginErrors;
             },
             getLoginToken( state ){
                 return state.Authorization;

@@ -3741,7 +3741,7 @@ __webpack_require__.r(__webpack_exports__);
 
       if (this.$store.getters.getLoginStatus == 3) {
         this.loader.close();
-        this.openMessage('登陆失败!', 'error');
+        this.openMessage(this.$store.getters.getLoginErrors, 'error');
       }
 
       return this.$store.getters.getLoginStatus;
@@ -115670,6 +115670,7 @@ var users = {
     registerByPhoneError: '',
     //登录状态
     loginStatus: 0,
+    loginErrors: '',
     // 存储token
     Authorization: localStorage.getItem('Authorization') ? localStorage.getItem('Authorization') : '',
     user: {},
@@ -115735,9 +115736,11 @@ var users = {
         commit('setLoginToken', 'Bearer ' + response.data.meta.access_token);
         commit('setUser', response.data.data);
       })["catch"](function (error) {
+        commit('setUserLoadStatus', 2);
         commit('setUser', '');
         commit('setUserLoadStatus', 3);
         commit('setLoginStatus', 3);
+        commit('setLoginErrors', error.response.data.message);
       });
     },
     loginByOauth: function loginByOauth(_ref8, data) {
@@ -115810,6 +115813,9 @@ var users = {
     setLoginStatus: function setLoginStatus(state, status) {
       state.loginStatus = status;
     },
+    setLoginErrors: function setLoginErrors(state, status) {
+      state.loginErrors = status;
+    },
     // 修改token，并将token存入localStorage
     setLoginToken: function setLoginToken(state, access_token) {
       state.Authorization = access_token;
@@ -115846,6 +115852,9 @@ var users = {
     },
     getLoginStatus: function getLoginStatus(state) {
       return state.loginStatus;
+    },
+    getLoginErrors: function getLoginErrors(state) {
+      return state.loginErrors;
     },
     getLoginToken: function getLoginToken(state) {
       return state.Authorization;

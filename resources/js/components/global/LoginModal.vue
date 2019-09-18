@@ -191,7 +191,7 @@
                 }
                 if (this.$store.getters.getLoginStatus == 3) {
                     this.loader.close();
-                    this.openMessage('登陆失败!', 'error');
+                    this.openMessage(this.$store.getters.getLoginErrors, 'error');
                 }
                 return this.$store.getters. getLoginStatus;
             }
