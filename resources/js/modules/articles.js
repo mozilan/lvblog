@@ -44,7 +44,8 @@ export const articles = {
                 })
                 .catch(function (error){
                     commit('setArticleAddStatus', 3);
-                    commit('setArticleAddResponseMessages', error.response.data.message);
+                    console.log(error.response.data.errors[Object.keys(error.response.data.errors)[0]].toString());
+                    commit('setArticleAddResponseMessages', error.response.data.errors[Object.keys(error.response.data.errors)[0]].toString());
                 });
         },
         initArticleAddStatus({commit}){

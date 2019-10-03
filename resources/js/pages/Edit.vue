@@ -95,6 +95,8 @@
      // Local Registration
      import {mavonEditor} from 'mavon-editor';
      import 'mavon-editor/dist/css/index.css';
+     import { EventBus } from '../event-bus';
+
      export default {
           name: 'editor',
           components: {
@@ -103,6 +105,7 @@
           },
           data() {
                return {
+                    loader:'',
                     markdownOption: {
                          bold: true, // 粗体
                          italic: true, // 斜体
@@ -281,14 +284,40 @@
                     this.categoryInputValue = '';
                },
                publishArticle(target){
-                    console.log(this.form.tags);
+                    this.loader = this.$loading({
+                         lock: true,
+                         text: '发布中...',
+                         spinner: 'el-icon-loading',
+                         background: 'rgba(0, 0, 0, 0.7)'
+                    });
                     this.$store.dispatch('addArticle',{
                          title:this.form.title,
                          body:this.form.handbook,
                          tags:this.form.tagDynamicTags,
                          category_id:this.form.category_id,
                          target: !this.form.public && target === 0 ? 2 : target
-                    })
+                    });
+                    this.$watch(this.$store.getters.getArticleAddStatus, function () {
+                         if (this.$store.getters.getArticleAddStatus()  === 2) {
+                              this.loader.close();
+                              EventBus.$emit('open-message', {
+                                   notification: this.form.title + (target===0 ? ' 发布成功!' :' 已保存到草稿箱'),
+                                   type: 'success'
+                              });
+                              this.$store.dispatch('initArticleAddStatus');
+                              this.form.title = '';
+                              this.form.handbook = '';
+                              this.form.tagDynamicTags = '';
+                              this.$router.push('/blog');
+                         }
+                         if (this.$store.getters.getArticleAddStatus()  === 3) {
+                              this.loader.close();
+                              EventBus.$emit('open-message', {
+                                   notification: this.$store.getters.getArticleAddResponseMessages(),
+                                   type: 'error'
+                              });
+                         }
+                    });
                },
           },
           created() {

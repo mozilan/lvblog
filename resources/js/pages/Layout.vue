@@ -23,6 +23,7 @@
             <el-header>
                 <Navigation></Navigation>
             </el-header>
+            <Notification></Notification>
             <el-row type="flex" justify="center" id="content">
                 <el-col :xs="20" :md="20" :style="{'minHeight':minHeight+'px'}">
                     <router-view></router-view>
@@ -40,6 +41,7 @@
     import Navigation from '../components/global/NavigationModal';
     import Register from '../components/global/RegisterModal';
     import Login from '../components/global/LoginModal';
+    import Notification from '../components/global/Notification';
     export default {
         data() {
             return {
@@ -56,6 +58,7 @@
             Register,
             LFooter,
             Login,
+            Notification,
         }
     }
 </script>
