@@ -217,6 +217,7 @@
                     this.tagInputValue = '';
                },
                handleClose(category) {
+                    this.categoryInputValue = '';
                     this.categoryDynamicTags.splice(this.categoryDynamicTags.indexOf(category), 1);
                },
                showInput() {
@@ -228,10 +229,10 @@
                handleInputConfirm() {
                     let categoryInputValue = this.categoryInputValue;
                     if(categoryInputValue === ''){
-                         this.$message({
-                              message: "分类名称不能为空",
-                              type: 'warning'
-                         });
+                         // this.$message({
+                         //      message: "分类名称不能为空",
+                         //      type: 'warning'
+                         // });
                          this.categoryInputVisible = false;
                          this.categoryInputValue = '';
                          return 0;
@@ -267,8 +268,8 @@
                                    }
                                    if (this.$store.getters.getCategoriesAddStatus() === 3) {
                                         this.categoryDynamicTags = [];
-                                        this.$message({
-                                             message: this.$store.getters.getCategoriesAddResponseMessages(),
+                                        EventBus.$emit('open-message', {
+                                             notification: this.$store.getters.getCategoriesAddResponseMessages(),
                                              type: 'error'
                                         });
                                    }

@@ -5068,6 +5068,7 @@ __webpack_require__.r(__webpack_exports__);
       this.tagInputValue = '';
     },
     handleClose: function handleClose(category) {
+      this.categoryInputValue = '';
       this.categoryDynamicTags.splice(this.categoryDynamicTags.indexOf(category), 1);
     },
     showInput: function showInput() {
@@ -5082,10 +5083,10 @@ __webpack_require__.r(__webpack_exports__);
       var categoryInputValue = this.categoryInputValue;
 
       if (categoryInputValue === '') {
-        this.$message({
-          message: "分类名称不能为空",
-          type: 'warning'
-        });
+        // this.$message({
+        //      message: "分类名称不能为空",
+        //      type: 'warning'
+        // });
         this.categoryInputVisible = false;
         this.categoryInputValue = '';
         return 0;
@@ -5120,8 +5121,8 @@ __webpack_require__.r(__webpack_exports__);
 
             if (this.$store.getters.getCategoriesAddStatus() === 3) {
               this.categoryDynamicTags = [];
-              this.$message({
-                message: this.$store.getters.getCategoriesAddResponseMessages(),
+              _event_bus__WEBPACK_IMPORTED_MODULE_2__["EventBus"].$emit('open-message', {
+                notification: this.$store.getters.getCategoriesAddResponseMessages(),
                 type: 'error'
               });
             }
