@@ -11,7 +11,9 @@ class ArticleRequest extends FormRequest
         return [
             'title' => 'required|string',
             'body' => 'required|string',
-            'category_id' => 'required|exists:categories,id',
+            'tags' => 'nullable',
+            'category_id' => 'required|numeric|exists:categories,id',
+            'target' => 'required|numeric'
         ];
     }
 }

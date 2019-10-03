@@ -115663,7 +115663,7 @@ var articles = {
       })["catch"](function (error) {
         commit('setArticleAddStatus', 3);
         console.log(error.response.data.errors[Object.keys(error.response.data.errors)[0]].toString());
-        commit('setArticleAddResponseMessages', error.response.data.errors[Object.keys(error.response.data.errors)[0]].toString());
+        commit('setArticleAddResponseMessages', error.response.data.errors[Object.keys(error.response.data.errors)[0]].toString() === '' ? "发布失败，可能是因为登陆超时造成的." : error.response.data.errors[Object.keys(error.response.data.errors)[0]].toString());
       });
     },
     initArticleAddStatus: function initArticleAddStatus(_ref3) {

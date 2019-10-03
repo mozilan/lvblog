@@ -17,7 +17,7 @@ class CreateTagsTable extends Migration
             $table->bigIncrements('id');
             $table->bigInteger('user_id')->index()->unsigned()->comment('所属用户');
             $table->string('name')->comment('名称');
-            $table->bigInteger('article_id')->index()->unsigned()->comment('所属文章');
+            $table->bigInteger('num')->unsigned()->comment('引用次数');
             $table->timestamps();
         });
     }
