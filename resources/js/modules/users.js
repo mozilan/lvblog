@@ -73,34 +73,34 @@ export const users = {
             commit('setVerificationCodeLoadStatus', 0);
         },
         freshRegisterByPhoneStatus({commit}){
-            commit( 'setRegisterByPhoneStatus',0);
+            commit('setRegisterByPhoneStatus',0);
         },
         registerByPhone( {commit , dispatch},data){
             commit( 'setRegisterByPhoneStatus', 1);
             UserAPI.postSignIn( data.verification_key,data.verification_code, data.name,data.password)
                 .then(function ( response ) {
-                    commit( 'setRegisterByPhoneStatus' , 2);
+                    commit('setRegisterByPhoneStatus' , 2);
                     commit('setLoginToken','Bearer ' + response.data.meta.access_token);
                     dispatch('loadUser');
                 })
                 .catch(function (error){
                     commit('setRegisterByPhoneError', error.response.data.errors[Object.keys(error.response.data.errors)[0]].toString());
-                    commit( 'setRegisterByPhoneStatus',3);
+                    commit('setRegisterByPhoneStatus',3);
                 })
         },
         login({commit},data){
             commit('setLoginStatus',1);
             UserAPI.postSignUp( data.username,data.password)
                 .then(function ( response ) {
-                    commit( 'setLoginStatus' , 2);
+                    commit('setUser' , response.data.data);
+                    commit('setUserLoadStatus',2);
                     commit('setLoginToken','Bearer ' + response.data.meta.access_token);
-                    commit( 'setUser' , response.data.data);
+                    commit('setLoginStatus' , 2);
                 })
                 .catch(function (error) {
-                    commit('setUserLoadStatus',2);
-                    commit( 'setUser' ,'');
+                    commit('setUser' ,'');
                     commit('setUserLoadStatus',3);
-                    commit( 'setLoginStatus',3);
+                    commit('setLoginStatus',3);
                     commit('setLoginErrors',error.response.data.message);
         })
         },
@@ -108,12 +108,15 @@ export const users = {
             commit('setLoginStatus',1);
                     UserAPI.postSignInByOauth( data.code,data.social_type)
                     .then(function ( response ) {
-                        commit( 'setLoginStatus' , 2);
+                        commit('setUser' , response.data.data);
+                        commit('setUserLoadStatus',2);
                         commit('setLoginToken','Bearer ' + response.data.meta.access_token);
-                        commit( 'setUser' , response.data.data);
+                        commit('setLoginStatus' , 2);
                     })
                     .catch(function (error) {
-                        commit( 'setLoginStatus',3);
+                        commit('setUser' ,'');
+                        commit('setLoginStatus',3);
+                        commit('setUserLoadStatus',3);
                     });
         },
         loadUser({commit}){
@@ -121,13 +124,14 @@ export const users = {
                 UserAPI.getLoadUser()
                     .then(function (response) {
                         commit('setUserLoadStatus',2);
-                        commit( 'setUser' , response.data.data);
+                        commit('setUser' , response.data.data);
                     })
                     .catch(function (error) {
                         if(error.response.status === 401){
                             localStorage.removeItem('Authorization');
                             commit('setLoginToken','');
                         }
+                        commit('setUser' ,'');
                         commit('setUserLoadStatus',3);
                     });
         },
@@ -138,7 +142,7 @@ export const users = {
                 commit('setLoginToken', '');
                 dispatch('loadUser');
                 commit('setLogoutStatus', 2);
-                commit( 'setLoginStatus',0);
+                commit('setLoginStatus',0);
             }catch (e) {
                 commit('setLogoutStatus', 3);
             }

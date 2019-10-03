@@ -3,12 +3,10 @@
 namespace App\Http\Controllers\API;
 
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 use App\Handlers\ImageUploadHandler;
 
 class ImagesController extends Controller
 {
-    //
     public function store(Request $request, ImageUploadHandler $uploader)
     {
         $user =  \Auth::guard('api')->user();

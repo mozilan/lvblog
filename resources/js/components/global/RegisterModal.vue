@@ -379,7 +379,7 @@
                     this.openMessage(this.$store.getters.getRegisterByPhoneError,'error');
                     this.$store.dispatch('freshRegisterByPhoneStatus');
                 }
-                return this.$store.getters.getRegisterStatus;
+                return this.$store.getters.getRegisterByPhoneStatus;
             },
         },
         mounted() {

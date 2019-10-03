@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Api;
 
-use Illuminate\Http\Request;
 use Gregwar\Captcha\CaptchaBuilder;
 use App\Http\Requests\Api\CaptchaRequest;
 

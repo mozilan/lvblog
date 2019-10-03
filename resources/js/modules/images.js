@@ -5,7 +5,7 @@
 | The Vuex data store for the Images
 */
 
-import ImagesAPI from '../api/Images';
+import ImagesAPI from '../api/images';
 
 /**
  status = 0 -> 数据尚未加载

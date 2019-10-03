@@ -4273,7 +4273,7 @@ __webpack_require__.r(__webpack_exports__);
         this.$store.dispatch('freshRegisterByPhoneStatus');
       }
 
-      return this.$store.getters.getRegisterStatus;
+      return this.$store.getters.getRegisterByPhoneStatus;
     }
   },
   mounted: function mounted() {
@@ -5065,7 +5065,7 @@ __webpack_require__.r(__webpack_exports__);
         body: this.form.handbook,
         tags: this.form.tagDynamicTags,
         category_id: this.form.category_id,
-        target: target
+        target: !this.form["public"] && target === 0 ? 2 : target
       });
     }
   },
@@ -114348,50 +114348,6 @@ module.exports = "/images/vue.jpg?52a341ad3b0b705827ace812e601985e";
 
 /***/ }),
 
-/***/ "./resources/js/api/Images.js":
-/*!************************************!*\
-  !*** ./resources/js/api/Images.js ***!
-  \************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _config_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../config.js */ "./resources/js/config.js");
-/**
- * Imports the LvBlog API URL from the config.
- */
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-  upLoadImages: function upLoadImages(data) {
-    return axios.post(_config_js__WEBPACK_IMPORTED_MODULE_0__["LVBLOG_CONFIG"].API_URL + '/images', data);
-  }
-});
-
-/***/ }),
-
-/***/ "./resources/js/api/Tags.js":
-/*!**********************************!*\
-  !*** ./resources/js/api/Tags.js ***!
-  \**********************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _config_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../config.js */ "./resources/js/config.js");
-/**
- * Imports the LvBlog API URL from the config.
- */
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-  getTags: function getTags(user_id) {
-    return axios.get(_config_js__WEBPACK_IMPORTED_MODULE_0__["LVBLOG_CONFIG"].API_URL + '/tags/' + user_id);
-  }
-});
-
-/***/ }),
-
 /***/ "./resources/js/api/articles.js":
 /*!**************************************!*\
   !*** ./resources/js/api/articles.js ***!
@@ -114448,6 +114404,50 @@ __webpack_require__.r(__webpack_exports__);
     return axios.post(_config_js__WEBPACK_IMPORTED_MODULE_0__["LVBLOG_CONFIG"].API_URL + '/categories', {
       name: name
     });
+  }
+});
+
+/***/ }),
+
+/***/ "./resources/js/api/images.js":
+/*!************************************!*\
+  !*** ./resources/js/api/images.js ***!
+  \************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _config_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../config.js */ "./resources/js/config.js");
+/**
+ * Imports the LvBlog API URL from the config.
+ */
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  upLoadImages: function upLoadImages(data) {
+    return axios.post(_config_js__WEBPACK_IMPORTED_MODULE_0__["LVBLOG_CONFIG"].API_URL + '/images', data);
+  }
+});
+
+/***/ }),
+
+/***/ "./resources/js/api/tags.js":
+/*!**********************************!*\
+  !*** ./resources/js/api/tags.js ***!
+  \**********************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _config_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../config.js */ "./resources/js/config.js");
+/**
+ * Imports the LvBlog API URL from the config.
+ */
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  getTags: function getTags(user_id) {
+    return axios.get(_config_js__WEBPACK_IMPORTED_MODULE_0__["LVBLOG_CONFIG"].API_URL + '/tags/' + user_id);
   }
 });
 
@@ -115272,7 +115272,7 @@ var api_url = '';
 
 switch ("development") {
   case 'development':
-    api_url = 'http://www.mozilan.com/api';
+    api_url = 'http://localhost/api';
     break;
 
   case 'production':
@@ -115510,7 +115510,7 @@ var categories = {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "images", function() { return images; });
-/* harmony import */ var _api_Images__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../api/Images */ "./resources/js/api/Images.js");
+/* harmony import */ var _api_images__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../api/images */ "./resources/js/api/images.js");
 /*
 |-------------------------------------------------------------------------------
 | VUEX modules/users.js
@@ -115535,7 +115535,7 @@ var images = {
     upLoadImages: function upLoadImages(_ref, data) {
       var commit = _ref.commit;
       commit('setImagesUpLoadStatus', 1);
-      _api_Images__WEBPACK_IMPORTED_MODULE_0__["default"].upLoadImages(data).then(function (response) {
+      _api_images__WEBPACK_IMPORTED_MODULE_0__["default"].upLoadImages(data).then(function (response) {
         commit('setImages', response.data.file_path);
         commit('setImagesUpLoadStatus', 2);
       })["catch"](function (error) {
@@ -115575,7 +115575,7 @@ var images = {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "tags", function() { return tags; });
-/* harmony import */ var _api_Tags__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../api/Tags */ "./resources/js/api/Tags.js");
+/* harmony import */ var _api_tags__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../api/tags */ "./resources/js/api/tags.js");
 /*
 |-------------------------------------------------------------------------------
 | VUEX modules/users.js
@@ -115600,7 +115600,7 @@ var tags = {
     loadTags: function loadTags(_ref, data) {
       var commit = _ref.commit;
       commit('setTagsLoadStatus', 1);
-      _api_Tags__WEBPACK_IMPORTED_MODULE_0__["default"].getTags(data.id).then(function (response) {
+      _api_tags__WEBPACK_IMPORTED_MODULE_0__["default"].getTags(data.id).then(function (response) {
         commit('setTags', response.data.data);
         commit('setTagsLoadStatus', 2);
       })["catch"](function (error) {
@@ -115732,11 +115732,11 @@ var users = {
       var commit = _ref7.commit;
       commit('setLoginStatus', 1);
       _api_users__WEBPACK_IMPORTED_MODULE_0__["default"].postSignUp(data.username, data.password).then(function (response) {
-        commit('setLoginStatus', 2);
-        commit('setLoginToken', 'Bearer ' + response.data.meta.access_token);
         commit('setUser', response.data.data);
-      })["catch"](function (error) {
         commit('setUserLoadStatus', 2);
+        commit('setLoginToken', 'Bearer ' + response.data.meta.access_token);
+        commit('setLoginStatus', 2);
+      })["catch"](function (error) {
         commit('setUser', '');
         commit('setUserLoadStatus', 3);
         commit('setLoginStatus', 3);
@@ -115747,11 +115747,14 @@ var users = {
       var commit = _ref8.commit;
       commit('setLoginStatus', 1);
       _api_users__WEBPACK_IMPORTED_MODULE_0__["default"].postSignInByOauth(data.code, data.social_type).then(function (response) {
-        commit('setLoginStatus', 2);
-        commit('setLoginToken', 'Bearer ' + response.data.meta.access_token);
         commit('setUser', response.data.data);
+        commit('setUserLoadStatus', 2);
+        commit('setLoginToken', 'Bearer ' + response.data.meta.access_token);
+        commit('setLoginStatus', 2);
       })["catch"](function (error) {
+        commit('setUser', '');
         commit('setLoginStatus', 3);
+        commit('setUserLoadStatus', 3);
       });
     },
     loadUser: function loadUser(_ref9) {
@@ -115766,6 +115769,7 @@ var users = {
           commit('setLoginToken', '');
         }
 
+        commit('setUser', '');
         commit('setUserLoadStatus', 3);
       });
     },
@@ -116660,8 +116664,8 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /home/vagrant/code/LvBlog/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /home/vagrant/code/LvBlog/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /home/wunian/PhpstormProjects/lvblog/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /home/wunian/PhpstormProjects/lvblog/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

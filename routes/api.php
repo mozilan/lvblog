@@ -21,7 +21,7 @@ $api = app('Dingo\Api\Routing\Router');
 //    });
 //});
 $api->version('v1', [
-    'namespace' => 'App\Http\Controllers\Api',
+    'namespace' => 'App\Http\Controllers\API',
 ], function($api) {
 
     $api->group([

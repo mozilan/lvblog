@@ -287,7 +287,7 @@
                          body:this.form.handbook,
                          tags:this.form.tagDynamicTags,
                          category_id:this.form.category_id,
-                         target:target
+                         target: !this.form.public && target === 0 ? 2 : target
                     })
                },
           },

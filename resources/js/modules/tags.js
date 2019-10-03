@@ -5,7 +5,7 @@
 | The Vuex data store for the Tags
 */
 
-import TagAPI from '../api/Tags';
+import TagAPI from '../api/tags';
 
 /**
  status = 0 -> 数据尚未加载
