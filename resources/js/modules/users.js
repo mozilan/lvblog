@@ -101,22 +101,25 @@ export const users = {
                     commit('setUser' ,'');
                     commit('setUserLoadStatus',3);
                     commit('setLoginStatus',3);
-                    commit('setLoginErrors',error.response.data.message);
+                    commit('setLoginErrors',error.response.data.message !== '' ? error.response.data.message: '未知错误');
         })
         },
         loginByOauth({commit},data){
             commit('setLoginStatus',1);
                     UserAPI.postSignInByOauth( data.code,data.social_type)
                     .then(function ( response ) {
+                        commit('setLoginToken','Bearer ' + response.data.meta.access_token);
                         commit('setUser' , response.data.data);
                         commit('setUserLoadStatus',2);
-                        commit('setLoginToken','Bearer ' + response.data.meta.access_token);
                         commit('setLoginStatus' , 2);
                     })
                     .catch(function (error) {
+                        localStorage.removeItem('Authorization');
+                        commit('setLoginToken','');
                         commit('setUser' ,'');
                         commit('setLoginStatus',3);
                         commit('setUserLoadStatus',3);
+                        commit('setLoginErrors',error.response.data.message !== '' ? error.response.data.message: '未知错误');
                     });
         },
         loadUser({commit}){

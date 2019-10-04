@@ -8,6 +8,7 @@
 			<div class="text item" v-for="tag in tags ">
 				<el-tag size="mini" class="tag-item">{{tag.name}}[{{tag.count}}]</el-tag>
 			</div>
+			<div class="clear"></div>
 		</el-card>
 	</div>
 </template>
@@ -48,5 +49,11 @@
 	
 	.tag-item {
 		margin-right: 10px;
+	}
+	.item{
+		float: left;
+	}
+	.clear{
+		clear: both;
 	}
 </style>

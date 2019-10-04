@@ -13,7 +13,7 @@ class TagTransformer extends TransformerAbstract
         return [
             'id' => $tag->id,
             'name' => $tag->name,
-            'count' => $tag->articleMapTag()->count(),
+            'count' => $tag->num,
         ];
     }
 }

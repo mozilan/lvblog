@@ -41,6 +41,8 @@
     <el-dialog title="用户登录" :close="redirectToIndex" :visible.sync="loginDialogFormVisible">
         <el-container style="display:block">
         <el-row>
+            <div @click="toRescue" style="display: block;" ref="toRescue">
+            </div>
             <el-form :model="form">
                 <el-col :xs="24" :sm="24" :md="24" :lg="24">
                     <el-form-item label="用户名" :label-width="formLabelWidth">
@@ -96,9 +98,11 @@
 </template>
 <script>
     import { EventBus } from '../../event-bus.js';
+    import  _urls from '../../utils/url';
     export default {
         data() {
             return {
+                url: '/',
                 loader: '',
                 loginDialogFormVisible: false,
                 form: {
@@ -127,6 +131,9 @@
             }
         },
         methods: {
+            toRescue() {
+                window.location.href = this.url;
+            },
             openMessage: function (title, type) {
                 this.$message({
                     message: title,
@@ -187,7 +194,9 @@
                 if (this.$store.getters.getLoginStatus == 2) {
                     this.loader.close();
                     this.openMessage('登录成功！', 'success');
-                    this.loginDialogFormVisible = false;
+                    if(_urls.getUrlParams('code') !== null){
+                        window.location.href = '/';
+                    }
                 }
                 if (this.$store.getters.getLoginStatus == 3) {
                     this.loader.close();

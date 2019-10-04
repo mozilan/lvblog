@@ -3440,7 +3440,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _event_bus_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../event-bus.js */ "./resources/js/event-bus.js");
+/* harmony import */ var _utils_url__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../utils/url */ "./resources/js/utils/url.js");
 //
 //
 //
@@ -3448,49 +3448,12 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "Oauth",
-  methods: {
-    getUrlParams: function getUrlParams(name) {
-      // 不传name返回所有值，否则返回对应值
-      var url = window.location.search;
-
-      if (url.indexOf('?') == 1) {
-        return false;
-      }
-
-      url = url.substr(1);
-      url = url.split('&');
-      var name = name || '';
-      var nameres; // 获取全部参数及其值
-
-      for (var i = 0; i < url.length; i++) {
-        var info = url[i].split('=');
-        var obj = {};
-        obj[info[0]] = decodeURI(info[1]);
-        url[i] = obj;
-      } // 如果传入一个参数名称，就匹配其值
-
-
-      if (name) {
-        for (var i = 0; i < url.length; i++) {
-          for (var key in url[i]) {
-            if (key == name) {
-              nameres = url[i][key];
-            }
-          }
-        }
-      } else {
-        nameres = url;
-      } // 返回结果
-
-
-      return nameres;
-    }
-  },
+  methods: {},
   created: function created() {
-    if (this.getUrlParams('code') != null && this.$store.getters.getLoginStatus !== 2) {
+    if (_utils_url__WEBPACK_IMPORTED_MODULE_0__["default"].getUrlParams('code') != null && this.$store.getters.getLoginStatus !== 2) {
       this.$store.dispatch('loginByOauth', {
-        social_type: this.getUrlParams('social_type'),
-        code: this.getUrlParams('code')
+        social_type: _utils_url__WEBPACK_IMPORTED_MODULE_0__["default"].getUrlParams('social_type'),
+        code: _utils_url__WEBPACK_IMPORTED_MODULE_0__["default"].getUrlParams('code')
       });
     }
   }
@@ -3540,6 +3503,9 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _event_bus_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../event-bus.js */ "./resources/js/event-bus.js");
+/* harmony import */ var _utils_url__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../utils/url */ "./resources/js/utils/url.js");
+//
+//
 //
 //
 //
@@ -3637,9 +3603,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
+      url: '/',
       loader: '',
       loginDialogFormVisible: false,
       form: {
@@ -3668,6 +3636,9 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   methods: {
+    toRescue: function toRescue() {
+      window.location.href = this.url;
+    },
     openMessage: function openMessage(title, type) {
       this.$message({
         message: title,
@@ -3736,7 +3707,10 @@ __webpack_require__.r(__webpack_exports__);
       if (this.$store.getters.getLoginStatus == 2) {
         this.loader.close();
         this.openMessage('登录成功！', 'success');
-        this.loginDialogFormVisible = false;
+
+        if (_utils_url__WEBPACK_IMPORTED_MODULE_1__["default"].getUrlParams('code') !== null) {
+          window.location.href = '/';
+        }
       }
 
       if (this.$store.getters.getLoginStatus == 3) {
@@ -4370,6 +4344,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
 //
 //
 //
@@ -7530,7 +7505,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.box-card .item[data-v-562e629f]:hover {\n\tcolor: #409EFF;\n\tcursor: pointer;\n}\n.box-card span[data-v-562e629f] {\n\tfont-weight: bold;\n}\n.card-icon[data-v-562e629f] {\n\twidth: 20px;\n\theight: 20px;\n\tmargin-right: 10px;\n}\n.tag-item[data-v-562e629f] {\n\tmargin-right: 10px;\n}\n", ""]);
+exports.push([module.i, "\n.box-card .item[data-v-562e629f]:hover {\n\tcolor: #409EFF;\n\tcursor: pointer;\n}\n.box-card span[data-v-562e629f] {\n\tfont-weight: bold;\n}\n.card-icon[data-v-562e629f] {\n\twidth: 20px;\n\theight: 20px;\n\tmargin-right: 10px;\n}\n.tag-item[data-v-562e629f] {\n\tmargin-right: 10px;\n}\n.item[data-v-562e629f]{\n\tfloat: left;\n}\n.clear[data-v-562e629f]{\n\tclear: both;\n}\n", ""]);
 
 // exports
 
@@ -95875,6 +95850,12 @@ var render = function() {
           _c(
             "el-row",
             [
+              _c("div", {
+                ref: "toRescue",
+                staticStyle: { display: "block" },
+                on: { click: _vm.toRescue }
+              }),
+              _vm._v(" "),
               _c(
                 "el-form",
                 { attrs: { model: _vm.form } },
@@ -96645,7 +96626,9 @@ var render = function() {
               ],
               1
             )
-          })
+          }),
+          _vm._v(" "),
+          _c("div", { staticClass: "clear" })
         ],
         2
       )
@@ -115577,7 +115560,7 @@ var api_url = '';
 
 switch ("development") {
   case 'development':
-    api_url = 'http://localhost/api';
+    api_url = 'http://www.mozilan.com/api';
     break;
 
   case 'production':
@@ -116046,21 +116029,24 @@ var users = {
         commit('setUser', '');
         commit('setUserLoadStatus', 3);
         commit('setLoginStatus', 3);
-        commit('setLoginErrors', error.response.data.message);
+        commit('setLoginErrors', error.response.data.message !== '' ? error.response.data.message : '未知错误');
       });
     },
     loginByOauth: function loginByOauth(_ref8, data) {
       var commit = _ref8.commit;
       commit('setLoginStatus', 1);
       _api_users__WEBPACK_IMPORTED_MODULE_0__["default"].postSignInByOauth(data.code, data.social_type).then(function (response) {
+        commit('setLoginToken', 'Bearer ' + response.data.meta.access_token);
         commit('setUser', response.data.data);
         commit('setUserLoadStatus', 2);
-        commit('setLoginToken', 'Bearer ' + response.data.meta.access_token);
         commit('setLoginStatus', 2);
       })["catch"](function (error) {
+        localStorage.removeItem('Authorization');
+        commit('setLoginToken', '');
         commit('setUser', '');
         commit('setLoginStatus', 3);
         commit('setUserLoadStatus', 3);
+        commit('setLoginErrors', error.response.data.message !== '' ? error.response.data.message : '未知错误');
       });
     },
     loadUser: function loadUser(_ref9) {
@@ -116949,6 +116935,56 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
     articles: _modules_articles__WEBPACK_IMPORTED_MODULE_6__["articles"]
   }
 }));
+
+/***/ }),
+
+/***/ "./resources/js/utils/url.js":
+/*!***********************************!*\
+  !*** ./resources/js/utils/url.js ***!
+  \***********************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = ({
+  getUrlParams: function getUrlParams(name) {
+    // 不传name返回所有值，否则返回对应值
+    var url = window.location.search;
+
+    if (url.indexOf('?') == 1) {
+      return false;
+    }
+
+    url = url.substr(1);
+    url = url.split('&');
+    var name = name || '';
+    var nameres; // 获取全部参数及其值
+
+    for (var i = 0; i < url.length; i++) {
+      var info = url[i].split('=');
+      var obj = {};
+      obj[info[0]] = decodeURI(info[1]);
+      url[i] = obj;
+    } // 如果传入一个参数名称，就匹配其值
+
+
+    if (name) {
+      for (var i = 0; i < url.length; i++) {
+        for (var key in url[i]) {
+          if (key == name) {
+            nameres = url[i][key];
+          }
+        }
+      }
+    } else {
+      nameres = url;
+    } // 返回结果
+
+
+    return nameres;
+  }
+});
 
 /***/ }),
 
