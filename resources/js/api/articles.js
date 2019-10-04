@@ -4,8 +4,8 @@
 import { LVBLOG_CONFIG } from '../config.js';
 
 export default {
-    getArticles: function(){
-        return axios.get(LVBLOG_CONFIG.API_URL + '/articles',{
+    getArticles: function(page){
+        return axios.get(LVBLOG_CONFIG.API_URL + '/articles'+'?page='+page ,{
 
         });
     },

@@ -6,6 +6,9 @@ use App\Http\Requests\Api\ArticleRequest;
 use App\Models\Article;
 use App\Models\Tag;
 use App\Models\ArticleMapTag;
+use App\Transformers\ArticleTransformer;
+use Illuminate\Http\Request;
+use App\Models\User;
 
 class ArticlesController extends Controller
 {
@@ -38,5 +41,36 @@ class ArticlesController extends Controller
 //        return $this->response->item($article, new TopicTransformer())
 //            ->setStatusCode(201);
         return response()->json(['message' => '发布成功'], 201);
+    }
+    public function index(Request $request, Article $article)
+    {
+        $query = $article->query();
+
+        if ($categoryId = $request->category_id) {
+            $query->where('category_id', $categoryId);
+        }
+
+        switch ($request->order) {
+            case 'recent':
+                $query->recent();
+                break;
+
+            default:
+                $query->recentReplied();
+                break;
+        }
+
+        $articles = $query->paginate(6);
+
+        return $this->response->paginator($articles, new ArticleTransformer());
+    }
+    public function userIndex($user, Request $request)
+    {
+        $user = User::find($user);
+        $articles = $user->articles()->recent()
+            ->paginate(20);
+//        $articles = Article::where('user_id',$user)->recent()
+//            ->paginate(20);
+        return $this->response->paginator($articles, new ArticleTransformer());
     }
 }

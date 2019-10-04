@@ -4696,78 +4696,64 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      blogs: [],
+      meta: '',
+      count: 10,
+      loading: false
+    };
+  },
   name: 'blog',
   components: {
     Friend: _components_friend__WEBPACK_IMPORTED_MODULE_0__["default"],
     Tag: _components_tag__WEBPACK_IMPORTED_MODULE_1__["default"],
     Oauth: _components_Oauth__WEBPACK_IMPORTED_MODULE_2__["default"],
     Category: _components_Category__WEBPACK_IMPORTED_MODULE_3__["default"]
+  },
+  computed: {
+    noMore: function noMore() {
+      return this.$store.getters.getArticles.meta.pagination.current_page >= this.$store.getters.getArticles.meta.pagination.total_pages; // return this.count >= 20
+    },
+    disabled: function disabled() {
+      return this.loading || this.noMore;
+    },
+    articles: function articles() {
+      return this.$store.getters.getArticles;
+    }
+  },
+  watch: {
+    'blogs': 'show'
+  },
+  created: function created() {
+    this.$store.dispatch('loadArticles', {
+      id: ''
+    });
+    this.blogs = this.$store.getters.getArticles;
+  },
+  methods: {
+    show: function show() {// console.log(this.blogs);
+    },
+    load: function load() {
+      var _this = this;
+
+      console.log(this.$store.getters.getArticles.meta.pagination.current_page);
+      console.log(this.$store.getters.getArticles.meta.pagination.total_pages);
+      this.loading = true;
+      this.$store.dispatch('loadArticles', {
+        id: '',
+        page: ++this.$store.getters.getArticles.meta.pagination.current_page
+      });
+      setTimeout(function () {
+        _this.blogs += _this.$store.getters.getArticles;
+        _this.loading = false;
+      }, 2000);
+    }
   }
 });
 
@@ -7562,7 +7548,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n#side .item[data-v-c8ad8caa] {\n    margin-bottom: 30px;\n}\n.art-item[data-v-c8ad8caa] {\n    margin-bottom: 30px;\n    position: relative;\n}\n.art-item .star[data-v-c8ad8caa] {\n    width: 60px;\n    height: 60px;\n    position: absolute;\n    top: 0;\n    right: 0;\n}\nimg.tag[data-v-c8ad8caa] {\n    width: 16px;\n    height: 16px;\n}\n.art-title[data-v-c8ad8caa] {\n    border-left: 3px solid #F56C6C;\n    padding-left: 5px;\n    cursor: pointer;\n}\n.art-title[data-v-c8ad8caa]:hover {\n    padding-left: 10px;\n    color: #409EFF;\n}\n.art-time[data-v-c8ad8caa] {\n    margin-right: 20px;\n}\n.art-body[data-v-c8ad8caa] {\n    display: flex;\n    padding: 10px 0;\n}\n.side-img[data-v-c8ad8caa] {\n    height: 150px;\n    width: 270px;\n    overflow: hidden;\n    margin-right: 10px;\n}\nimg.art-banner[data-v-c8ad8caa] {\n    width: 100%;\n    height: 100%;\n    transition: all 0.6s;\n}\nimg.art-banner[data-v-c8ad8caa]:hover {\n    transform: scale(1.4);\n}\n.side-abstract[data-v-c8ad8caa] {\n    flex: 1;\n    display: flex;\n    flex-direction: column;\n}\n.art-abstract[data-v-c8ad8caa] {\n    flex: 1;\n    color: #aaa;\n}\n.art-more[data-v-c8ad8caa] {\n    height: 40px;\n    display: flex;\n    justify-content: space-between;\n    align-items: flex-end;\n}\n.art-more .view[data-v-c8ad8caa] {\n    color: #aaa;\n}\nh5[data-v-c8ad8caa]{\n    font-size: 18px;\n}\n.pagination[data-v-c8ad8caa] {\n    background-color: #F9F9F9;\n}\n", ""]);
+exports.push([module.i, "\n#side .item[data-v-c8ad8caa] {\n    margin-bottom: 30px;\n}\n.art-item[data-v-c8ad8caa] {\n    margin-bottom: 30px;\n    position: relative;\n}\n.art-item .star[data-v-c8ad8caa] {\n    width: 60px;\n    height: 60px;\n    position: absolute;\n    top: 0;\n    right: 0;\n}\nimg.tag[data-v-c8ad8caa] {\n    width: 16px;\n    height: 16px;\n}\n.art-title[data-v-c8ad8caa] {\n    border-left: 3px solid #F56C6C;\n    padding-left: 5px;\n    cursor: pointer;\n}\n.art-title[data-v-c8ad8caa]:hover {\n    padding-left: 10px;\n    color: #409EFF;\n}\n.art-time[data-v-c8ad8caa] {\n    margin-right: 20px;\n}\n.art-body[data-v-c8ad8caa] {\n    display: flex;\n    padding: 10px 0;\n}\n.side-img[data-v-c8ad8caa] {\n    height: 150px;\n    width: 270px;\n    overflow: hidden;\n    margin-right: 10px;\n}\nimg.art-banner[data-v-c8ad8caa] {\n    width: 100%;\n    height: 100%;\n    transition: all 0.6s;\n}\nimg.art-banner[data-v-c8ad8caa]:hover {\n    transform: scale(1.4);\n}\n.side-abstract[data-v-c8ad8caa] {\n    flex: 1;\n    display: flex;\n    flex-direction: column;\n}\n.art-abstract[data-v-c8ad8caa] {\n    flex: 1;\n    color: #aaa;\n}\n.art-more[data-v-c8ad8caa] {\n    height: 40px;\n    display: flex;\n    justify-content: space-between;\n    align-items: flex-end;\n}\n.art-more .view[data-v-c8ad8caa] {\n    color: #aaa;\n}\nh5[data-v-c8ad8caa]{\n    font-size: 18px;\n}\n.pagination[data-v-c8ad8caa] {\n    background-color: #F9F9F9;\n}\nul[data-v-c8ad8caa]{\n    list-style:none;\n    margin:0; padding:0;\n}\n", ""]);
 
 // exports
 
@@ -96948,476 +96934,203 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    { staticClass: "home" },
+    { staticClass: "blog" },
     [
       _c(
         "el-row",
         { attrs: { id: "artList", type: "flex", justify: "space-around" } },
         [
-          _c(
-            "el-col",
-            { attrs: { span: 16 } },
-            [
-              _c(
-                "el-row",
-                { staticClass: "art-item" },
-                [
-                  _c(
-                    "el-card",
-                    { attrs: { shadow: "hover" } },
-                    [
-                      _c(
-                        "h5",
-                        [
-                          _c(
-                            "router-link",
-                            {
-                              staticClass: "art-title",
-                              attrs: { to: "/index", tag: "span" }
-                            },
-                            [_vm._v("Laravel+Vue+Element UI开发SPA应用")]
-                          )
-                        ],
-                        1
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "el-row",
-                        {
-                          staticClass:
-                            "art-info d-flex align-items-center justify-content-start"
-                        },
-                        [
-                          _c("div", { staticClass: "art-time" }, [
-                            _c("i", { staticClass: "el-icon-time" }),
-                            _vm._v("：2019-08-29")
-                          ]),
-                          _vm._v(" "),
-                          _c(
-                            "div",
-                            { staticClass: "d-flex align-items-center" },
-                            [
-                              _c("img", {
-                                staticClass: "tag",
-                                attrs: { src: __webpack_require__(/*! ../../assets/tag.png */ "./resources/assets/tag.png") }
-                              }),
-                              _vm._v("：\n                            "),
-                              _c("el-tag", { attrs: { size: "mini" } }, [
-                                _vm._v("Laravel")
-                              ]),
-                              _c("el-tag", { attrs: { size: "mini" } }, [
-                                _vm._v("Vue")
-                              ]),
-                              _c("el-tag", { attrs: { size: "mini" } }, [
-                                _vm._v("Element UI")
-                              ])
-                            ],
-                            1
-                          )
-                        ]
-                      ),
-                      _vm._v(" "),
-                      _c("el-row", { staticClass: "art-body" }, [
-                        _c(
-                          "div",
-                          { staticClass: "side-img hidden-sm-and-down" },
-                          [
-                            _c("img", {
-                              staticClass: "art-banner",
-                              attrs: {
-                                src: __webpack_require__(/*! ../../assets/laravel.png */ "./resources/assets/laravel.png")
-                              }
-                            })
-                          ]
-                        ),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "side-abstract" }, [
-                          _c("div", { staticClass: "art-abstract" }, [
-                            _vm._v(
-                              "\n                                Laravel 是 Taylor Otwell 开发的一款基于 PHP 语言的 Web 开源框架，采用了 MVC 的架构模式，在 2011 年 6 月正式发布了首个版本。由于 Laravel 具备 Rails 敏捷开发等优秀特质，深度集成 PHP 强大的扩展包（Composer）生态与 PHP 开发者广大的受众群，让 Laravel 在发布之后的短短几年时间得到了极其迅猛的发展，Laravel 在国内的生态圈发展也日趋成熟，你可以很轻松的在网上找到很多 Laravel 相关的中文学习资料、技术讨论社区。\n                            "
-                            )
-                          ]),
-                          _vm._v(" "),
-                          _c(
-                            "div",
-                            { staticClass: "art-more" },
-                            [
-                              _c(
-                                "router-link",
-                                { attrs: { to: "/index", tag: "span" } },
-                                [
-                                  _c("el-button", { attrs: { plain: "" } }, [
-                                    _vm._v("阅读全文")
-                                  ])
-                                ],
-                                1
-                              ),
-                              _vm._v(" "),
-                              _c("div", { staticClass: "view" }, [
-                                _c("i", { staticClass: "el-icon-view" }),
-                                _vm._v("12414")
-                              ])
-                            ],
-                            1
-                          )
-                        ])
-                      ])
+          _c("el-col", { attrs: { span: 16 } }, [
+            _c(
+              "div",
+              {
+                staticClass: "infinite-list-wrapper",
+                staticStyle: { overflow: "auto" }
+              },
+              [
+                _c(
+                  "ul",
+                  {
+                    directives: [
+                      {
+                        name: "infinite-scroll",
+                        rawName: "v-infinite-scroll",
+                        value: _vm.load,
+                        expression: "load"
+                      }
                     ],
-                    1
-                  ),
-                  _vm._v(" "),
-                  _c("img", {
-                    staticClass: "star",
-                    attrs: { src: __webpack_require__(/*! ../../assets/star.png */ "./resources/assets/star.png") }
-                  })
-                ],
-                1
-              ),
-              _vm._v(" "),
-              _c(
-                "el-row",
-                { staticClass: "art-item" },
-                [
-                  _c(
-                    "el-card",
-                    { attrs: { shadow: "hover" } },
-                    [
-                      _c(
-                        "h5",
-                        [
-                          _c(
-                            "router-link",
-                            {
-                              staticClass: "art-title",
-                              attrs: { to: "/index", tag: "span" }
-                            },
-                            [_vm._v("Vue.js 是什么")]
-                          )
-                        ],
-                        1
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "el-row",
-                        {
-                          staticClass:
-                            "art-info d-flex align-items-center justify-content-start"
-                        },
-                        [
-                          _c("div", { staticClass: "art-time" }, [
-                            _c("i", { staticClass: "el-icon-time" }),
-                            _vm._v("：2019-08-29")
-                          ]),
-                          _vm._v(" "),
-                          _c(
-                            "div",
-                            { staticClass: "d-flex align-items-center" },
-                            [
-                              _c("img", {
-                                staticClass: "tag",
-                                attrs: { src: __webpack_require__(/*! ../../assets/tag.png */ "./resources/assets/tag.png") }
-                              }),
-                              _vm._v("：\n                            "),
-                              _c("el-tag", { attrs: { size: "mini" } }, [
-                                _vm._v("Vue")
-                              ])
-                            ],
-                            1
-                          )
-                        ]
-                      ),
-                      _vm._v(" "),
-                      _c("el-row", { staticClass: "art-body" }, [
+                    staticClass: "list",
+                    attrs: { "infinite-scroll-disabled": "disabled" }
+                  },
+                  _vm._l(_vm.articles.data, function(i) {
+                    return _c(
+                      "div",
+                      [
                         _c(
-                          "div",
-                          { staticClass: "side-img hidden-sm-and-down" },
+                          "el-row",
+                          { staticClass: "art-item" },
                           [
-                            _c("img", {
-                              staticClass: "art-banner",
-                              attrs: { src: __webpack_require__(/*! ../../assets/vue.jpg */ "./resources/assets/vue.jpg") }
-                            })
-                          ]
-                        ),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "side-abstract" }, [
-                          _c("div", { staticClass: "art-abstract" }, [
-                            _vm._v(
-                              "\n                                Vue (读音 /vjuː/，类似于 view) 是一套用于构建用户界面的渐进式框架。与其它大型框架不同的是，Vue 被设计为可以自底向上逐层应用。Vue 的核心库只关注视图层，不仅易于上手，还便于与第三方库或既有项目整合。另一方面，当与现代化的工具链以及各种支持类库结合使用时，Vue 也完全能够为复杂的单页应用提供驱动。\n                            "
-                            )
-                          ]),
-                          _vm._v(" "),
-                          _c(
-                            "div",
-                            { staticClass: "art-more" },
-                            [
-                              _c(
-                                "router-link",
-                                { attrs: { to: "/index", tag: "span" } },
-                                [
-                                  _c("el-button", { attrs: { plain: "" } }, [
-                                    _vm._v("阅读全文")
+                            _c(
+                              "el-card",
+                              { attrs: { shadow: "hover" } },
+                              [
+                                _c(
+                                  "h5",
+                                  [
+                                    _c(
+                                      "router-link",
+                                      {
+                                        staticClass: "art-title",
+                                        attrs: { to: "/index", tag: "span" }
+                                      },
+                                      [_vm._v(_vm._s(i.title))]
+                                    )
+                                  ],
+                                  1
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "el-row",
+                                  {
+                                    staticClass:
+                                      "art-info d-flex align-items-center justify-content-start"
+                                  },
+                                  [
+                                    _c("div", { staticClass: "art-time" }, [
+                                      _c("i", { staticClass: "el-icon-time" }),
+                                      _vm._v("：" + _vm._s(i.created_at))
+                                    ]),
+                                    _vm._v(" "),
+                                    _c(
+                                      "div",
+                                      {
+                                        staticClass: "d-flex align-items-center"
+                                      },
+                                      [
+                                        _c("img", {
+                                          staticClass: "tag",
+                                          staticStyle: { float: "left" },
+                                          attrs: {
+                                            src: __webpack_require__(/*! ../../assets/tag.png */ "./resources/assets/tag.png")
+                                          }
+                                        }),
+                                        _vm._v(
+                                          "：\n                                        "
+                                        ),
+                                        _vm._l(i.tag, function(t) {
+                                          return _c(
+                                            "div",
+                                            { staticStyle: { float: "left" } },
+                                            [
+                                              _c(
+                                                "el-tag",
+                                                { attrs: { size: "mini" } },
+                                                [_vm._v(_vm._s(t.name))]
+                                              )
+                                            ],
+                                            1
+                                          )
+                                        })
+                                      ],
+                                      2
+                                    )
+                                  ]
+                                ),
+                                _vm._v(" "),
+                                _c("el-row", { staticClass: "art-body" }, [
+                                  _c(
+                                    "div",
+                                    {
+                                      staticClass: "side-img hidden-sm-and-down"
+                                    },
+                                    [
+                                      _c("img", {
+                                        staticClass: "art-banner",
+                                        attrs: {
+                                          src: __webpack_require__(/*! ../../assets/laravel.png */ "./resources/assets/laravel.png")
+                                        }
+                                      })
+                                    ]
+                                  ),
+                                  _vm._v(" "),
+                                  _c("div", { staticClass: "side-abstract" }, [
+                                    _c("div", { staticClass: "art-abstract" }, [
+                                      _vm._v(
+                                        "\n                                            " +
+                                          _vm._s(i.excerpt) +
+                                          "\n                                        "
+                                      )
+                                    ]),
+                                    _vm._v(" "),
+                                    _c(
+                                      "div",
+                                      { staticClass: "art-more" },
+                                      [
+                                        _c(
+                                          "router-link",
+                                          {
+                                            attrs: { to: "/index", tag: "span" }
+                                          },
+                                          [
+                                            _c(
+                                              "el-button",
+                                              { attrs: { plain: "" } },
+                                              [_vm._v("阅读全文")]
+                                            )
+                                          ],
+                                          1
+                                        ),
+                                        _vm._v(" "),
+                                        _c("div", { staticClass: "view" }, [
+                                          _c("i", {
+                                            staticClass: "el-icon-view"
+                                          }),
+                                          _vm._v(_vm._s(i.view_count))
+                                        ])
+                                      ],
+                                      1
+                                    )
                                   ])
-                                ],
-                                1
-                              ),
-                              _vm._v(" "),
-                              _c("div", { staticClass: "view" }, [
-                                _c("i", { staticClass: "el-icon-view" }),
-                                _vm._v("12414")
-                              ])
-                            ],
-                            1
-                          )
-                        ])
-                      ])
-                    ],
-                    1
-                  ),
-                  _vm._v(" "),
-                  _c("img", {
-                    staticClass: "star",
-                    attrs: { src: __webpack_require__(/*! ../../assets/star.png */ "./resources/assets/star.png") }
-                  })
-                ],
-                1
-              ),
-              _vm._v(" "),
-              _c(
-                "el-row",
-                { staticClass: "art-item" },
-                [
-                  _c(
-                    "el-card",
-                    { attrs: { shadow: "hover" } },
-                    [
-                      _c(
-                        "h5",
-                        [
-                          _c(
-                            "router-link",
-                            {
-                              staticClass: "art-title",
-                              attrs: { to: "/index", tag: "span" }
-                            },
-                            [_vm._v("MVVM 设计模式")]
-                          )
-                        ],
-                        1
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "el-row",
-                        {
-                          staticClass:
-                            "art-info d-flex align-items-center justify-content-start"
-                        },
-                        [
-                          _c("div", { staticClass: "art-time" }, [
-                            _c("i", { staticClass: "el-icon-time" }),
-                            _vm._v("：2019-08-29")
-                          ]),
-                          _vm._v(" "),
-                          _c(
-                            "div",
-                            { staticClass: "d-flex align-items-center" },
-                            [
-                              _c("img", {
-                                staticClass: "tag",
-                                attrs: { src: __webpack_require__(/*! ../../assets/tag.png */ "./resources/assets/tag.png") }
-                              }),
-                              _vm._v("：\n                            "),
-                              _c("el-tag", { attrs: { size: "mini" } }, [
-                                _vm._v("MVVM")
-                              ]),
-                              _c("el-tag", { attrs: { size: "mini" } }, [
-                                _vm._v("设计模式")
-                              ])
-                            ],
-                            1
-                          )
-                        ]
-                      ),
-                      _vm._v(" "),
-                      _c("el-row", { staticClass: "art-body" }, [
-                        _c(
-                          "div",
-                          { staticClass: "side-img hidden-sm-and-down" },
-                          [
+                                ])
+                              ],
+                              1
+                            ),
+                            _vm._v(" "),
                             _c("img", {
-                              staticClass: "art-banner",
-                              attrs: { src: __webpack_require__(/*! ../../assets/mvvm.png */ "./resources/assets/mvvm.png") }
+                              staticClass: "star",
+                              attrs: { src: __webpack_require__(/*! ../../assets/star.png */ "./resources/assets/star.png") }
                             })
-                          ]
-                        ),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "side-abstract" }, [
-                          _c("div", { staticClass: "art-abstract" }, [
-                            _vm._v(
-                              "\n                                在 MVVM 设计模式中，也有 Model 层，负责存储数据。有 View 层，用于显示数据。但 MVVM 设计模式中，没有 Presenter 层。取而代之的是 V-Model 层级。\n                                而 V-Model 并不需要我们来 进行编写，使用 MVVM 设计模式进行编码的时候，无需关注 V-Model 这一层是如何实现的，它完全是 Vue 内置的（因为涉及到Vue框架源码的实现，不做讲解）。而我们只需要更多的关注 M 层与 V层，即模型层和视图层。\n                            "
-                            )
-                          ]),
-                          _vm._v(" "),
-                          _c(
-                            "div",
-                            { staticClass: "art-more" },
-                            [
-                              _c(
-                                "router-link",
-                                { attrs: { to: "/index", tag: "span" } },
-                                [
-                                  _c("el-button", { attrs: { plain: "" } }, [
-                                    _vm._v("阅读全文")
-                                  ])
-                                ],
-                                1
-                              ),
-                              _vm._v(" "),
-                              _c("div", { staticClass: "view" }, [
-                                _c("i", { staticClass: "el-icon-view" }),
-                                _vm._v("12414")
-                              ])
-                            ],
-                            1
-                          )
-                        ])
-                      ])
-                    ],
-                    1
-                  ),
-                  _vm._v(" "),
-                  _c("img", {
-                    staticClass: "star",
-                    attrs: { src: __webpack_require__(/*! ../../assets/star.png */ "./resources/assets/star.png") }
-                  })
-                ],
-                1
-              ),
-              _vm._v(" "),
-              _c(
-                "el-row",
-                { staticClass: "art-item" },
-                [
-                  _c(
-                    "el-card",
-                    { attrs: { shadow: "hover" } },
-                    [
-                      _c(
-                        "h5",
-                        [
-                          _c(
-                            "router-link",
-                            {
-                              staticClass: "art-title",
-                              attrs: { to: "/index", tag: "span" }
-                            },
-                            [_vm._v("鼠标悬浮时显示")]
-                          )
-                        ],
-                        1
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "el-row",
-                        {
-                          staticClass:
-                            "art-info d-flex align-items-center justify-content-start"
-                        },
-                        [
-                          _c("div", { staticClass: "art-time" }, [
-                            _c("i", { staticClass: "el-icon-time" }),
-                            _vm._v("：2019-08-29")
-                          ]),
-                          _vm._v(" "),
-                          _c(
-                            "div",
-                            { staticClass: "d-flex align-items-center" },
-                            [
-                              _c("img", {
-                                staticClass: "tag",
-                                attrs: { src: __webpack_require__(/*! ../../assets/tag.png */ "./resources/assets/tag.png") }
-                              }),
-                              _vm._v("：\n                            "),
-                              _c("el-tag", { attrs: { size: "mini" } }, [
-                                _vm._v("swagger2")
-                              ])
-                            ],
-                            1
-                          )
-                        ]
-                      ),
-                      _vm._v(" "),
-                      _c("el-row", { staticClass: "art-body" }, [
-                        _c(
-                          "div",
-                          { staticClass: "side-img hidden-sm-and-down" },
-                          [
-                            _c("img", {
-                              staticClass: "art-banner",
-                              attrs: { src: __webpack_require__(/*! ../../assets/vue.jpg */ "./resources/assets/vue.jpg") }
-                            })
-                          ]
-                        ),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "side-abstract" }, [
-                          _c("div", { staticClass: "art-abstract" }, [
-                            _vm._v(
-                              "\n                                Iconfont-国内功能很强大且图标内容很丰富的矢量图标库, 提供矢量图标下载、在快照 在小程序中使用阿里文字图标在小程序中使用阿里文字图标库前在小程序中使用阿里文字图标库前库前端开发的便捷工具 - AndrewNeo - CSDN博客\n                            "
-                            )
-                          ]),
-                          _vm._v(" "),
-                          _c(
-                            "div",
-                            { staticClass: "art-more" },
-                            [
-                              _c(
-                                "router-link",
-                                { attrs: { to: "/index", tag: "span" } },
-                                [
-                                  _c("el-button", { attrs: { plain: "" } }, [
-                                    _vm._v("阅读全文")
-                                  ])
-                                ],
-                                1
-                              ),
-                              _vm._v(" "),
-                              _c("div", { staticClass: "view" }, [
-                                _c("i", { staticClass: "el-icon-view" }),
-                                _vm._v("12414")
-                              ])
-                            ],
-                            1
-                          )
-                        ])
-                      ])
-                    ],
-                    1
-                  ),
-                  _vm._v(" "),
-                  _c("img", {
-                    staticClass: "star",
-                    attrs: { src: __webpack_require__(/*! ../../assets/star.png */ "./resources/assets/star.png") }
-                  })
-                ],
-                1
-              ),
-              _vm._v(" "),
-              _c(
-                "div",
-                { staticClass: "block pagination" },
-                [
-                  _c("el-pagination", {
-                    attrs: {
-                      background: "",
-                      layout: "prev, pager, next",
-                      total: 50
-                    }
-                  })
-                ],
-                1
-              )
-            ],
-            1
-          ),
+                          ],
+                          1
+                        )
+                      ],
+                      1
+                    )
+                  }),
+                  0
+                ),
+                _vm._v(" "),
+                _vm.loading ? _c("p", [_vm._v("加载中...")]) : _vm._e(),
+                _vm._v(" "),
+                _vm.noMore ? _c("p", [_vm._v("没有更多了")]) : _vm._e()
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              { staticClass: "block pagination" },
+              [
+                _c("el-pagination", {
+                  attrs: {
+                    background: "",
+                    layout: "prev, pager, next",
+                    total: 50
+                  }
+                })
+              ],
+              1
+            )
+          ]),
           _vm._v(" "),
           _c(
             "el-col",
@@ -114564,8 +114277,8 @@ __webpack_require__.r(__webpack_exports__);
  */
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  getArticles: function getArticles() {
-    return axios.get(_config_js__WEBPACK_IMPORTED_MODULE_0__["LVBLOG_CONFIG"].API_URL + '/articles', {});
+  getArticles: function getArticles(page) {
+    return axios.get(_config_js__WEBPACK_IMPORTED_MODULE_0__["LVBLOG_CONFIG"].API_URL + '/articles' + '?page=' + page, {});
   },
   getArticle: function getArticle(id) {
     return axios.get(_config_js__WEBPACK_IMPORTED_MODULE_0__["LVBLOG_CONFIG"].API_URL + '/articles', {});
@@ -115627,15 +115340,26 @@ var articles = {
     articleAddResponseMessages: ''
   },
   actions: {
-    loadarticles: function loadarticles(_ref, data) {
+    loadArticles: function loadArticles(_ref, data) {
       var commit = _ref.commit;
-      commit('setarticlesLoadStatus', 1);
-      _api_articles__WEBPACK_IMPORTED_MODULE_0__["default"].getarticles(data.id).then(function (response) {
-        commit('setarticles', response.data.data);
-        commit('setarticlesLoadStatus', 2);
-      })["catch"](function (error) {
-        commit('setarticlesLoadStatus', 3);
-      });
+      commit('setArticlesLoadStatus', 1);
+
+      if (data.id === '') {
+        _api_articles__WEBPACK_IMPORTED_MODULE_0__["default"].getArticles(data.page !== '' ? data.page : 1).then(function (response) {
+          console.log(response.data);
+          commit('setArticles', response.data);
+          commit('setArticlesLoadStatus', 2);
+        })["catch"](function (error) {
+          commit('setArticlesLoadStatus', 3);
+        });
+      } else {
+        _api_articles__WEBPACK_IMPORTED_MODULE_0__["default"].getUserArticles(data.id).then(function (response) {
+          commit('setArticles', response.data.data);
+          commit('setArticlesLoadStatus', 2);
+        })["catch"](function (error) {
+          commit('setArticlesLoadStatus', 3);
+        });
+      }
     },
     addArticle: function addArticle(_ref2, data) {
       var commit = _ref2.commit,
@@ -115656,10 +115380,10 @@ var articles = {
     }
   },
   mutations: {
-    setarticlesLoadStatus: function setarticlesLoadStatus(state, status) {
+    setArticlesLoadStatus: function setArticlesLoadStatus(state, status) {
       state.articlesLoadStatus = status;
     },
-    setarticles: function setarticles(state, articles) {
+    setArticles: function setArticles(state, articles) {
       state.articles = articles;
     },
     setArticleAddStatus: function setArticleAddStatus(state, status) {

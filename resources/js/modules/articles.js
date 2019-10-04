@@ -25,16 +25,28 @@ export const articles = {
         articleAddResponseMessages:'',
     },
     actions:{
-        loadarticles({commit},data){
-            commit('setarticlesLoadStatus',1);
-            ArticleAPI.getarticles(data.id)
-                .then(function (response) {
-                    commit('setarticles', response.data.data);
-                    commit('setarticlesLoadStatus', 2);
-                })
-                .catch(function (error){
-                    commit('setarticlesLoadStatus', 3);
-                });
+        loadArticles({commit},data){
+            commit('setArticlesLoadStatus',1);
+            if(data.id === ''){
+                ArticleAPI.getArticles(data.page !== '' ? data.page : 1)
+                    .then(function (response) {
+                        console.log(response.data);
+                        commit('setArticles', response.data);
+                        commit('setArticlesLoadStatus', 2);
+                    })
+                    .catch(function (error){
+                        commit('setArticlesLoadStatus', 3);
+                    });
+            }else{
+                ArticleAPI.getUserArticles(data.id)
+                    .then(function (response) {
+                        commit('setArticles', response.data.data);
+                        commit('setArticlesLoadStatus', 2);
+                    })
+                    .catch(function (error){
+                        commit('setArticlesLoadStatus', 3);
+                    });
+            }
         },
         addArticle({commit,dispatch},data){
             commit('setArticleAddStatus', 1);
@@ -51,13 +63,14 @@ export const articles = {
         initArticleAddStatus({commit}){
             commit('setArticleAddStatus', 0);
             commit('setArticleAddResponseMessages', '');
-        }
+        },
     },
     mutations:{
-        setarticlesLoadStatus(state,status){
+        setArticlesLoadStatus(state,status){
             state.articlesLoadStatus = status;
         },
-        setarticles(state,articles){
+        setArticles(state,articles){
+
             state.articles = articles;
         },
         setArticleAddStatus(state,status){

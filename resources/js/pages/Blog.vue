@@ -85,117 +85,56 @@
     .pagination {
         background-color: #F9F9F9;
     }
+    ul{
+        list-style:none;
+        margin:0; padding:0;
+    }
 </style>
 
 <template>
-    <div class="home">
+    <div class="blog">
         <el-row id="artList" type="flex" justify="space-around">
             <el-col :span="16">
-                <el-row class="art-item">
-                    <el-card shadow="hover">
-                        <h5><router-link to="/index" tag="span" class="art-title">Laravel+Vue+Element UI开发SPA应用</router-link></h5>
-                        <el-row class="art-info d-flex align-items-center justify-content-start">
-                            <div class="art-time"><i class="el-icon-time"></i>：2019-08-29</div>
-                            <div class="d-flex align-items-center"><img class="tag" src="../../assets/tag.png" />：
-                                <el-tag size="mini">Laravel</el-tag><el-tag size="mini">Vue</el-tag><el-tag size="mini">Element UI</el-tag>
-                            </div>
-                        </el-row>
-                        <el-row class="art-body">
-                            <div class="side-img hidden-sm-and-down"><img class="art-banner" src="../../assets/laravel.png"></div>
-                            <div class="side-abstract">
-                                <div class="art-abstract">
-                                    Laravel 是 Taylor Otwell 开发的一款基于 PHP 语言的 Web 开源框架，采用了 MVC 的架构模式，在 2011 年 6 月正式发布了首个版本。由于 Laravel 具备 Rails 敏捷开发等优秀特质，深度集成 PHP 强大的扩展包（Composer）生态与 PHP 开发者广大的受众群，让 Laravel 在发布之后的短短几年时间得到了极其迅猛的发展，Laravel 在国内的生态圈发展也日趋成熟，你可以很轻松的在网上找到很多 Laravel 相关的中文学习资料、技术讨论社区。
-                                </div>
-                                <div class="art-more">
-                                    <router-link to="/index" tag="span">
-                                        <el-button plain>阅读全文</el-button>
-                                    </router-link>
-                                    <div class="view"><i class="el-icon-view"></i>12414</div>
-                                </div>
-                            </div>
-                        </el-row>
-                    </el-card>
-                    <img class="star" src="../../assets/star.png" />
-                </el-row>
-                <el-row class="art-item">
-                    <el-card shadow="hover">
-                        <h5><router-link to="/index" tag="span" class="art-title">Vue.js 是什么</router-link></h5>
-                        <el-row class="art-info d-flex align-items-center justify-content-start">
-                            <div class="art-time"><i class="el-icon-time"></i>：2019-08-29</div>
-                            <div class="d-flex align-items-center"><img class="tag" src="../../assets/tag.png" />：
-                                <el-tag size="mini">Vue</el-tag>
-                            </div>
-                        </el-row>
-                        <el-row class="art-body">
-                            <div class="side-img hidden-sm-and-down"><img class="art-banner" src="../../assets/vue.jpg"></div>
-                            <div class="side-abstract">
-                                <div class="art-abstract">
-                                    Vue (读音 /vjuː/，类似于 view) 是一套用于构建用户界面的渐进式框架。与其它大型框架不同的是，Vue 被设计为可以自底向上逐层应用。Vue 的核心库只关注视图层，不仅易于上手，还便于与第三方库或既有项目整合。另一方面，当与现代化的工具链以及各种支持类库结合使用时，Vue 也完全能够为复杂的单页应用提供驱动。
-                                </div>
-                                <div class="art-more">
-                                    <router-link to="/index" tag="span">
-                                        <el-button plain>阅读全文</el-button>
-                                    </router-link>
-                                    <div class="view"><i class="el-icon-view"></i>12414</div>
-                                </div>
-                            </div>
-                        </el-row>
-                    </el-card>
-                    <img class="star" src="../../assets/star.png" />
-                </el-row>
-                <el-row class="art-item">
-                    <el-card shadow="hover">
-                        <h5><router-link to="/index" tag="span" class="art-title">MVVM 设计模式</router-link></h5>
-                        <el-row class="art-info d-flex align-items-center justify-content-start">
-                            <div class="art-time"><i class="el-icon-time"></i>：2019-08-29</div>
-                            <div class="d-flex align-items-center"><img class="tag" src="../../assets/tag.png" />：
-                                <el-tag size="mini">MVVM</el-tag><el-tag size="mini">设计模式</el-tag>
-                            </div>
-                        </el-row>
-                        <el-row class="art-body">
-                            <div class="side-img hidden-sm-and-down"><img class="art-banner" src="../../assets/mvvm.png"></div>
-                            <div class="side-abstract">
-                                <div class="art-abstract">
-                                    在 MVVM 设计模式中，也有 Model 层，负责存储数据。有 View 层，用于显示数据。但 MVVM 设计模式中，没有 Presenter 层。取而代之的是 V-Model 层级。
-                                    而 V-Model 并不需要我们来 进行编写，使用 MVVM 设计模式进行编码的时候，无需关注 V-Model 这一层是如何实现的，它完全是 Vue 内置的（因为涉及到Vue框架源码的实现，不做讲解）。而我们只需要更多的关注 M 层与 V层，即模型层和视图层。
-                                </div>
-                                <div class="art-more">
-                                    <router-link to="/index" tag="span">
-                                        <el-button plain>阅读全文</el-button>
-                                    </router-link>
-                                    <div class="view"><i class="el-icon-view"></i>12414</div>
-                                </div>
-                            </div>
-                        </el-row>
-                    </el-card>
-                    <img class="star" src="../../assets/star.png" />
-                </el-row>
-                <el-row class="art-item">
-                    <el-card shadow="hover">
-                        <h5><router-link to="/index" tag="span" class="art-title">鼠标悬浮时显示</router-link></h5>
-                        <el-row class="art-info d-flex align-items-center justify-content-start">
-                            <div class="art-time"><i class="el-icon-time"></i>：2019-08-29</div>
-                            <div class="d-flex align-items-center"><img class="tag" src="../../assets/tag.png" />：
-                                <el-tag size="mini">swagger2</el-tag>
-                            </div>
-                        </el-row>
-                        <el-row class="art-body">
-                            <div class="side-img hidden-sm-and-down"><img class="art-banner" src="../../assets/vue.jpg"></div>
-                            <div class="side-abstract">
-                                <div class="art-abstract">
-                                    Iconfont-国内功能很强大且图标内容很丰富的矢量图标库, 提供矢量图标下载、在快照 在小程序中使用阿里文字图标在小程序中使用阿里文字图标库前在小程序中使用阿里文字图标库前库前端开发的便捷工具 - AndrewNeo - CSDN博客
-                                </div>
-                                <div class="art-more">
-                                    <router-link to="/index" tag="span">
-                                        <el-button plain>阅读全文</el-button>
-                                    </router-link>
-                                    <div class="view"><i class="el-icon-view"></i>12414</div>
-                                </div>
-                            </div>
-                        </el-row>
-                    </el-card>
-                    <img class="star" src="../../assets/star.png" />
-                </el-row>
+                <div class="infinite-list-wrapper" style="overflow:auto">
+                    <ul
+                            class="list"
+                            v-infinite-scroll="load"
+                            infinite-scroll-disabled="disabled">
+                        <div v-for="i in articles.data">
+                            <el-row class="art-item">
+                                <el-card shadow="hover">
+                                    <h5><router-link to="/index" tag="span" class="art-title">{{i.title}}</router-link></h5>
+                                    <el-row class="art-info d-flex align-items-center justify-content-start">
+                                        <div class="art-time"><i class="el-icon-time"></i>：{{i.created_at}}</div>
+                                        <div class="d-flex align-items-center" >
+                                            <img class="tag" src="../../assets/tag.png" style="float:left"/>：
+                                            <div v-for="t in i.tag" style="float:left">
+                                                <el-tag size="mini">{{t.name}}</el-tag>
+                                            </div>
+                                        </div>
+                                    </el-row>
+                                    <el-row class="art-body">
+                                        <div class="side-img hidden-sm-and-down"><img class="art-banner" src="../../assets/laravel.png"></div>
+                                        <div class="side-abstract">
+                                            <div class="art-abstract">
+                                                {{i.excerpt}}
+                                            </div>
+                                            <div class="art-more">
+                                                <router-link to="/index" tag="span">
+                                                    <el-button plain>阅读全文</el-button>
+                                                </router-link>
+                                                <div class="view"><i class="el-icon-view"></i>{{i.view_count}}</div>
+                                            </div>
+                                        </div>
+                                    </el-row>
+                                </el-card>
+                                <img class="star" src="../../assets/star.png" />
+                            </el-row>
+                        </div>
+                    </ul>
+                    <p v-if="loading">加载中...</p>
+                    <p v-if="noMore">没有更多了</p>
+                </div>
                 <div class="block pagination">
                     <el-pagination background="" layout="prev, pager, next" :total="50">
                     </el-pagination>
@@ -223,6 +162,14 @@
     import Category from '../components/Category'
 
     export default {
+        data () {
+            return {
+                blogs:[],
+                meta:'',
+                count: 10,
+                loading: false
+            }
+        },
         name: 'blog',
         components: {
             Friend,
@@ -230,5 +177,43 @@
             Oauth,
             Category
         },
+        computed:{
+            noMore () {
+                return this.$store.getters.getArticles.meta.pagination.current_page >= this.$store.getters.getArticles.meta.pagination.total_pages;                // return this.count >= 20
+            },
+            disabled () {
+                return this.loading || this.noMore
+            },
+            articles(){
+                return this.$store.getters.getArticles;
+            }
+        },
+        watch:{
+            'blogs':'show'
+        },
+        created(){
+            this.$store.dispatch('loadArticles',{
+                id:'',
+            });
+            this.blogs = this.$store.getters.getArticles;
+        },
+        methods: {
+            show(){
+              // console.log(this.blogs);
+            },
+            load () {
+                console.log(this.$store.getters.getArticles.meta.pagination.current_page);
+                console.log(this.$store.getters.getArticles.meta.pagination.total_pages);
+                this.loading = true;
+                this.$store.dispatch('loadArticles',{
+                    id:'',
+                    page: ++this.$store.getters.getArticles.meta.pagination.current_page,
+                });
+                setTimeout(() => {
+                    this.blogs += this.$store.getters.getArticles;
+                    this.loading = false
+                }, 2000)
+            }
+        }
     }
 </script>
