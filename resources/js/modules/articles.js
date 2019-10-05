@@ -17,7 +17,7 @@ import ArticleAPI from '../api/articles';
 export const articles = {
     state: {
         //分类
-        articles: [],
+        articles: '',
         articlesLoadStatus:0,
         article: '',
         articleLoadStatus:0,
@@ -25,13 +25,18 @@ export const articles = {
         articleAddResponseMessages:'',
     },
     actions:{
-        loadArticles({commit},data){
+        loadArticles({commit,state},data ){
             commit('setArticlesLoadStatus',1);
             if(data.id === ''){
                 ArticleAPI.getArticles(data.page !== '' ? data.page : 1)
                     .then(function (response) {
-                        console.log(response.data);
-                        commit('setArticles', response.data);
+                        if(state.articles.data !== undefined){
+                            var merge_data = state.articles.data.concat(response.data.data);
+                            response.data.data = merge_data;
+                            console.log(response.data.meta);
+                            commit('setArticles',response.data);
+                        }
+                        commit('setArticles',response.data);
                         commit('setArticlesLoadStatus', 2);
                     })
                     .catch(function (error){
@@ -70,7 +75,6 @@ export const articles = {
             state.articlesLoadStatus = status;
         },
         setArticles(state,articles){
-
             state.articles = articles;
         },
         setArticleAddStatus(state,status){
@@ -85,7 +89,9 @@ export const articles = {
             return state.articles;
         },
         getArticlesLoadStatus(state){
-            return state.articlesLoadStatus;
+            return function(){
+                return state.articlesLoadStatus;
+            }
         },
         getArticleAddStatus(state){
             return function() {

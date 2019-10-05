@@ -3600,14 +3600,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      url: '/',
       loader: '',
       loginDialogFormVisible: false,
       form: {
@@ -3636,9 +3633,6 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   methods: {
-    toRescue: function toRescue() {
-      window.location.href = this.url;
-    },
     openMessage: function openMessage(title, type) {
       this.$message({
         message: title,
@@ -4703,10 +4697,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      blogs: [],
-      meta: '',
-      count: 10,
-      loading: false
+      loading: false,
+      infinite_box: {
+        height: '',
+        overflow: 'auto'
+      }
     };
   },
   name: 'blog',
@@ -4718,7 +4713,11 @@ __webpack_require__.r(__webpack_exports__);
   },
   computed: {
     noMore: function noMore() {
-      return this.$store.getters.getArticles.meta.pagination.current_page >= this.$store.getters.getArticles.meta.pagination.total_pages; // return this.count >= 20
+      if (this.$store.getters.getArticles.meta === undefined || this.$store.getters.getArticles.meta === undefined) {
+        return true;
+      } else {
+        return this.$store.getters.getArticles.meta.pagination.current_page >= this.$store.getters.getArticles.meta.pagination.total_pages;
+      }
     },
     disabled: function disabled() {
       return this.loading || this.noMore;
@@ -4727,31 +4726,31 @@ __webpack_require__.r(__webpack_exports__);
       return this.$store.getters.getArticles;
     }
   },
-  watch: {
-    'blogs': 'show'
-  },
   created: function created() {
     this.$store.dispatch('loadArticles', {
       id: ''
     });
-    this.blogs = this.$store.getters.getArticles;
+    var h = window.innerHeight - 128; //可见区域高度
+
+    console.log(h);
+    this.infinite_box.height = h + 'px';
   },
   methods: {
-    show: function show() {// console.log(this.blogs);
-    },
     load: function load() {
       var _this = this;
 
-      console.log(this.$store.getters.getArticles.meta.pagination.current_page);
-      console.log(this.$store.getters.getArticles.meta.pagination.total_pages);
       this.loading = true;
-      this.$store.dispatch('loadArticles', {
-        id: '',
-        page: ++this.$store.getters.getArticles.meta.pagination.current_page
-      });
       setTimeout(function () {
-        _this.blogs += _this.$store.getters.getArticles;
-        _this.loading = false;
+        _this.$store.dispatch('loadArticles', {
+          id: '',
+          page: 2
+        });
+
+        _this.$watch(_this.$store.getters.getArticlesLoadStatus, function () {
+          if (this.$store.getters.getArticlesLoadStatus() === 2) {
+            this.loading = false;
+          }
+        });
       }, 2000);
     }
   }
@@ -7548,7 +7547,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n#side .item[data-v-c8ad8caa] {\n    margin-bottom: 30px;\n}\n.art-item[data-v-c8ad8caa] {\n    margin-bottom: 30px;\n    position: relative;\n}\n.art-item .star[data-v-c8ad8caa] {\n    width: 60px;\n    height: 60px;\n    position: absolute;\n    top: 0;\n    right: 0;\n}\nimg.tag[data-v-c8ad8caa] {\n    width: 16px;\n    height: 16px;\n}\n.art-title[data-v-c8ad8caa] {\n    border-left: 3px solid #F56C6C;\n    padding-left: 5px;\n    cursor: pointer;\n}\n.art-title[data-v-c8ad8caa]:hover {\n    padding-left: 10px;\n    color: #409EFF;\n}\n.art-time[data-v-c8ad8caa] {\n    margin-right: 20px;\n}\n.art-body[data-v-c8ad8caa] {\n    display: flex;\n    padding: 10px 0;\n}\n.side-img[data-v-c8ad8caa] {\n    height: 150px;\n    width: 270px;\n    overflow: hidden;\n    margin-right: 10px;\n}\nimg.art-banner[data-v-c8ad8caa] {\n    width: 100%;\n    height: 100%;\n    transition: all 0.6s;\n}\nimg.art-banner[data-v-c8ad8caa]:hover {\n    transform: scale(1.4);\n}\n.side-abstract[data-v-c8ad8caa] {\n    flex: 1;\n    display: flex;\n    flex-direction: column;\n}\n.art-abstract[data-v-c8ad8caa] {\n    flex: 1;\n    color: #aaa;\n}\n.art-more[data-v-c8ad8caa] {\n    height: 40px;\n    display: flex;\n    justify-content: space-between;\n    align-items: flex-end;\n}\n.art-more .view[data-v-c8ad8caa] {\n    color: #aaa;\n}\nh5[data-v-c8ad8caa]{\n    font-size: 18px;\n}\n.pagination[data-v-c8ad8caa] {\n    background-color: #F9F9F9;\n}\nul[data-v-c8ad8caa]{\n    list-style:none;\n    margin:0; padding:0;\n}\n", ""]);
+exports.push([module.i, "\n#side .item[data-v-c8ad8caa] {\n    margin-bottom: 30px;\n}\n.art-item[data-v-c8ad8caa] {\n    margin-bottom: 30px;\n    position: relative;\n}\n.art-item .star[data-v-c8ad8caa] {\n    width: 60px;\n    height: 60px;\n    position: absolute;\n    top: 0;\n    right: 0;\n}\nimg.tag[data-v-c8ad8caa] {\n    width: 16px;\n    height: 16px;\n}\n.art-title[data-v-c8ad8caa] {\n    border-left: 3px solid #F56C6C;\n    padding-left: 5px;\n    cursor: pointer;\n}\n.art-title[data-v-c8ad8caa]:hover {\n    padding-left: 10px;\n    color: #409EFF;\n}\n.art-time[data-v-c8ad8caa] {\n    margin-right: 20px;\n}\n.art-body[data-v-c8ad8caa] {\n    display: flex;\n    padding: 10px 0;\n}\n.side-img[data-v-c8ad8caa] {\n    height: 150px;\n    width: 270px;\n    overflow: hidden;\n    margin-right: 10px;\n}\nimg.art-banner[data-v-c8ad8caa] {\n    width: 100%;\n    height: 100%;\n    transition: all 0.6s;\n}\nimg.art-banner[data-v-c8ad8caa]:hover {\n    transform: scale(1.4);\n}\n.side-abstract[data-v-c8ad8caa] {\n    flex: 1;\n    display: flex;\n    flex-direction: column;\n}\n.art-abstract[data-v-c8ad8caa] {\n    flex: 1;\n    color: #aaa;\n}\n.art-more[data-v-c8ad8caa] {\n    height: 40px;\n    display: flex;\n    justify-content: space-between;\n    align-items: flex-end;\n}\n.art-more .view[data-v-c8ad8caa] {\n    color: #aaa;\n}\nh5[data-v-c8ad8caa]{\n    font-size: 18px;\n}\n.pagination[data-v-c8ad8caa] {\n    background-color: #F9F9F9;\n}\nul[data-v-c8ad8caa]{\n    list-style:none;\n    margin:0; padding:0;\n}\n.infinite-list-wrapper p[data-v-c8ad8caa]{\n    text-align: center;\n}\n", ""]);
 
 // exports
 
@@ -95836,12 +95835,6 @@ var render = function() {
           _c(
             "el-row",
             [
-              _c("div", {
-                ref: "toRescue",
-                staticStyle: { display: "block" },
-                on: { click: _vm.toRescue }
-              }),
-              _vm._v(" "),
               _c(
                 "el-form",
                 { attrs: { model: _vm.form } },
@@ -96934,7 +96927,7 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    { staticClass: "blog" },
+    { staticClass: "blog", staticStyle: { overflow: "auto" } },
     [
       _c(
         "el-row",
@@ -96943,10 +96936,7 @@ var render = function() {
           _c("el-col", { attrs: { span: 16 } }, [
             _c(
               "div",
-              {
-                staticClass: "infinite-list-wrapper",
-                staticStyle: { overflow: "auto" }
-              },
+              { staticClass: "infinite-list-wrapper", style: _vm.infinite_box },
               [
                 _c(
                   "ul",
@@ -96964,7 +96954,7 @@ var render = function() {
                   },
                   _vm._l(_vm.articles.data, function(i) {
                     return _c(
-                      "div",
+                      "li",
                       [
                         _c(
                           "el-row",
@@ -97009,18 +96999,25 @@ var render = function() {
                                       [
                                         _c("img", {
                                           staticClass: "tag",
-                                          staticStyle: { float: "left" },
+                                          staticStyle: {
+                                            float: "left",
+                                            "margin-right": "3px",
+                                            "margin-top": "4px"
+                                          },
                                           attrs: {
                                             src: __webpack_require__(/*! ../../assets/tag.png */ "./resources/assets/tag.png")
                                           }
                                         }),
-                                        _vm._v(
-                                          "：\n                                        "
-                                        ),
+                                        _vm._v(" "),
                                         _vm._l(i.tag, function(t) {
                                           return _c(
                                             "div",
-                                            { staticStyle: { float: "left" } },
+                                            {
+                                              staticStyle: {
+                                                float: "left",
+                                                "margin-left": "2px"
+                                              }
+                                            },
                                             [
                                               _c(
                                                 "el-tag",
@@ -97056,9 +97053,9 @@ var render = function() {
                                   _c("div", { staticClass: "side-abstract" }, [
                                     _c("div", { staticClass: "art-abstract" }, [
                                       _vm._v(
-                                        "\n                                            " +
+                                        "\n                                                " +
                                           _vm._s(i.excerpt) +
-                                          "\n                                        "
+                                          "\n                                            "
                                       )
                                     ]),
                                     _vm._v(" "),
@@ -97112,23 +97109,10 @@ var render = function() {
                 _vm._v(" "),
                 _vm.loading ? _c("p", [_vm._v("加载中...")]) : _vm._e(),
                 _vm._v(" "),
-                _vm.noMore ? _c("p", [_vm._v("没有更多了")]) : _vm._e()
+                _vm.noMore
+                  ? _c("p", [_vm._v("很高兴你翻到这里，但是真的没有了...")])
+                  : _vm._e()
               ]
-            ),
-            _vm._v(" "),
-            _c(
-              "div",
-              { staticClass: "block pagination" },
-              [
-                _c("el-pagination", {
-                  attrs: {
-                    background: "",
-                    layout: "prev, pager, next",
-                    total: 50
-                  }
-                })
-              ],
-              1
             )
           ]),
           _vm._v(" "),
@@ -115332,7 +115316,7 @@ __webpack_require__.r(__webpack_exports__);
 var articles = {
   state: {
     //分类
-    articles: [],
+    articles: '',
     articlesLoadStatus: 0,
     article: '',
     articleLoadStatus: 0,
@@ -115341,12 +115325,22 @@ var articles = {
   },
   actions: {
     loadArticles: function loadArticles(_ref, data) {
-      var commit = _ref.commit;
+      var commit = _ref.commit,
+          state = _ref.state;
       commit('setArticlesLoadStatus', 1);
 
       if (data.id === '') {
         _api_articles__WEBPACK_IMPORTED_MODULE_0__["default"].getArticles(data.page !== '' ? data.page : 1).then(function (response) {
-          console.log(response.data);
+          console.log(state.articles.data);
+          console.log(response.data.data);
+
+          if (state.articles.data !== undefined) {
+            var merge_data = state.articles.data.concat(response.data.data);
+            response.data.data = merge_data;
+            console.log(response.data.meta);
+            commit('setArticles', response.data);
+          }
+
           commit('setArticles', response.data);
           commit('setArticlesLoadStatus', 2);
         })["catch"](function (error) {
@@ -115398,7 +115392,9 @@ var articles = {
       return state.articles;
     },
     getArticlesLoadStatus: function getArticlesLoadStatus(state) {
-      return state.articlesLoadStatus;
+      return function () {
+        return state.articlesLoadStatus;
+      };
     },
     getArticleAddStatus: function getArticleAddStatus(state) {
       return function () {

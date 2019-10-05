@@ -89,26 +89,30 @@
         list-style:none;
         margin:0; padding:0;
     }
+    .infinite-list-wrapper p{
+        text-align: center;
+    }
 </style>
 
 <template>
-    <div class="blog">
+    <div class="blog" style="overflow:auto">
         <el-row id="artList" type="flex" justify="space-around">
             <el-col :span="16">
-                <div class="infinite-list-wrapper" style="overflow:auto">
-                    <ul
+                <div class="infinite-list-wrapper" :style="infinite_box">
+                        <ul
                             class="list"
                             v-infinite-scroll="load"
                             infinite-scroll-disabled="disabled">
-                        <div v-for="i in articles.data">
+                        <li v-for="i in articles.data">
                             <el-row class="art-item">
                                 <el-card shadow="hover">
                                     <h5><router-link to="/index" tag="span" class="art-title">{{i.title}}</router-link></h5>
                                     <el-row class="art-info d-flex align-items-center justify-content-start">
                                         <div class="art-time"><i class="el-icon-time"></i>：{{i.created_at}}</div>
                                         <div class="d-flex align-items-center" >
-                                            <img class="tag" src="../../assets/tag.png" style="float:left"/>：
-                                            <div v-for="t in i.tag" style="float:left">
+                                            <img class="tag" src="../../assets/tag.png" style="float:left;margin-right:3px;
+margin-top: 4px;"/>
+                                            <div v-for="t in i.tag" style="float:left;margin-left: 2px;">
                                                 <el-tag size="mini">{{t.name}}</el-tag>
                                             </div>
                                         </div>
@@ -130,14 +134,10 @@
                                 </el-card>
                                 <img class="star" src="../../assets/star.png" />
                             </el-row>
-                        </div>
+                        </li>
                     </ul>
                     <p v-if="loading">加载中...</p>
-                    <p v-if="noMore">没有更多了</p>
-                </div>
-                <div class="block pagination">
-                    <el-pagination background="" layout="prev, pager, next" :total="50">
-                    </el-pagination>
+                    <p v-if="noMore">很高兴你翻到这里，但是真的没有了...</p>
                 </div>
             </el-col>
             <el-col :span="6" class="hidden-sm-and-down" id="side">
@@ -164,10 +164,11 @@
     export default {
         data () {
             return {
-                blogs:[],
-                meta:'',
-                count: 10,
-                loading: false
+                loading: false,
+                infinite_box:{
+                    height:'',
+                    overflow: 'auto',
+                },
             }
         },
         name: 'blog',
@@ -179,7 +180,11 @@
         },
         computed:{
             noMore () {
-                return this.$store.getters.getArticles.meta.pagination.current_page >= this.$store.getters.getArticles.meta.pagination.total_pages;                // return this.count >= 20
+                if(this.$store.getters.getArticles.meta === undefined || this.$store.getters.getArticles.meta === undefined ){
+                    return true;
+                }else{
+                    return this.$store.getters.getArticles.meta.pagination.current_page >= this.$store.getters.getArticles.meta.pagination.total_pages;
+                }
             },
             disabled () {
                 return this.loading || this.noMore
@@ -188,31 +193,31 @@
                 return this.$store.getters.getArticles;
             }
         },
-        watch:{
-            'blogs':'show'
-        },
         created(){
             this.$store.dispatch('loadArticles',{
                 id:'',
             });
-            this.blogs = this.$store.getters.getArticles;
+            var h = window.innerHeight-128;//可见区域高度
+            console.log(h);
+            this.infinite_box.height = h+'px';
         },
         methods: {
-            show(){
-              // console.log(this.blogs);
-            },
             load () {
-                console.log(this.$store.getters.getArticles.meta.pagination.current_page);
-                console.log(this.$store.getters.getArticles.meta.pagination.total_pages);
                 this.loading = true;
-                this.$store.dispatch('loadArticles',{
-                    id:'',
-                    page: ++this.$store.getters.getArticles.meta.pagination.current_page,
-                });
                 setTimeout(() => {
-                    this.blogs += this.$store.getters.getArticles;
-                    this.loading = false
-                }, 2000)
+                    this.$store.dispatch('loadArticles',{
+                        id:'',
+                        page: 2,
+                    });
+                    this.$watch(this.$store.getters.getArticlesLoadStatus, function () {
+                        if(this.$store.getters.getArticlesLoadStatus() === 2) {
+                            this.loading = false
+                        }
+                        if(this.$store.getters.getArticlesLoadStatus() === 3) {
+                            this.$message.error('错了哦，懒加载文章失败了');
+                        }
+                    });
+                }, 2000);
             }
         }
     }
