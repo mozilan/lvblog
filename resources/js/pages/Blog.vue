@@ -20,7 +20,10 @@
         width: 16px;
         height: 16px;
     }
-
+    .clear-title{
+        margin-top: 15px;
+        margin-bottom: 15px;
+    }
     .art-title {
         border-left: 3px solid #F56C6C;
         padding-left: 5px;
@@ -28,12 +31,11 @@
     }
 
     .art-title:hover {
-        padding-left: 10px;
         color: #409EFF;
     }
 
     .art-time {
-        margin-right: 20px;
+        margin: 6px 0;
     }
 
     .art-body {
@@ -106,7 +108,7 @@
                         <li v-for="i in articles.data">
                             <el-row class="art-item">
                                 <el-card shadow="hover">
-                                    <h5><router-link to="/index" tag="span" class="art-title">{{i.title}}</router-link></h5>
+                                    <h5 class="clear-title"><router-link to="/index" tag="span" class="art-title">{{i.title}}</router-link></h5>
                                     <el-row class="art-info d-flex align-items-center justify-content-start">
                                         <div class="art-time"><i class="el-icon-time"></i>：{{i.created_at}}</div>
                                         <div class="d-flex align-items-center">
@@ -208,7 +210,7 @@
                 setTimeout(() => {
                     this.$store.dispatch('loadArticles',{
                         id:'',
-                        page: 2,
+                        page: this.$store.getters.getArticles.meta === undefined ? 1 : ++this.$store.getters.getArticles.meta.pagination.current_page,
                     });
                     this.$watch(this.$store.getters.getArticlesLoadStatus, function () {
                         if(this.$store.getters.getArticlesLoadStatus() === 2) {

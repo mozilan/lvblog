@@ -2,17 +2,34 @@
           <el-container style="display:block">
                <el-row>
                     <el-form :model="form" :style="form_style">
-                         <el-col :xs="24" :sm="24" :md="24" :lg="24" class="bl-margin_bottom-title">
+                         <div class="bl-margin_bottom-title">
                               <el-form-item label="">
                                    <el-input
+                                           type="textarea"
+                                           maxlength="30"
+                                           show-word-limit
                                            placeholder="请输入文章标题"
                                            suffix-icon="el-icon-bank-card"
-                                           v-model="form.title">
+                                           v-model="form.title"
+                                           :autosize="{ minRows: 2, maxRows: 2}">
                                    </el-input>
                               </el-form-item>
-                         </el-col>
-                              <mavon-editor ref=md :toolbars="markdownOption" v-model="form.handbook" :ishljs = "true" @imgAdd="$imgAdd"  style="height: 100%"></mavon-editor>
-                         <el-col :xs="24" :sm="24" :md="18" :lg="12" class="bl-margin-top">
+                         </div>
+                         <mavon-editor ref=md :toolbars="markdownOption" v-model="form.handbook" :ishljs = "true" @imgAdd="$imgAdd"  style="height: 100%"></mavon-editor>
+                         <div class="bl-margin-top">
+                              <el-form-item>
+                                   <el-input
+                                           type="textarea"
+                                           placeholder="文章摘要"
+                                           maxlength="100"
+                                           show-word-limit
+                                           v-model="form.excerpt"
+                                           :autosize="{ minRows: 2, maxRows: 4}"
+                                   >
+                                   </el-input>
+                              </el-form-item>
+                         </div>
+                         <div class="bl-margin-top">
                               <el-form-item label="文章标签：">
                                    <div class="tag">
                                         <el-tag
@@ -36,8 +53,8 @@
                                         <el-button v-else class="button-new-tag" size="small" @click="tagShowInput">+ 添加标签</el-button>
                                    </div>
                               </el-form-item>
-                         </el-col>
-                         <el-col :xs="24" :sm="24" :md="18" :lg="12" class="bl-margin-top">
+                         </div>
+                         <div class="bl-margin-top">
                               <el-form-item label="文章分类：">
                                    <div class="category">
                                         <el-tag
@@ -69,7 +86,9 @@
                                         </el-select>
                                    </div>
                               </el-form-item>
-                         </el-col><el-col :xs="24" :sm="18" :md="12" :lg="6">
+                         </div>
+
+                         <div>
                               <el-form-item label="发布形式：">
                                    <div class="private">
                                         <el-switch
@@ -82,11 +101,11 @@
                                         </el-switch>
                                    </div>
                               </el-form-item>
-                         </el-col>
-                          <el-col :xs="24" :sm="24" :md="24" :lg="24">
+                         </div>
+                          <div>
                               <el-button class="bl-public" type="primary" @click="publishArticle(0)">发布博客</el-button>
                               <el-button class="bl-save" type="primary" @click="publishArticle(1)">保存草稿</el-button>
-                         </el-col>
+                         </div>
                     </el-form>
                </el-row>
           </el-container>
@@ -155,6 +174,7 @@
                          category_id:'',
                          tagDynamicTags: [],
                          public:true,
+                         excerpt:'',
                     },
                     categoryNameArr:[],
                };
@@ -299,6 +319,7 @@
                          body:this.form.handbook,
                          tags:this.form.tagDynamicTags,
                          category_id:this.form.category_id,
+                         excerpt:this.form.excerpt,
                          target: !this.form.public && target === 0 ? 2 : target
                     });
                     this.$watch(this.$store.getters.getArticleAddStatus, function () {
@@ -312,6 +333,7 @@
                               this.form.title = '';
                               this.form.handbook = '';
                               this.form.tagDynamicTags = '';
+                              this.form.excerpt= '';
                               this.$router.push('/blog');
                          }
                          if (this.$store.getters.getArticleAddStatus()  === 3) {
@@ -375,5 +397,8 @@
      }
      .bl-margin_bottom-title{
           margin-bottom:15px;
+     }
+     .el-textarea{
+          font-size: 16px;
      }
 </style>

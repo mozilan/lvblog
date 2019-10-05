@@ -14,12 +14,13 @@ export default {
 
         });
     },
-    postArticle: function(title,body,tags,category_id,target){
+    postArticle: function(title,body,tags,category_id,excerpt,target){
         return axios.post(LVBLOG_CONFIG.API_URL + '/articles',{
             title:title,
             body:body,
             tags:tags,
             category_id:category_id,
+            excerpt:excerpt,
             target:target,
         });
     }

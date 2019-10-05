@@ -55,7 +55,7 @@ export const articles = {
         },
         addArticle({commit,dispatch},data){
             commit('setArticleAddStatus', 1);
-            ArticleAPI.postArticle(data.title,data.body,data.tags,data.category_id,data.target)
+            ArticleAPI.postArticle(data.title,data.body,data.tags,data.category_id,data.excerpt,data.target)
                 .then(function (response) {
                     commit('setArticleAddStatus', 2);
                 })

@@ -29,7 +29,6 @@
                     <router-view></router-view>
                 </el-col>
             </el-row>
-            <LFooter></LFooter>
         </el-container>
         <Register></Register>
         <Login></Login>

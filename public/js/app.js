@@ -4691,6 +4691,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 
 
 
@@ -4745,7 +4747,7 @@ __webpack_require__.r(__webpack_exports__);
       setTimeout(function () {
         _this.$store.dispatch('loadArticles', {
           id: '',
-          page: 2
+          page: _this.$store.getters.getArticles.meta === undefined ? 1 : ++_this.$store.getters.getArticles.meta.pagination.current_page
         });
 
         _this.$watch(_this.$store.getters.getArticlesLoadStatus, function () {
@@ -4778,6 +4780,25 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var mavon_editor_dist_css_index_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! mavon-editor/dist/css/index.css */ "./node_modules/mavon-editor/dist/css/index.css");
 /* harmony import */ var mavon_editor_dist_css_index_css__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(mavon_editor_dist_css_index_css__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _event_bus__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../event-bus */ "./resources/js/event-bus.js");
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -4965,7 +4986,8 @@ __webpack_require__.r(__webpack_exports__);
         handbook: "#### 开始你的创作",
         category_id: '',
         tagDynamicTags: [],
-        "public": true
+        "public": true,
+        excerpt: ''
       },
       categoryNameArr: []
     };
@@ -5119,6 +5141,7 @@ __webpack_require__.r(__webpack_exports__);
         body: this.form.handbook,
         tags: this.form.tagDynamicTags,
         category_id: this.form.category_id,
+        excerpt: this.form.excerpt,
         target: !this.form["public"] && target === 0 ? 2 : target
       });
       this.$watch(this.$store.getters.getArticleAddStatus, function () {
@@ -5132,6 +5155,7 @@ __webpack_require__.r(__webpack_exports__);
           this.form.title = '';
           this.form.handbook = '';
           this.form.tagDynamicTags = '';
+          this.form.excerpt = '';
           this.$router.push('/blog');
         }
 
@@ -5430,7 +5454,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_global_RegisterModal__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/global/RegisterModal */ "./resources/js/components/global/RegisterModal.vue");
 /* harmony import */ var _components_global_LoginModal__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/global/LoginModal */ "./resources/js/components/global/LoginModal.vue");
 /* harmony import */ var _components_global_Notification__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../components/global/Notification */ "./resources/js/components/global/Notification.vue");
-//
 //
 //
 //
@@ -7556,7 +7579,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n#side .item[data-v-c8ad8caa] {\n    margin-bottom: 30px;\n}\n.art-item[data-v-c8ad8caa] {\n    margin-bottom: 30px;\n    position: relative;\n}\n.art-item .star[data-v-c8ad8caa] {\n    width: 60px;\n    height: 60px;\n    position: absolute;\n    top: 0;\n    right: 0;\n}\nimg.tag[data-v-c8ad8caa] {\n    width: 16px;\n    height: 16px;\n}\n.art-title[data-v-c8ad8caa] {\n    border-left: 3px solid #F56C6C;\n    padding-left: 5px;\n    cursor: pointer;\n}\n.art-title[data-v-c8ad8caa]:hover {\n    padding-left: 10px;\n    color: #409EFF;\n}\n.art-time[data-v-c8ad8caa] {\n    margin-right: 20px;\n}\n.art-body[data-v-c8ad8caa] {\n    display: flex;\n    padding: 10px 0;\n}\n.side-img[data-v-c8ad8caa] {\n    height: 150px;\n    width: 270px;\n    overflow: hidden;\n    margin-right: 10px;\n}\nimg.art-banner[data-v-c8ad8caa] {\n    width: 100%;\n    height: 100%;\n    transition: all 0.6s;\n}\nimg.art-banner[data-v-c8ad8caa]:hover {\n    transform: scale(1.4);\n}\n.side-abstract[data-v-c8ad8caa] {\n    flex: 1;\n    display: flex;\n    flex-direction: column;\n}\n.art-abstract[data-v-c8ad8caa] {\n    flex: 1;\n    color: #aaa;\n}\n.art-more[data-v-c8ad8caa] {\n    height: 40px;\n    display: flex;\n    justify-content: space-between;\n    align-items: flex-end;\n}\n.art-more .view[data-v-c8ad8caa] {\n    color: #aaa;\n}\nh5[data-v-c8ad8caa]{\n    font-size: 18px;\n}\n.pagination[data-v-c8ad8caa] {\n    background-color: #F9F9F9;\n}\nul[data-v-c8ad8caa]{\n    list-style:none;\n    margin:0; padding:0;\n}\n.infinite-list-wrapper p[data-v-c8ad8caa]{\n    text-align: center;\n}\n", ""]);
+exports.push([module.i, "\n#side .item[data-v-c8ad8caa] {\n    margin-bottom: 30px;\n}\n.art-item[data-v-c8ad8caa] {\n    margin-bottom: 30px;\n    position: relative;\n}\n.art-item .star[data-v-c8ad8caa] {\n    width: 60px;\n    height: 60px;\n    position: absolute;\n    top: 0;\n    right: 0;\n}\nimg.tag[data-v-c8ad8caa] {\n    width: 16px;\n    height: 16px;\n}\n.clear-title[data-v-c8ad8caa]{\n    margin-top: 15px;\n    margin-bottom: 20px;\n}\n.art-title[data-v-c8ad8caa] {\n    border-left: 3px solid #F56C6C;\n    padding-left: 5px;\n    cursor: pointer;\n}\n.art-title[data-v-c8ad8caa]:hover {\n    color: #409EFF;\n}\n.art-time[data-v-c8ad8caa] {\n    margin: 6px 0;\n}\n.art-body[data-v-c8ad8caa] {\n    display: flex;\n    padding: 10px 0;\n}\n.side-img[data-v-c8ad8caa] {\n    height: 150px;\n    width: 270px;\n    overflow: hidden;\n    margin-right: 10px;\n}\nimg.art-banner[data-v-c8ad8caa] {\n    width: 100%;\n    height: 100%;\n    transition: all 0.6s;\n}\nimg.art-banner[data-v-c8ad8caa]:hover {\n    transform: scale(1.4);\n}\n.side-abstract[data-v-c8ad8caa] {\n    flex: 1;\n    display: flex;\n    flex-direction: column;\n}\n.art-abstract[data-v-c8ad8caa] {\n    flex: 1;\n    color: #aaa;\n}\n.art-more[data-v-c8ad8caa] {\n    height: 40px;\n    display: flex;\n    justify-content: space-between;\n    align-items: flex-end;\n}\n.art-more .view[data-v-c8ad8caa] {\n    color: #aaa;\n}\nh5[data-v-c8ad8caa]{\n    font-size: 18px;\n}\n.pagination[data-v-c8ad8caa] {\n    background-color: #F9F9F9;\n}\nul[data-v-c8ad8caa]{\n    list-style:none;\n    margin:0; padding:0;\n}\n.infinite-list-wrapper p[data-v-c8ad8caa]{\n    text-align: center;\n}\n", ""]);
 
 // exports
 
@@ -7575,7 +7598,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n#editor {\n     margin: auto;\n     width: 80%;\n     height: 580px;\n}\n.el-tag + .el-tag {\n     margin-left: 10px;\n}\n.button-new-tag {\n     margin-left: 10px;\n     height: 32px;\n     line-height: 30px;\n     padding-top: 0;\n     padding-bottom: 0;\n}\n.input-new-tag {\n     width: 90px;\n     margin-left: 10px;\n     vertical-align: bottom;\n}\n.bl-public{\n     float: left;\n}\n.bl-save{\n     float: right;\n}\n.bl-margin-top{\n     margin-top: 40px ;\n}\n.button-new-tag{\n     margin-left:0;\n     height:40px;\n}\n.el-input--small .el-input__inner{\n     height: 40px;\n}\n.el-switch__label{\n     height:auto;\n}\n.bl-margin_bottom-title{\n     margin-bottom:15px;\n}\n", ""]);
+exports.push([module.i, "\n#editor {\n     margin: auto;\n     width: 80%;\n     height: 580px;\n}\n.el-tag + .el-tag {\n     margin-left: 10px;\n}\n.button-new-tag {\n     margin-left: 10px;\n     height: 32px;\n     line-height: 30px;\n     padding-top: 0;\n     padding-bottom: 0;\n}\n.input-new-tag {\n     width: 90px;\n     margin-left: 10px;\n     vertical-align: bottom;\n}\n.bl-public{\n     float: left;\n}\n.bl-save{\n     float: right;\n}\n.bl-margin-top{\n     margin-top: 40px ;\n}\n.button-new-tag{\n     margin-left:0;\n     height:40px;\n}\n.el-input--small .el-input__inner{\n     height: 40px;\n}\n.el-switch__label{\n     height:auto;\n}\n.bl-margin_bottom-title{\n     margin-bottom:15px;\n}\n.el-textarea{\n     font-size: 16px;\n}\n", ""]);
 
 // exports
 
@@ -96975,6 +96998,7 @@ var render = function() {
                               [
                                 _c(
                                   "h5",
+                                  { staticClass: "clear-title" },
                                   [
                                     _c(
                                       "router-link",
@@ -97188,11 +97212,8 @@ var render = function() {
             { style: _vm.form_style, attrs: { model: _vm.form } },
             [
               _c(
-                "el-col",
-                {
-                  staticClass: "bl-margin_bottom-title",
-                  attrs: { xs: 24, sm: 24, md: 24, lg: 24 }
-                },
+                "div",
+                { staticClass: "bl-margin_bottom-title" },
                 [
                   _c(
                     "el-form-item",
@@ -97200,8 +97221,12 @@ var render = function() {
                     [
                       _c("el-input", {
                         attrs: {
+                          type: "textarea",
+                          maxlength: "30",
+                          "show-word-limit": "",
                           placeholder: "请输入文章标题",
-                          "suffix-icon": "el-icon-bank-card"
+                          "suffix-icon": "el-icon-bank-card",
+                          autosize: { minRows: 2, maxRows: 2 }
                         },
                         model: {
                           value: _vm.form.title,
@@ -97233,11 +97258,38 @@ var render = function() {
               }),
               _vm._v(" "),
               _c(
-                "el-col",
-                {
-                  staticClass: "bl-margin-top",
-                  attrs: { xs: 24, sm: 24, md: 18, lg: 12 }
-                },
+                "div",
+                { staticClass: "bl-margin-top" },
+                [
+                  _c(
+                    "el-form-item",
+                    [
+                      _c("el-input", {
+                        attrs: {
+                          type: "textarea",
+                          placeholder: "文章摘要",
+                          maxlength: "100",
+                          "show-word-limit": "",
+                          autosize: { minRows: 2, maxRows: 4 }
+                        },
+                        model: {
+                          value: _vm.form.excerpt,
+                          callback: function($$v) {
+                            _vm.$set(_vm.form, "excerpt", $$v)
+                          },
+                          expression: "form.excerpt"
+                        }
+                      })
+                    ],
+                    1
+                  )
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                { staticClass: "bl-margin-top" },
                 [
                   _c("el-form-item", { attrs: { label: "文章标签：" } }, [
                     _c(
@@ -97318,11 +97370,8 @@ var render = function() {
               ),
               _vm._v(" "),
               _c(
-                "el-col",
-                {
-                  staticClass: "bl-margin-top",
-                  attrs: { xs: 24, sm: 24, md: 18, lg: 12 }
-                },
+                "div",
+                { staticClass: "bl-margin-top" },
                 [
                   _c("el-form-item", { attrs: { label: "文章分类：" } }, [
                     _c(
@@ -97423,9 +97472,9 @@ var render = function() {
                 ],
                 1
               ),
+              _vm._v(" "),
               _c(
-                "el-col",
-                { attrs: { xs: 24, sm: 18, md: 12, lg: 6 } },
+                "div",
                 [
                   _c("el-form-item", { attrs: { label: "发布形式：" } }, [
                     _c(
@@ -97460,8 +97509,7 @@ var render = function() {
               ),
               _vm._v(" "),
               _c(
-                "el-col",
-                { attrs: { xs: 24, sm: 24, md: 24, lg: 24 } },
+                "div",
                 [
                   _c(
                     "el-button",
@@ -98091,9 +98139,7 @@ var render = function() {
               )
             ],
             1
-          ),
-          _vm._v(" "),
-          _c("LFooter")
+          )
         ],
         1
       ),
@@ -114283,12 +114329,13 @@ __webpack_require__.r(__webpack_exports__);
   getArticle: function getArticle(id) {
     return axios.get(_config_js__WEBPACK_IMPORTED_MODULE_0__["LVBLOG_CONFIG"].API_URL + '/articles', {});
   },
-  postArticle: function postArticle(title, body, tags, category_id, target) {
+  postArticle: function postArticle(title, body, tags, category_id, excerpt, target) {
     return axios.post(_config_js__WEBPACK_IMPORTED_MODULE_0__["LVBLOG_CONFIG"].API_URL + '/articles', {
       title: title,
       body: body,
       tags: tags,
       category_id: category_id,
+      excerpt: excerpt,
       target: target
     });
   }
@@ -115281,6 +115328,8 @@ switch ("development") {
     break;
 }
 
+var ValineAppID = 'vEWC8aDW7kv3G3fW021C6LII-gzGzoHsz';
+var ValineAppKey = 'mgzfz3n69093F8zHv6Q8EySf';
 var LVBLOG_CONFIG = {
   API_URL: api_url
 };
@@ -115372,7 +115421,7 @@ var articles = {
       var commit = _ref2.commit,
           dispatch = _ref2.dispatch;
       commit('setArticleAddStatus', 1);
-      _api_articles__WEBPACK_IMPORTED_MODULE_0__["default"].postArticle(data.title, data.body, data.tags, data.category_id, data.target).then(function (response) {
+      _api_articles__WEBPACK_IMPORTED_MODULE_0__["default"].postArticle(data.title, data.body, data.tags, data.category_id, data.excerpt, data.target).then(function (response) {
         commit('setArticleAddStatus', 2);
       })["catch"](function (error) {
         commit('setArticleAddStatus', 3);
