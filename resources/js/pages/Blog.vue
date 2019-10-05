@@ -107,7 +107,7 @@
                         <li v-for="i in articles.data">
                             <el-row class="art-item">
                                 <el-card shadow="hover">
-                                    <h5 class="clear-title"><router-link to="/index" tag="span" class="art-title">{{i.title}}</router-link></h5>
+                                    <h5 class="clear-title"><router-link :to="{name:'art',params: {art_id:i.id}}" tag="span" class="art-title">{{i.title}}</router-link></h5>
                                     <el-row class="art-info d-flex align-items-center justify-content-start">
                                         <div class="art-time"><i class="el-icon-time"></i>：{{i.created_at}}</div>
                                         <div class="d-flex align-items-center">
@@ -119,7 +119,7 @@
                                         </div>
                                     </el-row>
                                     <el-row class="art-body">
-                                        <div class="side-img hidden-sm-and-down"><img class="art-banner" src="../../assets/laravel.png"></div>
+                                        <div class="side-img hidden-sm-and-down"><img class="art-banner" :src="img_src+i.id"></div>
                                         <div class="side-abstract">
                                             <div class="art-abstract">
                                                 {{i.excerpt}}
@@ -171,6 +171,7 @@
                     height:'',
                     overflow: 'auto',
                 },
+                img_src:'https://s0.xinger.ink/acgimg/acgurl.php?',
             }
         },
         name: 'blog',

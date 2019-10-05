@@ -70,8 +70,9 @@
 <style lang="scss">
     #artcle-info {
         padding: 20px;
-        background-image: url(../../assets/vue.jpg);
+        background-image: url(https://s0.xinger.ink/acgimg/acgurl.php?678);
         margin-bottom: 40px;
+        background-size: 850px 416px;
     }
 
     #artcle-info .abstract {
