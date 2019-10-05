@@ -37,7 +37,7 @@
 </template>
 
 <script>
-    import LFooter from '../components/L-footer'
+
     import Navigation from '../components/global/NavigationModal';
     import Register from '../components/global/RegisterModal';
     import Login from '../components/global/LoginModal';
@@ -56,7 +56,6 @@
         components: {
             Navigation,
             Register,
-            LFooter,
             Login,
             Notification,
         }

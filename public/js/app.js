@@ -4533,6 +4533,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_tag__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/tag */ "./resources/js/components/tag.vue");
 /* harmony import */ var _components_Oauth__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/Oauth */ "./resources/js/components/Oauth.vue");
 /* harmony import */ var _components_Category__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../components/Category */ "./resources/js/components/Category.vue");
+/* harmony import */ var _components_L_footer__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../components/L-footer */ "./resources/js/components/L-footer.vue");
 //
 //
 //
@@ -4690,6 +4691,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+
 
 
 
@@ -4709,7 +4711,8 @@ __webpack_require__.r(__webpack_exports__);
     Friend: _components_friend__WEBPACK_IMPORTED_MODULE_0__["default"],
     Tag: _components_tag__WEBPACK_IMPORTED_MODULE_1__["default"],
     Oauth: _components_Oauth__WEBPACK_IMPORTED_MODULE_2__["default"],
-    Category: _components_Category__WEBPACK_IMPORTED_MODULE_3__["default"]
+    Category: _components_Category__WEBPACK_IMPORTED_MODULE_3__["default"],
+    LFooter: _components_L_footer__WEBPACK_IMPORTED_MODULE_4__["default"]
   },
   computed: {
     noMore: function noMore() {
@@ -4732,7 +4735,6 @@ __webpack_require__.r(__webpack_exports__);
     });
     var h = window.innerHeight - 128; //可见区域高度
 
-    console.log(h);
     this.infinite_box.height = h + 'px';
   },
   methods: {
@@ -4749,6 +4751,10 @@ __webpack_require__.r(__webpack_exports__);
         _this.$watch(_this.$store.getters.getArticlesLoadStatus, function () {
           if (this.$store.getters.getArticlesLoadStatus() === 2) {
             this.loading = false;
+          }
+
+          if (this.$store.getters.getArticlesLoadStatus() === 3) {
+            this.$message.error('错了哦，懒加载文章失败了');
           }
         });
       }, 2000);
@@ -4877,6 +4883,9 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
+      form_style: {
+        height: ''
+      },
       loader: '',
       markdownOption: {
         bold: true,
@@ -5140,6 +5149,9 @@ __webpack_require__.r(__webpack_exports__);
     this.$store.dispatch('loadCategories', {
       id: this.$store.getters.getUser.id
     });
+    var h = window.innerHeight - 430; //可见区域高度
+
+    this.form_style.height = h + 'px';
   }
 });
 
@@ -5414,11 +5426,10 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _components_L_footer__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../components/L-footer */ "./resources/js/components/L-footer.vue");
-/* harmony import */ var _components_global_NavigationModal__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/global/NavigationModal */ "./resources/js/components/global/NavigationModal.vue");
-/* harmony import */ var _components_global_RegisterModal__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/global/RegisterModal */ "./resources/js/components/global/RegisterModal.vue");
-/* harmony import */ var _components_global_LoginModal__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../components/global/LoginModal */ "./resources/js/components/global/LoginModal.vue");
-/* harmony import */ var _components_global_Notification__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../components/global/Notification */ "./resources/js/components/global/Notification.vue");
+/* harmony import */ var _components_global_NavigationModal__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../components/global/NavigationModal */ "./resources/js/components/global/NavigationModal.vue");
+/* harmony import */ var _components_global_RegisterModal__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/global/RegisterModal */ "./resources/js/components/global/RegisterModal.vue");
+/* harmony import */ var _components_global_LoginModal__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/global/LoginModal */ "./resources/js/components/global/LoginModal.vue");
+/* harmony import */ var _components_global_Notification__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../components/global/Notification */ "./resources/js/components/global/Notification.vue");
 //
 //
 //
@@ -5457,7 +5468,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-
 
 
 
@@ -5473,11 +5483,10 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   components: {
-    Navigation: _components_global_NavigationModal__WEBPACK_IMPORTED_MODULE_1__["default"],
-    Register: _components_global_RegisterModal__WEBPACK_IMPORTED_MODULE_2__["default"],
-    LFooter: _components_L_footer__WEBPACK_IMPORTED_MODULE_0__["default"],
-    Login: _components_global_LoginModal__WEBPACK_IMPORTED_MODULE_3__["default"],
-    Notification: _components_global_Notification__WEBPACK_IMPORTED_MODULE_4__["default"]
+    Navigation: _components_global_NavigationModal__WEBPACK_IMPORTED_MODULE_0__["default"],
+    Register: _components_global_RegisterModal__WEBPACK_IMPORTED_MODULE_1__["default"],
+    Login: _components_global_LoginModal__WEBPACK_IMPORTED_MODULE_2__["default"],
+    Notification: _components_global_Notification__WEBPACK_IMPORTED_MODULE_3__["default"]
   }
 });
 
@@ -7452,7 +7461,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.L-footer[data-v-4bfe94f2]{\n\tpadding: 20px;\n\ttext-align: center;\n\tcolor: #fff;\n\tbackground-color: #555;\n}\n.main[data-v-4bfe94f2]{\n\twidth: 70%;\n\tmargin: 0 auto;\n\tcolor: #ccc;\n}\n.out-link[data-v-4bfe94f2]{\n\ttext-decoration: none;\n\tcolor: #ccc;\n}\n.out-link[data-v-4bfe94f2]:hover{\n\tcolor: #ffffff;\n}\n.item-col[data-v-4bfe94f2]{\n\ttext-align: left;\n}\n.item-col.weside[data-v-4bfe94f2]{\n\tfont-size: 14px;\n}\n.item-col .title[data-v-4bfe94f2]{\n\tcolor: #ddd;\n\tmargin-bottom: 10px;\n}\n.item span[data-v-4bfe94f2]{\n\tmargin-right: 5px;\n}\n", ""]);
+exports.push([module.i, "\n.L-footer[data-v-4bfe94f2]{\n\ttext-align: center;\n\tcolor: #fff;\n\tbackground-color: #000;\n}\n.main[data-v-4bfe94f2]{\n\twidth: 70%;\n\tmargin: 0 auto;\n\tcolor: #ccc;\n}\n.out-link[data-v-4bfe94f2]{\n\ttext-decoration: none;\n\tcolor: #ccc;\n}\n.out-link[data-v-4bfe94f2]:hover{\n\tcolor: #ffffff;\n}\n.item-col[data-v-4bfe94f2]{\n\ttext-align: left;\n}\n.item-col.weside[data-v-4bfe94f2]{\n\tfont-size: 14px;\n}\n.item-col .title[data-v-4bfe94f2]{\n\tcolor: #ddd;\n\tmargin-bottom: 10px;\n}\n.item span[data-v-4bfe94f2]{\n\tmargin-right: 5px;\n}\n", ""]);
 
 // exports
 
@@ -97001,13 +97010,19 @@ var render = function() {
                                           staticClass: "tag",
                                           staticStyle: {
                                             float: "left",
-                                            "margin-right": "3px",
-                                            "margin-top": "4px"
+                                            "margin-right": "0",
+                                            "margin-top": "5px"
                                           },
                                           attrs: {
                                             src: __webpack_require__(/*! ../../assets/tag.png */ "./resources/assets/tag.png")
                                           }
                                         }),
+                                        _vm._v(" "),
+                                        _c(
+                                          "span",
+                                          { staticStyle: { float: "left" } },
+                                          [_vm._v("：")]
+                                        ),
                                         _vm._v(" "),
                                         _vm._l(i.tag, function(t) {
                                           return _c(
@@ -97053,9 +97068,9 @@ var render = function() {
                                   _c("div", { staticClass: "side-abstract" }, [
                                     _c("div", { staticClass: "art-abstract" }, [
                                       _vm._v(
-                                        "\n                                                " +
+                                        "\n                                            " +
                                           _vm._s(i.excerpt) +
-                                          "\n                                            "
+                                          "\n                                        "
                                       )
                                     ]),
                                     _vm._v(" "),
@@ -97170,7 +97185,7 @@ var render = function() {
         [
           _c(
             "el-form",
-            { attrs: { model: _vm.form } },
+            { style: _vm.form_style, attrs: { model: _vm.form } },
             [
               _c(
                 "el-col",
@@ -97383,6 +97398,7 @@ var render = function() {
                         _c(
                           "el-select",
                           {
+                            staticStyle: { width: "100px" },
                             attrs: { placeholder: "请选择" },
                             model: {
                               value: _vm.form.category_id,
@@ -115331,9 +115347,6 @@ var articles = {
 
       if (data.id === '') {
         _api_articles__WEBPACK_IMPORTED_MODULE_0__["default"].getArticles(data.page !== '' ? data.page : 1).then(function (response) {
-          console.log(state.articles.data);
-          console.log(response.data.data);
-
           if (state.articles.data !== undefined) {
             var merge_data = state.articles.data.concat(response.data.data);
             response.data.data = merge_data;

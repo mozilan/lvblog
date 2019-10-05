@@ -109,9 +109,9 @@
                                     <h5><router-link to="/index" tag="span" class="art-title">{{i.title}}</router-link></h5>
                                     <el-row class="art-info d-flex align-items-center justify-content-start">
                                         <div class="art-time"><i class="el-icon-time"></i>：{{i.created_at}}</div>
-                                        <div class="d-flex align-items-center" >
-                                            <img class="tag" src="../../assets/tag.png" style="float:left;margin-right:3px;
-margin-top: 4px;"/>
+                                        <div class="d-flex align-items-center">
+                                            <img class="tag" src="../../assets/tag.png" style="float:left;margin-right:0;margin-top: 5px;"/>
+                                            <span style="float: left;">：</span>
                                             <div v-for="t in i.tag" style="float:left;margin-left: 2px;">
                                                 <el-tag size="mini">{{t.name}}</el-tag>
                                             </div>
@@ -160,6 +160,7 @@ margin-top: 4px;"/>
     import Tag from '../components/tag'
     import Oauth from '../components/Oauth'
     import Category from '../components/Category'
+    import LFooter from '../components/L-footer'
 
     export default {
         data () {
@@ -176,7 +177,8 @@ margin-top: 4px;"/>
             Friend,
             Tag,
             Oauth,
-            Category
+            Category,
+            LFooter
         },
         computed:{
             noMore () {
@@ -198,7 +200,6 @@ margin-top: 4px;"/>
                 id:'',
             });
             var h = window.innerHeight-128;//可见区域高度
-            console.log(h);
             this.infinite_box.height = h+'px';
         },
         methods: {

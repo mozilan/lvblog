@@ -40,10 +40,9 @@ export default {
 
 <style scoped>
 .L-footer{
-	padding: 20px;
 	text-align: center;
 	color: #fff;
-	background-color: #555;
+	background-color: #000;
 }
 .main{
 	width: 70%;

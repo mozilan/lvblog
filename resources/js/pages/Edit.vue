@@ -1,7 +1,7 @@
 <template>
           <el-container style="display:block">
                <el-row>
-                    <el-form :model="form">
+                    <el-form :model="form" :style="form_style">
                          <el-col :xs="24" :sm="24" :md="24" :lg="24" class="bl-margin_bottom-title">
                               <el-form-item label="">
                                    <el-input
@@ -59,7 +59,7 @@
                                         >
                                         </el-input>
                                         <el-button v-else class="button-new-tag" size="small" @click="showInput">+ 添加分类</el-button>
-                                        <el-select v-model="form.category_id" placeholder="请选择">
+                                        <el-select v-model="form.category_id" placeholder="请选择" style="width: 100px">
                                              <el-option
                                                      v-for="item in categories"
                                                      :key="item.id"
@@ -105,6 +105,9 @@
           },
           data() {
                return {
+                    form_style:{
+                         height:'',
+                    },
                     loader:'',
                     markdownOption: {
                          bold: true, // 粗体
@@ -325,6 +328,8 @@
                this.$store.dispatch('loadCategories',{
                     id:this.$store.getters.getUser.id,
                });
+               var h = window.innerHeight-430;//可见区域高度
+               this.form_style.height = h+'px';
           }
      }
 </script>
