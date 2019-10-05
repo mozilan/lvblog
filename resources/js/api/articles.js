@@ -9,8 +9,8 @@ export default {
 
         });
     },
-    getArticle: function(id){
-        return axios.get(LVBLOG_CONFIG.API_URL + '/articles',{
+    getArticle: function(art_id){
+        return axios.get(LVBLOG_CONFIG.API_URL + '/articles/'+art_id,{
 
         });
     },

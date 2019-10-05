@@ -74,6 +74,11 @@ export default new VueRouter({
                     components: Vue.component( 'Home', require( './pages/Blog' ) ),
                 },
                 {
+                    path: 'art/:art_id',
+                    name: 'art',
+                    components: Vue.component( 'Article', require( './pages/Art' ) ),
+                },
+                {
                     path: 'archive',
                     name: 'archive',
                     components: Vue.component( 'Archive', require( './pages/Archive' ) ),

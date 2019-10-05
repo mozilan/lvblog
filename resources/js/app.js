@@ -43,8 +43,14 @@ import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
 import router from './routes.js'
 import store from './store.js'
-
-
+import hljs from 'highlight.js'
+//封装成一个指令
+Vue.directive('highlight', (el) => {
+    let blocks = el.querySelectorAll('pre code');
+    blocks.forEach((block) => {
+        hljs.highlightBlock(block)
+    })
+});
 Vue.use(ElementUI);
 
 const app = new Vue({

@@ -95,7 +95,6 @@
         text-align: center;
     }
 </style>
-
 <template>
     <div class="blog" style="overflow:auto">
         <el-row id="artList" type="flex" justify="space-around">
@@ -126,7 +125,7 @@
                                                 {{i.excerpt}}
                                             </div>
                                             <div class="art-more">
-                                                <router-link to="/index" tag="span">
+                                                <router-link :to="{name:'art',params: {art_id:i.id}}" tag="span">
                                                     <el-button plain>阅读全文</el-button>
                                                 </router-link>
                                                 <div class="view"><i class="el-icon-view"></i>{{i.view_count}}</div>

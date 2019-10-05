@@ -60,6 +60,8 @@ $api->version('v1', [
             ->name('api.articles.index');
         $api->get('users/{user}/articles', 'ArticlesController@userIndex')
             ->name('api.users.articles.index');
+        $api->get('articles/{article}', 'ArticlesController@show')
+            ->name('api.articles.show');
         // 需要 token 验证的接口
         $api->group(['middleware' => 'api.auth'], function($api) {
             // 当前登录用户信息
@@ -76,7 +78,7 @@ $api->version('v1', [
                 ->name('api.images.store');
             // 发布文章
             $api->post('articles', 'ArticlesController@store')
-                ->name('api.topics.store');
+                ->name('api.articles.store');
         });
     });
 });

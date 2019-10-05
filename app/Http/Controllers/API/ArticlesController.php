@@ -68,9 +68,15 @@ class ArticlesController extends Controller
     {
         $user = User::find($user);
         $articles = $user->articles()->recent()
-            ->paginate(20);
+            ->paginate(6);
 //        $articles = Article::where('user_id',$user)->recent()
 //            ->paginate(20);
         return $this->response->paginator($articles, new ArticleTransformer());
+    }
+
+    public function show($article)
+    {
+        $article = Article::find($article);
+        return $this->response->item($article, new ArticleTransformer());
     }
 }

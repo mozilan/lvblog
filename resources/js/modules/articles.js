@@ -69,6 +69,17 @@ export const articles = {
             commit('setArticleAddStatus', 0);
             commit('setArticleAddResponseMessages', '');
         },
+        loadArticle({commit},data){
+            commit('setArticleLoadStatus',1);
+            ArticleAPI.getArticle(data.art_id)
+                .then(function (response) {
+                    commit('setArticle',response.data);
+                    commit('setArticleLoadStatus', 2);
+                })
+                .catch(function (error){
+                    commit('setArticleLoadStatus', 3);
+                });
+        }
     },
     mutations:{
         setArticlesLoadStatus(state,status){
@@ -76,6 +87,12 @@ export const articles = {
         },
         setArticles(state,articles){
             state.articles = articles;
+        },
+        setArticleLoadStatus(state,status){
+            state.articleLoadStatus = status;
+        },
+        setArticle(state,article){
+            state.article = article;
         },
         setArticleAddStatus(state,status){
             state.articleAddStatus = status;
@@ -91,6 +108,14 @@ export const articles = {
         getArticlesLoadStatus(state){
             return function(){
                 return state.articlesLoadStatus;
+            }
+        },
+        getArticle(state){
+            return state.article;
+        },
+        getArticleLoadStatus(state){
+            return function(){
+                return state.articleLoadStatus;
             }
         },
         getArticleAddStatus(state){

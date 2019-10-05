@@ -24,15 +24,16 @@ class ArticleTransformer extends TransformerAbstract
             'created_at' => (string) $article->created_at,
             'updated_at' => (string) $article->updated_at,
             'tag' => $article->Tags(),
+            'user' => $article->User(),
+            'category' => $article->Category(),
         ];
-
     }
-    public function includeUser(Article $article)
-    {
-        return $this->item($article->user, new UserTransformer());
-    }
-    public function includeCategory(Article $article)
-    {
-        return $this->item($article->category, new CategoryTransformer());
-    }
+//    public function includeUser(Article $article)
+//    {
+//        return $this->item($article->user, new UserTransformer());
+//    }
+//    public function includeCategory(Article $article)
+//    {
+//        return $this->item($article->category, new CategoryTransformer());
+//    }
 }
