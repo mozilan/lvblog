@@ -9,7 +9,7 @@ class ArticleRequest extends FormRequest
     public function rules()
     {
         return [
-            'title' => 'required|string|max:30',
+            'title' => 'required|string|max:50',
             'body' => 'required|string',
             'tags' => 'nullable',
             'category_id' => 'required|numeric|exists:categories,id',

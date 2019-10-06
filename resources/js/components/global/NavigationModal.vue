@@ -22,8 +22,6 @@
         <h5 class="bl-logo "><a id="index" href="/">LvBlog</a></h5>
         <el-menu :default-active="activeIndex" class="el-menu-blumer" mode="horizontal" @select="handleSelect">
             <el-menu-item index="1"><router-link :to="{ name:'index' }">首页</router-link></el-menu-item>
-            <el-menu-item index="2"><router-link :to="{ name:'archive' }">归档</router-link></el-menu-item>
-            <el-menu-item index="3"><router-link :to="{ name:'about' }">关于</router-link></el-menu-item>
             <el-menu-item index="6" @click="register" v-if="tokenStatus === '' ">注册</el-menu-item>
             <el-menu-item index="7" @click="login" v-if="tokenStatus === '' ">登录</el-menu-item>
             <el-submenu index="8" v-if="tokenStatus !== '' ">
@@ -31,6 +29,8 @@
                     <el-image style="width: 40px; height: 40px;border:3px solid #409eff;border-radius:30px" :src="user.avatar"></el-image>
                 </template>
                 <el-menu-item index="8-1"><router-link :to="{ name:'edit' }">写博客</router-link></el-menu-item>
+                <el-menu-item index="3"><router-link :to="{ name:'about' }">关于我</router-link></el-menu-item>
+                <el-menu-item index="2"><router-link :to="{ name:'archive',params:{'user':user.id?user.id:1}}">我的归档</router-link></el-menu-item>
                 <el-menu-item index="8-2"><router-link :to="{ name:'home' }">个人中心</router-link></el-menu-item>
                 <el-menu-item index="8-3" @click="logout()">退出登录</el-menu-item>
             </el-submenu>

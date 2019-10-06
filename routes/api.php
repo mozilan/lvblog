@@ -62,6 +62,8 @@ $api->version('v1', [
             ->name('api.users.articles.index');
         $api->get('articles/{article}', 'ArticlesController@show')
             ->name('api.articles.show');
+        $api->get('archives/{user_id}', 'ArchivesController@index')
+            ->name('api.archives.index');
         // 需要 token 验证的接口
         $api->group(['middleware' => 'api.auth'], function($api) {
             // 当前登录用户信息

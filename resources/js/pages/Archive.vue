@@ -1,10 +1,10 @@
 <template>
     <div class="archive">
-        <div class="count">归档：234天</div>
+        <div class="count">归档：{{archives.meta.count}}篇</div>
         <el-timeline>
-            <el-timeline-item v-for="(activity, index) in activities" :key="index" :color="activity.color" :timestamp="activity.timestamp" placement="top" @mouseenter="hoverLine(activity)">
+            <el-timeline-item v-for="(activity, index) in archives.data" :key="index" color="#fff" :timestamp="activity.created_at" placement="top" @mouseenter="hoverLine(activity)">
                 <div class="line-item">
-                    <router-link to="/article" tag="span">{{activity.content}}</router-link>
+                    <router-link :to="{name:'art',params: {art_id:activity.article_id}}" tag="span">{{activity.title}}</router-link>
                 </div>
             </el-timeline-item>
         </el-timeline>
@@ -14,24 +14,19 @@
 <script>
     export default {
         name: 'archive',
-        data() {
+        data () {
             return {
-                activities: [{
-                    content: 'Laravel+Vue构建API应用',
-                    timestamp: '2019-04-15'
-                }, {
-                    content: 'Linux系统运维',
-                    timestamp: '2019-04-13'
-                }, {
-                    content: 'PHP从入门到出家',
-                    timestamp: '2019-04-11'
-                }]
-            };
-        },
-        methods: {
-            hoverLine(activity) {
-                activity.color = "#409eff"
             }
+        },
+        computed:{
+            archives(){
+                return this.$store.getters.getArchives;
+            }
+        },
+        created(){
+            this.$store.dispatch('loadArchives',{
+                user : this.$route.params.user ? this.$route.params.user : 1
+            });
         }
     }
 </script>

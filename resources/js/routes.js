@@ -79,10 +79,9 @@ export default new VueRouter({
                     components: Vue.component( 'Article', require( './pages/Art' ) ),
                 },
                 {
-                    path: 'archive',
+                    path: 'archive/:user',
                     name: 'archive',
                     components: Vue.component( 'Archive', require( './pages/Archive' ) ),
-                    beforeEnter: requireAuth
                 },
                 {
                     path: 'home',

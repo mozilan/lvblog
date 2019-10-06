@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Requests\Api\ArticleRequest;
+use App\Models\Archive;
 use App\Models\Article;
 use App\Models\Tag;
 use App\Models\ArticleMapTag;
@@ -18,6 +19,11 @@ class ArticlesController extends Controller
         $article->fill($request->all());
         $article->user_id = $this->user()->id;
         $article->save();
+        $archieve=new Archive();
+        $archieve->user_id = $this->user()->id;
+        $archieve->article_id = $article->id;
+        $archieve->title = $article->title;
+        $archieve->save();
         foreach ($request->tags as $v){
             if(Tag::where([['name',$v],['user_id',$this->user()->id]])->first() !== null){
                 $tag = Tag::where([

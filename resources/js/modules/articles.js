@@ -78,7 +78,11 @@ export const articles = {
                 .catch(function (error){
                     commit('setArticleLoadStatus', 3);
                 });
-        }
+        },
+        clearArticles({commit}){
+            commit('setArticles','');
+            commit('setArticlesLoadStatus', 0);
+        },
     },
     mutations:{
         setArticlesLoadStatus(state,status){

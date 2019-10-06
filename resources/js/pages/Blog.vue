@@ -212,6 +212,7 @@
             }
         },
         created(){
+            this.$store.dispatch('clearArticles');
             this.$store.dispatch('loadArticles',{
                 id:'',
             });
