@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Requests\Api\ArticleRequest;
 use App\Models\Archive;
 use App\Models\Article;
+use App\Models\Category;
 use App\Models\Tag;
 use App\Models\ArticleMapTag;
 use App\Transformers\ArticleTransformer;
@@ -72,20 +73,52 @@ class ArticlesController extends Controller
     }
     public function userIndex($user, Request $request)
     {
-        $user = User::find($user);
-        $articles = $user->articles()->recent()
+        $articles = User::find($user)->articles()->recent()
             ->paginate(6);
 //        $articles = Article::where('user_id',$user)->recent()
 //            ->paginate(20);
         return $this->response->paginator($articles, new ArticleTransformer());
     }
 
+    public function categoryIndex($category)
+    {
+        $category = Category::find($category);
+        if($category != null){
+            $articles = Article::where('category_id',$category->id)->recent()->paginate(8);
+            return $this->response->paginator($articles, new ArticleTransformer());
+        }else{
+            return response()->json(['message' => '文章不存在或者没有访问权限'], 404);
+        }
+
+    }
+    public function tagIndex($tag)
+    {
+        $tag = Tag::find($tag);
+        if($tag == null){
+            return response()->json(['message' => '文章不存在或者没有访问权限'], 404);
+        }else{
+            $articles = $tag->Article()->recent()->paginate(8);
+            return $this->response->paginator($articles, new ArticleTransformer());
+        }
+    }
     public function show($article)
     {
         $article = Article::find($article);
-        if($this->user->id != $article->user_id && $article->target != 0 ) {
+        if($article==null){
             return response()->json(['message' => '文章不存在或者没有访问权限'], 404);
         }
-        return $this->response->item($article, new ArticleTransformer());
+        if($this->user){
+            if($this->user->id != $article->user_id && $article->target != 0 ) {
+                return response()->json(['message' => '文章不存在或者没有访问权限'], 404);
+            }else{
+                return $this->response->item($article, new ArticleTransformer());
+            }
+        }else {
+            if ($article->target == 0) {
+                return $this->response->item($article, new ArticleTransformer());
+            } else {
+                return response()->json(['message' => '文章不存在或者没有访问权限'], 404);
+            }
+        }
     }
 }

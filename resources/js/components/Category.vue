@@ -5,10 +5,13 @@
 				<img class="card-icon" src="../../assets/biaoqian.png" />
 				<span>热门分类</span>
 			</div>
+
 		<div v-for="category in categories" class="text item">
-			<a href="#"><span style="float: left;">{{category.name}}</span></a>
-			<el-tag style="float: right" size="mini" class="category-item" type="success"  @click="">[{{category.count}}]</el-tag>
-			<div style="clear:both;"></div>
+			<router-link :to="{name:'blog.category',params: {category:category.id}}">
+				<a href="#"><span style="float: left;">{{category.name}}</span></a>
+				<el-tag style="float: right" size="mini" class="category-item" type="success"  @click="">[{{category.count}}]</el-tag>
+				<div style="clear:both;"></div>
+			</router-link>
 		</div>
 		</el-card>
 	</div>

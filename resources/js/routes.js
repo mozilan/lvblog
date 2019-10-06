@@ -69,9 +69,27 @@ export default new VueRouter({
                     beforeEnter: requireAuth
                 },
                 {
-                    path: 'blog/:user?',
+                    path: 'blog',
                     name: 'blog',
-                    components: Vue.component( 'Home', require( './pages/Blog' ) ),
+                    components: Vue.component( 'Blog', require( './pages/Blog' ) ),
+                    children: [
+                        {
+                            path: 'user/:user',
+                            name: 'blog.user',
+                            components: Vue.component( 'Blog-User', require( './pages/Blog' ) )
+                        },
+                        {
+                            path: 'tag/:tag',
+                            name: 'blog.tag',
+                            components: Vue.component( 'Blog-Tag', require( './pages/Blog' ) )
+                        },
+                        {
+                            path: 'category/:category',
+                            name: 'blog.category',
+                            components: Vue.component( 'Blog-Category', require( './pages/Blog' ) )
+                        }
+
+                    ]
                 },
                 {
                     path: 'art/:art_id',

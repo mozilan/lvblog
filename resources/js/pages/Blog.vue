@@ -208,19 +208,103 @@
         },
         methods: {
             getArticles(){
-                this.$store.dispatch('clearArticles');
-
-                this.$store.dispatch('loadArticles',{
+                console.log(this.$route.params.user);
+                console.log(this.$route.params.tag);
+                if(this.$route.params.user !== undefined && this.$route.params.tag ===undefined && this.$route.params.category === undefined)
+                {
+                    const loading = this.$loading({
+                        lock: true,
+                        text: 'Loading',
+                        spinner: 'el-icon-loading',
+                        background: 'rgba(0, 0, 0, 0.7)'
+                    });
+                    setTimeout(() => {
+                        loading.close();
+                    }, 2000);
+                    console.log("检测到user属性，没检测到tag属性");
+                    this.$store.dispatch('clearArticles');
+                    this.$store.dispatch('loadArticles',{
                     user:this.$route.params.user ? this.$route.params.user : '',
-                });
+                    });
+                }else if(this.$route.params.user === undefined && this.$route.params.tag !==undefined && this.$route.params.category ===undefined){
+                    const loading = this.$loading({
+                        lock: true,
+                        text: 'Loading',
+                        spinner: 'el-icon-loading',
+                        background: 'rgba(0, 0, 0, 0.7)'
+                    });
+                    setTimeout(() => {
+                        loading.close();
+                    }, 2000);
+                    console.log("检测到tag属性");
+                    this.$store.dispatch('clearArticles');
+                    this.$store.dispatch('loadUserTagArticles',{
+                        user:this.$route.params.user,
+                        tag:this.$route.params.tag,
+                        page:'',
+                    });
+                }else if(this.$route.params.user === undefined&& this.$route.params.tag ===undefined && this.$route.params.category !==undefined){
+                    const loading = this.$loading({
+                        lock: true,
+                        text: 'Loading',
+                        spinner: 'el-icon-loading',
+                        background: 'rgba(0, 0, 0, 0.7)'
+                    });
+                    setTimeout(() => {
+                        loading.close();
+                    }, 2000);
+                    console.log("检测到cat属性");
+                    this.$store.dispatch('clearArticles');
+                    this.$store.dispatch('loadUserCategoryArticles',{
+                        user:this.$route.params.user,
+                        category:this.$route.params.category,
+                        page:'',
+                    });
+                }else{
+                    const loading = this.$loading({
+                        lock: true,
+                        text: 'Loading',
+                        spinner: 'el-icon-loading',
+                        background: 'rgba(0, 0, 0, 0.7)'
+                    });
+                    setTimeout(() => {
+                        loading.close();
+                    }, 2000);
+                    this.$store.dispatch('clearArticles');
+                    this.$store.dispatch('loadArticles',{
+                        user:this.$route.params.user ? this.$route.params.user : '',
+                    });
+                }
+
             },
             load () {
                 this.loading = true;
                 setTimeout(() => {
-                    this.$store.dispatch('loadArticles',{
-                        user:this.$route.params.user ? this.$route.params.user :'',
-                        page: this.$store.getters.getArticles.meta === undefined ? 1 : ++this.$store.getters.getArticles.meta.pagination.current_page,
-                    });
+                    if(this.$route.params.user !== undefined && this.$route.params.tag === undefined&& this.$route.params.category ===undefined)
+                    {
+                        this.$store.dispatch('loadArticles',{
+                            user:this.$route.params.user ? this.$route.params.user :'',
+                            page: this.$store.getters.getArticles.meta === undefined ? 1 : ++this.$store.getters.getArticles.meta.pagination.current_page,
+
+                        });
+                    }else if(this.$route.params.user === undefined&& this.$route.params.tag !== undefined && this.$route.params.category ===undefined){
+                        this.$store.dispatch('loadUserTagArticles',{
+                            tag:this.$route.params.tag,
+                            user:this.$route.params.user ? this.$route.params.user :'',
+                            page: this.$store.getters.getArticles.meta === undefined ? 1 : ++this.$store.getters.getArticles.meta.pagination.current_page,
+                        });
+                    }else if(this.$route.params.user === undefined&& this.$route.params.tag ===undefined && this.$route.params.category !==undefined){
+                        this.$store.dispatch('loadUserCategoryArticles',{
+                            category:this.$route.params.category,
+                            user:this.$route.params.user ? this.$route.params.user :'',
+                            page: this.$store.getters.getArticles.meta === undefined ? 1 : ++this.$store.getters.getArticles.meta.pagination.current_page,
+                        });
+                    }else{
+                        this.$store.dispatch('loadArticles',{
+                            user:this.$route.params.user ? this.$route.params.user :'',
+                            page: this.$store.getters.getArticles.meta === undefined ? 1 : ++this.$store.getters.getArticles.meta.pagination.current_page,
+                        });
+                    }
                     this.$watch(this.$store.getters.getArticlesLoadStatus, function () {
                         if(this.$store.getters.getArticlesLoadStatus() === 2) {
                             this.loading = false

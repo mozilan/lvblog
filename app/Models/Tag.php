@@ -17,5 +17,9 @@ class Tag extends Model
         return $this->belongsTo(User::class);
     }
 
+    public function scopeArticle()
+    {
+        return Article::whereIn('id', ArticleMapTag::where('tag_id',$this->id)->pluck('article_id')->toArray());
+    }
 }
 

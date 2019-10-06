@@ -51,7 +51,7 @@ $api->version('v1', [
         $api->delete('authorizations/current', 'AuthorizationsController@destroy')
             ->name('api.authorizations.destroy');
         //获取某一用户所有分类
-        $api->get('categories/{user_id}', 'CategoriesController@index')
+        $api->get('categories/{user}', 'CategoriesController@index')
             ->name('api.categories.index');
         //获取某一用户所有文章标签
         $api->get('tags/{user_id}', 'TagsController@index')
@@ -65,8 +65,14 @@ $api->version('v1', [
         //获取某一文章
         $api->get('articles/{article}', 'ArticlesController@show')
             ->name('api.articles.show');
+        //获取某一分类下所有文章
+        $api->get('categories/{category}/articles/', 'ArticlesController@categoryIndex')
+            ->name('api.user.category.articles.show');
+        //获取某一标签下所有文章
+        $api->get('tags/{tag}/articles', 'ArticlesController@tagIndex')
+            ->name('api.user.tag.articles.show');
         //获取某一用户的归档
-        $api->get('archives/{user_id}', 'ArchivesController@index')
+        $api->get('archives/{user}', 'ArchivesController@index')
             ->name('api.archives.index');
         // 需要 token 验证的接口
         $api->group(['middleware' => 'api.auth'], function($api) {

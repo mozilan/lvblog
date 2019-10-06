@@ -14,6 +14,7 @@ class TagTransformer extends TransformerAbstract
             'id' => $tag->id,
             'name' => $tag->name,
             'count' => $tag->num,
+            'user_id' => $tag->user_id,
         ];
     }
 }

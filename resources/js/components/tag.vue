@@ -6,7 +6,7 @@
 				<span>标签云</span>
 			</div>
 			<div class="text item" v-for="tag in tags ">
-				<el-tag size="mini" :type="type[Math.floor(Math.random()*type.length)]" class="tag-item">{{tag.name}}[{{tag.count}}]</el-tag>
+				<router-link :to="{name:'blog.tag',params: {tag:tag.id}}"><el-tag size="mini" :type="type[Math.floor(Math.random()*type.length)]" class="tag-item">{{tag.name}}[{{tag.count}}]</el-tag></router-link>
 			</div>
 			<div class="clear"></div>
 		</el-card>
@@ -22,6 +22,7 @@
 			}
 		},
 		methods: {
+
 		},
 		mounted:{
 

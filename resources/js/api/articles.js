@@ -15,6 +15,17 @@ export default {
 
         });
     },
+    getUserTagArticles: function(tag,page){
+        return axios.get(LVBLOG_CONFIG.API_URL + '/tags/'+tag+'/articles'+'?page='+page ,{
+
+        });
+    },
+    getUserCategoryArticles: function(category,page){
+
+        return axios.get(LVBLOG_CONFIG.API_URL + '/categories/'+category+'/articles'+'?page='+page ,{
+
+        });
+    },
     getArticle: function(art_id){
         return axios.get(LVBLOG_CONFIG.API_URL + '/articles/'+art_id,{
 
