@@ -97,9 +97,24 @@
 </style>
 <template>
     <div class="blog" style="overflow:auto">
+        <el-backtop target=".blog-component__scroll .blog-scrollbar__wrap" :bottom="100">
+            <div
+                    style="{
+        height: 100%;
+        width: 100%;
+        background-color: #f2f5f6;
+        box-shadow: 0 0 6px rgba(0,0,0, .12);
+        text-align: center;
+        line-height: 40px;
+        color: #1989fa;
+      }"
+            >
+                UP
+            </div>
+        </el-backtop>
         <el-row id="artList" type="flex" justify="space-around">
-            <el-col :span="16">
-                <div class="infinite-list-wrapper" :style="infinite_box">
+            <el-col :span="16" class="blog-component__scroll" v-loading="loading">
+                <div class="infinite-list-wrapper blog-scrollbar__wrap" :style="infinite_box"  >
                         <ul
                             class="list"
                             v-infinite-scroll="load"
@@ -162,7 +177,6 @@
     import Oauth from '../components/Oauth'
     import Category from '../components/Category'
     import LFooter from '../components/L-footer'
-
     export default {
         data () {
             return {

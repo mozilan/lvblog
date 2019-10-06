@@ -56,7 +56,7 @@
         },
         mounted() {
             EventBus.$on('open-message', function (data) {
-                this.message = data.notification;
+                this.message = data.notification.toString();
                 this.type = data.type;
                 this.show = true;
                 setTimeout(function () {

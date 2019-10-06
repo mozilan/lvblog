@@ -2591,6 +2591,13 @@ findup-sync@3.0.0:
     micromatch "^3.0.4"
     resolve-dir "^1.0.1"
 
+floating-form-labels@^1.2.4:
+  version "1.2.4"
+  resolved "https://registry.yarnpkg.com/floating-form-labels/-/floating-form-labels-1.2.4.tgz#056218a3247dc1cfcbc9f5dabc15f5abf3e7d5c0"
+  integrity sha1-BWIYoyR9wc/LyfXavBX1q/Pn1cA=
+  dependencies:
+    jquery ">=2.x <=3.x"
+
 flush-write-stream@^1.0.0:
   version "1.1.1"
   resolved "https://registry.npm.taobao.org/flush-write-stream/download/flush-write-stream-1.1.1.tgz#8dd7d873a1babc207d94ead0c2e0e44276ebf2e8"
@@ -3524,7 +3531,7 @@ isstream@~0.1.2:
   resolved "https://registry.yarnpkg.com/isstream/-/isstream-0.1.2.tgz#47e63f7af55afa6f92e1500e690eb8b8529c099a"
   integrity sha1-R+Y/evVa+m+S4VAOaQ64uFKcCZo=
 
-jquery@^3.2:
+"jquery@>=2.x <=3.x", jquery@^3.4.1:
   version "3.4.1"
   resolved "https://registry.npm.taobao.org/jquery/download/jquery-3.4.1.tgz#714f1f8d9dde4bdfa55764ba37ef214630d80ef2"
 

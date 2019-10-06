@@ -4,15 +4,7 @@
                     <el-form :model="form" :style="form_style">
                          <div class="bl-margin_bottom-title">
                               <el-form-item label="">
-                                   <el-input
-                                           type="textarea"
-                                           maxlength="30"
-                                           show-word-limit
-                                           placeholder="请输入文章标题"
-                                           suffix-icon="el-icon-bank-card"
-                                           v-model="form.title"
-                                           :autosize="{ minRows: 2, maxRows: 2}">
-                                   </el-input>
+                                   <el-input type="text" id="name" name="name" placeholder="请输入文章标题" v-model="form.title"  maxlength="30" show-word-limit></el-input>
                               </el-form-item>
                          </div>
                          <mavon-editor ref=md :toolbars="markdownOption" v-model="form.handbook" :ishljs = "true" @imgAdd="$imgAdd"  style="height: 100%"></mavon-editor>
@@ -21,7 +13,7 @@
                                    <el-input
                                            type="textarea"
                                            placeholder="文章摘要"
-                                           maxlength="100"
+                                           maxlength="80"
                                            show-word-limit
                                            v-model="form.excerpt"
                                            :autosize="{ minRows: 2, maxRows: 4}"
@@ -89,7 +81,7 @@
                          </div>
 
                          <div>
-                              <el-form-item label="发布形式：">
+                              <el-form-item label="发布形式：" id="btn1">
                                    <div class="private">
                                         <el-switch
                                                 style="display: block;line-height:40px;"
@@ -115,11 +107,13 @@
      import {mavonEditor} from 'mavon-editor';
      import 'mavon-editor/dist/css/index.css';
      import { EventBus } from '../event-bus';
+     import floating_form_labels from 'floating-form-labels';
 
      export default {
           name: 'editor',
           components: {
-               mavonEditor
+               mavonEditor,
+               floating_form_labels,
                // or 'mavon-editor': mavonEditor
           },
           data() {
@@ -179,7 +173,8 @@
                     categoryNameArr:[],
                };
           },
-          watch: {
+          mounted(){
+               $('#ffl-wrapper').floatingFormLabels();
           },
           computed:{
                categories(){
@@ -325,6 +320,9 @@
                     this.$watch(this.$store.getters.getArticleAddStatus, function () {
                          if (this.$store.getters.getArticleAddStatus()  === 2) {
                               this.loader.close();
+                              if(this.form.title.toString().length >  15){
+                                   this.form.title = this.form.title.toString().substring(0,15)+'...  ';
+                              }
                               EventBus.$emit('open-message', {
                                    notification: this.form.title + (target===0 ? ' 发布成功!' :' 已保存到草稿箱'),
                                    type: 'success'
@@ -383,7 +381,7 @@
           float: right;
      }
      .bl-margin-top{
-          margin-top: 40px ;
+          margin-top: 20px ;
      }
      .button-new-tag{
           margin-left:0;

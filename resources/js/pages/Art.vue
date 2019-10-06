@@ -1,7 +1,8 @@
 <template>
-    <div>
-        <el-row class="main" type="flex" justify="center">
-            <el-col :span="16">
+    <div class="art" :style="{'height':art_height}">
+        <el-backtop target=".page-component__scroll .el-scrollbar__wrap"></el-backtop>
+        <el-row class="main page-component__scroll" type="flex" justify="center">
+            <el-col :span="16" class="el-scrollbar__wrap">
                 <div id="artcle-info" :style="{'background-image':bg_url}">
                     <h2 class="text-center"><strong>{{article.data.title}}</strong></h2>
                     <!-- 描述：文章信息 -->
@@ -47,16 +48,20 @@
             return {
                 url:'',
                 bg_url:'https://s0.xinger.ink/acgimg/acgurl.php?',
+                art_height:'',
             }
         },
         created() {
-            console.log(this.$route.params.art_id);
             this.$store.dispatch('loadArticle',{
                 art_id : this.$route.params.art_id
             });
             this.url= window.location.href;
             this.bg_url = "url(" + this.bg_url + this.$route.params.art_id+")";
 
+        },
+        mounted(){+
+            console.log(window.innerHeight);
+            this.art_height = window.innerHeight-130+'px';
         },
         computed:{
             article(){
@@ -109,5 +114,8 @@
     }
     .lv-item{
         margin-top: 6px;
+    }
+    .main{
+        height: inherit;
     }
 </style>

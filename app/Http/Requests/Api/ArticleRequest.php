@@ -13,7 +13,7 @@ class ArticleRequest extends FormRequest
             'body' => 'required|string',
             'tags' => 'nullable',
             'category_id' => 'required|numeric|exists:categories,id',
-            'excerpt' => 'nullable|string|max:100',
+            'excerpt' => 'nullable|string|max:80',
             'target' => 'required|numeric'
         ];
     }

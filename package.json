@@ -13,7 +13,7 @@
     "axios": "^0.18",
     "cross-env": "^5.1",
     "es6-promise": "^4.2.8",
-    "jquery": "^3.2",
+    "jquery": "^3.4.1",
     "laravel-mix": "^4.0.7",
     "lodash": "^4.17.5",
     "popper.js": "^1.12",
@@ -27,6 +27,7 @@
   },
   "dependencies": {
     "element-ui": "^2.12.0",
+    "floating-form-labels": "^1.2.4",
     "github-markdown-css": "^3.0.1",
     "highlight.js": "^9.15.10",
     "marked": "^0.7.0",
