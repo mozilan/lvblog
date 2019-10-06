@@ -2,7 +2,7 @@
     <div class="archive">
         <div class="count">归档：{{archives.meta.count}}篇</div>
         <el-timeline>
-            <el-timeline-item v-for="(activity, index) in archives.data" :key="index" color="#fff" :timestamp="activity.created_at" placement="top" @mouseenter="hoverLine(activity)">
+            <el-timeline-item v-for="(activity, index) in archives.data" :key="index" color="grey" :timestamp="activity.created_at" placement="top" @mouseenter="hoverLine(activity)">
                 <div class="line-item">
                     <router-link :to="{name:'art',params: {art_id:activity.article_id}}" tag="span">{{activity.title}}</router-link>
                 </div>
