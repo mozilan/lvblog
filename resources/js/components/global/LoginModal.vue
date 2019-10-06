@@ -35,6 +35,16 @@
     .bl-right{
         float:right;
     }
+    .el-dialog{
+        max-width: 400px;
+        width: auto;
+    }
+    @media screen and (max-width: 450px) {
+        .el-dialog{
+            margin-left: 10px;
+            margin-right: 10px;
+        }
+    }
 </style>
 
 <template>

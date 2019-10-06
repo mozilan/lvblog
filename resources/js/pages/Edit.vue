@@ -308,7 +308,7 @@
                                    }
                                    if (this.$store.getters.getCategoriesAddStatus() === 3) {
                                         this.categoryDynamicTags = [];
-                                        EventBus.$emit('open-excerpt', {
+                                        EventBus.$emit('open-message', {
                                              notification: this.$store.getters.getCategoriesAddResponseMessages(),
                                              type: 'error'
                                         });
@@ -345,7 +345,7 @@
                               if(this.form.title.toString().length >  15){
                                    this.form.title = this.form.title.toString().substring(0,15)+'...  ';
                               }
-                              EventBus.$emit('open-excerpt', {
+                              EventBus.$emit('open-message', {
                                    notification: this.form.title + (target===0 ? ' 发布成功!' :' 已保存到草稿箱'),
                                    type: 'success'
                               });
@@ -358,7 +358,7 @@
                          }
                          if (this.$store.getters.getArticleAddStatus()  === 3) {
                               this.loader.close();
-                              EventBus.$emit('open-excerpt', {
+                              EventBus.$emit('open-message', {
                                    notification: this.$store.getters.getArticleAddResponseMessages(),
                                    type: 'error'
                               });
@@ -477,7 +477,7 @@
           }
      }
 </style>
-<style type="text/css">
+<style scoped type="text/css">
      #editor {
           margin: auto;
           width: 80%;

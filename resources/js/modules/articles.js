@@ -33,7 +33,6 @@ export const articles = {
                         if(state.articles.data !== undefined){
                             var merge_data = state.articles.data.concat(response.data.data);
                             response.data.data = merge_data;
-                            console.log(response.data.meta);
                             commit('setArticles',response.data);
                         }
                         commit('setArticles',response.data);
