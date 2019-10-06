@@ -1,26 +1,48 @@
 <template>
-          <el-container style="display:block">
+          <el-container style="display:block" class="edit">
                <el-row>
+                    <div class="title-animate">
+                         <div class="ffl-wrapper bl-margin_bottom-title">
+                              <label for="title" class="ffl-label">文章标题</label>
+                              <input type="text" id="title" name="title" v-model="form.title">
+                         </div>
+                         <!--<div class="ffl-wrapper">-->
+                              <!--<label for="email" class="ffl-label">Email</label>-->
+                              <!--<input type="email" id="email" name="email" >-->
+                         <!--</div>-->
+                         <!--<div class="ffl-wrapper">-->
+                              <!--<label for="excerpt" class="ffl-label">excerpt <span>(optional)</span></label>-->
+                              <!--<textarea id="excerpt" name="excerpt"></textarea>-->
+                         <!--</div>-->
+                         <!--<button type="submit">Send</button>-->
+                    </div>
                     <el-form :model="form" :style="form_style">
-                         <div class="bl-margin_bottom-title">
-                              <el-form-item label="">
-                                   <el-input type="text" id="name" name="name" placeholder="请输入文章标题" v-model="form.title"  maxlength="30" show-word-limit></el-input>
-                              </el-form-item>
-                         </div>
+                         <!--<div class="bl-margin_bottom-title">-->
+                              <!--<el-form-item label="">-->
+                                   <!--<el-input type="text" id="name" name="name" placeholder="请输入文章标题" v-model="form.title"  maxlength="30" show-word-limit></el-input>-->
+                              <!--</el-form-item>-->
+                         <!--</div>-->
                          <mavon-editor ref=md :toolbars="markdownOption" v-model="form.handbook" :ishljs = "true" @imgAdd="$imgAdd"  style="height: 100%"></mavon-editor>
-                         <div class="bl-margin-top">
-                              <el-form-item>
-                                   <el-input
-                                           type="textarea"
-                                           placeholder="文章摘要"
-                                           maxlength="80"
-                                           show-word-limit
-                                           v-model="form.excerpt"
-                                           :autosize="{ minRows: 2, maxRows: 4}"
-                                   >
-                                   </el-input>
-                              </el-form-item>
+                         <div class="title-animate bl-margin_bottom-title bl-margin-top">
+                              <div class="ffl-wrapper">
+                                   <label for="excerpt" class="ffl-label">文章摘要 <span>(可选)</span></label>
+                                   <textarea id="excerpt" name="excerpt" v-model="form.excerpt"></textarea>
+                              </div>
+                              <!--<button type="submit">Send</button>-->
                          </div>
+                         <!--<div class="bl-margin-top">-->
+                              <!--<el-form-item>-->
+                                   <!--<el-input-->
+                                           <!--type="textarea"-->
+                                           <!--placeholder="文章摘要"-->
+                                           <!--maxlength="80"-->
+                                           <!--show-word-limit-->
+                                           <!--v-model="form.excerpt"-->
+                                           <!--:autosize="{ minRows: 2, maxRows: 4}"-->
+                                   <!--&gt;-->
+                                   <!--</el-input>-->
+                              <!--</el-form-item>-->
+                         <!--</div>-->
                          <div class="bl-margin-top">
                               <el-form-item label="文章标签：">
                                    <div class="tag">
@@ -174,7 +196,7 @@
                };
           },
           mounted(){
-               $('#ffl-wrapper').floatingFormLabels();
+               $('.ffl-wrapper').floatingFormLabels();
           },
           computed:{
                categories(){
@@ -201,7 +223,7 @@
                               this.$refs.md.$img2Url(pos, this.$store.getters.getImages);
                          }else if (this.$store.getters.getImagesUpLoadStatus() === 3) {
                               this.$message({
-                                   message: "上传失败",
+                                   excerpt: "上传失败",
                                    type: 'error'
                               });
                               this.$refs.md.$img2Url(pos, null);
@@ -221,7 +243,7 @@
                     let tagInputValue = this.tagInputValue;
                     if(tagInputValue.length > 10){
                          this.$message({
-                              message: "标签名称不能超过10个单位长度",
+                              excerpt: "标签名称不能超过10个单位长度",
                               type: 'warning'
                          });
                          this.tagInputVisible = false;
@@ -248,7 +270,7 @@
                     let categoryInputValue = this.categoryInputValue;
                     if(categoryInputValue === ''){
                          // this.$message({
-                         //      message: "分类名称不能为空",
+                         //      excerpt: "分类名称不能为空",
                          //      type: 'warning'
                          // });
                          this.categoryInputVisible = false;
@@ -256,7 +278,7 @@
                          return 0;
                     }else if(categoryInputValue.length > 10){
                          this.$message({
-                              message: "分类名称不能超过10个单位长度",
+                              excerpt: "分类名称不能超过10个单位长度",
                               type: 'warning'
                          });
                          this.categoryInputVisible = false;
@@ -265,7 +287,7 @@
                     }
                     else if(this.categoryDynamicTags.length === 1){
                          this.$message({
-                              message: "一次只能添加一个分类",
+                              excerpt: "一次只能添加一个分类",
                               type: 'warning'
                          });
                          this.categoryInputVisible = false;
@@ -286,7 +308,7 @@
                                    }
                                    if (this.$store.getters.getCategoriesAddStatus() === 3) {
                                         this.categoryDynamicTags = [];
-                                        EventBus.$emit('open-message', {
+                                        EventBus.$emit('open-excerpt', {
                                              notification: this.$store.getters.getCategoriesAddResponseMessages(),
                                              type: 'error'
                                         });
@@ -294,7 +316,7 @@
                               });
                          }else{
                               this.$message({
-                                   message: "分类名称已存在",
+                                   excerpt: "分类名称已存在",
                                    type: 'warning'
                               });
                          }
@@ -323,7 +345,7 @@
                               if(this.form.title.toString().length >  15){
                                    this.form.title = this.form.title.toString().substring(0,15)+'...  ';
                               }
-                              EventBus.$emit('open-message', {
+                              EventBus.$emit('open-excerpt', {
                                    notification: this.form.title + (target===0 ? ' 发布成功!' :' 已保存到草稿箱'),
                                    type: 'success'
                               });
@@ -336,7 +358,7 @@
                          }
                          if (this.$store.getters.getArticleAddStatus()  === 3) {
                               this.loader.close();
-                              EventBus.$emit('open-message', {
+                              EventBus.$emit('open-excerpt', {
                                    notification: this.$store.getters.getArticleAddResponseMessages(),
                                    type: 'error'
                               });
@@ -350,10 +372,112 @@
                });
                var h = window.innerHeight-430;//可见区域高度
                this.form_style.height = h+'px';
+               console.log($('.ffl-wrapper'));
           }
      }
 </script>
-<style>
+<style scoped lang="scss">
+     .title-animate {
+          .ffl-wrapper {
+               position: relative;
+               display: block;
+               padding-top: 1rem;
+          }
+          .ffl-wrapper .ffl-label {
+               transition-property: all;
+               transition-duration: 200ms;
+               transition-timing-function: ease;
+               transition-delay: 0s;
+               position: absolute;
+               white-space: nowrap;
+               max-width: 100%;
+               text-overflow: ellipsis;
+               overflow: hidden;
+               pointer-events: none;
+               top: 1.25rem;
+          }
+          .ffl-wrapper.ffl-floated .ffl-label {
+               top: 0;
+          }
+
+          .ffl-label {
+               color: #909090;
+               line-height: 1.2;
+          }
+          .ffl-floated .ffl-label {
+               color: #0289f3;
+               font-size: 0.75rem;
+          }
+
+          form {
+               max-width: 30rem;
+               margin: 2rem auto 0;
+               background-color: #ffffff;
+               padding: 1rem;
+          }
+          form:after {
+               content: "";
+               display: block;
+               clear: both;
+          }
+
+          input,
+          textarea,
+          select {
+               transition: border-bottom 100ms ease;
+               display: block;
+               width: 100%;
+               padding: 0;
+               margin-bottom: 1rem;
+               box-shadow: none;
+               appearance: none;
+               outline: none;
+               background-color: transparent;
+               border-style: none;
+               border-bottom-width: 1px;
+               border-bottom-style: solid;
+               border-bottom-color: rgba(0, 0, 0, 0.2);
+               height: 1.875rem;
+          }
+          input:hover,
+          textarea:hover,
+          select:hover {
+               border-bottom-width: 1px;
+               border-bottom-color: #909090;
+          }
+          input:focus,
+          textarea:focus,
+          select:focus {
+               border-bottom-width: 1px;
+               border-bottom-color: #0289f3;
+          }
+
+          textarea {
+               resize: none;
+               min-height: 1.875rem;
+          }
+
+          label > span {
+               color: #cccccc;
+          }
+
+          [type="submit"] {
+               transition: background-color 0.3s ease;
+               border: none;
+               background-color: #0289f3;
+               color: #ffffff;
+               padding: 0.5rem 1rem;
+               text-transform: uppercase;
+               cursor: pointer;
+               margin-top: 1rem;
+               float: right;
+          }
+          [type="submit"]:hover, [type="submit"]:focus {
+               background-color: #027bda;
+          }
+     }
+</style>
+<style type="text/css">
      #editor {
           margin: auto;
           width: 80%;
@@ -399,4 +523,5 @@
      .el-textarea{
           font-size: 16px;
      }
+
 </style>

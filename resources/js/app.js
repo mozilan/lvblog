@@ -44,6 +44,7 @@ import 'element-ui/lib/theme-chalk/index.css';
 import router from './routes.js'
 import store from './store.js'
 import hljs from 'highlight.js'
+import $ from   'jquery'
 //封装成一个指令
 Vue.directive('highlight', (el) => {
     let blocks = el.querySelectorAll('pre code');
@@ -55,6 +56,7 @@ Vue.use(ElementUI);
 
 const app = new Vue({
     router,
-    store
+    store,
+    $,
 }).$mount('#app');
 
