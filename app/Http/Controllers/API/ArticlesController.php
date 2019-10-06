@@ -65,7 +65,7 @@ class ArticlesController extends Controller
                 $query->recentReplied();
                 break;
         }
-
+        $query->where('target','0');
         $articles = $query->paginate(6);
 
         return $this->response->paginator($articles, new ArticleTransformer());
@@ -83,6 +83,9 @@ class ArticlesController extends Controller
     public function show($article)
     {
         $article = Article::find($article);
+        if($this->user->id != $article->user_id && $article->target != 0 ) {
+            return response()->json(['message' => '文章不存在或者没有访问权限'], 404);
+        }
         return $this->response->item($article, new ArticleTransformer());
     }
 }

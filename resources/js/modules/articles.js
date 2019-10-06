@@ -27,7 +27,7 @@ export const articles = {
     actions:{
         loadArticles({commit,state},data ){
             commit('setArticlesLoadStatus',1);
-            if(data.id === ''){
+            if(data.user === ''){
                 ArticleAPI.getArticles(data.page !== '' ? data.page : 1)
                     .then(function (response) {
                         if(state.articles.data !== undefined){
@@ -42,9 +42,14 @@ export const articles = {
                         commit('setArticlesLoadStatus', 3);
                     });
             }else{
-                ArticleAPI.getUserArticles(data.id)
+                ArticleAPI.getUserArticles(data.user,data.page !== '' ? data.page : 1)
                     .then(function (response) {
-                        commit('setArticles', response.data.data);
+                        if(state.articles.data !== undefined){
+                            var merge_data = state.articles.data.concat(response.data.data);
+                            response.data.data = merge_data;
+                            commit('setArticles',response.data);
+                        }
+                        commit('setArticles',response.data);
                         commit('setArticlesLoadStatus', 2);
                     })
                     .catch(function (error){

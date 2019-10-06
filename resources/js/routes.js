@@ -69,7 +69,7 @@ export default new VueRouter({
                     beforeEnter: requireAuth
                 },
                 {
-                    path: 'blog',
+                    path: 'blog/:user?',
                     name: 'blog',
                     components: Vue.component( 'Home', require( './pages/Blog' ) ),
                 },

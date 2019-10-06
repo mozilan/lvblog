@@ -9,6 +9,12 @@ export default {
 
         });
     },
+    getUserArticles: function(user,page){
+
+        return axios.get(LVBLOG_CONFIG.API_URL + '/users/'+user+'/articles'+'?page='+page ,{
+
+        });
+    },
     getArticle: function(art_id){
         return axios.get(LVBLOG_CONFIG.API_URL + '/articles/'+art_id,{
 

@@ -56,12 +56,16 @@ $api->version('v1', [
         //获取某一用户所有文章标签
         $api->get('tags/{user_id}', 'TagsController@index')
             ->name('api.tags.index');
+        //获取所有文章
         $api->get('articles', 'ArticlesController@index')
             ->name('api.articles.index');
+        //获取某一用户所有文章
         $api->get('users/{user}/articles', 'ArticlesController@userIndex')
             ->name('api.users.articles.index');
+        //获取某一文章
         $api->get('articles/{article}', 'ArticlesController@show')
             ->name('api.articles.show');
+        //获取某一用户的归档
         $api->get('archives/{user_id}', 'ArchivesController@index')
             ->name('api.archives.index');
         // 需要 token 验证的接口

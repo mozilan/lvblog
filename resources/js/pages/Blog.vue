@@ -197,20 +197,28 @@
                 return this.$store.getters.getArticles;
             }
         },
+        watch: {
+            // 如果路由有变化，会再次执行该方法
+            "$route": "getArticles"
+        },
         created(){
-            this.$store.dispatch('clearArticles');
-            this.$store.dispatch('loadArticles',{
-                id:'',
-            });
+            this.getArticles();
             var h = window.innerHeight-128;//可见区域高度
             this.infinite_box.height = h+'px';
         },
         methods: {
+            getArticles(){
+                this.$store.dispatch('clearArticles');
+
+                this.$store.dispatch('loadArticles',{
+                    user:this.$route.params.user ? this.$route.params.user : '',
+                });
+            },
             load () {
                 this.loading = true;
                 setTimeout(() => {
                     this.$store.dispatch('loadArticles',{
-                        id:'',
+                        user:this.$route.params.user ? this.$route.params.user :'',
                         page: this.$store.getters.getArticles.meta === undefined ? 1 : ++this.$store.getters.getArticles.meta.pagination.current_page,
                     });
                     this.$watch(this.$store.getters.getArticlesLoadStatus, function () {

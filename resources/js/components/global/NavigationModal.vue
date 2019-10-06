@@ -30,6 +30,7 @@
                 <template slot="title">
                     <el-image style="width: 40px; height: 40px;border:3px solid #409eff;border-radius:30px" :src="user.avatar"></el-image>
                 </template>
+                <el-menu-item index="9"><router-link :to="{ name:'blog',params:{'user':user.id ? user.id:''}}">我的博客</router-link></el-menu-item>
                 <el-menu-item index="3"><router-link :to="{ name:'about' }">关于我</router-link></el-menu-item>
                 <el-menu-item index="2"><router-link :to="{ name:'archive',params:{'user':user.id?user.id:1}}">我的归档</router-link></el-menu-item>
                 <el-menu-item index="8-2"><router-link :to="{ name:'home' }">个人中心</router-link></el-menu-item>
