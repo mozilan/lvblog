@@ -52,40 +52,40 @@ export default new VueRouter({
     routes: [
         {
             path: '/',
-            redirect: {name: 'index'},
-            name: 'layout',
+            redirect: {name: '首页'},
+            name: '主页',
             components: Vue.component( 'Layout', require( './pages/Layout.vue' ) ),
             children: [
                 {
                     path: 'index',
-                    redirect: {name: 'blog'},
-                    name: 'index',
+                    redirect: {name: '文章'},
+                    name: '首页',
                     components: Vue.component( 'Index', require( './pages/Index.vue' ) )
                 },
                 {
                     path: 'edit',
-                    name: 'edit',
+                    name: '写作',
                     components: Vue.component( 'Edit', require( './pages/Edit' ) ),
                     beforeEnter: requireAuth
                 },
                 {
                     path: 'blog',
-                    name: 'blog',
+                    name: '文章',
                     components: Vue.component( 'Blog', require( './pages/Blog' ) ),
                     children: [
                         {
                             path: 'user/:user',
-                            name: 'blog.user',
+                            name: '用户文章',
                             components: Vue.component( 'Blog-User', require( './pages/Blog' ) )
                         },
                         {
                             path: 'tag/:tag',
-                            name: 'blog.tag',
+                            name: '标签文章',
                             components: Vue.component( 'Blog-Tag', require( './pages/Blog' ) )
                         },
                         {
                             path: 'category/:category',
-                            name: 'blog.category',
+                            name: '分类文章',
                             components: Vue.component( 'Blog-Category', require( './pages/Blog' ) )
                         }
 
@@ -93,12 +93,12 @@ export default new VueRouter({
                 },
                 {
                     path: 'art/:art_id',
-                    name: 'art',
+                    name: '查看文章',
                     components: Vue.component( 'Article', require( './pages/Art' ) ),
                 },
                 {
                     path: 'archive/:user',
-                    name: 'archive',
+                    name: '归档',
                     components: Vue.component( 'Archive', require( './pages/Archive' ) ),
                 },
                 {
@@ -108,7 +108,7 @@ export default new VueRouter({
                 },
                 {
                     path: 'about',
-                    name: 'about',
+                    name: '关于我',
                     components: Vue.component( 'About', require( './pages/About' ) ),
                 },
             ]

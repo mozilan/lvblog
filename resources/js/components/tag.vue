@@ -1,16 +1,16 @@
 <template>
-	<div class="tag">
+	<el-col class="tag">
 		<el-card class="box-card">
 			<div slot="header" class="d-flex align-items-center">
 				<img class="card-icon" src="../../assets/tag.png" />
 				<span>标签云</span>
 			</div>
 			<div class="text item" v-for="tag in tags ">
-				<router-link :to="{name:'blog.tag',params: {tag:tag.id}}"><el-tag size="mini" :type="type[Math.floor(Math.random()*type.length)]" class="tag-item">{{tag.name}}[{{tag.count}}]</el-tag></router-link>
+				<router-link :to="{name:'标签文章',params: {tag:tag.id}}"><el-tag size="mini" :type="type[Math.floor(Math.random()*type.length)]" class="tag-item">{{tag.name}}[{{tag.count}}]</el-tag></router-link>
 			</div>
 			<div class="clear"></div>
 		</el-card>
-	</div>
+	</el-col>
 </template>
 
 <script>

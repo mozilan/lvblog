@@ -1,5 +1,5 @@
 <template>
-	<div class="tag">
+	<el-col class="tag">
 		<el-card class="box-card">
 			<div slot="header" class="d-flex align-items-center">
 				<img class="card-icon" src="../../assets/biaoqian.png" />
@@ -7,14 +7,14 @@
 			</div>
 
 		<div v-for="category in categories" class="text item">
-			<router-link :to="{name:'blog.category',params: {category:category.id}}">
+			<router-link :to="{name:'分类文章',params: {category:category.id}}">
 				<a href="#"><span style="float: left;">{{category.name}}</span></a>
 				<el-tag style="float: right" size="mini" class="category-item" type="success"  @click="">[{{category.count}}]</el-tag>
 				<div style="clear:both;"></div>
 			</router-link>
 		</div>
 		</el-card>
-	</div>
+	</el-col>
 </template>
 
 <script>

@@ -167,12 +167,12 @@
             },
             redirectToIndex(){
                 if(this.$route.query.login != null){
-                    this.$router.push({name:'index'});
+                    this.$router.push({name:'首页'});
                 }
             },
             hideLoginDialogForm(){
                 this.loginDialogFormVisible = false;
-                this.$router.push({name:'index'});
+                this.$router.push({name:'首页'});
             },
             showLoginForm(){
                 if(this.$route.query.login != null){

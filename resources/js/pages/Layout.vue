@@ -11,9 +11,12 @@
      .app{
          font-family: "microsoft yahei";
      }
-    #content{
+    .content{
         background-color: #f9f9f9;
-        padding: 30px 0;
+    }
+    .breadcrumb{
+        background-color: #f9f9f9;
+        padding-top: 20px;
     }
 </style>
 
@@ -24,11 +27,16 @@
                 <Navigation></Navigation>
             </el-header>
             <Notification></Notification>
-            <el-row type="flex" justify="center" id="content">
-                <el-col :xs="20" :md="20" :style="{'minHeight':minHeight+'px'}">
-                    <router-view></router-view>
+            <el-row type="flex" justify="center" class="breadcrumb">
+                <el-col :xs="20" :md="20" style="padding: 6px 0 6px 0;">
+                    <el-breadcrumb separator="/" class="breadcrumb-inner">
+                        <el-breadcrumb-item v-for="item in $route.matched">
+                            {{ item.name }}
+                        </el-breadcrumb-item>
+                    </el-breadcrumb>
                 </el-col>
             </el-row>
+            <router-view></router-view>
         </el-container>
         <Register></Register>
         <Login></Login>

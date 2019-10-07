@@ -1,5 +1,5 @@
 <template>
-	<div class="friend">
+	<el-col class="friend">
 		<el-card class="box-card">
 		  <div slot="header" class="d-flex align-items-center">
 		  	<img class="card-icon" src="../../assets/lianjie.png"/>
@@ -9,10 +9,9 @@
 		    </el-button>
 		  </div>
 			<div class="text item"><a href="#">蓝默的博客</a></div>
-		  	<div class="text item"><a href="#">刘三金的博客</a></div>
 			<div class="text item"><a href="#">IT疯子也的博客</a></div>
 		</el-card>
-	</div>
+	</el-col>
 </template>
 
 <script>
@@ -25,6 +24,7 @@ export default {
 .box-card .item a{
 	text-decoration: none;
 	/*color: #F56C6C;*/
+	margin: 8px auto;
 }
 .box-card span{
 	font-weight: bold;

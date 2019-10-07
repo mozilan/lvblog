@@ -1,4 +1,4 @@
-<style scoped>
+<style scoped lang="scss">
     #side .item {
         margin-bottom: 30px;
     }
@@ -94,81 +94,89 @@
     .infinite-list-wrapper p{
         text-align: center;
     }
+    .blog{
+        padding-top: 20px;
+    }
 </style>
 <template>
-    <div class="blog" style="overflow:auto">
+    <el-row type="flex" class="row-bg" justify="center">
+        <el-col :xs="20" :md="20">
+        <div class="blog" style="overflow:auto">
         <el-backtop target=".blog-component__scroll .blog-scrollbar__wrap"></el-backtop>
-        <el-row id="artList" type="flex" justify="space-around">
-            <el-col :span="16" class="blog-component__scroll" v-loading="loading">
-                <div class="infinite-list-wrapper blog-scrollbar__wrap" :style="infinite_box"  >
-                        <ul
-                            class="list"
-                            v-infinite-scroll="load"
-                            infinite-scroll-disabled="disabled">
-                        <li v-for="i in articles.data">
-                            <el-row class="art-item">
-                                <el-card shadow="hover">
-                                    <h5 class="clear-title"><router-link :to="{name:'art',params: {art_id:i.id}}" tag="span" class="art-title">{{i.title}}</router-link></h5>
-                                    <el-row class="art-info d-flex align-items-center justify-content-start">
-                                        <div class="art-time"><i class="el-icon-time"></i>：{{i.created_at}}</div>
-                                        <div class="lv-clear-both"></div>
-                                        <div class="d-flex align-items-center lv-float-left">
-                                            <img class="tag" src="../../assets/tag.png" style="float:left;margin-right:0;margin-top: 5px;"/>
-                                            <span style="float: left;">：</span>
-                                            <div v-for="t in i.tag" style="float:left;margin-left: 2px;">
-                                                <router-link :to="{name:'blog.tag',params: {tag:t.id}}">
-                                                    <el-tag size="mini">{{t.name}}</el-tag>
-                                                </router-link>
+            <el-row type="flex" class="row-bg" justify="space-between">
+                <el-col :span="16"  class="blog-component__scroll" v-loading="loading">
+                    <div class="infinite-list-wrapper blog-scrollbar__wrap" :style="infinite_box"  >
+                            <ul
+                                class="list"
+                                v-infinite-scroll="load"
+                                infinite-scroll-disabled="disabled">
+                            <li v-for="i in articles.data">
+                                <el-row class="art-item">
+                                    <el-card shadow="hover">
+                                        <h5 class="clear-title"><router-link :to="{name:'art',params: {art_id:i.id}}" tag="span" class="art-title">{{i.title}}</router-link></h5>
+                                        <el-row class="art-info d-flex align-items-center justify-content-start">
+                                            <div class="art-time"><i class="el-icon-time"></i>：{{i.created_at}}</div>
+                                            <div class="lv-clear-both"></div>
+                                            <div class="d-flex align-items-center lv-float-left">
+                                                <img class="tag" src="../../assets/tag.png" style="float:left;margin-right:0;margin-top: 5px;"/>
+                                                <span style="float: left;">：</span>
+                                                <div v-for="t in i.tag" style="float:left;margin-left: 2px;">
+                                                    <router-link :to="{name:'标签文章',params: {tag:t.id}}">
+                                                        <el-tag size="mini">{{t.name}}</el-tag>
+                                                    </router-link>
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="d-flex align-items-center lv-float-left" style="margin-left: 8px;">
-                                            <img class="tag" src="../../assets/biaoqian.png" style="float:left;margin-right:0;margin-top: 5px;"/>
-                                            <span style="float: left;">：</span>
-                                            <div style="float:left;margin-left: 2px;">
-                                                <router-link :to="{name:'blog.category',params: {category:i.category.id}}">
-                                                    <el-tag size="mini">{{i.category.name}}</el-tag>
-                                                </router-link>
+                                            <div class="d-flex align-items-center lv-float-left" style="margin-left: 8px;">
+                                                <img class="tag" src="../../assets/biaoqian.png" style="float:left;margin-right:0;margin-top: 5px;"/>
+                                                <span style="float: left;">：</span>
+                                                <div style="float:left;margin-left: 2px;">
+                                                    <router-link :to="{name:'分类文章',params: {category:i.category.id}}">
+                                                        <el-tag size="mini">{{i.category.name}}</el-tag>
+                                                    </router-link>
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="lv-clear-both"></div>
-                                    </el-row>
-                                    <el-row class="art-body">
-                                        <div class="side-img hidden-sm-and-down"><img class="art-banner" :src="img_src+i.id"></div>
-                                        <div class="side-abstract">
-                                            <div class="art-abstract">
-                                                {{i.excerpt}}
+                                            <div class="lv-clear-both"></div>
+                                        </el-row>
+                                        <el-row class="art-body">
+                                            <div class="side-img hidden-sm-and-down"><img class="art-banner" :src="img_src+i.id"></div>
+                                            <div class="side-abstract">
+                                                <div class="art-abstract">
+                                                    {{i.excerpt}}
+                                                </div>
+                                                <div class="art-more">
+                                                    <router-link :to="{name:'art',params: {art_id:i.id}}" tag="span">
+                                                        <el-button plain>阅读全文</el-button>
+                                                    </router-link>
+                                                    <div class="view"><i class="el-icon-view"></i>{{i.view_count}}</div>
+                                                </div>
                                             </div>
-                                            <div class="art-more">
-                                                <router-link :to="{name:'art',params: {art_id:i.id}}" tag="span">
-                                                    <el-button plain>阅读全文</el-button>
-                                                </router-link>
-                                                <div class="view"><i class="el-icon-view"></i>{{i.view_count}}</div>
-                                            </div>
-                                        </div>
-                                    </el-row>
-                                </el-card>
-                                <img class="star" src="../../assets/star.png" />
-                            </el-row>
-                        </li>
-                    </ul>
-                    <p v-if="loading">加载中...</p>
-                    <p v-if="noMore">很高兴你翻到这里，但是真的没有了...</p>
-                </div>
-            </el-col>
-            <el-col :span="6" class="hidden-sm-and-down" id="side">
-                <div class="item">
-                    <Tag></Tag>
-                </div>
-                <div class="item">
-                    <Category></Category>
-                </div>
-                <div class="item">
-                    <Friend></Friend>
-                </div>
-            </el-col>
-            <Oauth></Oauth>
-        </el-row>
-    </div>
+                                        </el-row>
+                                    </el-card>
+                                    <img class="star" src="../../assets/star.png" />
+                                </el-row>
+                            </li>
+                        </ul>
+                        <p v-if="loading">加载中...</p>
+                        <p v-if="noMore">很高兴你翻到这里，但是真的没有了...</p>
+                    </div>
+                </el-col>
+                <el-col :span="2"></el-col>
+                <el-col :span="6" class="hidden-sm-and-down" id="side">
+                    <div class="item">
+                        <Tag></Tag>
+                    </div>
+                    <div class="item">
+                        <Category></Category>
+                    </div>
+                    <div class="item">
+                        <Friend></Friend>
+                    </div>
+                </el-col>
+                <Oauth></Oauth>
+            </el-row>
+            </div>
+        </el-col>
+    </el-row>
 </template>
 <script>
     import Friend from '../components/friend'
@@ -323,7 +331,7 @@
                             this.loading = false
                         }
                         if(this.$store.getters.getArticlesLoadStatus() === 3) {
-                            this.$message.error('错了哦，懒加载文章失败了');
+                            this.$message.error('错了哦，加载文章失败了');
                         }
                     });
                 }, 1000);

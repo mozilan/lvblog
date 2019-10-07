@@ -1,6 +1,7 @@
 <template>
-          <el-container style="display:block" class="edit">
-               <el-row>
+    <el-row type="flex" justify="center">
+        <el-col :xs="23" :sm="22" :md="21" :lg="20">
+          <div style="display:block" class="edit">
                     <div class="title-animate">
                          <div class="ffl-wrapper bl-margin_bottom-title">
                               <label for="title" class="ffl-label">文章标题</label>
@@ -121,8 +122,9 @@
                               <el-button class="bl-save" type="primary" @click="publishArticle(1)">保存草稿</el-button>
                          </div>
                     </el-form>
-               </el-row>
-          </el-container>
+          </div>
+        </el-col>
+    </el-row>
 </template>
 <script>
      // Local Registration

@@ -2,7 +2,7 @@
     <div class="art" :style="{'height':art_height}">
         <el-backtop target=".page-component__scroll .el-scrollbar__wrap"></el-backtop>
         <el-row class="main page-component__scroll" type="flex" justify="center">
-            <el-col :span="16" class="el-scrollbar__wrap">
+            <el-col :span="20" class="el-scrollbar__wrap">
                 <div id="artcle-info" :style="{'background-image':bg_url}">
                     <h2 class="text-center"><strong>{{article.data.title}}</strong></h2>
                     <!-- 描述：文章信息 -->
