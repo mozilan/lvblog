@@ -75,7 +75,7 @@ export const articles = {
         },
         loadUserCategoryArticles({commit,state},data){
             commit('setArticleLoadStatus',1);
-            ArticleAPI.getUserTagArticles(data.category,data.page)
+            ArticleAPI.getUserCategoryArticles(data.category,data.page)
                 .then(function (response) {
                     if(state.articles.data !== undefined){
                         var merge_data = state.articles.data.concat(response.data.data);

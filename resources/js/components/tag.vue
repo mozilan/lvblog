@@ -2,7 +2,7 @@
 	<div class="tag">
 		<el-card class="box-card">
 			<div slot="header" class="d-flex align-items-center">
-				<img class="card-icon" src="../../assets/biaoqian.png" />
+				<img class="card-icon" src="../../assets/tag.png" />
 				<span>标签云</span>
 			</div>
 			<div class="text item" v-for="tag in tags ">

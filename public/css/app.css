@@ -1,2 +1,15 @@
-@import url(https://fonts.googleapis.com/css?family=Nunito);
+html a,
+html a:hover,
+html a:focus {
+  text-decoration: none;
+  color: inherit;
+}
+
+html .lv-clear-both {
+  clear: both;
+}
+
+html .lv-float-left {
+  float: left !important;
+}
 

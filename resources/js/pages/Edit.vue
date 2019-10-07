@@ -223,7 +223,7 @@
                               this.$refs.md.$img2Url(pos, this.$store.getters.getImages);
                          }else if (this.$store.getters.getImagesUpLoadStatus() === 3) {
                               this.$message({
-                                   excerpt: "上传失败",
+                                   message: "上传失败",
                                    type: 'error'
                               });
                               this.$refs.md.$img2Url(pos, null);
@@ -243,7 +243,7 @@
                     let tagInputValue = this.tagInputValue;
                     if(tagInputValue.length > 10){
                          this.$message({
-                              excerpt: "标签名称不能超过10个单位长度",
+                              message: "标签名称不能超过10个单位长度",
                               type: 'warning'
                          });
                          this.tagInputVisible = false;
@@ -270,7 +270,7 @@
                     let categoryInputValue = this.categoryInputValue;
                     if(categoryInputValue === ''){
                          // this.$message({
-                         //      excerpt: "分类名称不能为空",
+                         //      message: "分类名称不能为空",
                          //      type: 'warning'
                          // });
                          this.categoryInputVisible = false;
@@ -278,7 +278,7 @@
                          return 0;
                     }else if(categoryInputValue.length > 10){
                          this.$message({
-                              excerpt: "分类名称不能超过10个单位长度",
+                              message: "分类名称不能超过10个单位长度",
                               type: 'warning'
                          });
                          this.categoryInputVisible = false;
@@ -287,7 +287,7 @@
                     }
                     else if(this.categoryDynamicTags.length === 1){
                          this.$message({
-                              excerpt: "一次只能添加一个分类",
+                              message: "一次只能添加一个分类",
                               type: 'warning'
                          });
                          this.categoryInputVisible = false;
@@ -316,7 +316,7 @@
                               });
                          }else{
                               this.$message({
-                                   excerpt: "分类名称已存在",
+                                   message: "分类名称已存在",
                                    type: 'warning'
                               });
                          }
@@ -477,7 +477,7 @@
           }
      }
 </style>
-<style scoped type="text/css">
+<style type="text/css">
      #editor {
           margin: auto;
           width: 80%;
@@ -495,7 +495,7 @@
      }
      .input-new-tag {
           width: 90px;
-          margin-left: 10px;
+          margin-left: 0;
           vertical-align: bottom;
      }
      .bl-public{

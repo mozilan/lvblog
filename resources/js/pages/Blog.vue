@@ -111,13 +111,26 @@
                                     <h5 class="clear-title"><router-link :to="{name:'art',params: {art_id:i.id}}" tag="span" class="art-title">{{i.title}}</router-link></h5>
                                     <el-row class="art-info d-flex align-items-center justify-content-start">
                                         <div class="art-time"><i class="el-icon-time"></i>：{{i.created_at}}</div>
-                                        <div class="d-flex align-items-center">
+                                        <div class="lv-clear-both"></div>
+                                        <div class="d-flex align-items-center lv-float-left">
                                             <img class="tag" src="../../assets/tag.png" style="float:left;margin-right:0;margin-top: 5px;"/>
                                             <span style="float: left;">：</span>
                                             <div v-for="t in i.tag" style="float:left;margin-left: 2px;">
-                                                <el-tag size="mini">{{t.name}}</el-tag>
+                                                <router-link :to="{name:'blog.tag',params: {tag:t.id}}">
+                                                    <el-tag size="mini">{{t.name}}</el-tag>
+                                                </router-link>
                                             </div>
                                         </div>
+                                        <div class="d-flex align-items-center lv-float-left" style="margin-left: 8px;">
+                                            <img class="tag" src="../../assets/biaoqian.png" style="float:left;margin-right:0;margin-top: 5px;"/>
+                                            <span style="float: left;">：</span>
+                                            <div style="float:left;margin-left: 2px;">
+                                                <router-link :to="{name:'blog.category',params: {category:i.category.id}}">
+                                                    <el-tag size="mini">{{i.category.name}}</el-tag>
+                                                </router-link>
+                                            </div>
+                                        </div>
+                                        <div class="lv-clear-both"></div>
                                     </el-row>
                                     <el-row class="art-body">
                                         <div class="side-img hidden-sm-and-down"><img class="art-banner" :src="img_src+i.id"></div>
@@ -220,7 +233,7 @@
                     });
                     setTimeout(() => {
                         loading.close();
-                    }, 2000);
+                    }, 1000);
                     console.log("检测到user属性，没检测到tag属性");
                     this.$store.dispatch('clearArticles');
                     this.$store.dispatch('loadArticles',{
@@ -235,7 +248,7 @@
                     });
                     setTimeout(() => {
                         loading.close();
-                    }, 2000);
+                    }, 1000);
                     console.log("检测到tag属性");
                     this.$store.dispatch('clearArticles');
                     this.$store.dispatch('loadUserTagArticles',{
@@ -252,7 +265,7 @@
                     });
                     setTimeout(() => {
                         loading.close();
-                    }, 2000);
+                    }, 1000);
                     console.log("检测到cat属性");
                     this.$store.dispatch('clearArticles');
                     this.$store.dispatch('loadUserCategoryArticles',{
@@ -269,7 +282,7 @@
                     });
                     setTimeout(() => {
                         loading.close();
-                    }, 2000);
+                    }, 1000);
                     this.$store.dispatch('clearArticles');
                     this.$store.dispatch('loadArticles',{
                         user:this.$route.params.user ? this.$route.params.user : '',
@@ -313,7 +326,7 @@
                             this.$message.error('错了哦，懒加载文章失败了');
                         }
                     });
-                }, 2000);
+                }, 1000);
             }
         }
     }
