@@ -1,8 +1,4 @@
 <style scoped lang="scss">
-    #side .item {
-        margin-bottom: 30px;
-    }
-
     .art-item {
         margin-bottom: 30px;
         position: relative;
@@ -64,20 +60,14 @@
         flex: 1;
         display: flex;
         flex-direction: column;
-    }
-
-    .art-abstract {
-        flex: 1;
         color: #aaa;
     }
-
     .art-more {
-        height: 40px;
         display: flex;
         justify-content: space-between;
+        flex: 1 auto;
         align-items: flex-end;
     }
-
     .art-more .view {
         color: #aaa;
     }
@@ -97,23 +87,70 @@
     .blog{
         padding-top: 20px;
     }
+    .lv-blog-side{
+        box-shadow: 0 0 0 2px #ebeef5;
+        padding-bottom: 10px;
+    }
+    .lv-margin-top{
+        margin-top:20px;
+    }
+    @media only screen and (max-width: 683px){
+        .lv-blog-side{
+            width: 100%;
+        }
+        .lv-blog-middle{
+            width: 100%;
+        }
+        .lv-tag-side{
+            width: 100%;
+        }
+        .lv-row-bg{
+            display: block;
+        }
+        .art-body {
+            display: block;
+            padding: 10px 0;
+        }
+        .side-img {
+            height: auto;
+            width: 100%;
+            overflow: hidden;
+            margin-right: 10px;
+        }
+
+        .clear-title{
+            margin-bottom: 0;
+        }
+        #side{
+            margin-top: 20px;
+        }
+        .art-more {
+            margin-top: 10px;
+        }
+        /*.art-more {*/
+            /*height: 40px;*/
+            /*display: block;*/
+            /*justify-content: space-between;*/
+            /*!*align-items: flex-end;*!*/
+        /*}*/
+    }
 </style>
 <template>
     <el-row type="flex" class="row-bg" justify="center">
-        <el-col :xs="20" :md="20">
+        <el-col :xs="24" :sm="24" :md="20" :lg="20">
         <div class="blog" style="overflow:auto">
         <el-backtop target=".blog-component__scroll .blog-scrollbar__wrap"></el-backtop>
-            <el-row type="flex" class="row-bg" justify="space-between">
-                <el-col :span="16"  class="blog-component__scroll" v-loading="loading">
+            <el-row type="flex" class="row-bg lv-row-bg" justify="space-between">
+                <el-col :span="16"  class="lv-blog-side blog-component__scroll" v-loading="loading">
                     <div class="infinite-list-wrapper blog-scrollbar__wrap" :style="infinite_box"  >
                             <ul
                                 class="list"
                                 v-infinite-scroll="load"
                                 infinite-scroll-disabled="disabled">
-                            <li v-for="i in articles.data">
+                            <li v-for="(i , index) in articles.data">
                                 <el-row class="art-item">
                                     <el-card shadow="hover">
-                                        <h5 class="clear-title"><router-link :to="{name:'art',params: {art_id:i.id}}" tag="span" class="art-title">{{i.title}}</router-link></h5>
+                                        <h5 class="clear-title"><router-link :to="{name:'查看文章',params: {art_id:i.id}}" tag="span" class="art-title">{{i.title}}</router-link></h5>
                                         <el-row class="art-info d-flex align-items-center justify-content-start">
                                             <div class="art-time"><i class="el-icon-time"></i>：{{i.created_at}}</div>
                                             <div class="lv-clear-both"></div>
@@ -144,15 +181,16 @@
                                                     {{i.excerpt}}
                                                 </div>
                                                 <div class="art-more">
-                                                    <router-link :to="{name:'art',params: {art_id:i.id}}" tag="span">
+                                                    <router-link :to="{name:'查看文章',params: {art_id:i.id}}" tag="span">
                                                         <el-button plain>阅读全文</el-button>
                                                     </router-link>
                                                     <div class="view"><i class="el-icon-view"></i>{{i.view_count}}</div>
                                                 </div>
                                             </div>
+
                                         </el-row>
                                     </el-card>
-                                    <img class="star" src="../../assets/star.png" />
+                                    <img v-show="index <= 3" class="star" src="../../assets/star.png" />
                                 </el-row>
                             </li>
                         </ul>
@@ -160,15 +198,29 @@
                         <p v-if="noMore">很高兴你翻到这里，但是真的没有了...</p>
                     </div>
                 </el-col>
-                <el-col :span="2"></el-col>
-                <el-col :span="6" class="hidden-sm-and-down" id="side">
+                <el-col :span="2" class="lv-blog-middle"></el-col>
+                <el-col :span="6" class="hidden-sm-and-down lv-tag-side" id="side" :style="infinite_side" >
                     <div class="item">
                         <Tag></Tag>
                     </div>
-                    <div class="item">
+                    <div class="lv-clear-both"></div>
+                    <div class="item lv-margin-top">
                         <Category></Category>
                     </div>
-                    <div class="item">
+                    <!--<div class="lv-clear-both"></div>-->
+                    <!--<div class="item lv-margin-top">-->
+                        <!--<Category></Category>-->
+                    <!--</div>-->
+                    <!--<div class="lv-clear-both"></div>-->
+                    <!--<div class="item lv-margin-top">-->
+                        <!--<Category></Category>-->
+                    <!--</div>-->
+                    <!--<div class="lv-clear-both"></div>-->
+                    <!--<div class="item lv-margin-top">-->
+                        <!--<Category></Category>-->
+                    <!--</div>-->
+                    <div class="lv-clear-both"></div>
+                    <div class="item lv-margin-top">
                         <Friend></Friend>
                     </div>
                 </el-col>
@@ -190,6 +242,10 @@
                 loading: false,
                 infinite_box:{
                     height:'',
+                    overflow: 'auto',
+                },
+                infinite_side:{
+                    maxHeight:'',
                     overflow: 'auto',
                 },
                 img_src:'https://s0.xinger.ink/acgimg/acgurl.php?',
@@ -224,8 +280,9 @@
         },
         created(){
             this.getArticles();
-            var h = window.innerHeight-128;//可见区域高度
-            this.infinite_box.height = h+'px';
+            var h = window.innerHeight-150;//可见区域高度
+            this.infinite_box.height = this.infinite_side.maxHeight = h+'px';
+
         },
         methods: {
             getArticles(){

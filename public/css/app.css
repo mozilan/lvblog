@@ -13,3 +13,10 @@ html .lv-float-left {
   float: left !important;
 }
 
+@media only screen and (max-width: 683px) {
+  html .el-submenu__title,
+  html .el-header {
+    padding: 0;
+  }
+}
+

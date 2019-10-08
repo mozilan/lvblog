@@ -1,7 +1,7 @@
 <template>
     <div class="about">
         <el-row class="main" type="flex" justify="center">
-            <el-col :span="16">
+            <el-col :xs="24" :sm="24" :md="20" :lg="20">
                 <h5 class="title"><i class="el-icon-star-on"></i>关于自己</h5>
                 <div class="statement">
                     <div class="item">开源爱好者，程序人生</div>
@@ -105,7 +105,7 @@
     }
 
     .title {
-        margin-top: 40px;
+
     }
 
     .statement {

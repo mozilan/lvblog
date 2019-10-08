@@ -2,19 +2,21 @@
     <div class="art" :style="{'height':art_height}">
         <el-backtop target=".page-component__scroll .el-scrollbar__wrap"></el-backtop>
         <el-row class="main page-component__scroll" type="flex" justify="center">
-            <el-col :span="20" class="el-scrollbar__wrap">
+            <el-col :xs="24" :sm="24" :md="20" :lg="20" class="el-scrollbar__wrap">
                 <div id="artcle-info" :style="{'background-image':bg_url}">
-                    <h2 class="text-center"><strong>{{article.data.title}}</strong></h2>
+                    <h2 class="text-center art-title">{{article.data.title}}</h2>
                     <!-- 描述：文章信息 -->
                     <div class="text-center timeAndView">
-						<span class="article-time">
+                        <el-avatar :size="35" :src="article.data.user.avatar"></el-avatar>
+                        ·
+                        <span class="article-time">
 							<i class="el-icon-time"></i>
-							发表于：<span>{{article.data.created_at}}</span>
+							<span>{{article.data.created_at}}</span>
 						</span>
-                        &#12288;|&#12288;
+                        ·
                         <span class="article-views">
 							<i class="el-icon-view"></i>
-							阅读量：<span>{{article.data.view_count}}</span>
+							<span>{{article.data.view_count}}</span>次阅读
 						</span>
                     </div>
                     <p class="abstract">
@@ -75,11 +77,15 @@
 </script>
 
 <style lang="scss" scoped>
+    .art{
+        margin-top: 20px;
+    }
     #artcle-info {
         padding: 20px;
         //background-image: url(https://s0.xinger.ink/acgimg/acgurl.php?678);
         margin-bottom: 40px;
         background-size: cover;
+        color: #ffffff;
     }
 
     #artcle-info .abstract {
@@ -95,7 +101,11 @@
         font-size: 16px;
         color: #ffffff;
     }
-
+    #artcle-info .text-center{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
     pre.has {
         color: #ffffff;
         background-color: rgba(0, 0, 0, 0.8);
@@ -117,5 +127,11 @@
     }
     .main{
         height: inherit;
+    }
+
+    @media only screen and (max-width: 683px){
+        .abstract{
+            display: none;
+        }
     }
 </style>

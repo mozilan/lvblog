@@ -16,6 +16,13 @@
     .el-menu-blumer{
         float:right;
     }
+
+    @media only screen and (max-width: 683px){
+        .el-menu-item{
+            padding: 0 10px;
+        }
+    }
+
 </style>
 <template>
     <div class="bl-header">

@@ -3,7 +3,7 @@
         text-align: center;
     }
     #chang-jian-ye-mian-bu-ju + .demo-container .el-main {
-        background-color: #e9eef3;
+        background-color: #ffffff;
         color: #333;
         text-align: center;
         line-height: 160px;
@@ -12,11 +12,14 @@
          font-family: "microsoft yahei";
      }
     .content{
-        background-color: #f9f9f9;
+        background-color: #ffffff;
     }
     .breadcrumb{
-        background-color: #f9f9f9;
+        background-color: #ffffff;
         padding-top: 20px;
+    }
+    .lv-breadcrumb-a{
+        font-weight: 400!important;
     }
 </style>
 
@@ -28,10 +31,10 @@
             </el-header>
             <Notification></Notification>
             <el-row type="flex" justify="center" class="breadcrumb">
-                <el-col :xs="20" :md="20" style="padding: 6px 0 6px 0;">
+                <el-col :xs="24" :sm="24" :md="20" :lg="20" style="padding: 6px 0 6px 0;">
                     <el-breadcrumb separator="/" class="breadcrumb-inner">
                         <el-breadcrumb-item v-for="item in $route.matched">
-                            {{ item.name }}
+                            <router-link class="lv-breadcrumb-a" :to="{ name:item.name }">{{ item.name }}</router-link>
                         </el-breadcrumb-item>
                     </el-breadcrumb>
                 </el-col>

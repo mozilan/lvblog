@@ -11,4 +11,9 @@ html{
   .lv-float-left{
     float:left !important;
   }
+  @media only screen and (max-width: 683px) {
+    .el-submenu__title,.el-header {
+      padding: 0;
+    }
+  }
 }
