@@ -1,8 +1,4 @@
-<style scoped>
-    #side .item {
-        margin-bottom: 30px;
-    }
-
+<style scoped lang="scss">
     .art-item {
         margin-bottom: 30px;
         position: relative;
@@ -20,7 +16,10 @@
         width: 16px;
         height: 16px;
     }
-
+    .clear-title{
+        margin-top: 15px;
+        margin-bottom: 15px;
+    }
     .art-title {
         border-left: 3px solid #F56C6C;
         padding-left: 5px;
@@ -28,12 +27,11 @@
     }
 
     .art-title:hover {
-        padding-left: 10px;
         color: #409EFF;
     }
 
     .art-time {
-        margin-right: 20px;
+        margin: 6px 0;
     }
 
     .art-body {
@@ -62,20 +60,14 @@
         flex: 1;
         display: flex;
         flex-direction: column;
-    }
-
-    .art-abstract {
-        flex: 1;
         color: #aaa;
     }
-
     .art-more {
-        height: 40px;
         display: flex;
         justify-content: space-between;
+        flex: 1 auto;
         align-items: flex-end;
     }
-
     .art-more .view {
         color: #aaa;
     }
@@ -85,145 +77,333 @@
     .pagination {
         background-color: #F9F9F9;
     }
-</style>
+    ul{
+        list-style:none;
+        margin:0; padding:0;
+    }
+    .infinite-list-wrapper p{
+        text-align: center;
+    }
+    .blog{
+        padding-top: 20px;
+    }
+    .lv-blog-side{
+        padding-bottom: 10px;
+    }
+    .lv-margin-top{
+        margin-top:20px;
+    }
+    .image-slot{
+        height: 150px;
+    }
+    .el-image{
+        display: block;
+    }
+    @media only screen and (max-width: 683px){
+        .lv-blog-side{
+            width: 100%;
+        }
+        .lv-blog-middle{
+            width: 100%;
+        }
+        .lv-tag-side{
+            width: 100%;
+        }
+        .lv-row-bg{
+            display: block;
+        }
+        .art-body {
+            display: block;
+            padding: 10px 0;
+        }
+        .side-img {
+            height: auto;
+            width: 100%;
+            overflow: hidden;
+            margin-right: 10px;
+        }
 
+        .clear-title{
+            margin-bottom: 0;
+        }
+        #side{
+            max-height: none!important;
+            margin-top: 20px;
+        }
+        .art-more {
+            margin-top: 10px;
+        }
+        /*.art-more {*/
+        /*height: 40px;*/
+        /*display: block;*/
+        /*justify-content: space-between;*/
+        /*!*align-items: flex-end;*!*/
+        /*}*/
+    }
+</style>
 <template>
-    <div class="home">
-        <el-row id="artList" type="flex" justify="space-around">
-            <el-col :span="16">
-                <el-row class="art-item">
-                    <el-card shadow="hover">
-                        <h5><router-link to="/index" tag="span" class="art-title">Laravel+Vue+Element UI开发SPA应用</router-link></h5>
-                        <el-row class="art-info d-flex align-items-center justify-content-start">
-                            <div class="art-time"><i class="el-icon-time"></i>：2019-08-29</div>
-                            <div class="d-flex align-items-center"><img class="tag" src="../../assets/tag.png" />：
-                                <el-tag size="mini">Laravel</el-tag><el-tag size="mini">Vue</el-tag><el-tag size="mini">Element UI</el-tag>
-                            </div>
-                        </el-row>
-                        <el-row class="art-body">
-                            <div class="side-img hidden-sm-and-down"><img class="art-banner" src="../../assets/laravel.png"></div>
-                            <div class="side-abstract">
-                                <div class="art-abstract">
-                                    Laravel 是 Taylor Otwell 开发的一款基于 PHP 语言的 Web 开源框架，采用了 MVC 的架构模式，在 2011 年 6 月正式发布了首个版本。由于 Laravel 具备 Rails 敏捷开发等优秀特质，深度集成 PHP 强大的扩展包（Composer）生态与 PHP 开发者广大的受众群，让 Laravel 在发布之后的短短几年时间得到了极其迅猛的发展，Laravel 在国内的生态圈发展也日趋成熟，你可以很轻松的在网上找到很多 Laravel 相关的中文学习资料、技术讨论社区。
-                                </div>
-                                <div class="art-more">
-                                    <router-link to="/index" tag="span">
-                                        <el-button plain>阅读全文</el-button>
-                                    </router-link>
-                                    <div class="view"><i class="el-icon-view"></i>12414</div>
-                                </div>
-                            </div>
-                        </el-row>
-                    </el-card>
-                    <img class="star" src="../../assets/star.png" />
+    <el-row type="flex" class="row-bg" justify="center">
+        <el-col :xs="24" :sm="24" :md="20" :lg="20">
+            <div class="blog" style="overflow:auto">
+                <el-backtop target=".blog-component__scroll .blog-scrollbar__wrap"></el-backtop>
+                <el-row type="flex" class="row-bg lv-row-bg" justify="space-between">
+                    <el-col :span="16"  class="lv-blog-side blog-component__scroll" v-loading="loading">
+                        <div class="infinite-list-wrapper blog-scrollbar__wrap" :style="infinite_box"  >
+                            <ul
+                                    class="list"
+                                    v-infinite-scroll="load"
+                                    infinite-scroll-disabled="disabled">
+                                <li v-for="(i , index) in articles.data">
+                                    <el-row class="art-item">
+                                        <el-card shadow="hover">
+                                            <h5 class="clear-title"><router-link :to="{name:'查看文章',params: {art_id:i.id}}" tag="span" class="art-title">{{i.title}}</router-link></h5>
+                                            <el-row class="art-info d-flex align-items-center justify-content-start">
+                                                <div class="art-time"><i class="el-icon-time"></i>：{{i.created_at}}</div>
+                                                <div class="lv-clear-both"></div>
+                                                <div class="d-flex align-items-center lv-float-left">
+                                                    <i class="el-icon-collection-tag"></i>
+                                                    <span>：</span>
+                                                    <span v-for="t in i.tag">
+                                                    <router-link :to="{name:'标签文章',params: {tag:t.id}}">
+                                                        <el-tag size="mini">{{t.name}}</el-tag>
+                                                    </router-link>
+                                                </span>
+                                                </div>
+                                                <div class="d-flex align-items-center lv-float-left" style="padding-left:5px">
+                                                    <i class="el-icon-folder-opened"></i>
+                                                    <span>：</span>
+                                                    <span>
+                                                    <router-link :to="{name:'分类文章',params: {category:i.category.id}}">
+                                                        <el-tag size="mini">{{i.category.name}}</el-tag>
+                                                    </router-link>
+                                                </span>
+                                                </div>
+                                                <div class="lv-clear-both"></div>
+                                            </el-row>
+                                            <el-row class="art-body">
+                                                <div class="side-img hidden-sm-and-down"><el-image class="art-banner" :src="img_src+i.id">
+                                                    <div slot="placeholder" class="image-slot">
+                                                        <img class="art-banner" src="https://mozilan.geekadpt.cn/img/other/orange.progress-bar-stripe-loader.svg">
+                                                    </div>
+                                                </el-image>
+                                                </div>
+                                                <div class="side-abstract">
+                                                    <div class="art-abstract">
+                                                        {{i.excerpt}}
+                                                    </div>
+                                                    <div class="art-more">
+                                                        <router-link :to="{name:'查看文章',params: {art_id:i.id}}" tag="span">
+                                                            <el-button plain>阅读全文</el-button>
+                                                        </router-link>
+                                                        <div class="view"><i class="el-icon-view"></i>{{i.view_count}}</div>
+                                                    </div>
+                                                </div>
+
+                                            </el-row>
+                                        </el-card>
+                                        <img v-show="index <= 3" class="star" src="../../assets/star.png" />
+                                    </el-row>
+                                </li>
+                            </ul>
+                            <p v-if="loading">加载中...</p>
+                            <p v-if="noMore">很高兴你翻到这里，但是真的没有了...</p>
+                        </div>
+                    </el-col>
+                    <el-col :span="2" class="lv-blog-middle"></el-col>
+                    <el-col :span="6" class="hidden-sm-and-down lv-tag-side" id="side" :style="infinite_side" >
+                        <div class="item">
+                            <Notice></Notice>
+                        </div>
+                        <div class="lv-clear-both"></div>
+                        <div class="item lv-margin-top">
+                            <Tag></Tag>
+                        </div>
+                        <div class="lv-clear-both"></div>
+                        <div class="item lv-margin-top">
+                            <Category></Category>
+                        </div>
+                        <div class="lv-clear-both"></div>
+                        <div class="item lv-margin-top">
+                            <Friend></Friend>
+                        </div>
+                        <div class="lv-clear-both"></div>
+                        <div class="item lv-margin-top">
+                            <Adsense></Adsense>
+                        </div>
+                    </el-col>
+                    <Oauth></Oauth>
                 </el-row>
-                <el-row class="art-item">
-                    <el-card shadow="hover">
-                        <h5><router-link to="/index" tag="span" class="art-title">Vue.js 是什么</router-link></h5>
-                        <el-row class="art-info d-flex align-items-center justify-content-start">
-                            <div class="art-time"><i class="el-icon-time"></i>：2019-08-29</div>
-                            <div class="d-flex align-items-center"><img class="tag" src="../../assets/tag.png" />：
-                                <el-tag size="mini">Vue</el-tag>
-                            </div>
-                        </el-row>
-                        <el-row class="art-body">
-                            <div class="side-img hidden-sm-and-down"><img class="art-banner" src="../../assets/vue.jpg"></div>
-                            <div class="side-abstract">
-                                <div class="art-abstract">
-                                    Vue (读音 /vjuː/，类似于 view) 是一套用于构建用户界面的渐进式框架。与其它大型框架不同的是，Vue 被设计为可以自底向上逐层应用。Vue 的核心库只关注视图层，不仅易于上手，还便于与第三方库或既有项目整合。另一方面，当与现代化的工具链以及各种支持类库结合使用时，Vue 也完全能够为复杂的单页应用提供驱动。
-                                </div>
-                                <div class="art-more">
-                                    <router-link to="/index" tag="span">
-                                        <el-button plain>阅读全文</el-button>
-                                    </router-link>
-                                    <div class="view"><i class="el-icon-view"></i>12414</div>
-                                </div>
-                            </div>
-                        </el-row>
-                    </el-card>
-                    <img class="star" src="../../assets/star.png" />
-                </el-row>
-                <el-row class="art-item">
-                    <el-card shadow="hover">
-                        <h5><router-link to="/index" tag="span" class="art-title">MVVM 设计模式</router-link></h5>
-                        <el-row class="art-info d-flex align-items-center justify-content-start">
-                            <div class="art-time"><i class="el-icon-time"></i>：2019-08-29</div>
-                            <div class="d-flex align-items-center"><img class="tag" src="../../assets/tag.png" />：
-                                <el-tag size="mini">MVVM</el-tag><el-tag size="mini">设计模式</el-tag>
-                            </div>
-                        </el-row>
-                        <el-row class="art-body">
-                            <div class="side-img hidden-sm-and-down"><img class="art-banner" src="../../assets/mvvm.png"></div>
-                            <div class="side-abstract">
-                                <div class="art-abstract">
-                                    在 MVVM 设计模式中，也有 Model 层，负责存储数据。有 View 层，用于显示数据。但 MVVM 设计模式中，没有 Presenter 层。取而代之的是 V-Model 层级。
-                                    而 V-Model 并不需要我们来 进行编写，使用 MVVM 设计模式进行编码的时候，无需关注 V-Model 这一层是如何实现的，它完全是 Vue 内置的（因为涉及到Vue框架源码的实现，不做讲解）。而我们只需要更多的关注 M 层与 V层，即模型层和视图层。
-                                </div>
-                                <div class="art-more">
-                                    <router-link to="/index" tag="span">
-                                        <el-button plain>阅读全文</el-button>
-                                    </router-link>
-                                    <div class="view"><i class="el-icon-view"></i>12414</div>
-                                </div>
-                            </div>
-                        </el-row>
-                    </el-card>
-                    <img class="star" src="../../assets/star.png" />
-                </el-row>
-                <el-row class="art-item">
-                    <el-card shadow="hover">
-                        <h5><router-link to="/index" tag="span" class="art-title">鼠标悬浮时显示</router-link></h5>
-                        <el-row class="art-info d-flex align-items-center justify-content-start">
-                            <div class="art-time"><i class="el-icon-time"></i>：2019-08-29</div>
-                            <div class="d-flex align-items-center"><img class="tag" src="../../assets/tag.png" />：
-                                <el-tag size="mini">swagger2</el-tag>
-                            </div>
-                        </el-row>
-                        <el-row class="art-body">
-                            <div class="side-img hidden-sm-and-down"><img class="art-banner" src="../../assets/vue.jpg"></div>
-                            <div class="side-abstract">
-                                <div class="art-abstract">
-                                    Iconfont-国内功能很强大且图标内容很丰富的矢量图标库, 提供矢量图标下载、在快照 在小程序中使用阿里文字图标在小程序中使用阿里文字图标库前在小程序中使用阿里文字图标库前库前端开发的便捷工具 - AndrewNeo - CSDN博客
-                                </div>
-                                <div class="art-more">
-                                    <router-link to="/index" tag="span">
-                                        <el-button plain>阅读全文</el-button>
-                                    </router-link>
-                                    <div class="view"><i class="el-icon-view"></i>12414</div>
-                                </div>
-                            </div>
-                        </el-row>
-                    </el-card>
-                    <img class="star" src="../../assets/star.png" />
-                </el-row>
-                <div class="block pagination">
-                    <el-pagination background="" layout="prev, pager, next" :total="50">
-                    </el-pagination>
-                </div>
-            </el-col>
-            <el-col :span="6" class="hidden-sm-and-down" id="side">
-                <div class="item">
-                    <Tag></Tag>
-                </div>
-                <div class="item">
-                    <Friend></Friend>
-                </div>
-            </el-col>
-            <Oauth></Oauth>
-        </el-row>
-    </div>
+            </div>
+        </el-col>
+    </el-row>
 </template>
 <script>
     import Friend from '../components/friend'
     import Tag from '../components/tag'
     import Oauth from '../components/Oauth'
-
+    import Category from '../components/Category'
+    import LFooter from '../components/L-footer'
+    import Adsense from '../components/Adsense'
+    import Notice from '../components/Notice'
     export default {
-        name: 'index',
+        data () {
+            return {
+                loading: false,
+                infinite_box:{
+                    maxHeight:'',
+                    overflow: 'auto',
+                },
+                infinite_side:{
+                    maxHeight:'',
+                    overflow: 'auto',
+                },
+                img_src:'https://s0.xinger.ink/acgimg/acgurl.php?',
+            }
+        },
+        name: 'blog',
         components: {
             Friend,
             Tag,
             Oauth,
+            Category,
+            LFooter,
+            Adsense,
+            Notice
         },
+        computed:{
+            noMore () {
+                if(this.$store.getters.getArticles.meta === undefined || this.$store.getters.getArticles.meta === undefined ){
+                    return true;
+                }else{
+                    return this.$store.getters.getArticles.meta.pagination.current_page >= this.$store.getters.getArticles.meta.pagination.total_pages;
+                }
+            },
+            disabled () {
+                return this.loading || this.noMore
+            },
+            articles(){
+                return this.$store.getters.getArticles;
+            }
+        },
+        watch: {
+            // 如果路由有变化，会再次执行该方法
+            "$route": "getArticles"
+        },
+        created(){
+            this.getArticles();
+            var h = window.innerHeight-152;//可见区域高度
+            this.infinite_box.height = this.infinite_side.maxHeight = h+'px';
+
+        },
+        methods: {
+            getArticles(){
+                console.log(this.$route.params.user);
+                console.log(this.$route.params.tag);
+                if(this.$route.params.user !== undefined && this.$route.params.tag ===undefined && this.$route.params.category === undefined)
+                {
+                    const loading = this.$loading({
+                        lock: true,
+                        text: 'Loading',
+                        spinner: 'el-icon-loading',
+                        background: 'rgba(0, 0, 0, 0.7)'
+                    });
+                    setTimeout(() => {
+                        loading.close();
+                    }, 1000);
+                    console.log("检测到user属性，没检测到tag属性");
+                    this.$store.dispatch('clearArticles');
+                    this.$store.dispatch('loadArticles',{
+                        user:this.$route.params.user ? this.$route.params.user : '',
+                    });
+                }else if(this.$route.params.user === undefined && this.$route.params.tag !==undefined && this.$route.params.category ===undefined){
+                    const loading = this.$loading({
+                        lock: true,
+                        text: 'Loading',
+                        spinner: 'el-icon-loading',
+                        background: 'rgba(0, 0, 0, 0.7)'
+                    });
+                    setTimeout(() => {
+                        loading.close();
+                    }, 1000);
+                    console.log("检测到tag属性");
+                    this.$store.dispatch('clearArticles');
+                    this.$store.dispatch('loadUserTagArticles',{
+                        user:this.$route.params.user,
+                        tag:this.$route.params.tag,
+                        page:'',
+                    });
+                }else if(this.$route.params.user === undefined&& this.$route.params.tag ===undefined && this.$route.params.category !==undefined){
+                    const loading = this.$loading({
+                        lock: true,
+                        text: 'Loading',
+                        spinner: 'el-icon-loading',
+                        background: 'rgba(0, 0, 0, 0.7)'
+                    });
+                    setTimeout(() => {
+                        loading.close();
+                    }, 1000);
+                    console.log("检测到cat属性");
+                    this.$store.dispatch('clearArticles');
+                    this.$store.dispatch('loadUserCategoryArticles',{
+                        user:this.$route.params.user,
+                        category:this.$route.params.category,
+                        page:'',
+                    });
+                }else{
+                    const loading = this.$loading({
+                        lock: true,
+                        text: 'Loading',
+                        spinner: 'el-icon-loading',
+                        background: 'rgba(0, 0, 0, 0.7)'
+                    });
+                    setTimeout(() => {
+                        loading.close();
+                    }, 1000);
+                    this.$store.dispatch('clearArticles');
+                    this.$store.dispatch('loadArticles',{
+                        user:this.$route.params.user ? this.$route.params.user : '',
+                    });
+                }
+
+            },
+            load () {
+                this.loading = true;
+                setTimeout(() => {
+                    if(this.$route.params.user !== undefined && this.$route.params.tag === undefined&& this.$route.params.category ===undefined)
+                    {
+                        this.$store.dispatch('loadArticles',{
+                            user:this.$route.params.user ? this.$route.params.user :'',
+                            page: this.$store.getters.getArticles.meta === undefined ? 1 : ++this.$store.getters.getArticles.meta.pagination.current_page,
+
+                        });
+                    }else if(this.$route.params.user === undefined&& this.$route.params.tag !== undefined && this.$route.params.category ===undefined){
+                        this.$store.dispatch('loadUserTagArticles',{
+                            tag:this.$route.params.tag,
+                            user:this.$route.params.user ? this.$route.params.user :'',
+                            page: this.$store.getters.getArticles.meta === undefined ? 1 : ++this.$store.getters.getArticles.meta.pagination.current_page,
+                        });
+                    }else if(this.$route.params.user === undefined&& this.$route.params.tag ===undefined && this.$route.params.category !==undefined){
+                        this.$store.dispatch('loadUserCategoryArticles',{
+                            category:this.$route.params.category,
+                            user:this.$route.params.user ? this.$route.params.user :'',
+                            page: this.$store.getters.getArticles.meta === undefined ? 1 : ++this.$store.getters.getArticles.meta.pagination.current_page,
+                        });
+                    }else{
+                        this.$store.dispatch('loadArticles',{
+                            user:this.$route.params.user ? this.$route.params.user :'',
+                            page: this.$store.getters.getArticles.meta === undefined ? 1 : ++this.$store.getters.getArticles.meta.pagination.current_page,
+                        });
+                    }
+                    this.$watch(this.$store.getters.getArticlesLoadStatus, function () {
+                        if(this.$store.getters.getArticlesLoadStatus() === 2) {
+                            this.loading = false
+                        }
+                        if(this.$store.getters.getArticlesLoadStatus() === 3) {
+                            this.$message.error('错了哦，加载文章失败了');
+                        }
+                    });
+                }, 1000);
+            }
+        }
     }
 </script>

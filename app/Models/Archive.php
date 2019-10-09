@@ -13,4 +13,9 @@ class Archive extends Model
     {
         return User::find( $this->user_id);
     }
+    public function scopeRecent($query)
+    {
+        // 按照创建时间排序
+        return $query->orderBy('created_at', 'desc');
+    }
 }

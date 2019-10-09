@@ -88,11 +88,16 @@
         padding-top: 20px;
     }
     .lv-blog-side{
-        box-shadow: 0 0 0 2px #ebeef5;
         padding-bottom: 10px;
     }
     .lv-margin-top{
         margin-top:20px;
+    }
+    .image-slot{
+        height: 150px;
+    }
+    .el-image{
+        display: block;
     }
     @media only screen and (max-width: 683px){
         .lv-blog-side{
@@ -122,6 +127,7 @@
             margin-bottom: 0;
         }
         #side{
+            max-height: none!important;
             margin-top: 20px;
         }
         .art-more {
@@ -155,27 +161,31 @@
                                             <div class="art-time"><i class="el-icon-time"></i>：{{i.created_at}}</div>
                                             <div class="lv-clear-both"></div>
                                             <div class="d-flex align-items-center lv-float-left">
-                                                <img class="tag" src="../../assets/tag.png" style="float:left;margin-right:0;margin-top: 5px;"/>
-                                                <span style="float: left;">：</span>
-                                                <div v-for="t in i.tag" style="float:left;margin-left: 2px;">
+                                                <i class="el-icon-collection-tag"></i>
+                                                <span>：</span>
+                                                <span v-for="t in i.tag">
                                                     <router-link :to="{name:'标签文章',params: {tag:t.id}}">
                                                         <el-tag size="mini">{{t.name}}</el-tag>
                                                     </router-link>
-                                                </div>
+                                                </span>
                                             </div>
-                                            <div class="d-flex align-items-center lv-float-left" style="margin-left: 8px;">
-                                                <img class="tag" src="../../assets/biaoqian.png" style="float:left;margin-right:0;margin-top: 5px;"/>
-                                                <span style="float: left;">：</span>
-                                                <div style="float:left;margin-left: 2px;">
+                                            <div class="d-flex align-items-center lv-float-left" style="padding-left:5px">
+                                                <i class="el-icon-folder-opened"></i>
+                                                <span>：</span>
+                                                <span>
                                                     <router-link :to="{name:'分类文章',params: {category:i.category.id}}">
                                                         <el-tag size="mini">{{i.category.name}}</el-tag>
                                                     </router-link>
-                                                </div>
+                                                </span>
                                             </div>
                                             <div class="lv-clear-both"></div>
                                         </el-row>
                                         <el-row class="art-body">
-                                            <div class="side-img hidden-sm-and-down"><img class="art-banner" :src="img_src+i.id"></div>
+                                            <div class="side-img hidden-sm-and-down"><el-image class="art-banner" :src="img_src+i.id">
+                                                <div slot="placeholder" class="image-slot">
+                                                    <img class="art-banner" src="https://mozilan.geekadpt.cn/img/other/orange.progress-bar-stripe-loader.svg">
+                                                </div>
+                                            </el-image></div>
                                             <div class="side-abstract">
                                                 <div class="art-abstract">
                                                     {{i.excerpt}}
@@ -220,9 +230,6 @@
                         <!--<Category></Category>-->
                     <!--</div>-->
                     <div class="lv-clear-both"></div>
-                    <div class="item lv-margin-top">
-                        <Friend></Friend>
-                    </div>
                 </el-col>
                 <Oauth></Oauth>
             </el-row>
@@ -241,7 +248,7 @@
             return {
                 loading: false,
                 infinite_box:{
-                    height:'',
+                    maxHeight:'',
                     overflow: 'auto',
                 },
                 infinite_side:{
@@ -280,7 +287,7 @@
         },
         created(){
             this.getArticles();
-            var h = window.innerHeight-150;//可见区域高度
+            var h = window.innerHeight-152;//可见区域高度
             this.infinite_box.height = this.infinite_side.maxHeight = h+'px';
 
         },

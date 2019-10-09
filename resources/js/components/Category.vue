@@ -2,7 +2,7 @@
 	<el-col class="tag">
 		<el-card class="box-card">
 			<div slot="header" class="d-flex align-items-center">
-				<img class="card-icon" src="../../assets/biaoqian.png" />
+				<i class="el-icon-folder-opened"></i>
 				<span>热门分类</span>
 			</div>
 

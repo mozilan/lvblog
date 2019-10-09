@@ -53,12 +53,11 @@ export default new VueRouter({
         {
             path: '/',
             redirect: {name: '首页'},
-            name: '主页',
+            name: 'LvBlog',
             components: Vue.component( 'Layout', require( './pages/Layout.vue' ) ),
             children: [
                 {
                     path: 'index',
-                    redirect: {name: '文章'},
                     name: '首页',
                     components: Vue.component( 'Index', require( './pages/Index.vue' ) )
                 },

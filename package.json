@@ -32,6 +32,7 @@
     "highlight.js": "^9.15.10",
     "marked": "^0.7.0",
     "mavon-editor": "^2.7.6",
-    "node-sass": "^4.12.0"
+    "node-sass": "^4.12.0",
+    "vue-seamless-scroll": "^1.1.17"
   }
 }

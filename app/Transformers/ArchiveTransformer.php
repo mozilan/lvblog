@@ -14,6 +14,7 @@ class ArchiveTransformer extends TransformerAbstract
             'title' => $archive->title,
             'article_id' => $archive->article_id,
             'created_at' => $archive->created_at->format('Y-m-d'),
+            'user' => $archive->User(),
         ];
     }
 }
