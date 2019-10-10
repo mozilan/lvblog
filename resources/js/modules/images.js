@@ -25,7 +25,7 @@ export const images = {
             commit('setImagesUpLoadStatus',1);
             ImagesAPI.upLoadImages(data)
                 .then(function (response){
-                    commit('setImages', response.data.file_path);
+                    commit('setImages', response.data);
                     commit('setImagesUpLoadStatus', 2);
                 })
                 .catch(function (error){

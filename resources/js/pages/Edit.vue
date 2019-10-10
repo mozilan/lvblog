@@ -218,11 +218,12 @@
                $imgAdd(pos, $file) {
                     // 第一步.将图片上传到服务器.
                     var formdata = new FormData();
-                    formdata.append('upload_file', $file);
+                    formdata.append('image', $file);
+                   formdata.append('type', 'article');
                     this.$store.dispatch('upLoadImages',formdata);
                     this.$watch(this.$store.getters.getImagesUpLoadStatus, function () {
                          if (this.$store.getters.getImagesUpLoadStatus() === 2) {
-                              this.$refs.md.$img2Url(pos, this.$store.getters.getImages);
+                              this.$refs.md.$img2Url(pos, this.$store.getters.getImages.data.path);
                          }else if (this.$store.getters.getImagesUpLoadStatus() === 3) {
                               this.$message({
                                    message: "上传失败",

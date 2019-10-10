@@ -24,8 +24,18 @@
                     </p>
                 </div>
                 <hr />
-                <div id="artcle-content"  class="content markdown-body" v-highlight v-html="article.data.body">
-                </div>
+                <mavon-editor
+                        class="markdown-body"
+                        :value="article.data.body"
+                        :subfield = "false"
+                        :defaultOpen = "'preview'"
+                        :toolbarsFlag = "false"
+                        :editable="false"
+                        :scrollStyle="true"
+                        :ishljs = "true"
+                ></mavon-editor>
+                <!--<div id="artcle-content"  class="content markdown-body" v-highlight v-html="article.data.body">-->
+
                 <div id="statement">
                     <div class="lv-item">作者：{{article.data.user.name}}</div>
                     <div class="lv-item">本文链接：
@@ -40,10 +50,10 @@
 
 <script>
     import {mavonEditor} from 'mavon-editor';
-    import marked from 'marked';
+    import 'mavon-editor/dist/css/index.css';
     import 'mavon-editor/dist/css/index.css';
     import 'highlight.js/styles/monokai-sublime.css';
-    import 'github-markdown-css';
+    // import 'github-markdown-css';
     export default {
         name: 'art',
         data () {
@@ -53,6 +63,9 @@
                 art_height:'',
             }
         },
+        components:{
+          mavonEditor
+        },
         created() {
             this.$store.dispatch('loadArticle',{
                 art_id : this.$route.params.art_id
@@ -61,15 +74,13 @@
             this.bg_url = "url(" + this.bg_url + this.$route.params.art_id+")";
 
         },
-        mounted(){+
+        mounted(){
+            console.log(this.$refs.md.d_render);
             console.log(window.innerHeight);
             this.art_height = window.innerHeight-130+'px';
         },
         computed:{
             article(){
-                if(this.$store.getters.getArticle.data !== undefined){
-                    this.$store.getters.getArticle.data.body = marked(this.$store.getters.getArticle.data.body);
-                }
                 return this.$store.getters.getArticle;
             }
         }
