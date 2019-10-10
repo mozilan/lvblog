@@ -288,7 +288,7 @@
         created(){
             this.getArticles();
             var h = window.innerHeight-152;//可见区域高度
-            this.infinite_box.height = this.infinite_side.maxHeight = h+'px';
+            this.infinite_box.maxHeight = this.infinite_side.maxHeight = h+'px';
 
         },
         methods: {

@@ -230,6 +230,10 @@
                         <div class="item lv-margin-top">
                             <Adsense></Adsense>
                         </div>
+                        <div class="lv-clear-both"></div>
+                        <div class="item lv-margin-top">
+                            <VFooter></VFooter>
+                        </div>
                     </el-col>
                     <Oauth></Oauth>
                 </el-row>
@@ -245,6 +249,7 @@
     import LFooter from '../components/L-footer'
     import Adsense from '../components/Adsense'
     import Notice from '../components/Notice'
+    import VFooter from '../components/global/V-Footer';
     export default {
         data () {
             return {
@@ -268,7 +273,8 @@
             Category,
             LFooter,
             Adsense,
-            Notice
+            Notice,
+            VFooter
         },
         computed:{
             noMore () {
@@ -292,7 +298,7 @@
         created(){
             this.getArticles();
             var h = window.innerHeight-152;//可见区域高度
-            this.infinite_box.height = this.infinite_side.maxHeight = h+'px';
+            this.infinite_box.maxHeight = this.infinite_side.maxHeight = h+'px';
 
         },
         methods: {

@@ -8,6 +8,7 @@
 		    	<router-link to="/index" tag="span">互换友链</router-link>
 		    </el-button>
 		  </div>
+			<div class="lv-clear-both"></div>
 			<el-col :span="24"  v-for="(item, index) in friend_box" >
 				<div class="lv-clear-both"></div>
 				<el-col :lg="4" :md="6" :sm="6" :xs="4" class="text item">
@@ -70,13 +71,16 @@ export default {
 }
 </script>
 
-<style scoped>
-.box-card .item a{
-	text-decoration: none;
-	/*color: #F56C6C;*/
-	margin: 8px auto;
-}
-.box-card span{
-	font-weight: bold;
-}
+<style scoped lang="scss">
+	.box-card{
+		padding-bottom: 20px;
+	}
+	.box-card .item a{
+		text-decoration: none;
+		/*color: #F56C6C;*/
+		margin: 8px auto;
+	}
+	.box-card span{
+		font-weight: bold;
+	}
 </style>
