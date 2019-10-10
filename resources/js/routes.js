@@ -59,7 +59,19 @@ export default new VueRouter({
                 {
                     path: 'index',
                     name: '首页',
-                    components: Vue.component( 'Index', require( './pages/Index.vue' ) )
+                    components: Vue.component( 'Index', require( './pages/Index.vue' ) ),
+                    children: [
+                        {
+                            path: 'comment/:comment',
+                            name: '热门评论',
+                            components: Vue.component( 'Index-Comment', require( './pages/Index.vue' ) )
+                        },
+                        {
+                            path: 'category/:category',
+                            name: '热门分类',
+                            components: Vue.component( 'Index-Category', require( './pages/Index.vue' ) )
+                        }
+                    ]
                 },
                 {
                     path: 'edit',
@@ -87,7 +99,6 @@ export default new VueRouter({
                             name: '分类文章',
                             components: Vue.component( 'Blog-Category', require( './pages/Blog' ) )
                         }
-
                     ]
                 },
                 {

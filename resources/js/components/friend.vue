@@ -9,16 +9,16 @@
 		    </el-button>
 		  </div>
 			<div class="lv-clear-both"></div>
-			<el-col :span="24"  v-for="(item, index) in friend_box" >
+			<el-col :span="24" v-for="(item, index) in friend_box" style="padding: 5px 0">
 				<div class="lv-clear-both"></div>
-				<el-col :lg="4" :md="6" :sm="6" :xs="4" class="text item">
+				<el-col :lg="4" :md="6" :sm="6" :xs="4" class="item">
 					<div class="lv-clear-both"></div>
 					<a href="https://mozilan.com">
-						<el-avatar :size="35" :src="item.avatar"></el-avatar>
+						<el-avatar :size="40" :src="item.avatar"></el-avatar>
 					</a>
 				</el-col>
-				<el-col :lg="20" :md="18" :sm="20" :xs="18">
-					<el-col :span="24">
+				<el-col :lg="20" :md="18" :sm="20" :xs="18" style="padding-left:10px">
+					<el-col :span="24" class="name">
 						{{item.name}}
 					</el-col>
 					<el-col :span="24" style="font-size: 14px">
@@ -41,7 +41,7 @@ export default {
 			desv:2,
 			friend_box:[
 				{
-					name:'蓝墨科技',
+					name:'蓝墨科技蓝墨科技蓝墨科技蓝墨科技蓝墨科技',
 					avatar:'https://avatars0.githubusercontent.com/u/54885220?v=4',
 					des:'向上的路并不拥挤'
 				},
@@ -75,12 +75,15 @@ export default {
 	.box-card{
 		padding-bottom: 20px;
 	}
+	.box-card .item{
+		padding: 5px 0;
+	}
 	.box-card .item a{
 		text-decoration: none;
 		/*color: #F56C6C;*/
 		margin: 8px auto;
 	}
-	.box-card span{
-		font-weight: bold;
+	.box-card .name{
+		white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
 	}
 </style>

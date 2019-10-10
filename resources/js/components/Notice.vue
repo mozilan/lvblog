@@ -38,10 +38,6 @@
         color: #409EFF;
         cursor: pointer;
     }
-
-    .box-card span {
-        font-weight: bold;
-    }
     .text{
         font-size: 14px;
     }

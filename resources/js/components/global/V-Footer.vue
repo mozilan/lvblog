@@ -87,9 +87,6 @@
     .box-card .social img{
         border: #f3926b 2px solid;
     }
-    .box-card span {
-        font-weight: bold;
-    }
     .box-card .middle{
         visibility:hidden;
     }

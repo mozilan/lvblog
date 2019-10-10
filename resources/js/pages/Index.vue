@@ -18,7 +18,7 @@
     }
     .clear-title{
         margin-top: 15px;
-        margin-bottom: 15px;
+        margin-bottom: 0;
     }
     .art-title {
         border-left: 3px solid #F56C6C;
@@ -45,17 +45,14 @@
         overflow: hidden;
         margin-right: 10px;
     }
-
-    img.art-banner {
+    .art-banner {
         width: 100%;
         height: 100%;
         transition: all 0.6s;
     }
-
-    img.art-banner:hover {
+    .art-banner:hover  {
         transform: scale(1.4);
     }
-
     .side-abstract {
         flex: 1;
         display: flex;
@@ -193,7 +190,8 @@
                                                     </div>
                                                     <div class="art-more">
                                                         <router-link :to="{name:'查看文章',params: {art_id:i.id}}" tag="span">
-                                                            <el-button plain>阅读全文</el-button>
+                                                            <el-avatar :size="25" :src="i.user.avatar"></el-avatar>
+                                                            <span style="height: 25px;position: absolute;padding-left:4px;">{{i.user.name}}</span>
                                                         </router-link>
                                                         <div class="view"><i class="el-icon-view"></i>{{i.view_count}}</div>
                                                     </div>
@@ -216,11 +214,11 @@
                         </div>
                         <div class="lv-clear-both"></div>
                         <div class="item lv-margin-top">
-                            <Tag></Tag>
+                            <HotComment></HotComment>
                         </div>
                         <div class="lv-clear-both"></div>
                         <div class="item lv-margin-top">
-                            <Category></Category>
+                            <Recommend></Recommend>
                         </div>
                         <div class="lv-clear-both"></div>
                         <div class="item lv-margin-top">
@@ -243,9 +241,9 @@
 </template>
 <script>
     import Friend from '../components/friend'
-    import Tag from '../components/tag'
     import Oauth from '../components/Oauth'
-    import Category from '../components/Category'
+    import Recommend from '../components/Recommend'
+    import HotComment from '../components/HotComment'
     import LFooter from '../components/L-footer'
     import Adsense from '../components/Adsense'
     import Notice from '../components/Notice'
@@ -268,9 +266,9 @@
         name: 'blog',
         components: {
             Friend,
-            Tag,
             Oauth,
-            Category,
+            Recommend,
+            HotComment,
             LFooter,
             Adsense,
             Notice,

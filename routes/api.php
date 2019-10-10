@@ -22,8 +22,7 @@ $api = app('Dingo\Api\Routing\Router');
 //});
 $api->version('v1', [
     'namespace' => 'App\Http\Controllers\API',
-], function($api) {
-
+    ], function($api) {
     $api->group([
         'middleware' => 'api.throttle',
         'limit' => config('api.rate_limits.sign.limit'),

@@ -56,10 +56,6 @@
         color: #409EFF;
         cursor: pointer;
     }
-
-    .box-card span {
-        font-weight: bold;
-    }
     .item{
         float: left;
     }

@@ -18,14 +18,13 @@
     }
     .clear-title{
         margin-top: 15px;
-        margin-bottom: 15px;
+        margin-bottom: 0;
     }
     .art-title {
         border-left: 3px solid #F56C6C;
         padding-left: 5px;
         cursor: pointer;
     }
-
     .art-title:hover {
         color: #409EFF;
     }
@@ -45,17 +44,14 @@
         overflow: hidden;
         margin-right: 10px;
     }
-
-    img.art-banner {
+    .art-banner {
         width: 100%;
         height: 100%;
         transition: all 0.6s;
     }
-
-    img.art-banner:hover {
+    .art-banner:hover  {
         transform: scale(1.4);
     }
-
     .side-abstract {
         flex: 1;
         display: flex;
@@ -121,10 +117,6 @@
             width: 100%;
             overflow: hidden;
             margin-right: 10px;
-        }
-
-        .clear-title{
-            margin-bottom: 0;
         }
         #side{
             max-height: none!important;
@@ -239,9 +231,9 @@
 </template>
 <script>
     import Friend from '../components/friend'
-    import Tag from '../components/tag'
+    import Tag from '../components/User/Tag'
     import Oauth from '../components/Oauth'
-    import Category from '../components/Category'
+    import Category from '../components/User/Category'
     import LFooter from '../components/L-footer'
     export default {
         data () {
