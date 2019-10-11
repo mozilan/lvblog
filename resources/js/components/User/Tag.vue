@@ -5,7 +5,7 @@
 				<i class="el-icon-collection-tag"></i>
 				<span>标签云</span>
 			</div>
-			<div class="text item" v-for="tag in tags ">
+			<div class="text item" v-for="tag in tags">
 				<router-link :to="{name:'标签文章',params: {tag:tag.id}}"><el-tag size="mini" :type="type[Math.floor(Math.random()*type.length)]" class="tag-item">{{tag.name}}[{{tag.count}}]</el-tag></router-link>
 			</div>
 			<div class="clear"></div>
@@ -53,5 +53,10 @@
 	}
 	.clear{
 		clear: both;
+	}
+	@media only screen and (max-width: 683px){
+		.box-car:nth-child(2) {
+			display: none;
+		}
 	}
 </style>

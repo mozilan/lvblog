@@ -95,6 +95,9 @@
     .el-image{
         display: block;
     }
+    .phone-tab{
+        display: none;
+    }
     @media only screen and (max-width: 683px){
         .lv-blog-side{
             width: 100%;
@@ -103,6 +106,10 @@
             width: 100%;
         }
         .lv-tag-side{
+            display: none;
+            width: 100%;
+        }
+        .lv-tag-side-sm{
             width: 100%;
         }
         .lv-row-bg{
@@ -125,12 +132,15 @@
         .art-more {
             margin-top: 10px;
         }
-        /*.art-more {*/
-            /*height: 40px;*/
-            /*display: block;*/
-            /*justify-content: space-between;*/
-            /*!*align-items: flex-end;*!*/
-        /*}*/
+        .phone-tab{
+            display: block;
+        }
+        .lv-margin-top{
+            margin-top:0;
+        }
+        .el-card__header{
+            display: none;
+        }
     }
 </style>
 <template>
@@ -139,6 +149,42 @@
         <div class="blog" style="overflow:auto">
         <el-backtop target=".blog-component__scroll .blog-scrollbar__wrap"></el-backtop>
             <el-row type="flex" class="row-bg lv-row-bg" justify="space-between">
+                <el-collapse accordion class="phone-tab">
+                    <el-collapse-item>
+                        <template slot="title">
+                            归类<i class="header-icon el-icon-info"></i>
+                        </template>
+                        <template>
+                            <el-tabs v-model="activeName" @tab-click="handleClick">
+                                <el-tab-pane label="标签" name="first">
+                                    <el-col :span="6" class="hidden-sm-and-down lv-tag-side-sm" :style="infinite_side" >
+                                        <div class="item">
+                                            <FTag></FTag>
+                                        </div>
+                                        <div class="lv-clear-both"></div>
+                                    </el-col>
+                                </el-tab-pane>
+                                <el-tab-pane label="分类" name="second">
+                                    <div class="lv-clear-both"></div>
+                                    <div class="item lv-margin-top">
+                                        <FCategory></FCategory>
+                                    </div>
+                                </el-tab-pane>
+                            </el-tabs>
+                        </template>
+                    </el-collapse-item>
+                </el-collapse>
+                <el-col :span="6" class="hidden-sm-and-down lv-tag-side" id="side" :style="infinite_side" >
+                    <div class="item">
+                        <Tag></Tag>
+                    </div>
+                    <div class="lv-clear-both"></div>
+                    <div class="item lv-margin-top">
+                        <Category></Category>
+                    </div>
+                    <div class="lv-clear-both"></div>
+                </el-col>
+                <el-col :span="2" class="lv-blog-middle"></el-col>
                 <el-col :span="16"  class="lv-blog-side blog-component__scroll" v-loading="loading">
                     <div class="infinite-list-wrapper blog-scrollbar__wrap" :style="infinite_box"  >
                             <ul
@@ -200,29 +246,6 @@
                         <p v-if="noMore">很高兴你翻到这里，但是真的没有了...</p>
                     </div>
                 </el-col>
-                <el-col :span="2" class="lv-blog-middle"></el-col>
-                <el-col :span="6" class="hidden-sm-and-down lv-tag-side" id="side" :style="infinite_side" >
-                    <div class="item">
-                        <Tag></Tag>
-                    </div>
-                    <div class="lv-clear-both"></div>
-                    <div class="item lv-margin-top">
-                        <Category></Category>
-                    </div>
-                    <!--<div class="lv-clear-both"></div>-->
-                    <!--<div class="item lv-margin-top">-->
-                        <!--<Category></Category>-->
-                    <!--</div>-->
-                    <!--<div class="lv-clear-both"></div>-->
-                    <!--<div class="item lv-margin-top">-->
-                        <!--<Category></Category>-->
-                    <!--</div>-->
-                    <!--<div class="lv-clear-both"></div>-->
-                    <!--<div class="item lv-margin-top">-->
-                        <!--<Category></Category>-->
-                    <!--</div>-->
-                    <div class="lv-clear-both"></div>
-                </el-col>
                 <Oauth></Oauth>
             </el-row>
             </div>
@@ -232,8 +255,10 @@
 <script>
     import Friend from '../components/friend'
     import Tag from '../components/User/Tag'
-    import Oauth from '../components/Oauth'
+    import FTag from '../components/SmallCreen/Tag'
     import Category from '../components/User/Category'
+    import FCategory from '../components/SmallCreen/Category'
+    import Oauth from '../components/Oauth'
     import LFooter from '../components/L-footer'
     export default {
         data () {
@@ -248,14 +273,17 @@
                     overflow: 'auto',
                 },
                 img_src:'https://s0.xinger.ink/acgimg/acgurl.php?',
+                activeName: 'first'
             }
         },
         name: 'blog',
         components: {
             Friend,
             Tag,
-            Oauth,
             Category,
+            FTag,
+            FCategory,
+            Oauth,
             LFooter
         },
         computed:{

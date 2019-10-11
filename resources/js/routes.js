@@ -113,7 +113,7 @@ export default new VueRouter({
                 },
                 {
                     path: 'home',
-                    name: 'home',
+                    name: '主页',
                     components: Vue.component( 'Home', require( './pages/Home' ) ),
                 },
                 {

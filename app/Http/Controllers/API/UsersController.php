@@ -50,9 +50,9 @@ class UsersController extends Controller
 
         if ($request->avatar_image_id) {
             $image = Image::find($request->avatar_image_id);
-
             $attributes['avatar'] = $image->path;
         }
+
         $user->update($attributes);
 
         return $this->response->item($user, new UserTransformer());

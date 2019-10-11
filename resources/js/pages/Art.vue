@@ -3,7 +3,7 @@
         <el-backtop target=".page-component__scroll .el-scrollbar__wrap"></el-backtop>
         <el-row class="main page-component__scroll" type="flex" justify="center">
             <el-col :xs="24" :sm="24" :md="20" :lg="20" class="el-scrollbar__wrap">
-                <div id="artcle-info" :style="{'background-image':bg_url}">
+                <div id="artcle-info" :style="{'background-image':bg_url}" @load="handleLoad" v-loading="bg_loading">
                     <h2 class="text-center art-title">{{article.data.title}}</h2>
                     <!-- 描述：文章信息 -->
                     <div class="text-center timeAndView">
@@ -61,27 +61,41 @@
                 url:'',
                 bg_url:'https://s0.xinger.ink/acgimg/acgurl.php?',
                 art_height:'',
+                bg_loading:true,
+                imgUrl: '',
             }
         },
         components:{
-          mavonEditor
+            mavonEditor
         },
         created() {
             this.$store.dispatch('loadArticle',{
                 art_id : this.$route.params.art_id
             });
             this.url= window.location.href;
+            this.imgUrl = this.bg_url+ this.$route.params.art_id;
             this.bg_url = "url(" + this.bg_url + this.$route.params.art_id+")";
-
         },
         mounted(){
-            console.log(this.$refs.md.d_render);
-            console.log(window.innerHeight);
             this.art_height = window.innerHeight-130+'px';
+            let bgImg = new Image();
+            console.log(this.imgUrl);
+            bgImg.src = this.imgUrl; // 获取背景图片的url
+            bgImg.onerror = () => {
+                console.log('img onerror')
+            };
+            bgImg.onload = () => { // 等背景图片加载成功后 去除loading
+                this.bg_loading = false
+            }
         },
         computed:{
             article(){
                 return this.$store.getters.getArticle;
+            }
+        },
+        methods:{
+            handleLoad(e){
+                console.log(e)
             }
         }
     }

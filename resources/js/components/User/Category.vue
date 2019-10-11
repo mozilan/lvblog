@@ -5,7 +5,6 @@
 				<i class="el-icon-folder-opened"></i>
 				<span>热门分类</span>
 			</div>
-
 			<div v-for="category in categories" class="text item">
 				<router-link :to="{name:'分类文章',params: {category:category.id}}">
 					<p style="float: left;">{{category.name}}</p>
@@ -19,7 +18,7 @@
 
 <script>
 	export default {
-		name: 'hot_category',
+		name: 'category',
 		data(){
 			return{
 
@@ -58,5 +57,11 @@
 
 	.category-item {
 		margin-right: 10px;
+	}
+
+	@media only screen and (max-width: 683px){
+		.d-flex{
+			display: none;
+		}
 	}
 </style>
