@@ -49,7 +49,7 @@
                         </li>
                         <li :class="selector.edit"  id="edit-btn" title="Edit"  data-page="edit" @click="showEditPage">
                             <div class="hover-background"></div>
-                            <span>Edit</span><i class="fa fa-file-text fa-fw"></i>
+                            <span>Editor</span><i class="fa fa-file-text fa-fw"></i>
                         </li>
                     </ul><!--/.nav-menu __PAGE MENU ENDS-->
                 </div><!--#menu-container-->
@@ -218,125 +218,27 @@
                     <li id="edit" v-show="page.edit_page">
                         <div class="title-container">
                             <div class="shadow-img" v-loading="loadings.bg_edit_loading" :style="{'background-image':getImage(3)}"></div>
-                            <h2 :class="selector.resume"><span class="invert">Resume Of</span> Mozilan</h2> <!--RESUME TITLE-->
+                            <h2 :class="selector.resume"><span class="invert">Editor Of</span> Mozilan</h2> <!--RESUME TITLE-->
                         </div>
                         <div class="description">
-
                             <div class='tabs tabs_animate'>
                                 <!--RESUME TAB LISTS-->
-                                <el-tabs v-model="activeName">
-                                    <el-tab-pane label="Skills" name="first"><!--RESUME FIRST TAB/SKILL TAB DETAILS-->
+                                <el-tabs v-model="activeNameEditor">
+                                    <el-tab-pane label="Skills" name="firstEditor"><!--RESUME FIRST TAB/SKILL TAB DETAILS-->
                                         <div id='tab-edit-1'>
-                                            <h3 class="title">OUR SKILLS</h3><!--SKILLS WITH BAR DISPLAY-->
-                                            <ul class="skills-list no-padding">
-                                                <li class="row">
-                                                    <el-col :xs="4"><div class="fw-mid">HTML</div></el-col>
-                                                    <el-col :xs="18">
-                                                        <div class="bar">
-                                                            <el-progress :text-inside="true" :stroke-width="26" :percentage="70"></el-progress>
-                                                        </div>
-                                                    </el-col>
-                                                    <div class="lv-clear-both"></div>
-                                                </li>
-                                                <li class="row">
-                                                    <el-col :xs="4"><div class="fw-mid">CSS</div></el-col>
-                                                    <el-col :xs="18">
-                                                        <div class="bar">
-                                                            <el-progress :text-inside="true" :stroke-width="24" :percentage="100" status="success"></el-progress>
-                                                        </div>
-                                                    </el-col>
-                                                    <div class="lv-clear-both"></div>
-                                                </li>
-                                                <li class="row">
-                                                    <el-col :xs="4"><div class="fw-mid">Javascript</div></el-col>
-                                                    <el-col :xs="18">
-                                                        <div class="bar">
-                                                            <el-progress :text-inside="true" :stroke-width="22" :percentage="80" status="warning"></el-progress>
-                                                        </div>
-                                                    </el-col>
-                                                    <div class="lv-clear-both"></div>
-                                                </li>
-                                            </ul><!--SKILLS WITH BAR DISPLAY ENDS-->
-                                            <div class="lv-clear-both"></div>
-                                            <!--SKILLS WITH CIRCLE DISPLAY-->
-                                            <div class="circle-skill-container">
-                                                <h3 class="title">OTHER SKILLS</h3>
-                                                <div class="row">
-                                                    <el-col class="center-align" :lg="8" :md="8" :sm="12" :xs="12">
-                                                        <el-progress type="circle" :percentage="25"></el-progress>
-                                                        <h5>Photoshop</h5>
-                                                    </el-col>
-                                                    <el-col class="center-align" :lg="8" :md="8" :sm="12" :xs="12">
-                                                        <el-progress type="circle" :percentage="25"></el-progress>
-                                                        <h5>Illustrator</h5>
-                                                    </el-col>
-                                                    <el-col class="center-align" ::lg="8" :md="8" :sm="12" :xs="12">
-                                                        <el-progress type="circle" :percentage="25"></el-progress>
-                                                        <h5>After effect</h5>
-                                                    </el-col>
-                                                </div>
-                                            </div><!--SKILLS WITH CIRCLE DISPLAY ENDS-->
+                                            <h3 class="title">编辑资料</h3><!--SKILLS WITH BAR DISPLAY-->
                                         </div><!--RESUME FIRST TAB/SKILL TAB DETAILS ENDS--></el-tab-pane>
-                                    <el-tab-pane label="Educations" name="second">
+                                    <el-tab-pane label="Educations" name="secondEditor">
                                         <!--RESUME SECOND TAB/EDUCATION TAB DETAILS-->
                                         <div id='tab-edit-2'>
-                                            <h3 class="title">EDUCATIONS</h3>
+                                            <h3 class="title">编辑技能</h3>
                                             <!--EDUCATION LIST ITEM-->
-                                            <el-collapse accordion  v-model="activeNameC">
-                                                <el-collapse-item name="1">
-                                                    <template slot="title" >
-                                                        Consectetur adipiscing<i class="header-icon el-icon-info"></i>
-                                                    </template>
-                                                    <div class="list-content">
-                                                        <h5 class="title">Consectetur adipiscing <span class="list-year">(2014 - 2005)</span></h5>
-                                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing Vivamus sit Vivamus sit. Vivamus sit.. consectetur adipiscing Vivamus sit. Vivamus sit</p><!--EDUCATION LIST DETAILS-->
-                                                    </div>
-                                                </el-collapse-item>
-                                                <el-collapse-item name="2">
-                                                    <template slot="title">
-                                                        Consectetur adipiscing<i class="header-icon el-icon-info"></i>
-                                                    </template>
-                                                    <div class="list-content">
-                                                        <h5 class="title">Consectetur adipiscing <span class="list-year">(2014 - 2005)</span></h5>
-                                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing Vivamus sit Vivamus sit. Vivamus sit.. consectetur adipiscing Vivamus sit. Vivamus sit</p><!--EDUCATION LIST DETAILS-->
-                                                    </div>
-                                                </el-collapse-item>
-                                                <el-collapse-item name="3">
-                                                    <template slot="title">
-                                                        Consectetur adipiscing<i class="header-icon el-icon-info"></i>
-                                                    </template>
-                                                    <div class="list-content">
-                                                        <h5 class="title">Consectetur adipiscing <span class="list-year">(2014 - 2005)</span></h5>
-                                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing Vivamus sit Vivamus sit. Vivamus sit.. consectetur adipiscing Vivamus sit. Vivamus sit</p><!--EDUCATION LIST DETAILS-->
-                                                    </div>
-                                                </el-collapse-item>
-                                            </el-collapse>
                                         </div><!--RESUME SECOND TAB/EDUCATION TAB DETAILS ENDS-->
                                     </el-tab-pane>
-                                    <el-tab-pane label="Employment" name="third">
+                                    <el-tab-pane label="Employment" name="thirdEditor">
                                         <!--RESUME THIRD TAB/EMPLYMENT TAB DETAILS ENDS-->
                                         <div id='tab-edit-3'>
-                                            <h3 class="title">EMPLOYMENT</h3>
-                                            <ul class="employment-class tab-cont">
-                                                <li>
-                                                    <!--EMPLOYMENT INDIVIDUAL LIST-->
-                                                    <h4>Manager <span class="year">2014 - 2005</span></h4>
-                                                    <h5>Consectetur adipiscing</h5>
-                                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing Vivamus sit Vivamus sit. Vivamus sit.. consectetur adipiscing Vivamus sit.</p><!--EMPLOYMENT LIST DETAILS-->
-                                                </li>
-                                                <li>
-                                                    <!--EMPLOYMENT INDIVIDUAL LIST-->
-                                                    <h4>Manager <span class="year">2014 - 2005</span></h4>
-                                                    <h5>Consectetur adipiscing</h5>
-                                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing Vivamus sit Vivamus sit. Vivamus sit.. consectetur adipiscing Vivamus sit.</p><!--EMPLOYMENT LIST DETAILS-->
-                                                </li>
-                                                <li>
-                                                    <!--EMPLOYMENT INDIVIDUAL LIST-->
-                                                    <h4>Manager <span class="year">2014 - 2005</span></h4>
-                                                    <h5>Consectetur adipiscing</h5>
-                                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing Vivamus sit Vivamus sit. Vivamus sit.. consectetur adipiscing Vivamus sit.</p><!--EMPLOYMENT LIST DETAILS-->
-                                                </li>
-                                            </ul>
+                                            <h3 class="title">编辑评论</h3>
                                         </div><!--RESUME THIRD TAB/EMPLYMENT TAB DETAILS ENDS-->
                                     </el-tab-pane>
                                 </el-tabs>
@@ -373,6 +275,7 @@
                 //     backgroundImage:""
                 // },
                 activeName:'first',
+                activeNameEditor:'firstEditor',
                 activeNameC:'1',
                 loading_screen:true,
                 loading_image:true,
