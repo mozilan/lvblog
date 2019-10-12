@@ -42,8 +42,9 @@ class UsersController extends Controller
     {
         return $this->response->item($this->user(), new UserTransformer());
     }
-    public function other(User $user)
+    public function other($user)
     {
+        $user=User::find($user);
         return $this->response->item($user, new UserTransformer());
     }
     public function update(UserRequest $request)

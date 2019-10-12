@@ -346,7 +346,7 @@
                });
                var h = window.innerHeight-430;//可见区域高度
                this.form_style.height = h+'px';
-               console.log($('.ffl-wrapper'));
+               // console.log($('.ffl-wrapper'));
           }
      }
 </script>

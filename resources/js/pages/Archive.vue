@@ -13,28 +13,6 @@
                                 </el-card>
                             </router-link>
                         </el-timeline-item>
-                        <!--<el-timeline-item timestamp="2018/4/3" placement="top">-->
-                            <!--<el-card>-->
-                                <!--<h4>更新 Github 模板</h4>-->
-                                <!--<p>王小虎 提交于 2018/4/3 20:46</p>-->
-                            <!--</el-card>-->
-                        <!--</el-timeline-item>-->
-                        <!--<el-timeline-item timestamp="2018/4/2" placement="top">-->
-                            <!--<el-card>-->
-                                <!--<h4>更新 Github 模板</h4>-->
-                                <!--<p>王小虎 提交于 2018/4/2 20:46</p>-->
-                            <!--</el-card>-->
-                        <!--</el-timeline-item>-->
-                    <!--</el-timeline>-->
-                <!--</div>-->
-
-                <!--<el-timeline>-->
-                    <!--<el-timeline-item v-for="(activity, index) in archives.data" :key="index" color="grey" :timestamp="activity.created_at" placement="top" @mouseenter="hoverLine(activity)">-->
-                        <!--<div class="line-item">-->
-                            <!--<router-link :to="{name:'查看文章',params: {art_id:activity.article_id}}" tag="span">{{activity.title}}</router-link>-->
-                        <!--</div>-->
-                    <!--</el-timeline-item>-->
-                <!--</el-timeline>-->
                         </el-timeline>
                     </div>
             </el-col>
@@ -47,10 +25,16 @@
         name: 'archive',
         data () {
             return {
+                meta:{
+                    count:0,
+                }
             }
         },
         computed:{
             archives(){
+                if(this.$store.getters.getArchives.data === undefined){
+                    this.$store.getters.getArchives.meta = this.meta;
+                }
                 return this.$store.getters.getArchives;
             }
         },

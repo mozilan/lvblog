@@ -38,7 +38,9 @@ export const users = {
         userLoadStatus:0,
         logoutStatus:0,
         userProfileUpdateStatus:'',
-        userProfileUpdateMessages:''
+        userProfileUpdateMessages:'',
+        other:'',
+        otherLoadStatus:'',
     },
     actions: {
         loadCaptchas({commit},data){
@@ -140,6 +142,23 @@ export const users = {
                         commit('setUserLoadStatus',3);
                     });
         },
+        loadOther({commit},data){
+            commit('setOtherLoadStatus',1);
+            UserAPI.getLoadOther(data)
+                .then(function (response) {
+                    if(response.data.data !== ''){
+                        commit('setOtherLoadStatus',2);
+                        commit('setOther' , response.data.data);
+                    }
+                    else{
+                        commit('setOtherLoadStatus',3);
+                    }
+                })
+                .catch(function (error){
+                    commit('setOther' ,'');
+                    commit('setOtherLoadStatus',3);
+                });
+        },
         logout({commit,dispatch}){
             commit('setLogoutStatus',1);
             try {
@@ -207,6 +226,12 @@ export const users = {
             setUserLoadStatus(state,status){
                 state.userLoadStatus = status;
             },
+            setOther (state, data) {
+                state.other = data;
+            },
+            setOtherLoadStatus(state,status){
+                state.otherLoadStatus = status;
+            },
             setUserProfileUpdateStatus(state,status){
                 state.userProfileUpdateStatus = status;
             } ,
@@ -255,6 +280,12 @@ export const users = {
                 return function(){
                     return state.userLoadStatus;
                 }
+            },
+            getOther(state){
+                return state.other;
+            },
+            getOtherLoadStatus(state){
+                return state.otherLoadStatus;
             },
             getUserProfileUpdateStatus(state){
                 return function() {

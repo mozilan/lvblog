@@ -65,10 +65,6 @@
                 ]
             }
         },
-        computed:{
-        },
-        created() {
-        }
     }
 </script>
 

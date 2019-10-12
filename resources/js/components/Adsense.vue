@@ -20,7 +20,7 @@
                         </el-popover>
                         <el-tooltip class="item" effect="dark" content="Laravel-China 社区" placement="left">
                             <a class="" href="https://learnku.com" target="_blank" style="display: block;border-top: 1px solid #d3e0e9;border-bottom: 1px solid #d3e0e9;">
-                                <img src="https://mozilan.geekadpt.cn/2019-10-09%2023-00-00%20%E7%9A%84%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE.png" class="ui popover" data-variation="inverted" data-content="服务器赞助商：UCloud" width="100%">
+                                <img src="https://mozilan.geekadpt.cn/2019-10-09%2023-00-00%20%E7%9A%84%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE.png" class="ui popover" data-variation="inverted" data-content="" width="100%">
                             </a>
                         </el-tooltip>
                     </div>
@@ -38,20 +38,10 @@
             return {
             }
         },
-        methods: {
-
-        },
-        mounted:{
-
-        },
-        computed:{
-        },
-        created() {
-        }
     }
 </script>
 
-<style scoped>
+<style scoped lang="scss">
     .box-card .item:hover {
         color: #409EFF;
         cursor: pointer;

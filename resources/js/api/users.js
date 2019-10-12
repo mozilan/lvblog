@@ -52,6 +52,10 @@ export default {
         return axios.get(LVBLOG_CONFIG.API_URL + '/user',
         );
     },
+    getLoadOther: function (data) {
+        return axios.get(LVBLOG_CONFIG.API_URL + '/other/'+data.other,
+        );
+    },
     patchUpdateUserProfile: function (data) {
         return axios.patch(LVBLOG_CONFIG.API_URL + '/user', {
                 name: data.name,

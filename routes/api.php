@@ -74,7 +74,7 @@ $api->version('v1', [
         $api->get('archives/{user}', 'ArchivesController@index')
             ->name('api.archives.index');
         // 指定用户信息
-        $api->get('user/{other}', 'UsersController@other')
+        $api->get('other/{other}', 'UsersController@other')
             ->name('api.other.show');
         // 需要 token 验证的接口
         $api->group(['middleware' => 'api.auth'], function($api) {

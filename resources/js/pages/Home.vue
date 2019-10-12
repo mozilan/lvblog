@@ -1,39 +1,45 @@
 <template>
     <div class="home" :style="home_style">
+        <el-popover
+                ref="popover1"
+                placement="top-start"
+                title="hello～"
+                width="200"
+                trigger="hover"
+                content="点击查看我的主页哦～">
+        </el-popover>
         <transition name="el-fade-in-linear">
-            <div v-show="loading_screen" @click="loading_screen=false" class="loading-screen" v-loading="loadings.bg_loading" :style="{'background-image':getImage(-1)}">
-                <el-avatar class="loading-avatar" :size="55" src="https://avatars0.githubusercontent.com/u/54885220?v=4"></el-avatar>
-                <div class="loading-introduction"><span class="rotate">蓝默空间-</span>把酒祝东风,且共从容.</div>
+            <div v-show="loading_screen" @click="loading_screen=false" class="loading-screen" v-loading="loadings.bg_loading" :style="{'background-image':bg_url}">
+                <el-avatar class="loading-avatar" :size="55" :src="other.avatar"></el-avatar>
+                <div class="loading-introduction"><span class="rotate">{{other.name}}</span>{{other.introduction}}</div>
             </div>
         </transition>
         <transition name="el-fade-in-linear">
-            <div id="frontpage" v-show="loading_image" @click="cancelLoadingImage">
+            <div v-popover:popover1 id="frontpage" v-show="loading_image" @click="cancelLoadingImage" :style="{'background-image':bg_frontpage_url}" v-loading="loadings.bg_front_loading">
                 <div class="shadow-img"></div>
-                <img src="../../assets/images/front-image.jpg" class="front-img img-responsive" alt ="Front-image"><!--IMAGE FOR FRONT SCREEN-->
-                <h1> <el-avatar :size="35" src="https://avatars0.githubusercontent.com/u/54885220?v=4"></el-avatar>John <span class="invert">Doe</span></h1><!--PROFILE NAME-->
-                <h3 class="invert" style="margin-top: -10px; margin-bottom: 10px;">Web <span class="rotate">Developer, Designer, Artist</span></h3> <!--SUBTITLE IN PROFILE-->
+                <img style="visibility: hidden" src="../../assets/images/front-image.jpg" class="front-img img-responsive" alt ="Front-image">
+                <h3 class="profile ajust-frontpage-avatar"><img class="front-avatar transparent" :src="other.avatar" alt="front-image"><span class="invert name">{{other.name}}</span></h3><!--PROFILE NAME-->
+                <h3 class="invert" style="margin-top: -10px; margin-bottom: 10px;">蓝默空间-<span class="rotate">在我的空间里闪耀！</span></h3> <!--SUBTITLE IN PROFILE-->
                 <div class="frontclick"><img src="../../assets/images/click.png" alt="" class="img-responsive"><span class="pulse"></span></div>
             </div>
         </transition>
-
     <!--FRONT PAGE/ SPLASH SCREEN SECTION ENDS-->
     <!--container-->
-
         <el-row class="main" type="flex" justify="center" :style="main_style" v-show="!loading_image">
-            <el-col :xs="24" :sm="24" :md="16" :lg="16">
+            <el-col :xs="24" :sm="24" :md="16" :lg="16" class="is-always-shadow">
             <div class="container" >
         <div id="content" class="row" >
             <el-col :sm="8">
                 <!--namecard-->
                 <div id="namecard" class="namecard">
                     <div class="shadow-img" v-loading="loadings.bg_namecard_loading" :style="{'background-image':getImage(0)}"></div>
-                    <h1 class="maintitle">Yuxuan <span class="invert">Huang</span></h1><!--PROFILE NAME-->
+                    <h1 class="maintitle">{{other.name}}<span class="invert"></span></h1><!--PROFILE NAME-->
                     <h3 class="invert sub-maintitle">
                         <transition name="el-fade-in-linear">
                         <span v-show="userTags.show" class="rotate">{{userTags.tag}}</span><!--SUBTITLE AFTET NAME-->
                         </transition>
                     </h3>
-                    <img id="profile-img" class="profile-img transparent" src="https://avatars0.githubusercontent.com/u/54885220?v=4" alt="profile-image"><!--PROFILE IMAGE-->
+                    <img id="profile-img" class="profile-img transparent" :src="other.avatar" alt="profile-image"><!--PROFILE IMAGE-->
                 </div><!--/#namecard-->
                 <!--menu-->
                 <div id="menu-container">
@@ -49,7 +55,7 @@
                         </li>
                         <li :class="selector.edit" v-if="this.$store.getters.getUser.id === this.$route.params.user" id="edit-btn" title="Edit"  data-page="edit" @click="showEditPage">
                             <div class="hover-background"></div>
-                            <span>Editor</span><i class="fa fa-file-text fa-fw"></i>
+                            <span>Edit</span><i class="fa fa-file-text fa-fw"></i>
                         </li>
                     </ul><!--/.nav-menu __PAGE MENU ENDS-->
                 </div><!--#menu-container-->
@@ -68,19 +74,19 @@
 
                             <div class="fade-text transparent">
                                 <!--DESCRIPTION ON HOME-->
-                                <div class="strong-text">Hello, I am <span>Mozilan</span></div>
+                                <div class="strong-text">你好，我是 <span>{{other.name}}</span></div>
                                 <div class="focus-text"><span>Web Developer & </span><span>Web Designer</span></div>
-                                <p class="large-paragraph">I have ten years experience as a web/interface designer.I have a love of clean, elegant styling. I have lots of experience in the production of CSS and HTML for modern websites.</p>
+                                <p class="large-paragraph">I have 3 years experience as a web/interface designer.I have a love of clean, elegant coding. I have lots of experience in the production of PHP and HTML for modern websites.</p>
                                 <!--DESCRIPTION ON HOME ENDS-->
                             </div>
 
                             <!--ALL PERSONAL DETAILS-->
-                            <h3 class="personal-info-title title">Personal Info</h3>
+                            <h3 class="personal-info-title title">个人信息</h3>
                             <ul class="personal-info">
-                                <li :class="page.name_class_1"><label>Name</label><span>Yuxuan Huang</span></li>
-                                <li :class="page.name_class_2"><label>Address</label><span>Melbourne Victoria 3000 Australia</span></li>
-                                <li :class="page.name_class_3"><label>Email</label><span>mozilan@aliyun.com</span></li>
-                                <li :class="page.name_class_4"><label>Phone</label><span>+15563090244</span></li>
+                                <li :class="page.name_class_1"><label>昵称</label><span>{{other.name}}</span></li>
+                                <li :class="page.name_class_2"><router-link :to="{name:'用户文章',params: {user:other.id}}"><label>博客</label><span>{{blog_page+other.id}}</span></router-link></li>
+                                <li :class="page.name_class_3"><label>Email</label><span>{{other.email!==''?other.email:'保密'}}</span></li>
+                                <li :class="page.name_class_4"><label>电话</label><span>{{'保密'}}</span></li>
                             </ul><!--/ul.personal-info-->
                         </div>
                     </li><!--/#home-->
@@ -88,22 +94,22 @@
                     <li id="resume" v-show="page.resume_page">
                         <div class="title-container">
                             <div class="shadow-img" v-loading="loadings.bg_resume_loading" :style="{'background-image':getImage(2)}"></div>
-                            <h2 :class="selector.resume"><span class="invert">Resume Of</span> Mozilan</h2> <!--RESUME TITLE-->
+                            <h2 :class="selector.resume"><span class="invert">Resume Of</span> {{other.name}}</h2> <!--RESUME TITLE-->
                         </div>
                         <div class="description">
 
                             <div class='tabs tabs_animate'>
                                 <!--RESUME TAB LISTS-->
                                 <el-tabs v-model="activeName">
-                                    <el-tab-pane label="Skills" name="first"><!--RESUME FIRST TAB/SKILL TAB DETAILS-->
+                                    <el-tab-pane label="技能" name="first"><!--RESUME FIRST TAB/SKILL TAB DETAILS-->
                                         <div id='tab-1'>
-                                            <h3 class="title">OUR SKILLS</h3><!--SKILLS WITH BAR DISPLAY-->
+                                            <h3 class="title">我的技能</h3><!--SKILLS WITH BAR DISPLAY-->
                                             <ul class="skills-list no-padding">
                                                 <li class="row">
                                                     <el-col :xs="4"><div class="fw-mid">HTML</div></el-col>
                                                     <el-col :xs="18">
                                                         <div class="bar">
-                                                            <el-progress :text-inside="true" :stroke-width="26" :percentage="70"></el-progress>
+                                                            <el-progress :text-inside="true" :stroke-width="26" :percentage="90"></el-progress>
                                                         </div>
                                                     </el-col>
                                                     <div class="lv-clear-both"></div>
@@ -130,79 +136,76 @@
                                             <div class="lv-clear-both"></div>
                                             <!--SKILLS WITH CIRCLE DISPLAY-->
                                             <div class="circle-skill-container">
-                                                <h3 class="title">OTHER SKILLS</h3>
+                                                <h3 class="title">其他技能</h3>
                                                 <div class="row">
                                                     <el-col class="center-align" :lg="8" :md="8" :sm="12" :xs="12">
-                                                        <el-progress type="circle" :percentage="25"></el-progress>
-                                                        <h5>Photoshop</h5>
+                                                        <el-progress type="circle" :percentage="80"></el-progress>
+                                                        <h5>PHP</h5>
                                                     </el-col>
                                                     <el-col class="center-align" :lg="8" :md="8" :sm="12" :xs="12">
-                                                        <el-progress type="circle" :percentage="25"></el-progress>
-                                                        <h5>Illustrator</h5>
+                                                        <el-progress type="circle" :percentage="60"></el-progress>
+                                                        <h5>Linux</h5>
                                                     </el-col>
                                                     <el-col class="center-align" ::lg="8" :md="8" :sm="12" :xs="12">
                                                         <el-progress type="circle" :percentage="25"></el-progress>
-                                                        <h5>After effect</h5>
+                                                        <h5>Python</h5>
                                                     </el-col>
                                                 </div>
                                             </div><!--SKILLS WITH CIRCLE DISPLAY ENDS-->
                                         </div><!--RESUME FIRST TAB/SKILL TAB DETAILS ENDS--></el-tab-pane>
-                                    <el-tab-pane label="Educations" name="second">
+                                    <el-tab-pane label="学历" name="second">
                                         <!--RESUME SECOND TAB/EDUCATION TAB DETAILS-->
                                         <div id='tab-2'>
-                                            <h3 class="title">EDUCATIONS</h3>
+                                            <h3 class="title">学习历程</h3>
                                                     <!--EDUCATION LIST ITEM-->
                                             <el-collapse accordion  v-model="activeNameC">
                                                 <el-collapse-item name="1">
                                                     <template slot="title" >
-                                                        Consectetur adipiscing<i class="header-icon el-icon-info"></i>
+                                                        Consectetur adipiscing <span class="list-year">(2019 - 2020)</span><i class="header-icon el-icon-info"></i>
                                                     </template>
                                                     <div class="list-content">
-                                                        <h5 class="title">Consectetur adipiscing <span class="list-year">(2014 - 2005)</span></h5>
                                                         <p>Lorem ipsum dolor sit amet, consectetur adipiscing Vivamus sit Vivamus sit. Vivamus sit.. consectetur adipiscing Vivamus sit. Vivamus sit</p><!--EDUCATION LIST DETAILS-->
                                                     </div>
                                                 </el-collapse-item>
                                                 <el-collapse-item name="2">
-                                                    <template slot="title">
-                                                        Consectetur adipiscing<i class="header-icon el-icon-info"></i>
+                                                    <template slot="title" >
+                                                        Consectetur adipiscing <span class="list-year">(2018 - 2019)</span><i class="header-icon el-icon-info"></i>
                                                     </template>
                                                     <div class="list-content">
-                                                        <h5 class="title">Consectetur adipiscing <span class="list-year">(2014 - 2005)</span></h5>
                                                         <p>Lorem ipsum dolor sit amet, consectetur adipiscing Vivamus sit Vivamus sit. Vivamus sit.. consectetur adipiscing Vivamus sit. Vivamus sit</p><!--EDUCATION LIST DETAILS-->
                                                     </div>
                                                 </el-collapse-item>
                                                 <el-collapse-item name="3">
-                                                    <template slot="title">
-                                                        Consectetur adipiscing<i class="header-icon el-icon-info"></i>
+                                                    <template slot="title" >
+                                                        Consectetur adipiscing <span class="list-year">(2017 - 2018)</span><i class="header-icon el-icon-info"></i>
                                                     </template>
                                                     <div class="list-content">
-                                                        <h5 class="title">Consectetur adipiscing <span class="list-year">(2014 - 2005)</span></h5>
                                                         <p>Lorem ipsum dolor sit amet, consectetur adipiscing Vivamus sit Vivamus sit. Vivamus sit.. consectetur adipiscing Vivamus sit. Vivamus sit</p><!--EDUCATION LIST DETAILS-->
                                                     </div>
                                                 </el-collapse-item>
                                             </el-collapse>
                                         </div><!--RESUME SECOND TAB/EDUCATION TAB DETAILS ENDS-->
                                     </el-tab-pane>
-                                    <el-tab-pane label="Employment" name="third">
+                                    <el-tab-pane label="职业" name="third">
                                         <!--RESUME THIRD TAB/EMPLYMENT TAB DETAILS ENDS-->
                                         <div id='tab-3'>
-                                            <h3 class="title">EMPLOYMENT</h3>
+                                            <h3 class="title">项目经历</h3>
                                             <ul class="employment-class tab-cont">
                                                 <li>
                                                     <!--EMPLOYMENT INDIVIDUAL LIST-->
-                                                    <h4>Manager <span class="year">2014 - 2005</span></h4>
+                                                    <h4>Manager <span class="year">2019 - 2020</span></h4>
                                                     <h5>Consectetur adipiscing</h5>
                                                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing Vivamus sit Vivamus sit. Vivamus sit.. consectetur adipiscing Vivamus sit.</p><!--EMPLOYMENT LIST DETAILS-->
                                                 </li>
                                                 <li>
                                                     <!--EMPLOYMENT INDIVIDUAL LIST-->
-                                                    <h4>Manager <span class="year">2014 - 2005</span></h4>
+                                                    <h4>Manager <span class="year">2018 - 2019</span></h4>
                                                     <h5>Consectetur adipiscing</h5>
                                                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing Vivamus sit Vivamus sit. Vivamus sit.. consectetur adipiscing Vivamus sit.</p><!--EMPLOYMENT LIST DETAILS-->
                                                 </li>
                                                 <li>
                                                     <!--EMPLOYMENT INDIVIDUAL LIST-->
-                                                    <h4>Manager <span class="year">2014 - 2005</span></h4>
+                                                    <h4>Manager <span class="year">2017 - 2018</span></h4>
                                                     <h5>Consectetur adipiscing</h5>
                                                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing Vivamus sit Vivamus sit. Vivamus sit.. consectetur adipiscing Vivamus sit.</p><!--EMPLOYMENT LIST DETAILS-->
                                                 </li>
@@ -218,13 +221,13 @@
                     <li id="edit" v-if="page.edit_page && (this.$store.getters.getUser.id === this.$route.params.user)" >
                         <div class="title-container">
                             <div class="shadow-img" v-loading="loadings.bg_edit_loading" :style="{'background-image':getImage(3)}"></div>
-                            <h2 :class="selector.resume"><span class="invert">Editor Of</span> Mozilan</h2> <!--RESUME TITLE-->
+                            <h2 :class="selector.resume"><span class="invert">Editor Of</span> {{other.name}}</h2> <!--RESUME TITLE-->
                         </div>
                         <div class="description">
                             <div class='tabs tabs_animate'>
                                 <!--RESUME TAB LISTS-->
                                 <el-tabs v-model="activeNameEditor">
-                                    <el-tab-pane label="Skills" name="firstEditor"><!--RESUME FIRST TAB/SKILL TAB DETAILS-->
+                                    <el-tab-pane label="技能管理" name="firstEditor"><!--RESUME FIRST TAB/SKILL TAB DETAILS-->
                                         <div id='tab-edit-1'>
                                             <h3 class="title">编辑资料</h3><!--SKILLS WITH BAR DISPLAY-->
                                             <effect-input class="effect-input" v-model="editor.name" type="ichiro" label="修改昵称" name="昵称"></effect-input>
@@ -243,17 +246,25 @@
                                         </div><!--RESUME FIRST TAB/SKILL TAB DETAILS ENDS-->
                                         <el-button class="edit-profile-button" type="primary" @click="updateUserProfile">更新资料</el-button>
                                     </el-tab-pane>
-                                    <el-tab-pane label="Educations" name="secondEditor">
+                                    <el-tab-pane label="技能管理" name="secondEditor">
                                         <!--RESUME SECOND TAB/EDUCATION TAB DETAILS-->
                                         <div id='tab-edit-2'>
-                                            <h3 class="title">编辑技能</h3>
+                                            <h3 class="title">开发中...</h3>
+                                            <el-image
+                                                    style="width: 100%; height: 100%"
+                                                    src="https://mozilan.geekadpt.cn/img/other/image-404.png"
+                                                    fit='contain'></el-image>
                                             <!--EDUCATION LIST ITEM-->
                                         </div><!--RESUME SECOND TAB/EDUCATION TAB DETAILS ENDS-->
                                     </el-tab-pane>
-                                    <el-tab-pane label="Employment" name="thirdEditor">
+                                    <el-tab-pane label="评论管理" name="thirdEditor">
                                         <!--RESUME THIRD TAB/EMPLYMENT TAB DETAILS ENDS-->
                                         <div id='tab-edit-3'>
-                                            <h3 class="title">编辑评论</h3>
+                                            <h3 class="title">开发中...</h3>
+                                            <el-image
+                                                    style="width: 100%; height: 100%"
+                                                    src="https://mozilan.geekadpt.cn/img/other/image-404.png"
+                                                    fit='contain'></el-image>
                                         </div><!--RESUME THIRD TAB/EMPLYMENT TAB DETAILS ENDS-->
                                     </el-tab-pane>
                                 </el-tabs>
@@ -264,7 +275,7 @@
                 </ul>
             </el-col><!--/.page-segment -->
             </transition>
-            <!--  <h6 class="copyright-text">Copyright © 2015 Mozilan</h6> --> <!--if anyone wants copyright Texts-->
+            <!--  <h6 class="copyright-text">Copyright © 2015 {{other.name}}</h6> --> <!--if anyone wants copyright Texts-->
         </div>
     </div><!--/.container -->
             </el-col>
@@ -320,10 +331,14 @@
                     tags: ['Web Developer', 'Web Designer', 'Web Artist'],
                     show:true
                 },
+                bg_frontpage:'https://mozilan.geekadpt.cn/img/custom/cover/front-image.jpg',
+                bg_frontpage_url :'',
+                bg_url:'',
                 img_src:'https://s0.xinger.ink/acgimg/acgurl.php?',
                 img_num:['1','2','3','4'],
                 loadings:{
                     bg_loading:true,
+                    bg_front_loading:true,
                     bg_namecard_loading:true,
                     bg_home_loading:true,
                     bg_resume_loading:true,
@@ -339,11 +354,12 @@
                     other_skills:{},
                 },
                 original_user:{
-                    name:'mozilan',
+                    name:'{{other.name}}',
                     avatar:'https://avatars0.githubusercontent.com/u/54885220?v=4',
                     introduction:'向上的路并不拥挤，而有的人选择了安逸',
-                    email:'mozilan@aliyun.com',
-                    avatar_image_id:32
+                    email:'{{other.name}}@aliyun.com',
+                    avatar_image_id:32,
+                    blog_page:''
                 }
             }
         },
@@ -361,10 +377,19 @@
             bgImg.onload = () => { // 等背景图片加载成功后 去除loadingavatar_image_id
                 this.loadings.bg_loading = false
             };
+            //引导页背景图片加载loading;
+            let bgFrontImg = new Image();
+            bgFrontImg.src = this.bg_frontpage; // 获取背景图片的url
+            bgFrontImg.onerror = () => {
+                console.log('img onerror')
+            };
+            bgFrontImg.onload = () => { // 等背景图片加载成功后 去除loadingavatar_image_id
+                this.loadings.bg_front_loading = false
+            };
             //namecard加载loading;
             let bgImg_namecard = new Image();
             bgImg_namecard.src = this.img_src+a[0]; // 获取背景图片的url
-            console.log("namecard 背景图片地址"+bgImg_namecard.src);
+            // console.log("namecard 背景图片地址"+bgImg_namecard.src);
             bgImg_namecard.onerror = () => {
                 console.log('bgImg_namecard load error')
             };
@@ -549,6 +574,9 @@
                         this.editor.avatar = '';
                         this.editor.introduction = '';
                         this.editor.email = '';
+                        this.$store.dispatch('loadOther',{
+                            other : this.$route.params.user
+                        });
                         this.showHomePage();
                     }
                     if (this.$store.getters.getUserProfileUpdateStatus()  === 3) {
@@ -560,7 +588,7 @@
         },
         created(){
             if(window.innerWidth > 763) {
-                console.log("高"+window.innerHeight);
+                // console.log("高"+window.innerHeight);
                 // this.home_style.minHeight = window.innerHeight + "px";
                 this.main_style.height = window.innerHeight - 145 + "px";
             }
@@ -569,8 +597,11 @@
             this.getImage(2);
             this.getImage(3);
             this.$store.dispatch('loadOther',{
-               user : this.$route.params.user
+               other : this.$route.params.user
             });
+            this.bg_frontpage_url ="url(" + this.bg_frontpage + ")";
+            this.bg_url ="url(" + this.img_src + ")";
+            this.blog_page = LVBLOG_CONFIG.URL+ '/#/home/';
         },
         computed:{
             other(){
@@ -578,6 +609,11 @@
             }
         },
     }
+    //好看的全屏背景哦～
+    // https://s0.xinger.ink/acgimg/acgurl.php?4 2 app.js:5064:13
+    //     https://s0.xinger.ink/acgimg/acgurl.php?11 app.js:5064:13
+    //         https://s0.xinger.ink/acgimg/acgurl.php?1 app.js:5064:13
+    //             https://s0.xinger.ink/acgimg/acgurl.php?14
 </script>
 <style lang="scss" scoped>
     .home{
@@ -586,8 +622,34 @@
     h3.sub-maintitle{
         min-height: 35px;
     }
-    #app{
-
+    .main .is-always-shadow{
+        box-shadow: 0 2px 12px 0 rgba(0,0,0,.1);
+    }
+    #frontpage .profile{
+        display: flex;
+        justify-content: right;
+        align-items: center;
+    }
+    #frontpage .profile .name{
+        margin-left: 5px;
+    }
+    #frontpage .front-avatar{
+        position: relative;
+        width: 40px;
+        height: 40px;
+        border-radius: 40px;
+        float: none;
+        overflow: hidden;
+        background-color: #fff;
+        border: 3px solid rgb(64, 158, 255);
+        z-index: 100;
+        opacity: 1;
+        -khtml-opacity: 1;
+        -moz-opacity: 1;
+        filter: alpha(opacity=100);
+        transition: opacity 1s ease-in-out;
+        -moz-transition: opacity 1s ease-in-out;
+        -webkit-transition: opacity 1s ease-in-out;
     }
     #tab-edit-1 h3{
         margin:5px 0;
@@ -1058,11 +1120,13 @@
     #frontpage{
         position: relative;
         width: 550px;
-        background-color: #badaef;
+        background-color: #a3cef6;
         text-align: right;
         padding: 15px;
         margin: 0px auto;
         cursor: pointer;
+        background-size: contain;
+        background-repeat: no-repeat;
     }
 
     .front-img{

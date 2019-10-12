@@ -186,10 +186,12 @@
                                                 </div>
                                                 <div class="side-abstract">
                                                     <div class="art-abstract">
-                                                        {{i.excerpt}}
+                                                        <router-link :to="{name:'查看文章',params: {art_id:i.id}}">
+                                                            {{i.excerpt}}
+                                                        </router-link>
                                                     </div>
                                                     <div class="art-more">
-                                                        <router-link :to="{name:'查看文章',params: {art_id:i.id}}" tag="span">
+                                                        <router-link :to="{ name:'主页' ,params:{'user':i.user.id}}" tag="span">
                                                             <el-avatar :size="25" :src="i.user.avatar"></el-avatar>
                                                             <span style="height: 25px;position: absolute;padding-left:4px;">{{i.user.name}}</span>
                                                         </router-link>
@@ -311,7 +313,7 @@
                     });
                     setTimeout(() => {
                         loading.close();
-                    }, 1000);
+                    }, 800);
                     console.log("检测到user属性，没检测到tag属性");
                     this.$store.dispatch('clearArticles');
                     this.$store.dispatch('loadArticles',{
@@ -326,7 +328,7 @@
                     });
                     setTimeout(() => {
                         loading.close();
-                    }, 1000);
+                    }, 800);
                     console.log("检测到tag属性");
                     this.$store.dispatch('clearArticles');
                     this.$store.dispatch('loadUserTagArticles',{
@@ -343,7 +345,7 @@
                     });
                     setTimeout(() => {
                         loading.close();
-                    }, 1000);
+                    }, 800);
                     console.log("检测到cat属性");
                     this.$store.dispatch('clearArticles');
                     this.$store.dispatch('loadUserCategoryArticles',{
@@ -360,7 +362,7 @@
                     });
                     setTimeout(() => {
                         loading.close();
-                    }, 1000);
+                    }, 800);
                     this.$store.dispatch('clearArticles');
                     this.$store.dispatch('loadArticles',{
                         user:this.$route.params.user ? this.$route.params.user : '',
@@ -404,7 +406,7 @@
                             this.$message.error('错了哦，加载文章失败了');
                         }
                     });
-                }, 1000);
+                }, 800);
             }
         }
     }

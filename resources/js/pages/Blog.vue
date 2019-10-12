@@ -155,7 +155,7 @@
                             归类<i class="header-icon el-icon-info"></i>
                         </template>
                         <template>
-                            <el-tabs v-model="activeName" @tab-click="handleClick">
+                            <el-tabs v-model="activeName">
                                 <el-tab-pane label="标签" name="first">
                                     <el-col :span="6" class="hidden-sm-and-down lv-tag-side-sm" :style="infinite_side" >
                                         <div class="item">
@@ -226,7 +226,9 @@
                                             </el-image></div>
                                             <div class="side-abstract">
                                                 <div class="art-abstract">
-                                                    {{i.excerpt}}
+                                                    <router-link :to="{name:'查看文章',params: {art_id:i.id}}" tag="span">
+                                                        {{i.excerpt}}
+                                                    </router-link>
                                                 </div>
                                                 <div class="art-more">
                                                     <router-link :to="{name:'查看文章',params: {art_id:i.id}}" tag="span">
@@ -313,8 +315,6 @@
         },
         methods: {
             getArticles(){
-                console.log(this.$route.params.user);
-                console.log(this.$route.params.tag);
                 if(this.$route.params.user !== undefined && this.$route.params.tag ===undefined && this.$route.params.category === undefined)
                 {
                     const loading = this.$loading({
@@ -325,8 +325,8 @@
                     });
                     setTimeout(() => {
                         loading.close();
-                    }, 1000);
-                    console.log("检测到user属性，没检测到tag属性");
+                    }, 800);
+                    // console.log("检测到user属性，没检测到tag属性");
                     this.$store.dispatch('clearArticles');
                     this.$store.dispatch('loadArticles',{
                     user:this.$route.params.user ? this.$route.params.user : '',
@@ -340,8 +340,8 @@
                     });
                     setTimeout(() => {
                         loading.close();
-                    }, 1000);
-                    console.log("检测到tag属性");
+                    }, 800);
+                    // console.log("检测到tag属性");
                     this.$store.dispatch('clearArticles');
                     this.$store.dispatch('loadUserTagArticles',{
                         user:this.$route.params.user,
@@ -357,8 +357,8 @@
                     });
                     setTimeout(() => {
                         loading.close();
-                    }, 1000);
-                    console.log("检测到cat属性");
+                    }, 800);
+                    // console.log("检测到cat属性");
                     this.$store.dispatch('clearArticles');
                     this.$store.dispatch('loadUserCategoryArticles',{
                         user:this.$route.params.user,
@@ -374,7 +374,7 @@
                     });
                     setTimeout(() => {
                         loading.close();
-                    }, 1000);
+                    }, 800);
                     this.$store.dispatch('clearArticles');
                     this.$store.dispatch('loadArticles',{
                         user:this.$route.params.user ? this.$route.params.user : '',
@@ -418,7 +418,7 @@
                             this.$message.error('错了哦，加载文章失败了');
                         }
                     });
-                }, 1000);
+                }, 800);
             }
         }
     }

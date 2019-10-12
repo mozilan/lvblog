@@ -57,12 +57,12 @@
 		created() {
 		}
 		,mounted() {
-			this.$refs.des.stop();
+			// this.$refs.des.stop();
 		},
 		methods:{
-			startScroll(index){
-				this.$refs.des[index].start();
-			}
+			// startScroll(index){
+			// 	this.$refs.des[index].start();
+			// }
 		}
 	}
 </script>

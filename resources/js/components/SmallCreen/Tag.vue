@@ -17,12 +17,6 @@
 				type:['success','info','warning','danger'],
 			}
 		},
-		methods: {
-
-		},
-		mounted:{
-
-		},
 		computed:{
 			tags(){
 				return this.$store.getters.getTags;

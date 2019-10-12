@@ -20,16 +20,6 @@
             return {
             }
         },
-        methods: {
-
-        },
-        mounted:{
-
-        },
-        computed:{
-        },
-        created() {
-        }
     }
 </script>
 
