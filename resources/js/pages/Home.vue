@@ -227,7 +227,20 @@
                                     <el-tab-pane label="Skills" name="firstEditor"><!--RESUME FIRST TAB/SKILL TAB DETAILS-->
                                         <div id='tab-edit-1'>
                                             <h3 class="title">编辑资料</h3><!--SKILLS WITH BAR DISPLAY-->
-                                        </div><!--RESUME FIRST TAB/SKILL TAB DETAILS ENDS--></el-tab-pane>
+                                            <effect-input class="effect-input" v-model="editor.name" type="juro" label="修改昵称" name="昵称"></effect-input>
+                                            <effect-input class="effect-input" v-model="editor.email" type="juro" label="修改邮箱" name="邮箱"></effect-input>
+                                            <el-upload
+                                                    class="avatar-uploader"
+                                                    :http-request="uploadAvatar"
+                                                    :show-file-list="false"
+                                            >
+                                                <img v-if="editor.avatar" :src="editor.avatar" class="avatar">
+                                                <i class="el-icon-upload"></i>
+                                                <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
+                                                <div class="el-upload__tip" slot="tip">只能上传jpg/png文件，且不超过2M</div>
+                                            </el-upload>
+                                        </div><!--RESUME FIRST TAB/SKILL TAB DETAILS ENDS-->
+                                    </el-tab-pane>
                                     <el-tab-pane label="Educations" name="secondEditor">
                                         <!--RESUME SECOND TAB/EDUCATION TAB DETAILS-->
                                         <div id='tab-edit-2'>
@@ -256,10 +269,16 @@
         </el-row>
     </div>
 </template>
-    <script>
-        var a = new Array(100);
+<script>
+    import {EffectInput} from 'effect-input'
+    import 'effect-input/dist/index.css';
+    import { LVBLOG_CONFIG } from '../config';
+    var a = new Array(100);
     export default {
         name: "Home",
+        components:{
+            EffectInput:EffectInput,
+        },
         data() {
             return {
                 home_style:{
@@ -307,7 +326,14 @@
                     bg_home_loading:true,
                     bg_resume_loading:true,
                     bg_edit_loading:true,
-                }
+                },
+                editor:{
+                    name:'',
+                    email:'',
+                    avatar:'',
+                    skills:{},
+                    other_skills:{},
+                },
             }
         },
         mounted(){
@@ -468,6 +494,30 @@
                 //     id = a[num] = this.getRandomNum(1000);
                 // }
                 return "url(" + this.img_src + a[num] + ")";
+            },
+            uploadAvatar(params) {
+                const isJPG = params.file.type === 'image/jpeg';
+                const isLt2M = params.file.size / 1024 / 1024 < 2;
+                if (!isJPG) {
+                    this.$message.error('上传头像图片只能是 JPG 格式!');
+                    return false;
+                }
+                if (!isLt2M) {
+                    this.$message.error('上传头像图片大小不能超过 2MB!');
+                    return false;
+                }
+                // 通过 FormData 对象上传文件
+                var formData = new FormData();
+                formData.append("image", params.file);
+                formData.append('type', 'avatar');
+                this.$store.dispatch('upLoadImages', formData);
+                this.$watch(this.$store.getters.getImagesUpLoadStatus, function () {
+                    if (this.$store.getters.getImagesUpLoadStatus() === 2) {
+                        this.editor.avatar = this.$store.getters.getImages.data.path;
+                    } else if (this.$store.getters.getImagesUpLoadStatus() === 3) {
+                        this.$message.error('上传头像失败了,可能是登陆超时造成的!');
+                    }
+                });
             }
         },
         created(){
@@ -492,6 +542,65 @@
     }
     #app{
 
+    }
+    .effect-input{
+        margin-top: 1em;
+        box-shadow: 0 2px 12px 0 rgba(0,0,0,.1);
+    }
+    .avatar-uploader{
+        margin-top: 1em;
+        box-shadow: 0 2px 12px 0 rgba(0,0,0,.1);
+        background-color: #fff;
+        border: 1px dashed #d9d9d9;
+        border-radius: 6px;
+        box-sizing: border-box;
+        width: 100%;
+        height: 180px;
+        text-align: center;
+        cursor: pointer;
+        position: relative;
+        overflow: hidden;
+        max-width: 320px;
+    }
+    .avatar-uploader .el-upload__text {
+        color: #606266;
+        font-size: 14px;
+        text-align: center;
+    }
+    .avatar-uploader .el-icon-upload {
+        font-size: 67px;
+        color: #c0c4cc;
+        margin: 40px 0 16px;
+        line-height: 50px;
+    }
+    .el-upload__tip {
+        font-size: 12px;
+        color: #606266;
+        margin-top: 7px;
+    }
+    .avatar-uploader .el-upload {
+        border: 1px dashed #d9d9d9;
+        border-radius: 6px;
+        cursor: pointer;
+        position: relative;
+        overflow: hidden;
+    }
+    .avatar-uploader .el-upload:hover {
+        border-color: #409EFF;
+    }
+    .avatar-uploader-icon {
+        font-size: 28px;
+        color: #8c939d;
+        width: 178px;
+        height: 178px;
+        line-height: 178px;
+        text-align: center;
+    }
+    .avatar {
+        width: 178px;
+        height: 178px;
+        display: block;
+        border-radius: 90px;
     }
     /*----------------------------------------------*/
     /* Base Style */
@@ -1021,7 +1130,7 @@
         padding-right: 25px;
         border-right: 2px solid #e1c03a;
         margin-right: 15px;
-        text-transform: uppercase;
+        /*text-transform: uppercase;*/
     }
 
     ul.nav-menu li:hover span,
@@ -1841,7 +1950,7 @@
             width: 25%;
             margin: 0px;
             padding: 15px;
-            font-size: 19px;
+            /*font-size: 19px;*/
             float: left;
             text-align: center;
             border-right: 1px solid #e1c03a;

@@ -301,8 +301,6 @@
         },
         methods: {
             getArticles(){
-                console.log(this.$route.params.user);
-                console.log(this.$route.params.tag);
                 if(this.$route.params.user !== undefined && this.$route.params.tag ===undefined && this.$route.params.category === undefined)
                 {
                     const loading = this.$loading({

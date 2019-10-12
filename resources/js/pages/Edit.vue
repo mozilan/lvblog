@@ -7,43 +7,15 @@
                               <label for="title" class="ffl-label">文章标题</label>
                               <input type="text" id="title" name="title" v-model="form.title">
                          </div>
-                         <!--<div class="ffl-wrapper">-->
-                              <!--<label for="email" class="ffl-label">Email</label>-->
-                              <!--<input type="email" id="email" name="email" >-->
-                         <!--</div>-->
-                         <!--<div class="ffl-wrapper">-->
-                              <!--<label for="excerpt" class="ffl-label">excerpt <span>(optional)</span></label>-->
-                              <!--<textarea id="excerpt" name="excerpt"></textarea>-->
-                         <!--</div>-->
-                         <!--<button type="submit">Send</button>-->
                     </div>
                     <el-form :model="form" :style="form_style">
-                         <!--<div class="bl-margin_bottom-title">-->
-                              <!--<el-form-item label="">-->
-                                   <!--<el-input type="text" id="name" name="name" placeholder="请输入文章标题" v-model="form.title"  maxlength="30" show-word-limit></el-input>-->
-                              <!--</el-form-item>-->
-                         <!--</div>-->
                          <mavon-editor ref=md :toolbars="markdownOption" v-model="form.handbook" :ishljs = "true" @imgAdd="$imgAdd"  style="height: 100%"></mavon-editor>
                          <div class="title-animate bl-margin_bottom-title bl-margin-top">
                               <div class="ffl-wrapper">
                                    <label for="excerpt" class="ffl-label">文章摘要 <span>(可选)</span></label>
                                    <textarea id="excerpt" name="excerpt" v-model="form.excerpt"></textarea>
                               </div>
-                              <!--<button type="submit">Send</button>-->
                          </div>
-                         <!--<div class="bl-margin-top">-->
-                              <!--<el-form-item>-->
-                                   <!--<el-input-->
-                                           <!--type="textarea"-->
-                                           <!--placeholder="文章摘要"-->
-                                           <!--maxlength="80"-->
-                                           <!--show-word-limit-->
-                                           <!--v-model="form.excerpt"-->
-                                           <!--:autosize="{ minRows: 2, maxRows: 4}"-->
-                                   <!--&gt;-->
-                                   <!--</el-input>-->
-                              <!--</el-form-item>-->
-                         <!--</div>-->
                          <div class="bl-margin-top">
                               <el-form-item label="文章标签：">
                                    <div class="tag">
@@ -136,7 +108,6 @@
      export default {
           name: 'editor',
           components: {
-               mavonEditor,
                floating_form_labels,
                // or 'mavon-editor': mavonEditor
           },
@@ -219,7 +190,7 @@
                     // 第一步.将图片上传到服务器.
                     var formdata = new FormData();
                     formdata.append('image', $file);
-                   formdata.append('type', 'article');
+                    formdata.append('type', 'article');
                     this.$store.dispatch('upLoadImages',formdata);
                     this.$watch(this.$store.getters.getImagesUpLoadStatus, function () {
                          if (this.$store.getters.getImagesUpLoadStatus() === 2) {
