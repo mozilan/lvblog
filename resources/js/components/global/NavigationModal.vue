@@ -73,7 +73,7 @@
             },
             logout(){
                 this.$store.dispatch('logout');
-                this.$router.push({name:'index'});
+                this.$router.push({name:'首页'});
             },
             loadUser(){
                 this.$store.dispatch('loadUser')

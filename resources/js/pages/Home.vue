@@ -1,7 +1,7 @@
 <template>
     <div class="home" :style="home_style">
         <transition name="el-fade-in-linear">
-            <div v-show="loading_screen" @click="loading_screen=false" class="loading-screen">
+            <div v-show="loading_screen" @click="loading_screen=false" class="loading-screen" v-loading="loadings.bg_loading" :style="{'background-image':getImage(-1)}">
                 <el-avatar class="loading-avatar" :size="55" src="https://avatars0.githubusercontent.com/u/54885220?v=4"></el-avatar>
                 <div class="loading-des"><span class="rotate">蓝默空间-</span>把酒祝东风,且共从容.</div>
             </div>
@@ -26,7 +26,7 @@
             <el-col :sm="8">
                 <!--namecard-->
                 <div id="namecard" class="namecard">
-                    <div class="shadow-img" :style="{'background-image':getImage(0)}"></div>
+                    <div class="shadow-img" v-loading="loadings.bg_namecard_loading" :style="{'background-image':getImage(0)}"></div>
                     <h1 class="maintitle">Yuxuan <span class="invert">Huang</span></h1><!--PROFILE NAME-->
                     <h3 class="invert sub-maintitle">
                         <transition name="el-fade-in-linear">
@@ -60,7 +60,7 @@
                     <!--HOME/PROFILE PAGE-->
                     <li id="home" v-show="page.home_page">
                         <div class="title-container">
-                            <div class="shadow-img" :style="{'background-image':getImage(1)}"></div>
+                            <div class="shadow-img" v-loading="loadings.bg_home_loading" :style="{'background-image':getImage(1)}"></div>
                             <h2 :class="selector.home">Welcome To <span class="invert">My Profile</span></h2><!--HOME TITLE-->
                         </div>
                         <div class="description">
@@ -87,7 +87,7 @@
                     <!--RESUME PAGE-->
                     <li id="resume" v-show="page.resume_page">
                         <div class="title-container">
-                            <div class="shadow-img" :style="{'background-image':getImage(2)}"></div>
+                            <div class="shadow-img" v-loading="loadings.bg_resume_loading" :style="{'background-image':getImage(2)}"></div>
                             <h2 :class="selector.resume"><span class="invert">Resume Of</span> Mozilan</h2> <!--RESUME TITLE-->
                         </div>
                         <div class="description">
@@ -217,7 +217,7 @@
                     <!--RESUME PAGE-->
                     <li id="edit" v-show="page.edit_page">
                         <div class="title-container">
-                            <div class="shadow-img" :style="{'background-image':getImage(3)}"></div>
+                            <div class="shadow-img" v-loading="loadings.bg_edit_loading" :style="{'background-image':getImage(3)}"></div>
                             <h2 :class="selector.resume"><span class="invert">Resume Of</span> Mozilan</h2> <!--RESUME TITLE-->
                         </div>
                         <div class="description">
@@ -397,7 +397,14 @@
                     show:true
                 },
                 img_src:'https://s0.xinger.ink/acgimg/acgurl.php?',
-                img_num:['1','2','3','4']
+                img_num:['1','2','3','4'],
+                loadings:{
+                    bg_loading:true,
+                    bg_namecard_loading:true,
+                    bg_home_loading:true,
+                    bg_resume_loading:true,
+                    bg_edit_loading:true,
+                }
             }
         },
         mounted(){
@@ -405,6 +412,52 @@
                 this.loading_screen = false;
             },10000);
             this.changeUserTag();
+            //背景图片加载loading;
+            let bgImg = new Image();
+            bgImg.src = this.img_src; // 获取背景图片的url
+            bgImg.onerror = () => {
+                console.log('img onerror')
+            };
+            bgImg.onload = () => { // 等背景图片加载成功后 去除loading
+                this.loadings.bg_loading = false
+            };
+            //namecard加载loading;
+            let bgImg_namecard = new Image();
+            bgImg_namecard.src = this.img_src+a[0]; // 获取背景图片的url
+            console.log("namecard 背景图片地址"+bgImg_namecard.src);
+            bgImg_namecard.onerror = () => {
+                console.log('bgImg_namecard load error')
+            };
+            bgImg_namecard.onload = () => { // 等背景图片加载成功后 去除loading
+                this.loadings.bg_namecard_loading= false
+            };
+            //home加载loading
+            let bgImg_home = new Image();
+            bgImg_home.src = this.img_src+a[1]; // 获取背景图片的url
+            bgImg_home.onerror = () => {
+                console.log('bgImg_home load error')
+            };
+            bgImg_home.onload = () => { // 等背景图片加载成功后 去除loading
+                this.loadings.bg_home_loading = false
+            };
+            //resume加载loading
+            let bgImg_resume = new Image();
+            bgImg_resume.src = this.img_src+a[2]; // 获取背景图片的url
+            bgImg_resume.onerror = () => {
+                console.log('bgImg_resume load rror')
+            };
+            bgImg_resume.onload = () => { // 等背景图片加载成功后 去除loading
+                this.loadings.bg_resume_loading = false
+            };
+            //edit加载loading
+            let bgImg_edit = new Image();
+            bgImg_edit.src = this.img_src+a[3]; // 获取背景图片的url
+            bgImg_edit.onerror = () => {
+                console.log('bgImg_edit load error')
+            };
+            bgImg_edit.onload = () => { // 等背景图片加载成功后 去除loading
+                this.loadings.bg_edit_loading = false
+            }
         },
         methods:{
             cancelLoadingImage(){
@@ -916,8 +969,10 @@
         width: 100%;
         height: 100%;
         z-index: 9999;
-        background: url('https://s0.xinger.ink/acgimg/acgurl.php') center no-repeat #ffffff;
         background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-color: #ffffff;
     }
     .loading-avatar{
         transform: translate(-50%, -50%);
@@ -932,6 +987,8 @@
         left: 50%;
         top: 50%;
         font-size: 15px;
+        width: 100%;
+        text-align: center;
     }
     #frontpage{
         position: relative;
