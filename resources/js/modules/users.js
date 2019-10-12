@@ -37,6 +37,8 @@ export const users = {
         user: {},
         userLoadStatus:0,
         logoutStatus:0,
+        userProfileUpdateStatus:'',
+        userProfileUpdateMessages:''
     },
     actions: {
         loadCaptchas({commit},data){
@@ -149,6 +151,18 @@ export const users = {
             }catch (e) {
                 commit('setLogoutStatus', 3);
             }
+        },
+        updateUserProfile({commit,dispatch},data) {
+            commit( 'setUserProfileUpdateStatus', 1);
+            UserAPI.patchUpdateUserProfile( data)
+                .then(function ( response ) {
+                    commit('setUserProfileUpdateStatus' , 2);
+                    dispatch('loadUser');
+                })
+                .catch(function (error){
+                    commit('setUserProfileUpdateMessages', error.response.data.errors[Object.keys(error.response.data.errors)[0]].toString());
+                    commit('setUserProfileUpdateStatus',3);
+                })
         }
     },
         mutations:{
@@ -193,9 +207,12 @@ export const users = {
             setUserLoadStatus(state,status){
                 state.userLoadStatus = status;
             },
-            setLogoutStatus(state,status){
-                state.loginStatus = status;
-            }
+            setUserProfileUpdateStatus(state,status){
+                state.userProfileUpdateStatus = status;
+            } ,
+            setUserProfileUpdateMessages(state,error){
+                state.userProfileUpdateMessages = error;
+            },
         },
         getters:{
             getCaptchaLoadStatus( state ){
@@ -237,6 +254,16 @@ export const users = {
             getUserLoadStatus(state){
                 return function(){
                     return state.userLoadStatus;
+                }
+            },
+            getUserProfileUpdateStatus(state){
+                return function() {
+                    return state.userProfileUpdateStatus;
+                }
+            } ,
+            getUserProfileUpdateMessages(state){
+                return function() {
+                    return state.userProfileUpdateMessages;
                 }
             },
             getLogoutStatus(state){

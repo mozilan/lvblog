@@ -112,7 +112,7 @@ export default new VueRouter({
                     components: Vue.component( 'Archive', require( './pages/Archive' ) ),
                 },
                 {
-                    path: 'home',
+                    path: 'home/:user',
                     name: '主页',
                     components: Vue.component( 'Home', require( './pages/Home' ) ),
                 },

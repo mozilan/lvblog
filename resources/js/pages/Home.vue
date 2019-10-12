@@ -3,7 +3,7 @@
         <transition name="el-fade-in-linear">
             <div v-show="loading_screen" @click="loading_screen=false" class="loading-screen" v-loading="loadings.bg_loading" :style="{'background-image':getImage(-1)}">
                 <el-avatar class="loading-avatar" :size="55" src="https://avatars0.githubusercontent.com/u/54885220?v=4"></el-avatar>
-                <div class="loading-des"><span class="rotate">蓝默空间-</span>把酒祝东风,且共从容.</div>
+                <div class="loading-introduction"><span class="rotate">蓝默空间-</span>把酒祝东风,且共从容.</div>
             </div>
         </transition>
         <transition name="el-fade-in-linear">
@@ -43,11 +43,11 @@
                             <div class="hover-background"></div>
                             <span>Home</span><i class="fa fa-user fa-fw"></i>
                         </li>
-                        <li :class="selector.resume"  id="resume-btn" title="Resume"  data-page="resume" @click="showResumePage">
+                        <li :class="selector.resume" id="resume-btn" title="Resume"  data-page="resume" @click="showResumePage">
                             <div class="hover-background"></div>
                             <span>Resume</span><i class="fa fa-file-text fa-fw"></i>
                         </li>
-                        <li :class="selector.edit"  id="edit-btn" title="Edit"  data-page="edit" @click="showEditPage">
+                        <li :class="selector.edit" v-if="this.$store.getters.getUser.id === this.$route.params.user" id="edit-btn" title="Edit"  data-page="edit" @click="showEditPage">
                             <div class="hover-background"></div>
                             <span>Editor</span><i class="fa fa-file-text fa-fw"></i>
                         </li>
@@ -215,7 +215,7 @@
                     </li>
                     <!--/#resume-->
                     <!--RESUME PAGE-->
-                    <li id="edit" v-show="page.edit_page">
+                    <li id="edit" v-if="page.edit_page && (this.$store.getters.getUser.id === this.$route.params.user)" >
                         <div class="title-container">
                             <div class="shadow-img" v-loading="loadings.bg_edit_loading" :style="{'background-image':getImage(3)}"></div>
                             <h2 :class="selector.resume"><span class="invert">Editor Of</span> Mozilan</h2> <!--RESUME TITLE-->
@@ -227,19 +227,21 @@
                                     <el-tab-pane label="Skills" name="firstEditor"><!--RESUME FIRST TAB/SKILL TAB DETAILS-->
                                         <div id='tab-edit-1'>
                                             <h3 class="title">编辑资料</h3><!--SKILLS WITH BAR DISPLAY-->
-                                            <effect-input class="effect-input" v-model="editor.name" type="juro" label="修改昵称" name="昵称"></effect-input>
-                                            <effect-input class="effect-input" v-model="editor.email" type="juro" label="修改邮箱" name="邮箱"></effect-input>
+                                            <effect-input class="effect-input" v-model="editor.name" type="ichiro" label="修改昵称" name="昵称"></effect-input>
+                                            <effect-input class="effect-input" v-model="editor.email" type="ichiro" label="修改邮箱" name="邮箱"></effect-input>
+                                            <effect-input class="effect-input" v-model="editor.introduction" type="juro" label="修改简介" name="简介"></effect-input>
                                             <el-upload
+                                                    :limit=1
                                                     class="avatar-uploader"
                                                     :http-request="uploadAvatar"
                                                     :show-file-list="false"
-                                            >
+                                                    action="customize">
                                                 <img v-if="editor.avatar" :src="editor.avatar" class="avatar">
                                                 <i class="el-icon-upload"></i>
-                                                <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
-                                                <div class="el-upload__tip" slot="tip">只能上传jpg/png文件，且不超过2M</div>
+                                                <div class="el-upload__text">将文件拖到此处,或<em>点击上传</em></div>
                                             </el-upload>
                                         </div><!--RESUME FIRST TAB/SKILL TAB DETAILS ENDS-->
+                                        <el-button class="edit-profile-button" type="primary" @click="updateUserProfile">更新资料</el-button>
                                     </el-tab-pane>
                                     <el-tab-pane label="Educations" name="secondEditor">
                                         <!--RESUME SECOND TAB/EDUCATION TAB DETAILS-->
@@ -331,9 +333,18 @@
                     name:'',
                     email:'',
                     avatar:'',
+                    avatar_image_id:1,
+                    introduction:'',
                     skills:{},
                     other_skills:{},
                 },
+                original_user:{
+                    name:'mozilan',
+                    avatar:'https://avatars0.githubusercontent.com/u/54885220?v=4',
+                    introduction:'向上的路并不拥挤，而有的人选择了安逸',
+                    email:'mozilan@aliyun.com',
+                    avatar_image_id:32
+                }
             }
         },
         mounted(){
@@ -347,7 +358,7 @@
             bgImg.onerror = () => {
                 console.log('img onerror')
             };
-            bgImg.onload = () => { // 等背景图片加载成功后 去除loading
+            bgImg.onload = () => { // 等背景图片加载成功后 去除loadingavatar_image_id
                 this.loadings.bg_loading = false
             };
             //namecard加载loading;
@@ -480,19 +491,14 @@
                 },6000);
             },
             getRandomNum(range){
-                console.log(Math.floor(Math.random()*range));
+                // console.log(Math.floor(Math.random()*range));
                 return Math.floor(Math.random()*range);
             },
             getImage(num) {
-                console.log(a[num]);
+                // console.log(a[num]);
                 if(a[num] === undefined) {
                     a[num] = this.getRandomNum(1000);
                 }
-                // if(a[num] !== undefined){
-                //     id = a[num];
-                // }else{
-                //     id = a[num] = this.getRandomNum(1000);
-                // }
                 return "url(" + this.img_src + a[num] + ")";
             },
             uploadAvatar(params) {
@@ -514,11 +520,43 @@
                 this.$watch(this.$store.getters.getImagesUpLoadStatus, function () {
                     if (this.$store.getters.getImagesUpLoadStatus() === 2) {
                         this.editor.avatar = this.$store.getters.getImages.data.path;
+                        this.editor.avatar_image_id = this.$store.getters.getImages.data.id;
                     } else if (this.$store.getters.getImagesUpLoadStatus() === 3) {
                         this.$message.error('上传头像失败了,可能是登陆超时造成的!');
                     }
                 });
-            }
+            },
+            updateUserProfile(){
+                let original_user_profile =  this.$store.getters.getUser;
+                this.loader = this.$loading({
+                    lock: true,
+                    text: '提交中...',
+                    spinner: 'el-icon-loading',
+                    background: 'rgba(0, 0, 0, 0.7)'
+                });
+                this.$store.dispatch('updateUserProfile',{
+                    name:this.editor.name ===''? original_user_profile.name:this.editor.name,
+                    avatar:this.editor.avatar===''?original_user_profile.avatar:this.editor.avatar,
+                    avatar_image_id:this.editor.avatar_image_id===''?original_user_profile.avatar_image_id:this.editor.avatar_image_id,
+                    introduction:this.editor.introduction===''?original_user_profile.introduction:this.editor.introduction,
+                    email:this.editor.email===''?original_user_profile.email:this.editor.email,
+                });
+                this.$watch(this.$store.getters.getUserProfileUpdateStatus, function () {
+                    if (this.$store.getters.getUserProfileUpdateStatus()  === 2) {
+                        this.loader.close();
+                        this.$message.success('更新成功');
+                        this.editor.name = '';
+                        this.editor.avatar = '';
+                        this.editor.introduction = '';
+                        this.editor.email = '';
+                        this.showHomePage();
+                    }
+                    if (this.$store.getters.getUserProfileUpdateStatus()  === 3) {
+                        this.loader.close();
+                        this.$message.error(this.$store.getters.getUserProfileUpdateMessages());
+                    }
+                });
+            },
         },
         created(){
             if(window.innerWidth > 763) {
@@ -530,7 +568,15 @@
             this.getImage(1);
             this.getImage(2);
             this.getImage(3);
-        }
+            this.$store.dispatch('loadOther',{
+               user : this.$route.params.user
+            });
+        },
+        computed:{
+            other(){
+                return this.$store.getters.getOther;
+            }
+        },
     }
 </script>
 <style lang="scss" scoped>
@@ -543,6 +589,12 @@
     #app{
 
     }
+    #tab-edit-1 h3{
+        margin:5px 0;
+    }
+    .edit-profile-button{
+        margin-top: 15px;
+    }
     .effect-input{
         margin-top: 1em;
         box-shadow: 0 2px 12px 0 rgba(0,0,0,.1);
@@ -552,9 +604,9 @@
         box-shadow: 0 2px 12px 0 rgba(0,0,0,.1);
         background-color: #fff;
         border: 1px dashed #d9d9d9;
-        border-radius: 6px;
+        border-radius: 90px;
         box-sizing: border-box;
-        width: 100%;
+        width: 178px;
         height: 180px;
         text-align: center;
         cursor: pointer;
@@ -563,6 +615,7 @@
         max-width: 320px;
     }
     .avatar-uploader .el-upload__text {
+        padding:0 5px;
         color: #606266;
         font-size: 14px;
         text-align: center;
@@ -992,7 +1045,7 @@
         left: 50%;
         top: 50%;
     }
-    .loading-des{
+    .loading-introduction{
         margin-top: 55px;
         transform: translate(-50%, -50%);
         position: absolute;

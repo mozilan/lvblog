@@ -52,5 +52,13 @@ export default {
         return axios.get(LVBLOG_CONFIG.API_URL + '/user',
         );
     },
+    patchUpdateUserProfile: function (data) {
+        return axios.patch(LVBLOG_CONFIG.API_URL + '/user', {
+                name: data.name,
+                email:data.email,
+                introduction:data.introduction,
+                avatar_image_id:data.avatar_image_id,
+            });
+    },
 
 }

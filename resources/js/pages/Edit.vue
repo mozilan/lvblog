@@ -108,8 +108,8 @@
      export default {
           name: 'editor',
           components: {
-               floating_form_labels,
-               // or 'mavon-editor': mavonEditor
+              floating_form_labels,
+              mavonEditor
           },
           data() {
                return {
