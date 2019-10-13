@@ -109,7 +109,7 @@
                                                     <el-col :xs="4"><div class="fw-mid">HTML</div></el-col>
                                                     <el-col :xs="18">
                                                         <div class="bar">
-                                                            <el-progress :text-inside="true" :stroke-width="26" :percentage="90"></el-progress>
+                                                            <el-progress :text-inside="true" :stroke-width="26" :percentage="100"></el-progress>
                                                         </div>
                                                     </el-col>
                                                     <div class="lv-clear-both"></div>
@@ -118,13 +118,13 @@
                                                     <el-col :xs="4"><div class="fw-mid">CSS</div></el-col>
                                                     <el-col :xs="18">
                                                         <div class="bar">
-                                                            <el-progress :text-inside="true" :stroke-width="24" :percentage="100" status="success"></el-progress>
+                                                            <el-progress :text-inside="true" :stroke-width="24" :percentage="90" status="success"></el-progress>
                                                         </div>
                                                     </el-col>
                                                     <div class="lv-clear-both"></div>
                                                 </li>
                                                 <li class="row">
-                                                    <el-col :xs="4"><div class="fw-mid">Javascript</div></el-col>
+                                                    <el-col :xs="4"><div class="fw-mid">JavaScript</div></el-col>
                                                     <el-col :xs="18">
                                                         <div class="bar">
                                                             <el-progress :text-inside="true" :stroke-width="22" :percentage="80" status="warning"></el-progress>
@@ -1014,8 +1014,8 @@
     .btn{padding: 2px 25px; border-radius: 0px; }
 
     .btn-success{
-        background: #33FFFF;
-        border-color: #33FFFF;
+        background: #E6A23C;
+        border-color: #E6A23C;
         width: 100%;
         color: #000000;
         font-family: 'Oswald', sans-serif;
@@ -1028,8 +1028,8 @@
     .btn-success:hover,
     .open>.dropdown-toggle.btn-success {
         opacity: .9;
-        background: #33FFFF;
-        border-color: #33FFFF;
+        background: #E6A23C;
+        border-color: #E6A23C;
     }
     .form-control:focus{
         border-color: #888888;
@@ -1040,7 +1040,7 @@
 
     .modal-content {
         border-radius: 3px;
-        border: 8px solid #33FFFF;
+        border: 8px solid #E6A23C;
         box-shadow: 0 0px 7px rgb(0, 0, 0);
     }
     .modal-body {
@@ -1164,7 +1164,7 @@
         float: none;
         overflow: hidden;
         background-color: #fff;
-        border: 4px solid #33FFFF;
+        border: 4px solid #E6A23C;
         z-index: 100;
         opacity: 1; 	/* Modern!Firefox 0.9+, Safari 2?, Chrome any?Opera 9+, IE 9+ */
         -khtml-opacity: 1.0;
@@ -1228,7 +1228,7 @@
 
     ul.nav-menu li:hover{
         border-bottom-color: #409eff;
-        color: #33FFFF;
+        color: #E6A23C;
     }
 
     ul.nav-menu li:hover .hover-background,ul.nav-menu li.selected .hover-background {
@@ -1252,7 +1252,7 @@
 
     ul.nav-menu li:hover span,
     ul.nav-menu li.selected span {
-        border-right: 2px solid #33FFFF;
+        border-right: 2px solid #E6A23C;
     }
 
     .social-menu-container {
@@ -1280,7 +1280,7 @@
         color: #409eff;
     }
     .social-menu a:hover{
-        color: #33FFFF;
+        color: #E6A23C;
     }
     .social-menu li{
         float: left;
@@ -1295,11 +1295,11 @@
 
     .social-menu li:hover{
         background-color: #409eff;
-        color: #33FFFF;
+        color: #E6A23C;
     }
 
     .social-menu li:hover a{
-        color: #33FFFF;
+        color: #E6A23C;
     }
 
     .social-menu li i{
@@ -1359,7 +1359,7 @@
         margin: 10px 0px;
     }
     .strong-text span {
-        background: #33FFFF;
+        background: #E6A23C;
         padding: 2px 5px;
         padding-bottom: 2px;
         color: #111;
@@ -1446,7 +1446,7 @@
         min-width: 75px;
         font-size: 12.5px;
         font-weight: 600;
-        background: #33FFFF;
+        background: #E6A23C;
         margin-right: 10px;
         padding: 4px 10px 5px;
         margin: 0;
@@ -1478,7 +1478,7 @@
         float: left;
         text-align: center;
         background-color: #409eff;
-        color: #33FFFF;
+        color: #E6A23C;
         transition: background-color 0.3s ease-in;
         -webkit-transition: background-color 0.3s ease-in;
         font-size: 16px;
@@ -1505,7 +1505,7 @@
         background-image: url(../../assets/images/resume/icon_03.png);
     }
     .tabs .horizontal li a:hover, .tabs .horizontal li.active a{
-        background-color: #33FFFF;
+        background-color: #E6A23C;
         text-decoration: none;
         color: #409eff;
     }
@@ -1567,7 +1567,7 @@
         cursor: pointer;
     }
     .education-class > li.current > .title {
-        background-color: #33FFFF;
+        background-color: #E6A23C;
         color: #409eff;
     }
     .education-class h4 i{
@@ -1687,7 +1687,7 @@
     .cnmail {
         position: absolute;
         top: -48px;
-        background: #33FFFF;
+        background: #E6A23C;
         left: 0;
         width: 100%;
     }
@@ -1735,7 +1735,7 @@
         width: 25%;
         background: #409eff;
         border-right: 2px solid #fff;
-        color: #33FFFF;
+        color: #E6A23C;
         padding: 12px 0px;
         cursor: pointer;
         transition: background-color 0.5s ease-in;
@@ -1746,12 +1746,12 @@
     }
     .button-group .button.is-checked{
         color: #111;
-        background-color: #33FFFF;
+        background-color: #E6A23C;
     }
 
     .demo-2 .button-group .button.is-checked{
         color: #2C3E50;
-        background-color: #33FFFF;
+        background-color: #E6A23C;
     }
 
     .demo-2 .button-group .button{
@@ -1759,7 +1759,7 @@
     }
 
     .button-group .button:hover{
-        background-color: #33FFFF;
+        background-color: #E6A23C;
         color: #fff;
 
     }
@@ -1827,7 +1827,7 @@
     }
     .view a.info:hover {
         box-shadow: 0 0 5px #000;
-        background-color: #33FFFF;
+        background-color: #E6A23C;
         color: #212129;
     }
 
@@ -2012,7 +2012,7 @@
     .mobile-social{
         float: right;
         width: auto;
-        color: #33FFFF;
+        color: #E6A23C;
         font-size: 15px;
         margin-bottom: 0px;
     }
@@ -2027,7 +2027,7 @@
     }
 
     .mobile-social a:hover{
-        color: #33FFFF;
+        color: #E6A23C;
     }
 
     /*-------------------------------------------------------*/

@@ -37,6 +37,9 @@
             float:right;
         }
         .get-button{
+            position: absolute;
+            right: 0;
+            bottom: 0;
             padding: 20px 0;
             width: 75px;
         }
