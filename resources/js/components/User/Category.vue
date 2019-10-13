@@ -6,7 +6,7 @@
 				<span>热门分类</span>
 			</div>
 			<div v-for="category in categories" class="text item">
-				<router-link :to="{name:'分类文章',params: {category:category.id}}">
+				<router-link :to="{name:'分类文章',params: {category:category.id,user:category.user_id}}">
 					<p style="float: left;">{{category.name}}</p>
 					<el-tag style="float: right" size="mini" class="category-item" type="success"  @click="">[{{category.count}}]</el-tag>
 					<div style="clear:both;"></div>
@@ -31,7 +31,7 @@
 		},
 		created() {
 			this.$store.dispatch('loadCategories', {
-				id: this.$route.query.user != null ? this.$route.query.user : 1,
+				id: this.$route.params.user !== '' ? this.$route.params.user  : 1,
 			});
 		}
 	}

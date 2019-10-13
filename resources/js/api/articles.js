@@ -5,29 +5,29 @@ import { LVBLOG_CONFIG } from '../config.js';
 
 export default {
     getArticles: function(page){
-        return axios.get(LVBLOG_CONFIG.API_URL + '/articles'+'?page='+page ,{
+        return axios.get(LVBLOG_CONFIG.API_URL + '/articles'+'?include=user,category&&page='+page ,{
 
         });
     },
     getUserArticles: function(user,page){
 
-        return axios.get(LVBLOG_CONFIG.API_URL + '/users/'+user+'/articles'+'?page='+page ,{
+        return axios.get(LVBLOG_CONFIG.API_URL + '/users/'+user+'/articles'+'?include=user,category&&page='+page ,{
 
         });
     },
     getUserTagArticles: function(tag,page){
-        return axios.get(LVBLOG_CONFIG.API_URL + '/tags/'+tag+'/articles'+'?page='+page ,{
+        return axios.get(LVBLOG_CONFIG.API_URL + '/tags/'+tag+'/articles'+'?include=user,category&&page='+page ,{
 
         });
     },
     getUserCategoryArticles: function(category,page){
 
-        return axios.get(LVBLOG_CONFIG.API_URL + '/categories/'+category+'/articles'+'?page='+page ,{
+        return axios.get(LVBLOG_CONFIG.API_URL + '/categories/'+category+'/articles'+'?include=user,category&&page='+page ,{
 
         });
     },
     getArticle: function(art_id){
-        return axios.get(LVBLOG_CONFIG.API_URL + '/articles/'+art_id,{
+        return axios.get(LVBLOG_CONFIG.API_URL + '/articles/'+art_id+'?include=user',{
 
         });
     },

@@ -7,6 +7,7 @@ use League\Fractal\TransformerAbstract;
 
 class ArchiveTransformer extends TransformerAbstract
 {
+    protected $availableIncludes = ['user'];
     public function transform(Archive $archive)
     {
         return [
@@ -14,7 +15,10 @@ class ArchiveTransformer extends TransformerAbstract
             'title' => $archive->title,
             'article_id' => $archive->article_id,
             'created_at' => $archive->created_at->format('Y-m-d'),
-            'user' => $archive->User(),
         ];
+    }
+    public function includeUser(Archive $archive)
+    {
+        return $this->item($archive->user, new UserTransformer());
     }
 }

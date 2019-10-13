@@ -9,9 +9,9 @@ class Archive extends Model
     //
     protected $fillable = ['title', 'user_id'];
 
-    public function scopeUser()
+    public function user()
     {
-        return User::find( $this->user_id);
+        return $this->belongsTo(User::class);
     }
     public function scopeRecent($query)
     {

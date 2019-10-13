@@ -180,7 +180,7 @@
                                                 <div class="d-flex align-items-center lv-float-left">
                                                     <i class="el-icon-collection-tag"></i>
                                                     <span>：</span><span v-for="t in i.tag">
-                                                    <router-link :to="{name:'标签文章',params: {tag:t.id}}" style="margin: 5px">
+                                                    <router-link :to="{name:'标签文章',params: {user:t.user_id,tag:t.id}}" style="margin: 5px">
                                                         <el-tag size="mini">{{t.name}}</el-tag>
                                                     </router-link>
                                                 </span>
@@ -188,8 +188,8 @@
                                                 <div class="d-flex align-items-center art-category">
                                                     <i class="el-icon-folder-opened"></i>
                                                     <span>：</span>
-                                                    <router-link :to="{name:'分类文章',params: {category:i.category.id}}">
-                                                        <el-tag size="mini">{{i.category.name}}</el-tag>
+                                                    <router-link :to="{name:'分类文章',params: {category:i.category.data.id,user:i.category.data.user_id}}">
+                                                        <el-tag size="mini">{{i.category.data.name}}</el-tag>
                                                     </router-link>
                                                 </div>
                                                 <div class="lv-clear-both"></div>
@@ -214,21 +214,21 @@
                                                                     trigger="hover">
                                                                 <el-row  type="flex" class="row-bg" justify="space-between">
                                                                     <div :span="6">
-                                                                        <el-avatar :size="45" :src="i.user.avatar"></el-avatar>
+                                                                        <el-avatar :size="45" :src="i.user.data.avatar"></el-avatar>
                                                                     </div>
-                                                                    <div :span="14" style="margin-left:5px"><span style="margin: 5px 0;font-size: 16px;">{{i.user.name}}</span><br><span style="margin: 5px 0">{{i.user.introduction}}</span></div>
+                                                                    <div :span="14" style="margin-left:5px"><span style="margin: 5px 0;font-size: 16px;">{{i.user.data.name}}</span><br><span style="margin: 5px 0">{{i.user.data.introduction}}</span></div>
                                                                 </el-row>
                                                                 <el-divider></el-divider>
-                                                                <router-link :to="{ name:'主页' ,params:{'user':i.user.id}}" tag="span">
+                                                                <router-link :to="{ name:'主页' ,params:{'user':i.user_id}}" tag="span">
                                                                     <a href="#"><span style="color: cornflowerblue;">访问主页</span></a>
                                                                 </router-link>
-                                                                <router-link :to="{ name:'用户文章' ,params:{'user':i.user.id}}" style="float: right" tag="span">
+                                                                <router-link :to="{ name:'用户文章' ,params:{'user':i.user_id}}" style="float: right" tag="span">
                                                                     <a href="#">他的博客</a>
                                                                 </router-link>
                                                             <div slot="reference">
-                                                                <el-avatar :size="25" :src="i.user.avatar"></el-avatar>
-                                                                <router-link :to="{ name:'用户文章' ,params:{'user':i.user.id}}" style="height: 25px;position: absolute;padding-left:5px;" tag="span">
-                                                                    <a href="#">{{i.user.name}}</a>
+                                                                <el-avatar :size="25" :src="i.user.data.avatar"></el-avatar>
+                                                                <router-link :to="{ name:'用户文章' ,params:{'user':i.user_id}}" style="height: 25px;position: absolute;padding-left:5px;" tag="span">
+                                                                    <a href="#">{{i.user.data.name}}</a>
                                                                 </router-link>
                                                             </div>
                                                             </el-popover>

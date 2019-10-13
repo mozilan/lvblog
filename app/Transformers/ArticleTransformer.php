@@ -3,6 +3,7 @@
 namespace App\Transformers;
 
 use App\Models\Article;
+use App\Models\User;
 use League\Fractal\TransformerAbstract;
 
 class ArticleTransformer extends TransformerAbstract
@@ -23,17 +24,15 @@ class ArticleTransformer extends TransformerAbstract
             'slug' => $article->slug,
             'created_at' => (string) $article->created_at,
             'updated_at' => (string) $article->updated_at,
-            'tag' => $article->Tags(),
-            'user' => $article->User(),
-            'category' => $article->Category(),
+            'tag' => $article->Tag(),
         ];
     }
-//    public function includeUser(Article $article)
-//    {
-//        return $this->item($article->user, new UserTransformer());
-//    }
-//    public function includeCategory(Article $article)
-//    {
-//        return $this->item($article->category, new CategoryTransformer());
-//    }
+    public function includeUser(Article $article)
+    {
+        return $this->item($article->user, new UserTransformer());
+    }
+    public function includeCategory(Article $article)
+    {
+        return $this->item($article->category, new CategoryTransformer());
+    }
 }

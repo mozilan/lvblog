@@ -9,7 +9,7 @@
                             <router-link :to="{name:'查看文章',params: {art_id:activity.article_id}}" tag="span">
                                 <el-card>
                                     <h4> {{activity.title}}</h4>
-                                    <p>{{activity.user.name}} 提交于 {{activity.created_at}}</p>
+                                    <p>{{activity.user.data.name}} 提交于 {{activity.created_at}}</p>
                                 </el-card>
                             </router-link>
                         </el-timeline-item>

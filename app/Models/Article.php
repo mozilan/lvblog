@@ -1,30 +1,32 @@
 <?php
 
 namespace App\Models;
-
 use Illuminate\Database\Eloquent\Model;
 
 class Article extends Model
 {
     protected $fillable = ['title', 'body', 'user_id', 'category_id', 'reply_count', 'view_count', 'last_reply_user_id', 'order', 'excerpt', 'slug','target'];
 
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id', 'id');
+    }
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
+    }
     public function articleMapTag()
     {
         return $this->hasMany(ArticleMapTag::class);
     }
-
-    public function scopeUser()
-    {
-        return User::find( $this->user_id);
-    }
-    public function scopeCategory()
-    {
-        return Category::find($this->category_id);
-    }
-    public function scopeTags()
+    public function scopeTag()
     {
         return Tag::whereIn('id', ArticleMapTag::where('article_id',$this->id)->pluck('tag_id')->toArray())->get();
     }
+//    public function scopeTagTransform()
+//    {
+//        return $this->collection(Tag::whereIn('id', ArticleMapTag::where('article_id',$this->id)->pluck('tag_id')->toArray())->get(), new TagTransformer());
+//    }
     public function scopeWithOrder($query, $order)
     {
         // 不同的排序，使用不同的数据读取逻辑

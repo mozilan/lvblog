@@ -7,7 +7,7 @@
                     <h2 class="text-center art-title">{{article.data.title}}</h2>
                     <!-- 描述：文章信息 -->
                     <div class="text-center timeAndView">
-                        <router-link :to="{ name:'主页' ,params:{'user':article.data.user.id}}" tag="span"><el-avatar :size="35" :src="article.data.user.avatar"></el-avatar></router-link>
+                        <router-link :to="{ name:'主页' ,params:{'user':article.data.user.data.id}}" tag="span"><el-avatar :size="35" :src="article.data.user.data.avatar"></el-avatar></router-link>
                         ·
                         <span class="article-time">
 							<i class="el-icon-time"></i>
@@ -37,11 +37,11 @@
                 <!--<div id="artcle-content"  class="content markdown-body" v-highlight v-html="article.data.body">-->
 
                 <div id="statement">
-                    <div class="lv-item">作者：{{article.data.user.name}}</div>
+                    <div class="lv-item">作者：{{article.data.user.data.name}}</div>
                     <div class="lv-item">本文链接：
                         <a :href="url">{{url}}</a>
                     </div>
-                    <div class="lv-item">注：本博客所有文章除特别声明外,转载请注明出处!</div>
+                    <div class="lv-item">版权声明：本博客所有文章除特别声明外,转载请注明出处!</div>
                 </div>
             </el-col>
         </el-row>
