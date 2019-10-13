@@ -11,7 +11,7 @@
         <transition name="el-fade-in-linear">
             <div v-show="loading_screen" @click="loading_screen=false" class="loading-screen" v-loading="loadings.bg_loading" :style="{'background-image':bg_url}">
                 <el-avatar class="loading-avatar" :size="55" :src="other.avatar"></el-avatar>
-                <div class="loading-introduction"><span class="rotate">{{other.name}}</span>{{other.introduction}}</div>
+                <div class="loading-introduction"><span class="rotate">{{other.name}}--</span>{{other.introduction}}</div>
             </div>
         </transition>
         <transition name="el-fade-in-linear">
@@ -47,15 +47,15 @@
                     <ul class="nav-menu no-padding">
                         <li :class="selector.home" title="Home" data-page="home" @click="showHomePage">
                             <div class="hover-background"></div>
-                            <span>Home</span><i class="fa fa-user fa-fw"></i>
+                            <span>个人主页</span><i class="fa fa-user fa-fw"></i>
                         </li>
                         <li :class="selector.resume" id="resume-btn" title="Resume"  data-page="resume" @click="showResumePage">
                             <div class="hover-background"></div>
-                            <span>Resume</span><i class="fa fa-file-text fa-fw"></i>
+                            <span>我的简历</span><i class="fa fa-file-text fa-fw"></i>
                         </li>
                         <li :class="selector.edit" v-if="this.$store.getters.getUser.id === this.$route.params.user" id="edit-btn" title="Edit"  data-page="edit" @click="showEditPage">
                             <div class="hover-background"></div>
-                            <span>Edit</span><i class="fa fa-file-text fa-fw"></i>
+                            <span>更新信息</span><i class="fa fa-file-text fa-fw"></i>
                         </li>
                     </ul><!--/.nav-menu __PAGE MENU ENDS-->
                 </div><!--#menu-container-->

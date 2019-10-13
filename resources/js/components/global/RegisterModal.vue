@@ -1,4 +1,4 @@
-<style lang="scss">
+<style lang="scss" scoped>
     .register-modal{
         div#login-modal {
             position: fixed;
@@ -36,36 +36,25 @@
         .bl-right{
             float:right;
         }
-        .el-dialog{
-            max-width: 400px;
-            width: auto;
-        }
-        @media screen and (max-width: 450px) {
-            .el-dialog{
-                margin-left: 10px;
-                margin-right: 10px;
-            }
+        .get-button{
+            padding: 20px 0;
+            width: 75px;
         }
     }
-
 </style>
 <template>
-    <el-dialog class="register-modal"  title="用户注册" :visible.sync="registerDialogFormVisible">
+    <el-dialog class="register-modal"  :before-close="handleClose" title="用户注册" :visible.sync="registerDialogFormVisible">
         <el-container style="display:block">
             <el-row>
                 <el-form :model="form">
                     <el-col :xs="24" :sm="24" :md="24" :lg="24">
-                        <el-form-item label="手机号" :label-width="formLabelWidth">
-                            <el-input
-                                    placeholder="请输入手机号"
-                                    suffix-icon="el-icon-mobile-phone"
-                                    v-model="phone">
-                            </el-input>
+                        <el-form-item>
+                            <effect-input class="effect-input" v-model="phone" type="hoshi" label="手机号" name="手机号"></effect-input>
                         </el-form-item>
                     </el-col>
                     <el-col :xs="24" :sm="24" :md="24" :lg="24">
-                        <el-form-item label="验证码" :label-width="formLabelWidth">
-                            <el-button type="primary" style="float: right;" @click="getCaptchas" v-show="captcha_button_show" :loading="captcha_loading">{{ captcha_loading ? '获取中 ...' : '获取验证码' }}</el-button>
+                        <el-form-item>
+                            <el-button class="get-button" type="primary" style="float: right;" @click="getCaptchas" v-show="captcha_button_show" :loading="captcha_loading">{{ captcha_loading ? '获取中 ...' : '获取验证码' }}</el-button>
                             <el-image
                                     style="width:auto; height: 40px;float:right"
                                     :src="captchas_url"
@@ -73,56 +62,28 @@
                                     @click="getCaptchas"
                             >
                             </el-image>
-                            <el-input
-                                    placeholder="请输入图片验证码"
-                                    suffix-icon="el-icon-picture"
-                                    v-model="captcha_code"
-                                    style="width:50%;float:left;"
-
-                            >
-                            </el-input>
-<!--                            <el-input-->
-<!--                                    :value="captchas.captcha_key"-->
-<!--                                    v-model="captcha_key"-->
-<!--                                    style="display:none"-->
-<!--                            >-->
-<!--                            </el-input>-->
+                            <effect-input class="effect-input" v-model="captcha_code" type="kaede" label="图形码" name="图形码"></effect-input>
                         </el-form-item>
                     </el-col>
                     <el-col :xs="24" :sm="24" :md="24" :lg="24">
-                        <el-form-item label="短信码" :label-width="formLabelWidth">
-                            <el-input
-                                    placeholder="请输入短信验证码"
-                                    suffix-icon="el-icon-message"
-                                    v-model="verification_code"
-                                    @focus=""
-                                    style="width: 50%;float: left;"
-                            >
-                            </el-input>
-                            <el-button type="primary" @click="getMessages" :loading="message_loading" style="float: right">{{ message_loading ? '10秒倒计时 ...' : '发送短信码' }}</el-button>
+                        <el-form-item>
+                            <effect-input class="effect-input" v-model="verification_code" type="kaede" label="短信码" name="短信码"></effect-input>
+                            <el-button class="get-button" type="primary" @click="getMessages" :loading="message_loading" style="float: right">{{ message_loading ? '10秒倒计时 ...' : '发送短信码' }}</el-button>
                         </el-form-item>
                     </el-col>
                     <el-col :xs="24" :sm="24" :md="24" :lg="24">
-                        <el-form-item label="用户名" :label-width="formLabelWidth">
-                            <el-input
-                                    placeholder="请输入用户名"
-                                    suffix-icon="el-icon-user"
-                                    v-model="name">
-                            </el-input>
+                        <el-form-item>
+                            <effect-input class="effect-input" v-model="jiro" type="hoshi" label="昵称" name="昵称"></effect-input>
                         </el-form-item>
                     </el-col>
                     <el-col :xs="24" :sm="24" :md="24" :lg="24">
-                        <el-form-item label="密码" :label-width="formLabelWidth">
-                            <el-input
-                                    placeholder="请输入密码"
-                                    suffix-icon="el-icon-key"
-                                    v-model="password">
-                            </el-input>
+                        <el-form-item>
+                            <effect-input class="effect-input" v-model="password" type="kuro" label="密码" name="密码"></effect-input>
                         </el-form-item>
                     </el-col>
                 </el-form>
                 <el-col :xs="24" :sm="24" :md="24" :lg="24">
-                        <el-button @click="registerDialogFormVisible = false" style="float:left">取 消</el-button>
+                        <el-button @click="toLogin" style="float:left">登陆</el-button>
                         <el-button class="bl-right" type="primary" @click="submitRegisterByPhone" style="float:right">确定</el-button>
                 </el-col>
                 <span
@@ -148,7 +109,13 @@
 </template>
 <script>
     import { EventBus } from '../../event-bus.js';
+    import {EffectInput} from 'effect-input'
+    import 'effect-input/dist/index.css';
     export default {
+        name:'register_modal',
+        components:{
+            EffectInput:EffectInput,
+        },
         data() {
             return {
                 captcha_button_show:true,
@@ -202,6 +169,31 @@
             }
         },
         methods:{
+            hideRegisterDialogForm(){
+                this.registerDialogFormVisible = false;
+            },
+            toLogin(){
+                this.hideRegisterDialogForm();
+                EventBus.$emit('prompt-login');
+            },
+            handleClose(done) {
+                this.$confirm('确认关闭？')
+                    .then(_ => {
+                        this.clearForm();
+                        done();
+                    })
+                    .catch(_ => {});
+            },
+            clearForm(){
+                this.phone='';
+                this.captcha_code= '';
+                this.captchas_url='';
+                this.captcha_key='';
+                this.verification_key='';
+                this.verification_code='';
+                this.name='';
+                this.password= '';
+            },
             getCaptchas:function(){
                 if(this.phone.trim() === ''){
                     this.validations.phone.text = '请输入手机号';
@@ -371,14 +363,7 @@
                 }
                 if (this.$store.getters.getRegisterByPhoneStatus == 2){
                     //this.fullscreenLoading = false;
-                    this.phone='';
-                    this.captcha_code= '';
-                    this.captchas_url='';
-                    this.captcha_key='';
-                    this.verification_key='';
-                    this.verification_code='';
-                    this.name='';
-                    this.password= '';
+                    this.clearForm();
                     this.captcha_button_show = true;
                     this.captcha_show = false;
                     this.loader.close();

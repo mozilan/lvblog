@@ -18,6 +18,7 @@ class UserTransformer extends TransformerAbstract
             'bound_oauth' => $user->provider ? $user->provider : false,
             'created_at' => (string) $user->created_at,
             'updated_at' => (string) $user->updated_at,
+            'introduction' => (string) $user->introduction,
         ];
     }
 }

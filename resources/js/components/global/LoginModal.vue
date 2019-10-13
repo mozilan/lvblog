@@ -1,4 +1,4 @@
-<style lang="scss">
+<style lang="scss" scoped>
     .login-modal{
         div#login-modal {
             position: fixed;
@@ -39,49 +39,53 @@
         .bl-right{
             float:right;
         }
-        .el-dialog{
-            max-width: 400px;
-            width: auto;
-        }
-        @media screen and (max-width: 450px) {
-            .el-dialog{
-                margin-left: 10px;
-                margin-right: 10px;
-            }
-        }
+
         .oauth{
             text-align: center;
             padding-top: 3px;
         }
+        .effect-input{
+            width: 100%;
+        }
     }
-
+</style>
+<style type="text/css">
+    .el-dialog{
+        max-width: 400px;
+        width: auto;
+    }
+    .el-dialog__body{
+        padding: 20px 15px;
+    }
+    @media screen and (max-width: 450px) {
+        .el-dialog{
+            margin-top: 3vh!important;
+            margin-left: 10px;
+            margin-right: 10px;
+        }
+    }
+    .el-message-box{
+        width: 200px;
+    }
 </style>
 
 <template>
-    <el-dialog class="login-modal" title="用户登录" :close="redirectToIndex" :visible.sync="loginDialogFormVisible">
+    <el-dialog class="login-modal" title="用户登录" :before-close="handleClose" :close="redirectToIndex" :visible.sync="loginDialogFormVisible">
         <el-container style="display:block">
         <el-row>
             <el-form :model="form">
                 <el-col :xs="24" :sm="24" :md="24" :lg="24">
-                    <el-form-item label="用户名" :label-width="formLabelWidth">
-                        <el-input
-                                placeholder="请输入邮箱或者手机号"
-                                suffix-icon="el-icon-user"
-                                v-model="username">
-                        </el-input>
+                    <el-form-item>
+                        <effect-input class="effect-input" v-model="username" type="kaede" label="用户名" name="用户名"></effect-input>
                     </el-form-item>
                 </el-col>
                 <el-col :xs="24" :sm="24" :md="24" :lg="24">
-                    <el-form-item label="密码" :label-width="formLabelWidth">
-                        <el-input
-                                placeholder="请输入密码"
-                                suffix-icon="el-icon-key"
-                                v-model="password">
-                        </el-input>
+                    <el-form-item>
+                        <effect-input class="effect-input" v-model="password" type="kaede" label="密码" name="密码"></effect-input>
                     </el-form-item>
                 </el-col>
                 <el-col :xs="24" :sm="24" :md="24" :lg="24">
-                    <el-form-item label="Oauth" :label-width="formLabelWidth">
+                    <el-form-item>
                         <el-col :xs="6" :sm="6" :md="4" :lg="4" class="bl-left oauth">
                             <el-link href="/auth/github" v-on:click.stop="">
                                 <el-image style="width: 20px; height: 20px" src="https://mozilan.geekadpt.cn/img/social/github.png"/>
@@ -115,7 +119,7 @@
                 </el-col>
             </el-form>
             <el-col :xs="24" :sm="24" :md="24" :lg="24">
-                <el-button @click="hideLoginDialogForm">取 消</el-button>
+                <el-button @click="toRegister">注册</el-button>
                 <el-button class="bl-right" type="primary" @click="submitLogin">确 定</el-button>
             </el-col>
             <span
@@ -128,7 +132,13 @@
 <script>
     import { EventBus } from '../../event-bus.js';
     import  _urls from '../../utils/url';
+    import {EffectInput} from 'effect-input'
+    import 'effect-input/dist/index.css';
     export default {
+        name:'login_modal',
+        components:{
+            EffectInput:EffectInput,
+        },
         data() {
             return {
                 loader: '',
@@ -159,11 +169,24 @@
             }
         },
         methods: {
+            toRegister() {
+                this.hideLoginDialogForm();
+                EventBus.$emit('prompt-register');
+            },
             openMessage: function (title, type) {
                 this.$message({
                     message: title,
                     type: type
                 });
+            },
+            handleClose(done) {
+                this.$confirm('确认关闭？')
+                    .then(_ => {
+                        this.username = '';
+                        this.password = '';
+                        done();
+                    })
+                    .catch(_ => {});
             },
             redirectToIndex(){
                 if(this.$route.query.login != null){
@@ -172,7 +195,6 @@
             },
             hideLoginDialogForm(){
                 this.loginDialogFormVisible = false;
-                this.$router.push({name:'首页'});
             },
             showLoginForm(){
                 if(this.$route.query.login != null){
@@ -208,7 +230,7 @@
         },
         computed: {
             loginStatus() {
-                if (this.$store.getters.getLoginStatus == 1) {
+                if (this.$store.getters.getLoginStatus === 1) {
                     this.loader = this.$loading({
                         lock: true,
                         text: '正在登录',
@@ -216,14 +238,14 @@
                         background: 'rgba(0, 0, 0, 0.7)'
                     });
                 }
-                if (this.$store.getters.getLoginStatus == 2) {
+                if (this.$store.getters.getLoginStatus === 2) {
                     this.loader.close();
                     this.openMessage('登录成功！', 'success');
                     if(_urls.getUrlParams('code') !== null){
                         window.location.href = '/';
                     }
                 }
-                if (this.$store.getters.getLoginStatus == 3) {
+                if (this.$store.getters.getLoginStatus === 3) {
                     this.loader.close();
                     this.openMessage(this.$store.getters.getLoginErrors, 'error');
                 }
