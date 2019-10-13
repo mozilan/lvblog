@@ -51,7 +51,7 @@ class UsersController extends Controller
     {
 
         $user = $this->user();
-
+        $this->authorize('update', $user);
         $attributes = $request->only(['name', 'email', 'introduction']);
 
         if ($request->avatar_image_id) {

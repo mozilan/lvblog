@@ -12,7 +12,7 @@ use Illuminate\Contracts\Auth\MustVerifyEmail as MustVerifyEmailContract;
 
 class User extends Authenticatable implements MustVerifyEmailContract, JWTSubject
 {
-    use Notifiable;
+    use Notifiable,HasRoles;
 
     /**
      * The attributes that are mass assignable.

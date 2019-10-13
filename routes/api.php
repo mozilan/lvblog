@@ -96,6 +96,12 @@ $api->version('v1', [
             // 编辑登录用户信息
             $api->patch('user', 'UsersController@update')
                 ->name('api.user.update');
+            // 标记消息通知为已读
+            $api->patch('user/read/notifications', 'NotificationsController@read')
+                ->name('api.user.notifications.read');
+            // 当前登录用户权限
+            $api->get('user/permissions', 'PermissionsController@index')
+                ->name('api.user.permissions.index');
         });
     });
 });

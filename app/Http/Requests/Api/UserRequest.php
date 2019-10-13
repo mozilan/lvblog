@@ -18,10 +18,10 @@ class UserRequest extends FormRequest
             case 'PATCH':
                 $userId = \Auth::guard('api')->id();
                 return [
-                    'name' => 'required|between:6,25|regex:/^[A-Za-z0-9\-\_]+$/|unique:users,name,' .$userId,
+                    'name' => 'required|regex:/^[A-Za-z0-9\-\_]+$/|between:6,25,' .$userId,
                     'email'=>'nullable|email|unique:users,email,' .$userId,
                     'introduction' => 'max:80',
-                    'avatar_image_id' => 'exists:images,id,type,avatar,user_id,' .$userId,
+                    'avatar_image_id' => 'nullable|exists:images,id,type,avatar,user_id,' .$userId,
                 ];
                 break;
         }

@@ -81,7 +81,12 @@ class AuthorizationsController extends Controller
             $newUser = new User();
 
             $newUser->name        = $type=='weibo'?$oauthUser->getNickname():$oauthUser->getName();
-            $newUser->email       = $oauthUser->getEmail() == '' ? '' : $oauthUser->getEmail();
+            $oauthUserEmail = $oauthUser->getEmail() ;
+            if($oauthUserEmail !== ''){
+                User::where('email',$oauthUserEmail)->doesntExist() ? $newUser->email = $oauthUserEmail:$newUser->email = null;
+            }else{
+                $newUser->email = '';
+            }
             $newUser->avatar      = $oauthUser->getAvatar();
             $newUser->password    = '';
             $newUser->provider    = $type;

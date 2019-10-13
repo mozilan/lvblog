@@ -348,7 +348,7 @@
                     name:'',
                     email:'',
                     avatar:'',
-                    avatar_image_id:1,
+                    avatar_image_id:'',
                     introduction:'',
                     skills:{},
                     other_skills:{},
@@ -358,7 +358,7 @@
                     avatar:'https://avatars0.githubusercontent.com/u/54885220?v=4',
                     introduction:'向上的路并不拥挤，而有的人选择了安逸',
                     email:'{{other.name}}@aliyun.com',
-                    avatar_image_id:32,
+                    avatar_image_id:'',
                     blog_page:''
                 }
             }
