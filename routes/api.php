@@ -96,6 +96,8 @@ $api->version('v1', [
             // 更新文章
             $api->patch('articles/{article}', 'ArticlesController@update')
                 ->name('api.articles.update');
+            $api->delete('articles/{article}', 'ArticlesController@destroy')
+                ->name('api.articles.destroy');
             // 编辑登录用户信息
             $api->patch('user', 'UsersController@update')
                 ->name('api.user.update');

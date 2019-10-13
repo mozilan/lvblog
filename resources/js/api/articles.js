@@ -50,6 +50,9 @@ export default {
             excerpt:data.excerpt,
             target:data.target,
         });
+    },
+    deleteArticle: function(data){
+        return axios.delete(LVBLOG_CONFIG.API_URL + '/articles/'+data.id);
     }
 
 }

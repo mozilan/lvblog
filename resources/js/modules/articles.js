@@ -25,6 +25,7 @@ export const articles = {
         articleAddResponseMessages:'',
         articleUpdateStatus:0,
         articleUpdateResponseMessages:'',
+        articleDeleteStatus:0,
     },
     actions:{
         loadArticles({commit,state},data ){
@@ -104,7 +105,7 @@ export const articles = {
                 });
         },
         updateArticle({commit},data){
-            commit('setArticleAddStatus', 1);
+            commit('setArticleUpdateStatus', 1);
             ArticleAPI.patchArticle(data)
                 .then(function (response) {
                     commit('setArticleUpdateStatus', 2);
@@ -113,6 +114,16 @@ export const articles = {
                     commit('setArticleUpdateStatus', 3);
                     console.log(error.response.data.errors[Object.keys(error.response.data.errors)[0]].toString());
                     commit('setArticleUpdateResponseMessages', error.response.data.errors[Object.keys(error.response.data.errors)[0]].toString() === '' ? "发布失败，可能是因为登陆超时造成的." : error.response.data.errors[Object.keys(error.response.data.errors)[0]].toString());
+                });
+        },
+        deleteArticle({commit},data){
+            commit('setArticleDeleteStatus', 1);
+            ArticleAPI.deleteArticle(data)
+                .then(function (response) {
+                    commit('setArticleDeleteStatus', 2);
+                })
+                .catch(function (error){
+                    commit('setArticleDeleteStatus', 3);
                 });
         },
         initArticleAddStatus({commit}){
@@ -161,6 +172,9 @@ export const articles = {
         setArticleUpdateStatus(state,status){
             state.articleUpdateStatus = status;
         },
+        setArticleDeleteStatus(state,status){
+            state.articleDeleteStatus = status;
+        },
         setArticleUpdateResponseMessages(state,messages){
             state.articlesUpdateResponseMessages = messages;
         },
@@ -195,6 +209,11 @@ export const articles = {
         getArticleUpdateStatus(state){
             return function() {
                 return state.articleUpdateStatus;
+            }
+        },
+        getArticleDeleteStatus(state){
+            return function(){
+                return state.articleDeleteStatus;
             }
         },
         getArticleUpdateResponseMessages(state){

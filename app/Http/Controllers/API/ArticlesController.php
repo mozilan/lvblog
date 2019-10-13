@@ -52,6 +52,7 @@ class ArticlesController extends Controller
     }
     public function update(ArticleRequest $request,$article)
     {
+        $this->authorize('update', $this->user());
         $article = Article::find($article);
         if($article_map_tag = ArticleMapTag::where('article_id',$article->id)->get()){
             foreach ($article_map_tag as $v){
@@ -90,6 +91,13 @@ class ArticlesController extends Controller
             }
         }
         return response()->json(['message' => '更新成功'], 201);
+    }
+
+    public function destroy($id)
+    {
+        $this->authorize('destroy', $this->user());
+        Article::destroy($id);
+        return response()->json(['message' => '删除成功'], 201);
     }
     public function index(Request $request, Article $article)
     {
