@@ -93,6 +93,9 @@ $api->version('v1', [
             // 发布文章
             $api->post('articles', 'ArticlesController@store')
                 ->name('api.articles.store');
+            // 更新文章
+            $api->patch('articles/{article}', 'ArticlesController@update')
+                ->name('api.articles.update');
             // 编辑登录用户信息
             $api->patch('user', 'UsersController@update')
                 ->name('api.user.update');

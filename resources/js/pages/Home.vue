@@ -246,7 +246,7 @@
                                         </div><!--RESUME FIRST TAB/SKILL TAB DETAILS ENDS-->
                                         <el-button class="edit-profile-button" type="primary" @click="updateUserProfile">更新资料</el-button>
                                     </el-tab-pane>
-                                    <el-tab-pane label="技能管理" name="secondEditor">
+                                    <el-tab-pane label="文章管理" name="secondEditor">
                                         <!--RESUME SECOND TAB/EDUCATION TAB DETAILS-->
                                         <div id='tab-edit-2'>
                                             <h3 class="title">开发中...</h3>
@@ -606,7 +606,7 @@
         computed:{
             other(){
                 return this.$store.getters.getOther;
-            }
+            },
         },
     }
     //好看的全屏背景哦～

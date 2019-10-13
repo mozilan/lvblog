@@ -223,7 +223,13 @@
                                 infinite-scroll-disabled="disabled">
                             <li v-for="(i , index) in articles.data">
                                 <el-row class="art-item">
-                                    <el-card shadow="hover">
+                                    <el-popover
+                                            placement="bottom"
+                                            width="200"
+                                            trigger="hover">
+                                        <el-button><router-link :to="{name:'编辑文章',params: {art:i.id,user:i.user_id}}" >编辑</router-link></el-button>
+                                        <el-button @click="deleteArticle(i.id)">删除</el-button>
+                                    <el-card shadow="hover" slot="reference">
                                         <h5 class="clear-title"><router-link :to="{name:'查看文章',params: {art_id:i.id}}" tag="span" class="art-title">{{i.title}}</router-link></h5>
                                         <el-row class="art-info d-flex align-items-center justify-content-start">
                                             <div class="art-time"><i class="el-icon-time"></i>：{{i.created_at}}</div>
@@ -272,6 +278,7 @@
 
                                         </el-row>
                                     </el-card>
+                                    </el-popover>
                                     <img v-show="index <= 3" class="star" src="../../assets/star.png" />
                                 </el-row>
                             </li>
@@ -451,6 +458,9 @@
                         }
                     });
                 }, 800);
+            },
+            deleteArticle(id){
+                this.$store.dispatch('deleteArticle');
             }
         }
     }

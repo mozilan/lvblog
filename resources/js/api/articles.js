@@ -40,5 +40,16 @@ export default {
             excerpt:excerpt,
             target:target,
         });
+    },
+    patchArticle: function(data){
+        return axios.patch(LVBLOG_CONFIG.API_URL + '/articles/'+data.id,{
+            title:data.title,
+            body:data.body,
+            tags:data.tags,
+            category_id:data.category_id,
+            excerpt:data.excerpt,
+            target:data.target,
+        });
     }
+
 }

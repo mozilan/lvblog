@@ -23,6 +23,8 @@ export const articles = {
         articleLoadStatus:0,
         articleAddStatus:0,
         articleAddResponseMessages:'',
+        articleUpdateStatus:0,
+        articleUpdateResponseMessages:'',
     },
     actions:{
         loadArticles({commit,state},data ){
@@ -101,9 +103,25 @@ export const articles = {
                     commit('setArticleAddResponseMessages', error.response.data.errors[Object.keys(error.response.data.errors)[0]].toString() === '' ? "发布失败，可能是因为登陆超时造成的." : error.response.data.errors[Object.keys(error.response.data.errors)[0]].toString());
                 });
         },
+        updateArticle({commit},data){
+            commit('setArticleAddStatus', 1);
+            ArticleAPI.patchArticle(data)
+                .then(function (response) {
+                    commit('setArticleUpdateStatus', 2);
+                })
+                .catch(function (error){
+                    commit('setArticleUpdateStatus', 3);
+                    console.log(error.response.data.errors[Object.keys(error.response.data.errors)[0]].toString());
+                    commit('setArticleUpdateResponseMessages', error.response.data.errors[Object.keys(error.response.data.errors)[0]].toString() === '' ? "发布失败，可能是因为登陆超时造成的." : error.response.data.errors[Object.keys(error.response.data.errors)[0]].toString());
+                });
+        },
         initArticleAddStatus({commit}){
             commit('setArticleAddStatus', 0);
             commit('setArticleAddResponseMessages', '');
+        },
+        initArticleUpdateStatus({commit}){
+            commit('setArticleUpdateStatus', 0);
+            commit('setArticleUpdateResponseMessages', '');
         },
         loadArticle({commit},data){
             commit('setArticleLoadStatus',1);
@@ -140,6 +158,12 @@ export const articles = {
         setArticleAddResponseMessages(state,messages){
             state.articlesAddResponseMessages = messages;
         },
+        setArticleUpdateStatus(state,status){
+            state.articleUpdateStatus = status;
+        },
+        setArticleUpdateResponseMessages(state,messages){
+            state.articlesUpdateResponseMessages = messages;
+        },
     },
     getters:{
         getArticles(state){
@@ -166,6 +190,16 @@ export const articles = {
         getArticleAddResponseMessages(state){
             return function() {
                 return state.articlesAddResponseMessages;
+            }
+        } ,
+        getArticleUpdateStatus(state){
+            return function() {
+                return state.articleUpdateStatus;
+            }
+        },
+        getArticleUpdateResponseMessages(state){
+            return function() {
+                return state.articlesUpdateResponseMessages;
             }
         }
     }

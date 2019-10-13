@@ -3,7 +3,7 @@
         <el-col :xs="24" :sm="24" :md="16" :lg="16">
           <div style="display:block" class="edit">
                     <div class="title-animate">
-                         <div class="ffl-wrapper bl-margin_bottom-title">
+                         <div :class="ffl_input">
                               <label for="title" class="ffl-label">文章标题</label>
                               <input type="text" id="title" name="title" v-model="form.title">
                          </div>
@@ -11,7 +11,7 @@
                     <el-form :model="form" :style="form_style">
                          <mavon-editor ref=md :toolbars="markdownOption" v-model="form.handbook" :ishljs = "true" @imgAdd="$imgAdd"  style="height: 100%"></mavon-editor>
                          <div class="title-animate bl-margin_bottom-title bl-margin-top">
-                              <div class="ffl-wrapper">
+                              <div :class="ffl_input">
                                    <label for="excerpt" class="ffl-label">文章摘要 <span>(可选)</span></label>
                                    <textarea id="excerpt" name="excerpt" v-model="form.excerpt"></textarea>
                               </div>
@@ -90,8 +90,10 @@
                               </el-form-item>
                          </div>
                           <div>
-                              <el-button class="bl-public" type="primary" @click="publishArticle(0)">发布博客</el-button>
-                              <el-button class="bl-save" type="primary" @click="publishArticle(1)">保存草稿</el-button>
+                              <el-button v-if="this.$route.params.art" class="bl-public" type="primary" @click="updateArticle(0)">更新博客</el-button>
+                              <el-button v-if="!this.$route.params.art" class="bl-public" type="primary" @click="publishArticle(0)">发布博客</el-button>
+                              <el-button v-if="!this.$route.params.art"  class="bl-save" type="" @click="publishArticle(1)">保存草稿</el-button>
+                              <el-button v-if="this.$route.params.art"  class="bl-save" type="" @click="updateArticle(1)">保存草稿</el-button>
                          </div>
                     </el-form>
           </div>
@@ -113,6 +115,7 @@
           },
           data() {
                return {
+                    ffl_input:'ffl-wrapper bl-margin_bottom-title',
                     form_style:{
                          height:'',
                     },
@@ -339,11 +342,79 @@
                          }
                     });
                },
+               updateArticle(target){
+                   this.loader = this.$loading({
+                       lock: true,
+                       text: '更新中...',
+                       spinner: 'el-icon-loading',
+                       background: 'rgba(0, 0, 0, 0.7)'
+                   });
+                   this.$store.dispatch('updateArticle',{
+                       id:this.$route.params.art,
+                       title:this.form.title,
+                       body:this.form.handbook,
+                       tags:this.form.tagDynamicTags,
+                       category_id:this.form.category_id,
+                       excerpt:this.form.excerpt,
+                       target: !this.form.public && target === 0 ? 2 : target
+                   });
+                   this.$watch(this.$store.getters.getArticleUpdateStatus, function () {
+                       if (this.$store.getters.getArticleUpdateStatus()  === 2) {
+                           this.loader.close();
+                           if(this.form.title.toString().length >  15){
+                               this.form.title = this.form.title.toString().substring(0,15)+'...  ';
+                           }
+                           EventBus.$emit('open-message', {
+                               notification: this.form.title + (target===0 ? ' 更新成功!' :' 已保存到草稿箱'),
+                               type: 'success'
+                           });
+                           this.$store.dispatch('initArticleUpdateStatus');
+                           this.form.title = '';
+                           this.form.handbook = '';
+                           this.form.tagDynamicTags = '';
+                           this.form.excerpt= '';
+                           this.$router.push('/blog');
+                       }
+                       if (this.$store.getters.getArticleUpdateStatus()  === 3) {
+                           this.loader.close();
+                           EventBus.$emit('open-message', {
+                               notification: this.$store.getters.getArticleUpdateResponseMessages(),
+                               type: 'error'
+                           });
+                       }
+                   });
+               }
           },
-          created() {
+          created(){
                this.$store.dispatch('loadCategories',{
                     id:this.$store.getters.getUser.id,
                });
+               console.log(this.$route.params.art);
+               if(this.$route.params.art){
+                   this.$store.dispatch('loadArticle',{
+                       art_id : this.$route.params.art
+                   });
+                   this.$watch(this.$store.getters. getArticleLoadStatus, function () {
+                       if(this.$store.getters. getArticleLoadStatus() === 2) {
+                           let article = this.$store.getters.getArticle.data;
+                           this.form.handbook = article.body;
+                           this.form.title = article.title;
+                           this.form.excerpt = article.excerpt;
+                           this.form.category_id = article.category_id;
+                           let i = 0;
+                           while (i < article.tag.length){
+                               this.form.tagDynamicTags.push(article.tag[i].name);
+                               ++i;
+                           }
+                           this.form.public = article.target === 0 ? true : false;
+                           this.ffl_input = 'ffl-wrapper bl-margin_bottom-title ffl-floated';
+
+                       }
+                       else if(this.$store.getters. getArticleLoadStatus() === 3) {
+                           this.$message.error('错了哦，加载文章失败了');
+                       }
+                   });
+               }
                var h = window.innerHeight-430;//可见区域高度
                this.form_style.height = h+'px';
                // console.log($('.ffl-wrapper'));

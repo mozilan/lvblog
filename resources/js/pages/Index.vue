@@ -179,11 +179,12 @@
                                                 <div class="lv-clear-both"></div>
                                                 <div class="d-flex align-items-center lv-float-left">
                                                     <i class="el-icon-collection-tag"></i>
-                                                    <span>：</span><span v-for="t in i.tag">
-                                                    <router-link :to="{name:'标签文章',params: {user:t.user_id,tag:t.id}}" style="margin: 5px">
-                                                        <el-tag size="mini">{{t.name}}</el-tag>
-                                                    </router-link>
-                                                </span>
+                                                    <span>：</span>
+                                                    <span v-for="t in i.tag">
+                                                        <router-link :to="{name:'标签文章',params: {user:t.user_id,tag:t.id}}" style="margin: 5px">
+                                                            <el-tag size="mini">{{t.name}}</el-tag>
+                                                        </router-link>
+                                                    </span>
                                                 </div>
                                                 <div class="d-flex align-items-center art-category">
                                                     <i class="el-icon-folder-opened"></i>

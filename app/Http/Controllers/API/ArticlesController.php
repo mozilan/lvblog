@@ -25,29 +25,71 @@ class ArticlesController extends Controller
         $archieve->article_id = $article->id;
         $archieve->title = $article->title;
         $archieve->save();
-        foreach ($request->tags as $v){
-            if(Tag::where([['name',$v],['user_id',$this->user()->id]])->first() !== null){
-                $tag = Tag::where([
-                    ['name',$v],
-                    ['user_id',$this->user()->id]
-                ])->first();
-                $tag->num = $tag->num+1;
-            }else{
-                $tag = new Tag();
-                $tag -> user_id = $this->user()->id;
-                $tag -> name = $v;
-                $tag -> num = 1;
+        if($request->tags){
+            foreach ($request->tags as $v){
+                if(Tag::where([['name',$v],['user_id',$this->user()->id]])->first() !== null){
+                    $tag = Tag::where([
+                        ['name',$v],
+                        ['user_id',$this->user()->id]
+                    ])->first();
+                    $tag->num = $tag->num+1;
+                }else{
+                    $tag = new Tag();
+                    $tag -> user_id = $this->user()->id;
+                    $tag -> name = $v;
+                    $tag -> num = 1;
+                }
+                $tag->save();
+                $article_map_tag = new ArticleMapTag();
+                $article_map_tag-> tag_id = $tag->id;
+                $article_map_tag-> article_id = $article->id;
+                $article_map_tag->save();
             }
-            $tag->save();
-            $article_map_tag = new ArticleMapTag();
-            $article_map_tag-> tag_id = $tag->id;
-            $article_map_tag-> article_id = $article->id;
-            $article_map_tag->save();
         }
-
 //        return $this->response->item($article, new TopicTransformer())
 //            ->setStatusCode(201);
         return response()->json(['message' => '发布成功'], 201);
+    }
+    public function update(ArticleRequest $request,$article)
+    {
+        $article = Article::find($article);
+        if($article_map_tag = ArticleMapTag::where('article_id',$article->id)->get()){
+            foreach ($article_map_tag as $v){
+                $tag = Tag::find($v->tag_id);
+                if($tag->num >1){
+                    $tag->num = $tag->num - 1;
+                    $tag->save();
+                }else{
+                    Tag::destroy($v->tag_id);
+                }
+            }
+        }
+        ArticleMapTag::where('article_id',$article->id)->delete();
+        $article->fill($request->all());
+        $article->user_id = $this->user()->id;
+        $article->save();
+        if($request->tags){
+            foreach ($request->tags as $v){
+                if(Tag::where([['name',$v],['user_id',$this->user()->id]])->first() !== null){
+                    $tag = Tag::where([
+                        ['name',$v],
+                        ['user_id',$this->user()->id]
+                    ])->first();
+                    $tag->num = $tag->num+1;
+                }else{
+                    $tag = new Tag();
+                    $tag -> user_id = $this->user()->id;
+                    $tag -> name = $v;
+                    $tag -> num = 1;
+                }
+                $tag->save();
+                $article_map_tag = new ArticleMapTag();
+                $article_map_tag-> tag_id = $tag->id;
+                $article_map_tag-> article_id = $article->id;
+                $article_map_tag->save();
+            }
+        }
+        return response()->json(['message' => '更新成功'], 201);
     }
     public function index(Request $request, Article $article)
     {

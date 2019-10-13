@@ -77,7 +77,14 @@ export default new VueRouter({
                     path: 'edit',
                     name: '写作',
                     components: Vue.component( 'Edit', require( './pages/Edit' ) ),
-                    beforeEnter: requireAuth
+                    beforeEnter: requireAuth,
+                    children: [
+                        {
+                            path: 'art/:art',
+                            name: '编辑文章',
+                            components: Vue.component( 'Edit', require( './pages/Edit' ) ),
+                        },
+                    ]
                 },
                 {
                     path: 'blog',
