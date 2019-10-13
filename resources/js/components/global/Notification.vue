@@ -1,4 +1,4 @@
-<style lang="scss">
+<style scoped lang="scss">
 
     div.error-notification-container {
         position: fixed;

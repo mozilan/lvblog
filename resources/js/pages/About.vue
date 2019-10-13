@@ -1,7 +1,7 @@
 <template>
     <div class="about">
         <el-row class="main" type="flex" justify="center">
-            <el-col :xs="24" :sm="24" :md="20" :lg="20">
+            <el-col :xs="24" :sm="24" :md="16" :lg="16">
                 <h5 class="title"><i class="el-icon-star-on"></i>关于自己</h5>
                 <div class="statement">
                     <div class="item">开源爱好者，程序人生</div>
@@ -94,7 +94,7 @@
     }
 </script>
 
-<style scoped>
+<style scoped lang="scss">
     .dl-blog dd {
         margin-left: 30px;
     }

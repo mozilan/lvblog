@@ -3,7 +3,6 @@
         margin-bottom: 30px;
         position: relative;
     }
-
     .art-item .star {
         width: 60px;
         height: 60px;
@@ -11,136 +10,157 @@
         top: 0;
         right: 0;
     }
-
-    img.tag {
-        width: 16px;
-        height: 16px;
-    }
-    .clear-title{
-        margin-top: 15px;
-        margin-bottom: 0;
-    }
-    .art-title {
-        border-left: 3px solid #F56C6C;
-        padding-left: 5px;
-        cursor: pointer;
-    }
-
-    .art-title:hover {
-        color: #409EFF;
-    }
-
-    .art-time {
-        margin: 6px 0;
-    }
-
-    .art-body {
-        display: flex;
-        padding: 10px 0;
-    }
-
-    .side-img {
-        height: 150px;
-        width: 270px;
-        overflow: hidden;
-        margin-right: 10px;
-    }
-    .art-banner {
-        width: 100%;
-        height: 100%;
-        transition: all 0.6s;
-    }
-    .art-banner:hover  {
-        transform: scale(1.4);
-    }
-    .side-abstract {
-        flex: 1;
-        display: flex;
-        flex-direction: column;
-        color: #aaa;
-    }
-    .art-more {
-        display: flex;
-        justify-content: space-between;
-        flex: 1 auto;
-        align-items: flex-end;
-    }
-    .art-more .view {
-        color: #aaa;
-    }
-    h5{
-        font-size: 18px;
-    }
-    .pagination {
-        background-color: #F9F9F9;
-    }
-    ul{
-        list-style:none;
-        margin:0; padding:0;
-    }
-    .infinite-list-wrapper p{
-        text-align: center;
-    }
-    .blog{
-        padding-top: 20px;
-    }
-    .lv-blog-side{
-        padding-bottom: 10px;
-    }
-    .lv-margin-top{
-        margin-top:20px;
-    }
-    .image-slot{
-        height: 150px;
-    }
-    .el-image{
-        display: block;
-    }
-    @media only screen and (max-width: 683px){
-        .lv-blog-side{
-            width: 100%;
+        img.tag {
+            width: 16px;
+            height: 16px;
         }
-        .lv-blog-middle{
-            width: 100%;
+
+        .clear-title {
+            margin-top: 15px;
+            margin-bottom: 0;
         }
-        .lv-tag-side{
-            width: 100%;
+
+        .art-title {
+            border-left: 3px solid #F56C6C;
+            padding-left: 5px;
+            cursor: pointer;
         }
-        .lv-row-bg{
-            display: block;
+
+        .art-title:hover {
+            color: #409EFF;
         }
+
+        .art-time {
+            margin: 6px 0;
+        }
+
         .art-body {
-            display: block;
+            display: flex;
             padding: 10px 0;
         }
+
+        .art-category {
+            float: left;
+            padding-left: 5px;
+        }
+
         .side-img {
-            height: auto;
-            width: 100%;
+            height: 150px;
+            width: 270px;
             overflow: hidden;
             margin-right: 10px;
         }
 
-        .clear-title{
-            margin-bottom: 0;
+        .art-banner {
+            width: 100%;
+            height: 100%;
+            transition: all 0.6s;
         }
-        #side{
-            max-height: none!important;
-            margin-top: 20px;
+
+        .art-banner:hover {
+            transform: scale(1.4);
+        }
+
+        .side-abstract {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            color: #aaa;
+        }
+        .side-abstract .art-abstract{
+            padding: 10px 0;
         }
         .art-more {
-            margin-top: 10px;
+            display: flex;
+            justify-content: space-between;
+            flex: 1 auto;
+            align-items: flex-end;
         }
-        /*.art-more {*/
-        /*height: 40px;*/
-        /*display: block;*/
-        /*justify-content: space-between;*/
-        /*!*align-items: flex-end;*!*/
-        /*}*/
-    }
+
+        .art-more .view {
+            color: #aaa;
+        }
+
+        h5 {
+            font-size: 18px;
+        }
+
+        .pagination {
+            background-color: #F9F9F9;
+        }
+
+        ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .infinite-list-wrapper p {
+            text-align: center;
+        }
+
+        .blog {
+            padding-top: 20px;
+        }
+
+        .lv-blog-side {
+            padding-bottom: 10px;
+        }
+
+        .lv-margin-top {
+            margin-top: 20px;
+        }
+
+        .image-slot {
+            height: 150px;
+        }
+
+        .el-image {
+            display: block;
+        }
+
+        @media only screen and (max-width: 683px) {
+            .lv-blog-side {
+                width: 100%;
+            }
+            .lv-blog-middle {
+                width: 100%;
+            }
+            .lv-tag-side {
+                width: 100%;
+            }
+            .lv-row-bg {
+                display: block;
+            }
+            .art-body {
+                display: block;
+                padding: 10px 0;
+            }
+            .side-img {
+                height: auto;
+                width: 100%;
+                overflow: hidden;
+                margin-right: 10px;
+            }
+            .clear-title {
+                margin-bottom: 0;
+            }
+            #side {
+                max-height: none !important;
+                margin-top: 20px;
+            }
+            .art-category {
+                clear: both;
+                padding: 0;
+            }
+            .art-item {
+                font-size: 14px;
+            }
+        }
 </style>
 <template>
     <el-row type="flex" class="row-bg" justify="center">
-        <el-col :xs="24" :sm="24" :md="20" :lg="20">
+        <el-col :xs="24" :sm="24" :md="16" :lg="16">
             <div class="blog" style="overflow:auto">
                 <el-backtop target=".blog-component__scroll .blog-scrollbar__wrap"></el-backtop>
                 <el-row type="flex" class="row-bg lv-row-bg" justify="space-between">
@@ -159,21 +179,18 @@
                                                 <div class="lv-clear-both"></div>
                                                 <div class="d-flex align-items-center lv-float-left">
                                                     <i class="el-icon-collection-tag"></i>
-                                                    <span>：</span>
-                                                    <span v-for="t in i.tag">
-                                                    <router-link :to="{name:'标签文章',params: {tag:t.id}}">
+                                                    <span>：</span><span v-for="t in i.tag">
+                                                    <router-link :to="{name:'标签文章',params: {tag:t.id}}" style="margin: 5px">
                                                         <el-tag size="mini">{{t.name}}</el-tag>
                                                     </router-link>
                                                 </span>
                                                 </div>
-                                                <div class="d-flex align-items-center lv-float-left" style="padding-left:5px">
+                                                <div class="d-flex align-items-center art-category">
                                                     <i class="el-icon-folder-opened"></i>
                                                     <span>：</span>
-                                                    <span>
                                                     <router-link :to="{name:'分类文章',params: {category:i.category.id}}">
                                                         <el-tag size="mini">{{i.category.name}}</el-tag>
                                                     </router-link>
-                                                </span>
                                                 </div>
                                                 <div class="lv-clear-both"></div>
                                             </el-row>
@@ -190,13 +207,33 @@
                                                             {{i.excerpt}}
                                                         </router-link>
                                                     </div>
-                                                    <div class="art-more">
-                                                        <router-link :to="{ name:'主页' ,params:{'user':i.user.id}}" tag="span">
-                                                            <el-avatar :size="25" :src="i.user.avatar"></el-avatar>
-                                                            <span style="height: 25px;position: absolute;padding-left:4px;">{{i.user.name}}</span>
-                                                        </router-link>
-                                                        <div class="view"><i class="el-icon-view"></i>{{i.view_count}}</div>
-                                                    </div>
+                                                        <div class="art-more">
+                                                            <el-popover
+                                                                    placement="top"
+                                                                    width="200"
+                                                                    trigger="hover">
+                                                                <el-row  type="flex" class="row-bg" justify="space-between">
+                                                                    <div :span="6">
+                                                                        <el-avatar :size="45" :src="i.user.avatar"></el-avatar>
+                                                                    </div>
+                                                                    <div :span="14" style="margin-left:5px"><span style="margin: 5px 0;font-size: 16px;">{{i.user.name}}</span><br><span style="margin: 5px 0">{{i.user.introduction}}</span></div>
+                                                                </el-row>
+                                                                <el-divider></el-divider>
+                                                                <router-link :to="{ name:'主页' ,params:{'user':i.user.id}}" tag="span">
+                                                                    <a href="#"><span style="color: cornflowerblue;">访问主页</span></a>
+                                                                </router-link>
+                                                                <router-link :to="{ name:'用户文章' ,params:{'user':i.user.id}}" style="float: right" tag="span">
+                                                                    <a href="#">他的博客</a>
+                                                                </router-link>
+                                                            <div slot="reference">
+                                                                <el-avatar :size="25" :src="i.user.avatar"></el-avatar>
+                                                                <router-link :to="{ name:'用户文章' ,params:{'user':i.user.id}}" style="height: 25px;position: absolute;padding-left:5px;" tag="span">
+                                                                    <a href="#">{{i.user.name}}</a>
+                                                                </router-link>
+                                                            </div>
+                                                            </el-popover>
+                                                            <div class="view"><i class="el-icon-view"></i>{{i.view_count}}</div>
+                                                        </div>
                                                 </div>
 
                                             </el-row>
@@ -209,8 +246,7 @@
                             <p v-if="noMore">很高兴你翻到这里，但是真的没有了...</p>
                         </div>
                     </el-col>
-                    <el-col :span="2" class="lv-blog-middle"></el-col>
-                    <el-col :span="6" class="hidden-sm-and-down lv-tag-side" id="side" :style="infinite_side" >
+                    <el-col :span="7" class="hidden-sm-and-down lv-tag-side" id="side" :style="infinite_side" >
                         <div class="item">
                             <Notice></Notice>
                         </div>

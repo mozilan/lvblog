@@ -10,15 +10,15 @@
         </el-popover>
         <transition name="el-fade-in-linear">
             <div v-show="loading_screen" @click="loading_screen=false" class="loading-screen" v-loading="loadings.bg_loading" :style="{'background-image':bg_url}">
-                <el-avatar class="loading-avatar" :size="55" :src="other.avatar"></el-avatar>
-                <div class="loading-introduction"><span class="rotate">{{other.name}}--</span>{{other.introduction}}</div>
+                <el-avatar v-if="other.avatar !== null" class="loading-avatar" :size="55" :src="other.avatar"></el-avatar><el-avatar class="loading-avatar" :size="55"  v-if="other.avatar===null">{{other.name}}</el-avatar>
+                <div class="loading-introduction"><span class="rotate">{{other.name}}</span><span v-if="other.introduction!==null">{{'--'+other.introduction}}</span></div>
             </div>
         </transition>
         <transition name="el-fade-in-linear">
             <div v-popover:popover1 id="frontpage" v-show="loading_image" @click="cancelLoadingImage" :style="{'background-image':bg_frontpage_url}" v-loading="loadings.bg_front_loading">
                 <div class="shadow-img"></div>
-                <img style="visibility: hidden" src="../../assets/images/front-image.jpg" class="front-img img-responsive" alt ="Front-image">
-                <h3 class="profile ajust-frontpage-avatar"><img class="front-avatar transparent" :src="other.avatar" alt="front-image"><span class="invert name">{{other.name}}</span></h3><!--PROFILE NAME-->
+                <img style="visibility: hidden" src="../../assets/images/front-image.jpg" class="front-img img-responsive" :alt ="other.name">
+                <h3 class="profile ajust-frontpage-avatar"><img v-if="other.avatar!==null" class="front-avatar transparent" :src="other.avatar" alt=""><el-avatar style="width: 40px; height: 40px;border:3px solid #409eff;border-radius:30px" v-if="other.avatar===null">{{other.name}}</el-avatar><span class="invert name">{{other.name}}</span></h3><!--PROFILE NAME-->
                 <h3 class="invert" style="margin-top: -10px; margin-bottom: 10px;">蓝默空间-<span class="rotate">在我的空间里闪耀！</span></h3> <!--SUBTITLE IN PROFILE-->
                 <div class="frontclick"><img src="../../assets/images/click.png" alt="" class="img-responsive"><span class="pulse"></span></div>
             </div>
@@ -39,7 +39,7 @@
                         <span v-show="userTags.show" class="rotate">{{userTags.tag}}</span><!--SUBTITLE AFTET NAME-->
                         </transition>
                     </h3>
-                    <img id="profile-img" class="profile-img transparent" :src="other.avatar" alt="profile-image"><!--PROFILE IMAGE-->
+                    <img id="profile-img" class="profile-img transparent" :src="other.avatar" alt="加载失败"><!--PROFILE IMAGE-->
                 </div><!--/#namecard-->
                 <!--menu-->
                 <div id="menu-container">
@@ -85,7 +85,7 @@
                             <ul class="personal-info">
                                 <li :class="page.name_class_1"><label>昵称</label><span>{{other.name}}</span></li>
                                 <li :class="page.name_class_2"><router-link :to="{name:'用户文章',params: {user:other.id}}"><label>博客</label><span>{{blog_page+other.id}}</span></router-link></li>
-                                <li :class="page.name_class_3"><label>Email</label><span>{{other.email!==''?other.email:'保密'}}</span></li>
+                                <li :class="page.name_class_3"><label>Email</label><span>{{other.email !== null ? other.email : '保密'}}</span></li>
                                 <li :class="page.name_class_4"><label>电话</label><span>{{'保密'}}</span></li>
                             </ul><!--/ul.personal-info-->
                         </div>
@@ -366,7 +366,7 @@
         mounted(){
             setTimeout(()=>{
                 this.loading_screen = false;
-            },10000);
+            },6000);
             this.changeUserTag();
             //背景图片加载loading;
             let bgImg = new Image();
@@ -1410,7 +1410,7 @@
         position: absolute;
         bottom: 0px;
         right: 15px;
-        background: url(../../assets/images/profile.png) no-repeat;
+        background: url(https://mozilan.geekadpt.cn/index.png) no-repeat;
         background-size: contain;
         background-position: right;
     }
@@ -1434,7 +1434,7 @@
         color: #fff;
         display: inline-block;
         margin-left: 9px;
-        text-transform: capitalize;
+        /*text-transform: capitalize;*/
     }
 
     .personal-info label {

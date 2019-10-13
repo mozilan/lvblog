@@ -1,7 +1,7 @@
 <template>
     <div class="archive">
         <el-row type="flex" justify="center">
-            <el-col :xs="24" :sm="24" :md="20" :lg="20">
+            <el-col :xs="24" :sm="24" :md="16" :lg="16">
                 <div class="count">归档：{{archives.meta.count}}篇</div>
                 <div class="block">
                     <el-timeline v-for="(activity, index) in archives.data">

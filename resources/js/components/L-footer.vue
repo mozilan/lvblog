@@ -38,7 +38,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 .L-footer{
 	text-align: center;
 	color: #fff;

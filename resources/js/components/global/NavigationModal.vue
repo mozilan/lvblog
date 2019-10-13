@@ -35,7 +35,8 @@
             <el-menu-item index="7" @click="login" v-if="tokenStatus === '' " icon="el-icon-user">登录</el-menu-item>
             <el-submenu index="8" v-if="tokenStatus !== '' ">
                 <template slot="title">
-                    <el-image style="width: 40px; height: 40px;border:3px solid #409eff;border-radius:30px" :src="user.avatar"></el-image>
+                    <el-avatar v-if="user.avatar===null" style="width: 40px; height: 40px;border:3px solid #409eff;border-radius:30px">{{user.name}}</el-avatar>
+                    <el-image v-if="user.avatar!==null" style="width: 40px; height: 40px;border:3px solid #409eff;border-radius:30px" :src="user.avatar"></el-image>
                 </template>
                 <el-menu-item index="9"><router-link :to="{ name:'用户文章',params:{'user':user.id ? user.id:''}}">我的博客</router-link></el-menu-item>
                 <el-menu-item index="3"><router-link :to="{ name:'关于我' }">关于我</router-link></el-menu-item>

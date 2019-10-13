@@ -55,7 +55,7 @@
         width: auto;
     }
     .el-dialog__body{
-        padding: 20px 15px;
+        padding: 5px 15px 20px 15px;
     }
     @media screen and (max-width: 450px) {
         .el-dialog{
@@ -76,7 +76,7 @@
             <el-form :model="form">
                 <el-col :xs="24" :sm="24" :md="24" :lg="24">
                     <el-form-item>
-                        <effect-input class="effect-input" v-model="username" type="kaede" label="用户名" name="用户名"></effect-input>
+                        <effect-input class="effect-input" v-model="username" type="ichiro" label="用户名" name="用户名"></effect-input>
                     </el-form-item>
                 </el-col>
                 <el-col :xs="24" :sm="24" :md="24" :lg="24">
@@ -171,7 +171,9 @@
         methods: {
             toRegister() {
                 this.hideLoginDialogForm();
-                EventBus.$emit('prompt-register');
+                setTimeout(()=>{
+                    EventBus.$emit('prompt-register');
+                },1000);
             },
             openMessage: function (title, type) {
                 this.$message({

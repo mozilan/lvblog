@@ -32,10 +32,18 @@
     .art-time {
         margin: 6px 0;
     }
-
+    .art-time-small {
+        margin: 0;
+        display: none;
+    }
     .art-body {
         display: flex;
         padding: 10px 0;
+    }
+
+    .art-category {
+        float: left;
+        padding-left: 5px;
     }
 
     .side-img {
@@ -58,6 +66,9 @@
         flex-direction: column;
         color: #aaa;
     }
+    .art-abstract{
+        padding: 10px 0;
+    }
     .art-more {
         display: flex;
         justify-content: space-between;
@@ -66,6 +77,9 @@
     }
     .art-more .view {
         color: #aaa;
+    }
+    .art-more .art-more-button-sm{
+        display: none;
     }
     h5{
         font-size: 18px;
@@ -119,6 +133,12 @@
             display: block;
             padding: 10px 0;
         }
+        .art-time{
+            display: none;
+        }
+        .art-time-small{
+            display: block;
+        }
         .side-img {
             height: auto;
             width: 100%;
@@ -129,8 +149,9 @@
             max-height: none!important;
             margin-top: 20px;
         }
-        .art-more {
-            margin-top: 10px;
+        .art-category {
+            clear: both;
+            padding: 0;
         }
         .phone-tab{
             display: block;
@@ -141,11 +162,21 @@
         .el-card__header{
             display: none;
         }
+        .art-item {
+            font-size: 14px;
+        }
+        .art-more-button{
+            display: none;
+        }
+        .art-more-button-sm{
+            color: orange;
+            display:block!important;
+        }
     }
 </style>
 <template>
     <el-row type="flex" class="row-bg" justify="center">
-        <el-col :xs="24" :sm="24" :md="20" :lg="20">
+        <el-col :xs="24" :sm="24" :md="16" :lg="16">
         <div class="blog" style="overflow:auto">
         <el-backtop target=".blog-component__scroll .blog-scrollbar__wrap"></el-backtop>
             <el-row type="flex" class="row-bg lv-row-bg" justify="space-between">
@@ -174,7 +205,7 @@
                         </template>
                     </el-collapse-item>
                 </el-collapse>
-                <el-col :span="6" class="hidden-sm-and-down lv-tag-side" id="side" :style="infinite_side" >
+                <el-col :span="7" class="hidden-sm-and-down lv-tag-side" id="side" :style="infinite_side" >
                     <div class="item">
                         <Tag></Tag>
                     </div>
@@ -184,7 +215,6 @@
                     </div>
                     <div class="lv-clear-both"></div>
                 </el-col>
-                <el-col :span="2" class="lv-blog-middle"></el-col>
                 <el-col :span="16"  class="lv-blog-side blog-component__scroll" v-loading="loading">
                     <div class="infinite-list-wrapper blog-scrollbar__wrap" :style="infinite_box"  >
                             <ul
@@ -202,16 +232,16 @@
                                                 <i class="el-icon-collection-tag"></i>
                                                 <span>：</span>
                                                 <span v-for="t in i.tag">
-                                                    <router-link :to="{name:'标签文章',params: {tag:t.id}}">
+                                                    <router-link :to="{name:'标签文章',params: {tag:t.id}}" style="margin: 5px">
                                                         <el-tag size="mini">{{t.name}}</el-tag>
                                                     </router-link>
                                                 </span>
                                             </div>
-                                            <div class="d-flex align-items-center lv-float-left" style="padding-left:5px">
+                                            <div class="d-flex align-items-center art-category">
                                                 <i class="el-icon-folder-opened"></i>
                                                 <span>：</span>
                                                 <span>
-                                                    <router-link :to="{name:'分类文章',params: {category:i.category.id}}">
+                                                    <router-link :to="{name:'分类文章',params: {category:i.category.id}}" >
                                                         <el-tag size="mini">{{i.category.name}}</el-tag>
                                                     </router-link>
                                                 </span>
@@ -232,8 +262,10 @@
                                                 </div>
                                                 <div class="art-more">
                                                     <router-link :to="{name:'查看文章',params: {art_id:i.id}}" tag="span">
-                                                        <el-button plain>阅读全文</el-button>
+                                                        <el-button plain  class="art-more-button">阅读全文</el-button>
+                                                        <span class="art-more-button-sm">阅读全文</span>
                                                     </router-link>
+                                                    <div class="art-time-small"><i class="el-icon-time"></i>：{{i.created_at}}</div>
                                                     <div class="view"><i class="el-icon-view"></i>{{i.view_count}}</div>
                                                 </div>
                                             </div>

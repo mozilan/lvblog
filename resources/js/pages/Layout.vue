@@ -1,4 +1,4 @@
-<style type="">
+<style lang="scss" scoped>
     #chang-jian-ye-mian-bu-ju + .demo-container .el-footer, #chang-jian-ye-mian-bu-ju + .demo-container .el-header {
         text-align: center;
     }
@@ -31,7 +31,7 @@
             </el-header>
             <Notification></Notification>
             <el-row type="flex" justify="center" class="breadcrumb">
-                <el-col :xs="24" :sm="24" :md="20" :lg="20" style="padding: 6px 0 6px 0;">
+                <el-col :xs="24" :sm="24" :md="16" :lg="16" style="padding: 6px 0 6px 0;">
                     <el-breadcrumb separator="/" class="breadcrumb-inner">
                         <el-breadcrumb-item v-for="item in $route.matched">
                             <router-link class="lv-breadcrumb-a" :to="{ name:item.name }">{{ item.name }}</router-link>

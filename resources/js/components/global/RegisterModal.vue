@@ -52,33 +52,32 @@
                             <effect-input class="effect-input" v-model="phone" type="hoshi" label="手机号" name="手机号"></effect-input>
                         </el-form-item>
                     </el-col>
+                    <el-image
+                            :src="captchas_url"
+                            v-show="captcha_show"
+                            @click="getCaptchas"
+                    >
+                    </el-image>
                     <el-col :xs="24" :sm="24" :md="24" :lg="24">
                         <el-form-item>
-                            <el-button class="get-button" type="primary" style="float: right;" @click="getCaptchas" v-show="captcha_button_show" :loading="captcha_loading">{{ captcha_loading ? '获取中 ...' : '获取验证码' }}</el-button>
-                            <el-image
-                                    style="width:auto; height: 40px;float:right"
-                                    :src="captchas_url"
-                                    v-show="captcha_show"
-                                    @click="getCaptchas"
-                            >
-                            </el-image>
-                            <effect-input class="effect-input" v-model="captcha_code" type="kaede" label="图形码" name="图形码"></effect-input>
+                            <el-button class="get-button" type="primary" style="float: right;" @click="getCaptchas" v-show="captcha_button_show" :loading="captcha_loading">{{ captcha_loading ? '获取中 ...' : '点我获取' }}</el-button>
+                            <effect-input class="effect-input" v-model="captcha_code" type="hoshi" label="图形验证码" name="图形验证码"></effect-input>
                         </el-form-item>
                     </el-col>
                     <el-col :xs="24" :sm="24" :md="24" :lg="24">
                         <el-form-item>
-                            <effect-input class="effect-input" v-model="verification_code" type="kaede" label="短信码" name="短信码"></effect-input>
-                            <el-button class="get-button" type="primary" @click="getMessages" :loading="message_loading" style="float: right">{{ message_loading ? '10秒倒计时 ...' : '发送短信码' }}</el-button>
+                            <effect-input class="effect-input" v-model="verification_code" type="hoshi" label="短信验证码" name="短信验证码""></effect-input>
+                            <el-button class="get-button" type="primary" @click="getMessages" :loading="message_loading" style="float: right">{{ message_loading ? '10秒倒计时 ...' : '点我获取' }}</el-button>
                         </el-form-item>
                     </el-col>
                     <el-col :xs="24" :sm="24" :md="24" :lg="24">
                         <el-form-item>
-                            <effect-input class="effect-input" v-model="jiro" type="hoshi" label="昵称" name="昵称"></effect-input>
+                            <effect-input class="effect-input" v-model="name" type="hoshi" label="昵称" name="昵称"></effect-input>
                         </el-form-item>
                     </el-col>
                     <el-col :xs="24" :sm="24" :md="24" :lg="24">
                         <el-form-item>
-                            <effect-input class="effect-input" v-model="password" type="kuro" label="密码" name="密码"></effect-input>
+                            <effect-input class="effect-input" v-model="password" type="kaede" label="密码" name="密码"></effect-input>
                         </el-form-item>
                     </el-col>
                 </el-form>
@@ -174,7 +173,9 @@
             },
             toLogin(){
                 this.hideRegisterDialogForm();
-                EventBus.$emit('prompt-login');
+                setTimeout(()=>{
+                    EventBus.$emit('prompt-login');
+                },1000);
             },
             handleClose(done) {
                 this.$confirm('确认关闭？')

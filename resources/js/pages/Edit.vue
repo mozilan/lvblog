@@ -1,6 +1,6 @@
 <template>
     <el-row type="flex" justify="center">
-        <el-col :xs="24" :sm="24" :md="20" :lg="20">
+        <el-col :xs="24" :sm="24" :md="16" :lg="16">
           <div style="display:block" class="edit">
                     <div class="title-animate">
                          <div class="ffl-wrapper bl-margin_bottom-title">

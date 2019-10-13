@@ -34,7 +34,7 @@
 	}
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 	.box-card .item:hover {
 		color: #409EFF;
 		cursor: pointer;
