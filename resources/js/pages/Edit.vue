@@ -9,7 +9,7 @@
                          </div>
                     </div>
                     <el-form :model="form" :style="form_style">
-                         <mavon-editor ref=md :toolbars="markdownOption" v-model="form.handbook" :ishljs = "true" @imgAdd="$imgAdd"  style="height: 100%"></mavon-editor>
+                         <mavon-editor ref=md :toolbars="markdownOption" v-model="form.handbook" :ishljs = "true" @imgAdd="$imgAdd"  :style="styles.mavon_style"></mavon-editor>
                          <div class="title-animate bl-margin_bottom-title bl-margin-top">
                               <div :class="ffl_input">
                                    <label for="excerpt" class="ffl-label">文章摘要 <span>(可选)</span></label>
@@ -115,6 +115,11 @@
           },
           data() {
                return {
+                   styles:{
+                       mavon_style:{
+                           height:''
+                       },
+                   },
                     ffl_input:'ffl-wrapper bl-margin_bottom-title',
                     form_style:{
                          height:'',
@@ -246,10 +251,6 @@
                handleInputConfirm() {
                     let categoryInputValue = this.categoryInputValue;
                     if(categoryInputValue === ''){
-                         // this.$message({
-                         //      message: "分类名称不能为空",
-                         //      type: 'warning'
-                         // });
                          this.categoryInputVisible = false;
                          this.categoryInputValue = '';
                          return 0;
@@ -389,7 +390,6 @@
                this.$store.dispatch('loadCategories',{
                     id:this.$store.getters.getUser.id,
                });
-               console.log(this.$route.params.art);
                if(this.$route.params.art){
                    this.$store.dispatch('loadArticle',{
                        art_id : this.$route.params.art
@@ -411,13 +411,13 @@
 
                        }
                        else if(this.$store.getters. getArticleLoadStatus() === 3) {
-                           this.$message.error('错了哦，加载文章失败了');
+                           this.$message.error('文章不存在或网络连接失败');
                        }
                    });
                }
                var h = window.innerHeight-430;//可见区域高度
                this.form_style.height = h+'px';
-               // console.log($('.ffl-wrapper'));
+               this.styles.mavon_style.height = window.innerHeight-531+'px';
           }
      }
 </script>

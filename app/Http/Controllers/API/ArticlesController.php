@@ -46,8 +46,6 @@ class ArticlesController extends Controller
                 $article_map_tag->save();
             }
         }
-//        return $this->response->item($article, new TopicTransformer())
-//            ->setStatusCode(201);
         return response()->json(['message' => '发布成功'], 201);
     }
     public function update(ArticleRequest $request,$article)
@@ -96,7 +94,20 @@ class ArticlesController extends Controller
     public function destroy($id)
     {
         $this->authorize('destroy', $this->user());
+        $article = Article::find($id);
+        if($article_map_tag = ArticleMapTag::where('article_id',$article->id)->get()){
+            foreach ($article_map_tag as $v){
+                $tag = Tag::find($v->tag_id);
+                if($tag->num >1){
+                    $tag->num = $tag->num - 1;
+                    $tag->save();
+                }else{
+                    Tag::destroy($v->tag_id);
+                }
+            }
+        }
         Article::destroy($id);
+        Archive::where('article_id',$id)->delete();
         return response()->json(['message' => '删除成功'], 201);
     }
     public function index(Request $request, Article $article)

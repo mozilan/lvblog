@@ -2,7 +2,7 @@
 	<el-col class="tag">
 		<el-card class="box-card">
 			<div class="text item" v-for="tag in tags">
-				<router-link :to="{name:'标签文章',params: {tag:tag.id,user:tag.user_id}}"><el-tag size="mini" :type="type[Math.floor(Math.random()*type.length)]" class="tag-item">{{tag.name}}[{{tag.count}}]</el-tag></router-link>
+				<router-link :to="{name:'标签文章',params: {tag:tag.id},query:{user:tag.user_id}}"><el-tag size="mini" :type="type[Math.floor(Math.random()*type.length)]" class="tag-item">{{tag.name}}[{{tag.count}}]</el-tag></router-link>
 			</div>
 			<div class="clear"></div>
 		</el-card>
@@ -24,7 +24,7 @@
 		},
 		created() {
 			this.$store.dispatch('loadTags', {
-				id: this.$route.params.user !== '' ? this.$route.params.user  : 1,
+				id: this.$route.query.user !== '' ? this.$route.query.user  : 1,
 			});
 		}
 	}

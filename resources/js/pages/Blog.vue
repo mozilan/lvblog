@@ -349,8 +349,7 @@
         },
         created(){
             this.getArticles();
-            var h = window.innerHeight-152;//可见区域高度
-            this.infinite_box.maxHeight = this.infinite_side.maxHeight = h+'px';
+            this.infinite_box.maxHeight = this.infinite_side.maxHeight = window.innerHeight-152 +'px';
 
         },
         methods: {
@@ -476,6 +475,7 @@
                         if(this.$store.getters.getArticleDeleteStatus() === 2) {
                             this.loader.close();
                             this.$message.success('文章已删除！');
+                            this.getArticles();
                         }
                         if(this.$store.getters.getArticleDeleteStatus() === 3) {
                             this.loader.close();

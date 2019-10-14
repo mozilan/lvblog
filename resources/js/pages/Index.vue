@@ -217,10 +217,10 @@
                                                                     <div :span="6">
                                                                         <el-avatar :size="45" :src="i.user.data.avatar"></el-avatar>
                                                                     </div>
-                                                                    <div :span="14" style="margin-left:5px"><span style="margin: 5px 0;font-size: 16px;">{{i.user.data.name}}</span><br><span style="margin: 5px 0">{{i.user.data.introduction}}</span></div>
+                                                                    <div :span="14" style="margin-left:5px"><span style="margin: 5px 0;font-size: 16px;color:#F56C6C;font-weight: bold">{{i.user.data.name}}</span><br><span style="margin: 5px 0">{{i.user.data.introduction}}</span></div>
                                                                 </el-row>
                                                                 <el-divider></el-divider>
-                                                                <router-link :to="{ name:'主页' ,params:{'user':i.user_id}}" tag="span">
+                                                                <router-link :to="{ name:'主页' ,params:{'user':i.user_id},query:{user:i.user_id}}" tag="span">
                                                                     <a href="#"><span style="color: cornflowerblue;">访问主页</span></a>
                                                                 </router-link>
                                                                 <router-link :to="{ name:'用户文章' ,params:{'user':i.user_id}}" style="float: right" tag="span">

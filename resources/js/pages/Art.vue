@@ -1,5 +1,5 @@
 <template>
-    <div class="art" :style="{'height':art_height}">
+    <div class="art" :style="styles.art_style">
         <el-backtop target=".page-component__scroll .el-scrollbar__wrap"></el-backtop>
         <el-row class="main page-component__scroll" type="flex" justify="center">
             <el-col :xs="24" :sm="24" :md="16" :lg="16" class="el-scrollbar__wrap">
@@ -58,6 +58,11 @@
         name: 'art',
         data () {
             return {
+                styles:{
+                    art_style:{
+                        height:''
+                    }
+                },
                 url:'',
                 bg_url:'https://s0.xinger.ink/acgimg/acgurl.php?',
                 art_height:'',
@@ -75,6 +80,7 @@
             this.url= window.location.href;
             this.imgUrl = this.bg_url+ this.$route.params.art_id;
             this.bg_url = "url(" + this.bg_url + this.$route.params.art_id+")";
+            this.styles.art_style.height = window.innerHeight-152+'px';
         },
         mounted(){
             this.art_height = window.innerHeight-130+'px';

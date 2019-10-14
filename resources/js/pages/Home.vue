@@ -53,7 +53,7 @@
                             <div class="hover-background"></div>
                             <span>我的简历</span><i class="fa fa-file-text fa-fw"></i>
                         </li>
-                        <li :class="selector.edit" v-if="this.$store.getters.getUser.id === this.$route.params.user" id="edit-btn" title="Edit"  data-page="edit" @click="showEditPage">
+                        <li :class="selector.edit" v-if="this.$store.getters.getUser.id === this.$route.query.user === this.$route.params.user" id="edit-btn" title="Edit"  data-page="edit" @click="showEditPage">
                             <div class="hover-background"></div>
                             <span>更新信息</span><i class="fa fa-file-text fa-fw"></i>
                         </li>
@@ -218,7 +218,7 @@
                     </li>
                     <!--/#resume-->
                     <!--RESUME PAGE-->
-                    <li id="edit" v-if="page.edit_page && (this.$store.getters.getUser.id === this.$route.params.user)" >
+                    <li id="edit" v-if="page.edit_page && (this.$store.getters.getUser.id === this.$route.query.user === this.$route.params.user)" >
                         <div class="title-container">
                             <div class="shadow-img" v-loading="loadings.bg_edit_loading" :style="{'background-image':getImage(3)}"></div>
                             <h2 :class="selector.resume"><span class="invert">Editor Of</span> {{other.name}}</h2> <!--RESUME TITLE-->

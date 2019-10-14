@@ -116,7 +116,7 @@ export const articles = {
                     commit('setArticleUpdateResponseMessages', error.response.data.errors[Object.keys(error.response.data.errors)[0]].toString() === '' ? "发布失败，可能是因为登陆超时造成的." : error.response.data.errors[Object.keys(error.response.data.errors)[0]].toString());
                 });
         },
-        deleteArticle({commit},data){
+        deleteArticle({commit,dispatch},data){
             commit('setArticleDeleteStatus', 1);
             ArticleAPI.deleteArticle(data)
                 .then(function (response) {
