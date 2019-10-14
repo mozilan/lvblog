@@ -20,12 +20,16 @@ class ArticlesController extends Controller
         $article->fill($request->all());
         $article->user_id = $this->user()->id;
         $article->save();
-        if($article->target == 0) {
+        //如果是公开文章则发布归档
+        if($article->target === 0){
             $archieve = new Archive();
             $archieve->user_id = $this->user()->id;
             $archieve->article_id = $article->id;
             $archieve->title = $article->title;
             $archieve->save();
+        }
+        //发布标签和标签文章对照表
+        if($article->target !=1) {
             if ($request->tags) {
                 foreach ($request->tags as $v) {
                     if (Tag::where([['name', $v], ['user_id', $this->user()->id]])->first() !== null) {
@@ -54,7 +58,8 @@ class ArticlesController extends Controller
     {
         $this->authorize('update', $this->user());
         $article = Article::find($article);
-        if($article->target == 0){
+        //删除标签和标签文章对照表
+        if($article->target !=1){
             if($article_map_tag = ArticleMapTag::where('article_id',$article->id)->get()){
                 foreach ($article_map_tag as $v){
                     $tag = Tag::find($v->tag_id);
@@ -71,7 +76,12 @@ class ArticlesController extends Controller
         $article->fill($request->all());
         $article->user_id = $this->user()->id;
         $article->save();
-        if($article->target == 0){
+        //如果不是公开文章则删除归档
+        if($article->target !== 0 ){
+            Archive::where('article_id',$article->id)->delete();
+        }
+        if($article->target !== 1 ){
+            //发布标签和标签文章对照表
             if($request->tags){
                 foreach ($request->tags as $v){
                     if(Tag::where([['name',$v],['user_id',$this->user()->id]])->first() !== null){
@@ -87,6 +97,7 @@ class ArticlesController extends Controller
                         $tag -> num = 1;
                     }
                     $tag->save();
+                    //添加分类表
                     $article_map_tag = new ArticleMapTag();
                     $article_map_tag-> tag_id = $tag->id;
                     $article_map_tag-> article_id = $article->id;

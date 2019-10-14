@@ -36,7 +36,9 @@
                     <h1 class="maintitle">{{other.name}}<span class="invert"></span></h1><!--PROFILE NAME-->
                     <h3 class="invert sub-maintitle">
                         <transition name="el-fade-in-linear">
-                        <span v-show="userTags.show" class="rotate">{{userTags.tag}}</span><!--SUBTITLE AFTET NAME-->
+                            <template>
+                                <span v-show="userTags.show" class="rotate">{{userTags.tag}}</span><!--SUBTITLE AFTET NAME-->
+                            </template>
                         </transition>
                     </h3>
                     <img id="profile-img" class="profile-img transparent" :src="other.avatar" alt="加载失败"><!--PROFILE IMAGE-->
@@ -53,7 +55,7 @@
                             <div class="hover-background"></div>
                             <span>我的简历</span><i class="fa fa-file-text fa-fw"></i>
                         </li>
-                        <li :class="selector.edit" v-if="this.$store.getters.getUser.id === this.$route.query.user === this.$route.params.user" id="edit-btn" title="Edit"  data-page="edit" @click="showEditPage">
+                        <li :class="selector.edit" v-if="policyConfirm" id="edit-btn" title="Edit"  data-page="edit" @click="showEditPage"  key="2">
                             <div class="hover-background"></div>
                             <span>更新信息</span><i class="fa fa-file-text fa-fw"></i>
                         </li>
@@ -218,7 +220,7 @@
                     </li>
                     <!--/#resume-->
                     <!--RESUME PAGE-->
-                    <li id="edit" v-if="page.edit_page && (this.$store.getters.getUser.id === this.$route.query.user === this.$route.params.user)" >
+                    <li id="edit" v-if="page.edit_page && policyConfirm"  key="1">
                         <div class="title-container">
                             <div class="shadow-img" v-loading="loadings.bg_edit_loading" :style="{'background-image':getImage(3)}"></div>
                             <h2 :class="selector.resume"><span class="invert">Editor Of</span> {{other.name}}</h2> <!--RESUME TITLE-->
@@ -360,7 +362,7 @@
                     email:'{{other.name}}@aliyun.com',
                     avatar_image_id:'',
                     blog_page:''
-                }
+                },
             }
         },
         mounted(){
@@ -587,7 +589,7 @@
             },
         },
         created(){
-            if(window.innerWidth > 763) {
+            if(window.innerWidth > 763){
                 // console.log("高"+window.innerHeight);
                 // this.home_style.minHeight = window.innerHeight + "px";
                 this.main_style.height = window.innerHeight - 145 + "px";
@@ -604,9 +606,15 @@
             this.blog_page = LVBLOG_CONFIG.URL+ '/#/home/';
         },
         computed:{
+            user(){
+                return this.$store.getters.getUser;
+            },
             other(){
                 return this.$store.getters.getOther;
             },
+            policyConfirm(){
+                return parseInt(this.$store.getters.getUser.id) === parseInt(this.$route.params.user);
+            }
         },
     }
     //好看的全屏背景哦～

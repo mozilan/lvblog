@@ -122,9 +122,6 @@
                 <el-button @click="toRegister">注册</el-button>
                 <el-button class="bl-right" type="primary" @click="submitLogin">确 定</el-button>
             </el-col>
-            <span
-                    v-show="loginStatus == 1">
-            </span>
         </el-row>
         </el-container>
     </el-dialog>
@@ -141,7 +138,7 @@
         },
         data() {
             return {
-                loader: '',
+                loader: {},
                 loginDialogFormVisible: false,
                 form: {
                     name: '',
@@ -209,6 +206,23 @@
                         username: this.username,
                         password: this.password,
                     });
+                    this.loader = this.$loading({
+                        lock: true,
+                        text: '正在登录',
+                        spinner: 'el-icon-loading',
+                        background: 'rgba(0, 0, 0, 0.7)'
+                    });
+                    this.$watch(this.$store.getters.getLoginStatus, function () {
+                        if (this.$store.getters.getLoginStatus() === 2) {
+                            this.loader.close();
+                            this.$message.success('登陆成功！');
+                            this.hideLoginDialogForm();
+                        }
+                        if (this.$store.getters.getLoginStatus() === 3) {
+                            this.loader.close();
+                            this.$message.error(this.$store.getters.getLoginErrors());
+                        }
+                    });
                 }
             },
             validateLogin: function () {
@@ -232,25 +246,6 @@
         },
         computed: {
             loginStatus() {
-                if (this.$store.getters.getLoginStatus === 1) {
-                    this.loader = this.$loading({
-                        lock: true,
-                        text: '正在登录',
-                        spinner: 'el-icon-loading',
-                        background: 'rgba(0, 0, 0, 0.7)'
-                    });
-                }
-                if (this.$store.getters.getLoginStatus === 2) {
-                    this.loader.close();
-                    this.openMessage('登录成功！', 'success');
-                    if(_urls.getUrlParams('code') !== null){
-                        window.location.href = '/';
-                    }
-                }
-                if (this.$store.getters.getLoginStatus === 3) {
-                    this.loader.close();
-                    this.openMessage(this.$store.getters.getLoginErrors, 'error');
-                }
                 return this.$store.getters. getLoginStatus;
             }
         },

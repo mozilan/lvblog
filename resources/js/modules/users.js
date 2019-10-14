@@ -212,6 +212,9 @@ export const users = {
             setLoginStatus(state , status){
                 state.loginStatus = status;
             },
+            setLogoutStatus(state , status){
+                state.logoutStatus = status;
+            },
             setLoginErrors(state , status){
                 state.loginErrors = status;
             },
@@ -259,10 +262,14 @@ export const users = {
                 return state.verificationCodeError;
             },
             getLoginStatus( state ){
-                return state.loginStatus;
+                return function () {
+                    return state.loginStatus;
+                }
             },
             getLoginErrors(state ){
-                return state.loginErrors;
+                return function () {
+                    return state.loginErrors;
+                }
             },
             getLoginToken( state ){
                 return state.Authorization;

@@ -1,7 +1,7 @@
 <template>
+    <div style="display:block" class="edit">
     <el-row type="flex" justify="center">
         <el-col :xs="24" :sm="24" :md="16" :lg="16">
-          <div style="display:block" class="edit">
                     <div class="title-animate">
                          <div :class="ffl_input">
                               <label for="title" class="ffl-label">文章标题</label>
@@ -9,7 +9,7 @@
                          </div>
                     </div>
                     <el-form :model="form" :style="form_style">
-                         <mavon-editor ref=md :toolbars="markdownOption" v-model="form.handbook" :ishljs = "true" @imgAdd="$imgAdd"  :style="styles.mavon_style"></mavon-editor>
+                         <mavon-editor ref=md :toolbars="markdownOption" v-model="form.handbook" :ishljs = "true" @imgAdd="$imgAdd" :style="styles.mavon_style"></mavon-editor>
                          <div class="title-animate bl-margin_bottom-title bl-margin-top">
                               <div :class="ffl_input">
                                    <label for="excerpt" class="ffl-label">文章摘要 <span>(可选)</span></label>
@@ -96,9 +96,9 @@
                               <el-button v-if="this.$route.params.art"  class="bl-save" type="" @click="updateArticle(1)">保存草稿</el-button>
                          </div>
                     </el-form>
-          </div>
-        </el-col>
-    </el-row>
+            </el-col>
+        </el-row>
+    </div>
 </template>
 <script>
      // Local Registration
@@ -117,7 +117,7 @@
                return {
                    styles:{
                        mavon_style:{
-                           height:''
+                           minHeight:''
                        },
                    },
                     ffl_input:'ffl-wrapper bl-margin_bottom-title',
@@ -417,7 +417,7 @@
                }
                var h = window.innerHeight-430;//可见区域高度
                this.form_style.height = h+'px';
-               this.styles.mavon_style.height = window.innerHeight-531+'px';
+               this.styles.mavon_style.minHeight = window.innerHeight-531+'px';
           }
      }
 </script>
