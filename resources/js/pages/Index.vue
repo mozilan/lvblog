@@ -223,7 +223,7 @@
                                                                 <router-link :to="{ name:'主页' ,params:{'user':i.user_id},query:{user:i.user_id}}" tag="span">
                                                                     <a href="#"><span style="color: cornflowerblue;">访问主页</span></a>
                                                                 </router-link>
-                                                                <router-link :to="{ name:'用户文章' ,params:{'user':i.user_id}}" style="float: right" tag="span">
+                                                                <router-link :to="{ name:'用户文章' ,params:{'user':i.user_id},query:{user:i.user_id}}" style="float: right" tag="span">
                                                                     <a href="#">他的博客</a>
                                                                 </router-link>
                                                             <div slot="reference">

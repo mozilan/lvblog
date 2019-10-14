@@ -20,30 +20,32 @@ class ArticlesController extends Controller
         $article->fill($request->all());
         $article->user_id = $this->user()->id;
         $article->save();
-        $archieve=new Archive();
-        $archieve->user_id = $this->user()->id;
-        $archieve->article_id = $article->id;
-        $archieve->title = $article->title;
-        $archieve->save();
-        if($request->tags){
-            foreach ($request->tags as $v){
-                if(Tag::where([['name',$v],['user_id',$this->user()->id]])->first() !== null){
-                    $tag = Tag::where([
-                        ['name',$v],
-                        ['user_id',$this->user()->id]
-                    ])->first();
-                    $tag->num = $tag->num+1;
-                }else{
-                    $tag = new Tag();
-                    $tag -> user_id = $this->user()->id;
-                    $tag -> name = $v;
-                    $tag -> num = 1;
+        if($article->target == 0) {
+            $archieve = new Archive();
+            $archieve->user_id = $this->user()->id;
+            $archieve->article_id = $article->id;
+            $archieve->title = $article->title;
+            $archieve->save();
+            if ($request->tags) {
+                foreach ($request->tags as $v) {
+                    if (Tag::where([['name', $v], ['user_id', $this->user()->id]])->first() !== null) {
+                        $tag = Tag::where([
+                            ['name', $v],
+                            ['user_id', $this->user()->id]
+                        ])->first();
+                        $tag->num = $tag->num + 1;
+                    } else {
+                        $tag = new Tag();
+                        $tag->user_id = $this->user()->id;
+                        $tag->name = $v;
+                        $tag->num = 1;
+                    }
+                    $tag->save();
+                    $article_map_tag = new ArticleMapTag();
+                    $article_map_tag->tag_id = $tag->id;
+                    $article_map_tag->article_id = $article->id;
+                    $article_map_tag->save();
                 }
-                $tag->save();
-                $article_map_tag = new ArticleMapTag();
-                $article_map_tag-> tag_id = $tag->id;
-                $article_map_tag-> article_id = $article->id;
-                $article_map_tag->save();
             }
         }
         return response()->json(['message' => '发布成功'], 201);
@@ -52,40 +54,44 @@ class ArticlesController extends Controller
     {
         $this->authorize('update', $this->user());
         $article = Article::find($article);
-        if($article_map_tag = ArticleMapTag::where('article_id',$article->id)->get()){
-            foreach ($article_map_tag as $v){
-                $tag = Tag::find($v->tag_id);
-                if($tag->num >1){
-                    $tag->num = $tag->num - 1;
-                    $tag->save();
-                }else{
-                    Tag::destroy($v->tag_id);
+        if($article->target == 0){
+            if($article_map_tag = ArticleMapTag::where('article_id',$article->id)->get()){
+                foreach ($article_map_tag as $v){
+                    $tag = Tag::find($v->tag_id);
+                    if($tag->num >1){
+                        $tag->num = $tag->num - 1;
+                        $tag->save();
+                    }else{
+                        Tag::destroy($v->tag_id);
+                    }
                 }
             }
+            ArticleMapTag::where('article_id',$article->id)->delete();
         }
-        ArticleMapTag::where('article_id',$article->id)->delete();
         $article->fill($request->all());
         $article->user_id = $this->user()->id;
         $article->save();
-        if($request->tags){
-            foreach ($request->tags as $v){
-                if(Tag::where([['name',$v],['user_id',$this->user()->id]])->first() !== null){
-                    $tag = Tag::where([
-                        ['name',$v],
-                        ['user_id',$this->user()->id]
-                    ])->first();
-                    $tag->num = $tag->num+1;
-                }else{
-                    $tag = new Tag();
-                    $tag -> user_id = $this->user()->id;
-                    $tag -> name = $v;
-                    $tag -> num = 1;
+        if($article->target == 0){
+            if($request->tags){
+                foreach ($request->tags as $v){
+                    if(Tag::where([['name',$v],['user_id',$this->user()->id]])->first() !== null){
+                        $tag = Tag::where([
+                            ['name',$v],
+                            ['user_id',$this->user()->id]
+                        ])->first();
+                        $tag->num = $tag->num+1;
+                    }else{
+                        $tag = new Tag();
+                        $tag -> user_id = $this->user()->id;
+                        $tag -> name = $v;
+                        $tag -> num = 1;
+                    }
+                    $tag->save();
+                    $article_map_tag = new ArticleMapTag();
+                    $article_map_tag-> tag_id = $tag->id;
+                    $article_map_tag-> article_id = $article->id;
+                    $article_map_tag->save();
                 }
-                $tag->save();
-                $article_map_tag = new ArticleMapTag();
-                $article_map_tag-> tag_id = $tag->id;
-                $article_map_tag-> article_id = $article->id;
-                $article_map_tag->save();
             }
         }
         return response()->json(['message' => '更新成功'], 201);
@@ -113,10 +119,24 @@ class ArticlesController extends Controller
     public function index(Request $request, Article $article)
     {
         $query = $article->query();
+        switch ($request->order) {
+            case 'recent':
+                $query->recent();
+                break;
 
-        if ($categoryId = $request->category_id) {
-            $query->where('category_id', $categoryId);
+            default:
+                $query->recentReplied();
+                break;
         }
+        $query->where('target','0');
+        $articles = $query->paginate(20);
+
+        return $this->response->paginator($articles, new ArticleTransformer());
+    }
+    public function userIndex(Article $article,$user, Request $request)
+    {
+
+        $query = $article->query();
 
         switch ($request->order) {
             case 'recent':
@@ -128,38 +148,59 @@ class ArticlesController extends Controller
                 break;
         }
         $query->where('target','0');
-        $articles = $query->paginate(6);
-
-        return $this->response->paginator($articles, new ArticleTransformer());
-    }
-    public function userIndex($user, Request $request)
-    {
-        $articles = User::find($user)->articles()->recent()
-            ->paginate(6);
-//        $articles = Article::where('user_id',$user)->recent()
-//            ->paginate(20);
+        $articles = $query->paginate(20);
         return $this->response->paginator($articles, new ArticleTransformer());
     }
 
-    public function categoryIndex($category)
+    public function categoryIndex(Article $article,$category,Request $request)
     {
+        $query = $article->query();
         $category = Category::find($category);
-        if($category != null){
-            $articles = Article::where('category_id',$category->id)->recent()->paginate(8);
+        if($category){
+            $query->where('category_id',$category->id);
+            switch ($request->order) {
+                case 'recent':
+                    $query->recent();
+                    break;
+
+                default:
+                    $query->recentReplied();
+                    break;
+            }
+
+            $query->where('target','0');
+
+            $articles = $query->paginate(20);
+
             return $this->response->paginator($articles, new ArticleTransformer());
         }else{
             return response()->json(['message' => '文章不存在或者没有访问权限'], 404);
         }
 
     }
-    public function tagIndex($tag)
+    public function tagIndex($tag,Article $article,Request $request)
     {
+        $query = $article->query();
         $tag = Tag::find($tag);
-        if($tag == null){
-            return response()->json(['message' => '文章不存在或者没有访问权限'], 404);
-        }else{
-            $articles = $tag->Article()->recent()->paginate(8);
+        if($tag){
+            $query->whereIn('id', ArticleMapTag::where('id',$tag->id)->pluck('article_id')->toArray());;
+            switch ($request->order) {
+                case 'recent':
+                    $query->recent();
+                    break;
+
+                default:
+                    $query->recentReplied();
+                    break;
+            }
+
+            $query->where('target','0');
+
+            $articles = $query->paginate(20);
+
             return $this->response->paginator($articles, new ArticleTransformer());
+        }else{
+            return response()->json(['message' => '文章不存在或者没有访问权限'], 404);
         }
     }
     public function show($article)
