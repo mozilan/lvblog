@@ -20,19 +20,17 @@ class ArticlesController extends Controller
         $article->fill($request->all());
         $article->user_id = $this->user()->id;
         $article->save();
-        //如果是公开文章则发布归档
-        if($article->target === 0){
+        if($article->target == 0) {
+            //发布归档
             $archieve = new Archive();
             $archieve->user_id = $this->user()->id;
             $archieve->article_id = $article->id;
             $archieve->title = $article->title;
             $archieve->save();
-        }
-        //发布标签和标签文章对照表
-        if($article->target !=1) {
+            //发布标签和标签文章对照表
             if ($request->tags) {
                 foreach ($request->tags as $v) {
-                    if (Tag::where([['name', $v], ['user_id', $this->user()->id]])->first() !== null) {
+                    if (Tag::where([['name', $v], ['user_id', $this->user()->id]])->first() != null) {
                         $tag = Tag::where([
                             ['name', $v],
                             ['user_id', $this->user()->id]
@@ -59,7 +57,7 @@ class ArticlesController extends Controller
         $this->authorize('update', $this->user());
         $article = Article::find($article);
         //删除标签和标签文章对照表
-        if($article->target !=1){
+        if($article->target == 0 ){
             if($article_map_tag = ArticleMapTag::where('article_id',$article->id)->get()){
                 foreach ($article_map_tag as $v){
                     $tag = Tag::find($v->tag_id);
@@ -77,14 +75,14 @@ class ArticlesController extends Controller
         $article->user_id = $this->user()->id;
         $article->save();
         //如果不是公开文章则删除归档
-        if($article->target !== 0 ){
+        if($article->target != 0 ){
             Archive::where('article_id',$article->id)->delete();
         }
-        if($article->target !== 1 ){
+        if($article->target == 0 ){
             //发布标签和标签文章对照表
             if($request->tags){
                 foreach ($request->tags as $v){
-                    if(Tag::where([['name',$v],['user_id',$this->user()->id]])->first() !== null){
+                    if(Tag::where([['name',$v],['user_id',$this->user()->id]])->first() != null){
                         $tag = Tag::where([
                             ['name',$v],
                             ['user_id',$this->user()->id]
@@ -102,6 +100,12 @@ class ArticlesController extends Controller
                     $article_map_tag-> tag_id = $tag->id;
                     $article_map_tag-> article_id = $article->id;
                     $article_map_tag->save();
+                    //发布归档
+                    $archieve = new Archive();
+                    $archieve->user_id = $this->user()->id;
+                    $archieve->article_id = $article->id;
+                    $archieve->title = $article->title;
+                    $archieve->save();
                 }
             }
         }

@@ -6,7 +6,8 @@
                 <span>LvBlog-小白板</span>
             </div>
             <div class="text">
-                LvBlog 是我们应用的名称，“L” 是 Laravel 的缩写 , “v” 是 Vue 的缩写，本项目是基于 Laravel 5.8 + Vue 2 开发， 实现了 API 驱动和前后端分离，支持响应式的单页面博客类 WEB 应用。
+                {{configs.notice}}
+                <!--LvBlog 是我们应用的名称，“L” 是 Laravel 的缩写 , “v” 是 Vue 的缩写，本项目是基于 Laravel 5.8 + Vue 2 开发， 实现了 API 驱动和前后端分离，支持响应式的单页面博客类 WEB 应用。-->
             </div>
             <div class="clear"></div>
         </el-card>
@@ -16,10 +17,11 @@
 <script>
     export default {
         name: 'tag',
-        data () {
-            return {
+        computed:{
+            configs(){
+                return this.$store.getters.getConfigs.data;
             }
-        },
+        }
     }
 </script>
 

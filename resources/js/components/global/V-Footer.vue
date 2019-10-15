@@ -38,19 +38,23 @@
                 </div>
                 <el-col :span="24" class="copyright">
                     <i class="el-icon-caret-right"></i>
-					© 2019-2022<a href="https://www.mozilan.com">·蓝默空间·版权所有</a>
-                   Powered by <span><a href="https://mozilan.com">Mozilan</a></span>
+                    {{configs.copyright}}
+					<!--© 2019-2022·蓝默空间·版权所有-->
+                   Powered by <span><a href="https://mozilan.com">{{configs.author}}</a></span>
                 </el-col>
-                <el-col :span="24" class="copyright run">
-                    <i class="el-icon-loading"></i>
-                    本站已稳定运行23天4时36分22秒
-                </el-col>
+                <template>
+                    <el-col :span="24" class="copyright run">
+                        <i class="el-icon-loading"></i>
+                        {{runtime}}
+                    </el-col>
+                </template>
                 <el-col :span="24" class="copyright run">
                     <i class="el-icon-coordinate"></i>
-                    <a href="http://www.miit.gov.cn/">吉ICP备16007022号-5</a>
+                    <a href="http://www.miit.gov.cn/">{{configs.record}}</a>
                 </el-col>
             </el-card>
         </el-col>
+        <input type="hidden" :name="setTime">
     </div>
 </template>
 
@@ -62,9 +66,43 @@
                 srcList: [
                     'https://mozilan.geekadpt.cn/img/custom/wechat_pub.png',
                     'https://mozilan.geekadpt.cn/img/custom/wechat2.png'
-                ]
+                ],
+                time:'1998-10-22 17:30:00',
+                runtime:''
             }
         },
+        computed:{
+            configs(){
+                return this.$store.getters.getConfigs.data;
+            },
+            setTime(){
+                this.time = this.$store.getters.getConfigs.data.time;
+            }
+        },
+        methods: {
+            show_runtime(time) {
+                let X='',Y='',T='',M='',a='',A='',b='',B='',c='',C='',d='',D='';
+                //毫秒级时间戳转日期格式
+                X = new Date(new Date(time.replace(/-/g, '/')));
+                Y = new Date();
+                T = (Y.getTime() - X.getTime());
+                M = 24 * 60 * 60 * 1000;
+                a = T / M;
+                A = Math.floor(a);
+                b = (a - A) * 24;
+                B = Math.floor(b);
+                c = (b - B) * 60;
+                C = Math.floor((b - B) * 60);
+                D = Math.floor((c - C) * 60);
+                return "本站勉强运行: " + A + "天" + B + "小时" + C + "分" + D + "秒";
+            }
+        },
+        created() {
+            setInterval(()=>
+            {
+                this.runtime =  this.show_runtime(this.time);
+            },1000);
+        }
     }
 </script>
 

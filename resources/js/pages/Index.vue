@@ -16,13 +16,13 @@
         }
 
         .clear-title {
+            border-left: 3px solid #F56C6C;
+            padding-left: 5px;
             margin-top: 15px;
             margin-bottom: 0;
         }
 
         .art-title {
-            border-left: 3px solid #F56C6C;
-            padding-left: 5px;
             cursor: pointer;
         }
 
@@ -178,20 +178,20 @@
                                                 <div class="art-time"><i class="el-icon-time"></i>：{{i.created_at}}</div>
                                                 <div class="lv-clear-both"></div>
                                                 <div class="d-flex align-items-center lv-float-left">
-                                                    <i class="el-icon-collection-tag"></i>
-                                                    <span>：</span>
+                                                    <i class="el-icon-collection-tag"></i>：
                                                     <span v-for="t in i.tag">
-                                                        <router-link :to="{name:'标签文章',params: {tag:t.id},query:{user:i.user_id}}" style="margin: 5px">
+                                                        <router-link :to="{name:'标签文章',params: {tag:t.id},query:{user:i.user_id}}">
                                                             <el-tag size="mini">{{t.name}}</el-tag>
                                                         </router-link>
-                                                    </span>
+                                                </span>
                                                 </div>
                                                 <div class="d-flex align-items-center art-category">
-                                                    <i class="el-icon-folder-opened"></i>
-                                                    <span>：</span>
-                                                    <router-link :to="{name:'分类文章',params: {category:i.category.data.id},query:{user:i.user_id}}">
-                                                        <el-tag size="mini">{{i.category.data.name}}</el-tag>
-                                                    </router-link>
+                                                    <i class="el-icon-folder-opened"></i>：
+                                                    <span>
+                                                        <router-link :to="{name:'分类文章',params: {category:i.category.data.id},query:{user:i.user_id}}">
+                                                            <el-tag size="mini">{{i.category.data.name}}</el-tag>
+                                                        </router-link>
+                                                    </span>
                                                 </div>
                                                 <div class="lv-clear-both"></div>
                                             </el-row>
@@ -233,7 +233,7 @@
                                                                 </router-link>
                                                             </div>
                                                             </el-popover>
-                                                            <div class="view"><i class="el-icon-view"></i>{{i.view_count}}</div>
+                                                            <div class="view"><i class="el-icon-view"></i>&#8194;{{i.view_count}}</div>
                                                         </div>
                                                 </div>
 
@@ -342,30 +342,30 @@
             getArticles(){
                 if(this.$route.params.user !== undefined && this.$route.params.tag ===undefined && this.$route.params.category === undefined)
                 {
-                    const loading = this.$loading({
-                        lock: true,
-                        text: 'Loading',
-                        spinner: 'el-icon-loading',
-                        background: 'rgba(0, 0, 0, 0.7)'
-                    });
-                    setTimeout(() => {
-                        loading.close();
-                    }, 800);
+                    // const loading = this.$loading({
+                    //     lock: true,
+                    //     text: 'Loading',
+                    //     spinner: 'el-icon-loading',
+                    //     background: 'rgba(0, 0, 0, 0.7)'
+                    // });
+                    // setTimeout(() => {
+                    //     loading.close();
+                    // }, 800);
                     console.log("检测到user属性，没检测到tag属性");
                     this.$store.dispatch('clearArticles');
                     this.$store.dispatch('loadArticles',{
                         user:this.$route.params.user ? this.$route.params.user : '',
                     });
                 }else if(this.$route.params.user === undefined && this.$route.params.tag !==undefined && this.$route.params.category ===undefined){
-                    const loading = this.$loading({
-                        lock: true,
-                        text: 'Loading',
-                        spinner: 'el-icon-loading',
-                        background: 'rgba(0, 0, 0, 0.7)'
-                    });
-                    setTimeout(() => {
-                        loading.close();
-                    }, 800);
+                    // const loading = this.$loading({
+                    //     lock: true,
+                    //     text: 'Loading',
+                    //     spinner: 'el-icon-loading',
+                    //     background: 'rgba(0, 0, 0, 0.7)'
+                    // });
+                    // setTimeout(() => {
+                    //     loading.close();
+                    // }, 800);
                     console.log("检测到tag属性");
                     this.$store.dispatch('clearArticles');
                     this.$store.dispatch('loadUserTagArticles',{
@@ -374,15 +374,15 @@
                         page:'',
                     });
                 }else if(this.$route.params.user === undefined&& this.$route.params.tag ===undefined && this.$route.params.category !==undefined){
-                    const loading = this.$loading({
-                        lock: true,
-                        text: 'Loading',
-                        spinner: 'el-icon-loading',
-                        background: 'rgba(0, 0, 0, 0.7)'
-                    });
-                    setTimeout(() => {
-                        loading.close();
-                    }, 800);
+                    // const loading = this.$loading({
+                    //     lock: true,
+                    //     text: 'Loading',
+                    //     spinner: 'el-icon-loading',
+                    //     background: 'rgba(0, 0, 0, 0.7)'
+                    // });
+                    // setTimeout(() => {
+                    //     loading.close();
+                    // }, 800);
                     console.log("检测到cat属性");
                     this.$store.dispatch('clearArticles');
                     this.$store.dispatch('loadUserCategoryArticles',{
@@ -391,15 +391,15 @@
                         page:'',
                     });
                 }else{
-                    const loading = this.$loading({
-                        lock: true,
-                        text: 'Loading',
-                        spinner: 'el-icon-loading',
-                        background: 'rgba(0, 0, 0, 0.7)'
-                    });
-                    setTimeout(() => {
-                        loading.close();
-                    }, 800);
+                    // const loading = this.$loading({
+                    //     lock: true,
+                    //     text: 'Loading',
+                    //     spinner: 'el-icon-loading',
+                    //     background: 'rgba(0, 0, 0, 0.7)'
+                    // });
+                    // setTimeout(() => {
+                    //     loading.close();
+                    // }, 800);
                     this.$store.dispatch('clearArticles');
                     this.$store.dispatch('loadArticles',{
                         user:this.$route.params.user ? this.$route.params.user : '',

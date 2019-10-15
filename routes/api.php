@@ -76,6 +76,9 @@ $api->version('v1', [
         // 指定用户信息
         $api->get('other/{other}', 'UsersController@other')
             ->name('api.other.show');
+        // 获取网站配置信息
+        $api->get('web/configs', 'WebController@config')
+            ->name('api.web.config');
         // 需要 token 验证的接口
         $api->group(['middleware' => 'api.auth'], function($api) {
             // 当前登录用户信息

@@ -26,6 +26,7 @@ import { tags } from './modules/tags'
 import { images } from './modules/images'
 import { articles } from './modules/articles'
 import { archives } from './modules/archieves'
+import { web } from './modules/web'
 /**
  * Export our data store.
  */
@@ -36,6 +37,7 @@ export default new Vuex.Store({
         tags,
         images,
         articles,
-        archives
+        archives,
+        web
     }
 });

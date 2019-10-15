@@ -11,7 +11,7 @@
         <transition name="el-fade-in-linear">
             <div v-show="loading_screen" @click="loading_screen=false" class="loading-screen" v-loading="loadings.bg_loading" :style="{'background-image':bg_url}">
                 <el-avatar v-if="other.avatar !== null" class="loading-avatar" :size="55" :src="other.avatar"></el-avatar><el-avatar class="loading-avatar" :size="55"  v-if="other.avatar===null">{{other.name}}</el-avatar>
-                <div class="loading-introduction"><span class="rotate">{{other.name}}</span><span v-if="other.introduction!==null">{{'--'+other.introduction}}</span></div>
+                <div class="loading-introduction"><span class="rotate">{{other.name}}</span><span v-if="other.introduction">{{'--'+other.introduction}}</span></div>
             </div>
         </transition>
         <transition name="el-fade-in-linear">
@@ -362,7 +362,7 @@
         mounted(){
             setTimeout(()=>{
                 this.loading_screen = false;
-            },100000);
+            },5000);
             this.changeUserTag();
             //背景图片加载loading;
             let bgImg = new Image();
@@ -1116,14 +1116,14 @@
         position: absolute;
         left: 50%;
         top: 50%;
-        font-size: 15px;
+        font-size: 16px;
         width: 100%;
         text-align: center;
     }
     #frontpage{
         position: relative;
         width: 550px;
-        background-color: #9da0a5;
+        background-color: #28262c;
         text-align: right;
         padding: 15px;
         margin: 0px auto;
@@ -1131,7 +1131,9 @@
         background-size: contain;
         background-repeat: no-repeat;
     }
-
+    #frontpage .h3{
+        font-size: 18px;
+    }
     .front-img{
         width: 100%;
         min-height: 150px;
@@ -1195,7 +1197,10 @@
         padding: 15px 0px;
         margin: 0px;
     }
-
+    #menu-container li , #menu-container  li span {
+        /*display: none;*/
+        padding-right: 10px;
+    }
 
     ul.nav-menu li {
         position: relative;
@@ -1247,9 +1252,8 @@
     }
 
     ul.nav-menu li span {
-        padding-right: 25px;
         border-right: 2px solid #e1c03a;
-        margin-right: 15px;
+        margin-right: 0;
         /*text-transform: uppercase;*/
     }
 
@@ -2044,8 +2048,22 @@
         }
         #frontpage {
             width: auto;
-            text-align: center;
             margin: 0px 15px;
+        }
+        ul.nav-menu li span {
+            border-right: 0;
+            margin-right: 15px;
+            /*text-transform: uppercase;*/
+        }
+        ul.nav-menu li:hover span,
+        ul.nav-menu li.selected span {
+            border-right: 0;
+        }
+        ul.nav-menu li{
+            padding: 5px;
+        }
+        .main .is-always-shadow{
+            padding: 0 10px;
         }
         #namecard {
             text-align: center;
@@ -2063,8 +2081,9 @@
             min-height: 60px;
             padding: 0px;
         }
-        ul.nav-menu li span {
+        #menu-container li , #menu-container  li span {
             /*display: none;*/
+            padding-right: 0;
         }
         ul.nav-menu li {
             width: 25%;
@@ -2119,26 +2138,4 @@
             float: none;
         }
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 </style>

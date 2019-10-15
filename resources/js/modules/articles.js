@@ -19,7 +19,13 @@ export const articles = {
         //分类
         articles: '',
         articlesLoadStatus:0,
-        article: '',
+        article: {
+            data:{
+                user:{
+                    data:{}
+                }
+            }
+        },
         articleLoadStatus:0,
         articleAddStatus:0,
         articleAddResponseMessages:'',

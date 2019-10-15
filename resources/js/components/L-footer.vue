@@ -34,7 +34,12 @@
 
 <script>
 export default {
-  name: 'Lfooter'
+  	name: 'Lfooter',
+	computed:{
+		configs(){
+			return this.$store.getters.getConfigs;
+		}
+	}
 }
 </script>
 

@@ -68,6 +68,13 @@
             Register,
             Login,
             Notification,
+        },created() {
+            this.$store.dispatch('loadConfigs');
+        },
+        computed:{
+            configs(){
+                return this.$store.getters.getConfigs;
+            }
         }
     }
 </script>
