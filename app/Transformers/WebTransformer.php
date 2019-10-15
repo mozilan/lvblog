@@ -13,6 +13,7 @@ class WebTransformer extends TransformerAbstract
             'title' => $web->title,
             'notice' => $web->notice,
             'message' => $web->message,
+            'urgent_message' => $web->urgent_message,
             'author' => $web->author,
             'copyright' => $web->copyright,
             'record' => $web->record,

@@ -34,7 +34,19 @@ export const users = {
         loginErrors:'',
         // 存储token
         Authorization: localStorage.getItem('Authorization') ? localStorage.getItem('Authorization') : '',
-        user: {},
+        user: {
+            data:{
+                id:11,
+                name:'Mozilan',
+                email:null,
+                avatar:'',
+                bound_phone:false,
+                bound_oauth:'github',
+                created_at:'2019-10-15 20:26:11',
+                updated_at:'2019-10-15 20:26:11',
+                introduction:'',
+            }
+        },
         userLoadStatus:0,
         logoutStatus:0,
         userProfileUpdateStatus:'',

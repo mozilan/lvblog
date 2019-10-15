@@ -10,6 +10,9 @@
         top: 0;
         right: 0;
     }
+    .tag{
+        margin-right: 5px;
+    }
         img.tag {
             width: 16px;
             height: 16px;
@@ -181,7 +184,7 @@
                                                     <i class="el-icon-collection-tag"></i>：
                                                     <span v-for="t in i.tag">
                                                         <router-link :to="{name:'标签文章',params: {tag:t.id},query:{user:i.user_id}}">
-                                                            <el-tag size="mini">{{t.name}}</el-tag>
+                                                            <el-tag size="mini" class="tag">{{t.name}}</el-tag>
                                                         </router-link>
                                                 </span>
                                                 </div>

@@ -6,7 +6,7 @@
                 <div class="block">
                     <el-timeline v-for="(activity, index) in archives.data">
                         <el-timeline-item :timestamp="activity.created_at" placement="top">
-                            <router-link :to="{name:'查看文章',params: {art_id:activity.article_id}}" tag="span">
+                            <router-link :to="{name:'查看文章',params: {art_id:activity.article_id}}">
                                 <el-card>
                                     <h4> {{activity.title}}</h4>
                                     <p>{{activity.user.data.name}} 提交于 {{activity.created_at}}</p>

@@ -11,7 +11,9 @@
         top: 0;
         right: 0;
     }
-
+    .tag{
+        margin-right: 5px;
+    }
     img.tag {
         width: 16px;
         height: 16px;
@@ -223,13 +225,7 @@
                                 infinite-scroll-disabled="disabled">
                             <li v-for="(i , index) in articles.data">
                                 <el-row class="art-item">
-                                    <el-popover
-                                            placement="bottom"
-                                            width="200"
-                                            trigger="hover">
-                                        <router-link :to="{name:'编辑文章',params: {art:i.id,user:i.user_id}}" ><el-button>编辑</el-button></router-link>
-                                        <el-button @click="deleteArticle(i.id)">删除</el-button>
-                                    <el-card shadow="hover" slot="reference">
+                                    <el-card shadow="hover">
                                         <h5 class="clear-title"><router-link :to="{name:'查看文章',params: {art_id:i.id}}" tag="span" class="art-title">{{i.title}}</router-link></h5>
                                         <el-row class="art-info d-flex align-items-center justify-content-start">
                                             <div class="art-time"><i class="el-icon-time"></i>：{{i.created_at}}</div>
@@ -238,7 +234,7 @@
                                                 <i class="el-icon-collection-tag"></i>：
                                                 <span v-for="t in i.tag">
                                                         <router-link :to="{name:'标签文章',params: {tag:t.id},query:{user:i.user_id}}">
-                                                            <el-tag size="mini">{{t.name}}</el-tag>
+                                                            <el-tag size="mini" class="tag">{{t.name}}</el-tag>
                                                         </router-link>
                                                 </span>
                                             </div>
@@ -261,11 +257,11 @@
                                                 </div>
                                             </el-image></div>
                                             <div class="side-abstract">
-                                                <div class="art-abstract">
-                                                    <router-link :to="{name:'查看文章',params: {art_id:i.id}}" tag="span">
+                                                <router-link :to="{name:'查看文章',params: {art_id:i.id}}">
+                                                    <div class="art-abstract">
                                                         {{i.excerpt}}
-                                                    </router-link>
-                                                </div>
+                                                    </div>
+                                                </router-link>
                                                 <div class="art-more">
                                                     <router-link :to="{name:'查看文章',params: {art_id:i.id}}" tag="span">
                                                         <el-button plain  class="art-more-button">阅读全文</el-button>
@@ -278,7 +274,6 @@
 
                                         </el-row>
                                     </el-card>
-                                    </el-popover>
                                     <img v-show="index <= 3" class="star" src="../../assets/star.png" />
                                 </el-row>
                             </li>

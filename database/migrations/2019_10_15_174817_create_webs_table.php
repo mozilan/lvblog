@@ -18,6 +18,7 @@ class CreateWebsTable extends Migration
             $table->string('title')->nullable()->comment('站点标题');
             $table->string('notice')->nullable()->comment('站点公告');
             $table->string('message')->nullable()->comment('站点通知');
+            $table->string('urgent_message')->nullable()->comment('站点通知');
             $table->string('copyright')->nullable()->comment('版权信息');
             $table->string('author')->nullable()->comment('网站作者');
             $table->string('record')->nullable()->comment('备案信息');

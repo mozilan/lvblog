@@ -390,7 +390,7 @@
                this.$store.dispatch('loadCategories',{
                     id:this.$store.getters.getUser.id,
                });
-               if(this.$route.params.art){
+               if(this.$route.params.art && (this.$route.query.user == this.$store.getters.getUser.id )){
                    this.$store.dispatch('loadArticle',{
                        art_id : this.$route.params.art
                    });
@@ -408,12 +408,15 @@
                            }
                            this.form.public = article.target === 0 ? true : false;
                            this.ffl_input = 'ffl-wrapper bl-margin_bottom-title ffl-floated';
-
                        }
                        else if(this.$store.getters. getArticleLoadStatus() === 3) {
                            this.$message.error('文章不存在或网络连接失败');
                        }
                    });
+               }else {
+                   if(this.$route.params.art){
+                       this.$message.warning('不要抄袭别人的文章哦！来自己写一篇叭～')
+                   }
                }
                var h = window.innerHeight-430;//可见区域高度
                this.form_style.height = h+'px';

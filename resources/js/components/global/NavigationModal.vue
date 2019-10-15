@@ -29,8 +29,8 @@
         <h5 class="bl-logo "><a id="index" href="/">{{configs.title}}</a></h5>
         <el-menu :default-active="activeIndex" class="el-menu-blumer" mode="horizontal" @select="handleSelect">
             <el-menu-item index="1"><router-link :to="{ name:'首页' }"><i class="el-icon-s-home"></i>首页</router-link></el-menu-item>
-            <el-menu-item index="9"><router-link :to="{ name:'文章' }"><i class="el-icon-notebook-2"></i>博客</router-link></el-menu-item>
-            <el-menu-item index="2"><router-link :to="{ name:'写作' }"><i class="el-icon-edit"></i>写博客</router-link></el-menu-item>
+            <el-menu-item index="9"><router-link :to="{ name:'文章' }"><i class="el-icon-notebook-2"></i>博客园</router-link></el-menu-item>
+            <el-menu-item index="2"><router-link :to="{ name:'写作',query:{user:user.id} }"><i class="el-icon-edit"></i>写博客</router-link></el-menu-item>
             <el-menu-item index="6" @click="register" v-if="tokenStatus === '' " icon="el-icon-promotion"><i class="el-icon-circle-plus-outline"></i>注册</el-menu-item>
             <el-menu-item index="7" @click="login" v-if="tokenStatus === '' " icon="el-icon-user"><i class="el-icon-user"></i>登录</el-menu-item>
             <el-submenu index="8" v-if="tokenStatus !== '' ">

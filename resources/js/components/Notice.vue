@@ -19,6 +19,26 @@
         name: 'tag',
         computed:{
             configs(){
+                let configs = this.$store.getters.getConfigs.data;
+                let hasMessage =  localStorage.getItem('Message');
+                let hasUrgentMessage = localStorage.getItem('UrgentMessage');
+                if(configs.message && !hasMessage){
+                    localStorage.setItem('Message', 1);
+                    this.$notify({
+                        title: '你好,',
+                        message: configs.message,
+                        type: 'info'
+                    });
+                }
+                if(configs.urgent_message && !hasUrgentMessage){
+                    localStorage.setItem('UrgentMessage',1);
+                    this.$notify({
+                        title: '紧急通知',
+                        message: configs.urgent_message,
+                        type: 'warning',
+                        offset: 100
+                    });
+                }
                 return this.$store.getters.getConfigs.data;
             }
         }
