@@ -282,7 +282,7 @@
     </el-row>
 </template>
 <script>
-    import Friend from '../components/friend'
+    import Friend from '../components/Friend'
     import Oauth from '../components/Oauth'
     import Recommend from '../components/Recommend'
     import HotComment from '../components/HotComment'

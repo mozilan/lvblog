@@ -28,26 +28,52 @@ export const web = {
             }
         },
         configsLoadStatus:0,
+        friends:{
+            data:{
+                name:'',
+                avatar:'',
+                description:'',
+                owner:'',
+            }
+        },
+        setFriendsLoadStatus:''
     },
     actions:{
         loadConfigs({commit}){
-            commit('setConfigLoadStatus',1);
+            commit('setConfigsLoadStatus',1);
             WebAPI.getConfigs()
                 .then(function (response) {
                     commit('setConfigs', response.data);
-                    commit('setConfigLoadStatus', 2);
+                    commit('setConfigsLoadStatus', 2);
                 })
                 .catch(function (error){
-                    commit('setConfigLoadStatus', 3);
+                    commit('setConfigsLoadStatus', 3);
+                });
+        },
+        loadFriends({commit}){
+            commit('setFriendsLoadStatus',1);
+            WebAPI.getFriends()
+                .then(function (response) {
+                    commit('setFriends', response.data);
+                    commit('setFriendsLoadStatus', 2);
+                })
+                .catch(function (error){
+                    commit('setFriendsLoadStatus', 3);
                 });
         },
     },
     mutations:{
-        setConfigLoadStatus(state,status){
+        setConfigsLoadStatus(state,status){
             state.configsLoadStatus = status;
         },
         setConfigs(state,configs){
             state.configs = configs;
+        },
+        setFriendsLoadStatus(state,status){
+            state.friendsLoadStatus = status;
+        },
+        setFriends(state,friends){
+            state.friends = friends;
         },
     },
     getters:{
@@ -56,6 +82,12 @@ export const web = {
         },
         getConfigsLoadStatus(state){
             return state.configsLoadStatus;
+        },
+        getFriends(state){
+            return state.friends;
+        },
+        getsetFriendsLoadStatus(state){
+            return state.setFriendsLoadStatus;
         },
     }
 };

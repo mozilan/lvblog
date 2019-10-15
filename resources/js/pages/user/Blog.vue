@@ -295,7 +295,7 @@
     </el-row>
 </template>
 <script>
-    import Friend from '../../components/friend'
+    import Friend from '../../components/Friend'
     import Tag from '../../components/User/Tag'
     import FTag from '../../components/SmallCreen/Tag'
     import Category from '../../components/User/Category'

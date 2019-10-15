@@ -7,4 +7,7 @@ export default {
     getConfigs: function(){
         return axios.get(LVBLOG_CONFIG.API_URL + '/web/configs');
     },
+    getFriends: function () {
+        return axios.get(LVBLOG_CONFIG.API_URL + '/web/friends');
+    }
 }
