@@ -238,7 +238,7 @@
                                                 <i class="el-icon-collection-tag"></i>
                                                 <span>：</span>
                                                 <span v-for="t in i.tag">
-                                                    <router-link :to="{name:'标签文章',params: {user:t.user_id,tag:t.id}}" style="margin: 5px">
+                                                    <router-link :to="{name:'标签文章',params: {tag:t.id},query:{user:i.user_id}}" style="margin: 5px">
                                                         <el-tag size="mini">{{t.name}}</el-tag>
                                                     </router-link>
                                                 </span>
@@ -247,7 +247,7 @@
                                                 <i class="el-icon-folder-opened"></i>
                                                 <span>：</span>
                                                 <span>
-                                                    <router-link :to="{name:'分类文章',params: {user:i.user_id,category:i.category.data.id}}" >
+                                                    <router-link :to="{name:'分类文章',params: {category:i.category.data.id},query:{user:i.user_id}}" >
                                                         <el-tag size="mini">{{i.category.data.name}}</el-tag>
                                                     </router-link>
                                                 </span>
