@@ -214,6 +214,57 @@ class ArticlesController extends Controller
             return response()->json(['message' => '文章不存在或者没有访问权限'], 404);
         }
     }
+    public function draftIndex(Article $article,Request $request)
+    {
+        $user = $this->user;
+        $query = $article->query();
+
+        if ($query->where('user_id', $user->id)) {
+            switch ($request->order) {
+                case 'recent':
+                    $query->recent();
+                    break;
+
+                default:
+                    $query->recentReplied();
+                    break;
+            }
+            $query->where('target', '1');
+
+            $articles = $query->paginate(20);
+
+            return $this->response->paginator($articles, new ArticleTransformer());
+        }else{
+            return response()->json(['message' => '文章不存在或者没有访问权限'], 404);
+        }
+
+    }
+    public function privateIndex(Article $article,Request $request)
+    {
+        $user = $this->user;
+        $query = $article->query();
+
+        if ($query->where('user_id', $user->id)) {
+            switch ($request->order) {
+                case 'recent':
+                    $query->recent();
+                    break;
+
+                default:
+                    $query->recentReplied();
+                    break;
+            }
+            $query->where('target', '2');
+
+            $articles = $query->paginate(20);
+
+            return $this->response->paginator($articles, new ArticleTransformer());
+        }else{
+            return response()->json(['message' => '文章不存在或者没有访问权限'], 404);
+        }
+
+    }
+
     public function show($article)
     {
         $article = Article::find($article);

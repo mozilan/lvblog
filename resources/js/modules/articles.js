@@ -76,6 +76,38 @@ export const articles = {
                     commit('setArticleLoadStatus', 3);
             });
         },
+        loadDraftArticles({commit,state},data){
+            commit('setArticleLoadStatus',1);
+            ArticleAPI.getDraftArticles(data)
+                .then(function (response) {
+                    if(state.articles.data !== undefined){
+                        var merge_data = state.articles.data.concat(response.data.data);
+                        response.data.data = merge_data;
+                        commit('setArticles',response.data);
+                    }
+                    commit('setArticles',response.data);
+                    commit('setArticlesLoadStatus', 2);
+                })
+                .catch(function (error){
+                    commit('setArticleLoadStatus', 3);
+                });
+        },
+        loadPrivateArticles({commit,state},data){
+            commit('setArticleLoadStatus',1);
+            ArticleAPI.getPrivateArticles(data)
+                .then(function (response) {
+                    if(state.articles.data !== undefined){
+                        var merge_data = state.articles.data.concat(response.data.data);
+                        response.data.data = merge_data;
+                        commit('setArticles',response.data);
+                    }
+                    commit('setArticles',response.data);
+                    commit('setArticlesLoadStatus', 2);
+                })
+                .catch(function (error){
+                    commit('setArticleLoadStatus', 3);
+                });
+        },
         loadUserCategoryArticles({commit,state},data){
             commit('setArticleLoadStatus',1);
             ArticleAPI.getUserCategoryArticles(data.category,data.page)

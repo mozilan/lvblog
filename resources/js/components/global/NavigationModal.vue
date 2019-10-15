@@ -38,7 +38,9 @@
                     <el-avatar v-if="user.avatar===null" style="width: 40px; height: 40px;border:3px solid #409eff;border-radius:30px">{{user.name}}</el-avatar>
                     <el-image v-if="user.avatar!==null" style="width: 40px; height: 40px;border:3px solid #409eff;border-radius:30px" :src="user.avatar"></el-image>
                 </template>
-                <el-menu-item index="9"><router-link :to="{ name:'用户文章',params:{'user':user.id ? user.id:''},query:{user:user.id}}">我的博客</router-link></el-menu-item>
+                <el-menu-item index="9"><router-link :to="{ name:'我的文章',params:{'owner':user.id ? user.id:''},query:{user:user.id}}">我的博客</router-link></el-menu-item>
+                <el-menu-item index="9"><router-link :to="{ name:'私有文章',params:{'private':user.id ? user.id:''},query:{user:user.id}}">私有文章</router-link></el-menu-item>
+                <el-menu-item index="9"><router-link :to="{ name:'草稿箱',params:{'draft':user.id ? user.id:''},query:{user:user.id}}">草稿箱</router-link></el-menu-item>
                 <!--<el-menu-item index="3"><router-link :to="{ name:'关于我' }">关于我</router-link></el-menu-item>-->
                 <el-menu-item index="2"><router-link :to="{ name:'归档',params:{'user':user.id?user.id:1}}">我的归档</router-link></el-menu-item>
                 <el-menu-item index="8-2"><router-link :to="{ name:'主页' ,params:{'user':user.id?user.id:1},query:{user:user.id}}">个人中心</router-link></el-menu-item>

@@ -107,6 +107,12 @@ $api->version('v1', [
             // 当前登录用户权限
             $api->get('user/permissions', 'PermissionsController@index')
                 ->name('api.user.permissions.index');
+            //获取用户草稿箱下所有文章
+            $api->get('drafts/articles', 'ArticlesController@draftIndex')
+                ->name('api.user.draft.articles.show');
+            //获取用户私有文章
+            $api->get('privates/articles', 'ArticlesController@privateIndex')
+                ->name('api.user.private.articles.show');
         });
     });
 });

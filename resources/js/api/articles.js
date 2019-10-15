@@ -20,6 +20,12 @@ export default {
 
         });
     },
+    getDraftArticles: function(data){
+        return axios.get(LVBLOG_CONFIG.API_URL + '/drafts/articles'+'?include=user,category&&page='+data.page );
+    },
+    getPrivateArticles: function(data){
+        return axios.get(LVBLOG_CONFIG.API_URL + '/privates/articles'+'?include=user,category&&page='+data.page );
+    },
     getUserCategoryArticles: function(category,page){
 
         return axios.get(LVBLOG_CONFIG.API_URL + '/categories/'+category+'/articles'+'?include=user,category&&page='+page ,{

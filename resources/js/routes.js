@@ -94,7 +94,7 @@ export default new VueRouter({
                         {
                             path: 'user/:user',
                             name: '用户文章',
-                            components: Vue.component( 'Blog-User', require( './pages/Blog' ) )
+                            components: Vue.component( 'Blog-User', require( './pages/Blog' ))
                         },
                         {
                             path: 'tag/:tag',
@@ -105,6 +105,31 @@ export default new VueRouter({
                             path: 'category/:category',
                             name: '分类文章',
                             components: Vue.component( 'Blog-Category', require( './pages/Blog' ) )
+                        },
+                    ]
+                },
+                {
+                    path: 'manager',
+                    name: '文章管理',
+                    components: Vue.component( 'Blog', require( './pages/user/Blog' ) ),
+                    children: [
+                        {
+                            path: 'owner/:owner',
+                            name: '我的文章',
+                            components: Vue.component( 'Blog-MyBlog', require( './pages/user/Blog' ) ),
+                            beforeEnter: requireAuth,
+                        },
+                        {
+                            path: 'private/:private',
+                            name: '私有文章',
+                            components: Vue.component( 'Blog-Private', require( './pages/user/Blog' ) ),
+                            beforeEnter: requireAuth,
+                        },
+                        {
+                            path: 'draft/:draft',
+                            name: '草稿箱',
+                            components: Vue.component( 'Blog-Draft', require( './pages/user/Blog' ) ),
+                            beforeEnter: requireAuth,
                         }
                     ]
                 },
