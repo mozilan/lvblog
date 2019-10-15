@@ -356,15 +356,15 @@
             getArticles(){
                 if(this.$route.params.owner !== undefined && this.$route.params.draft ===undefined && this.$route.params.private === undefined)
                 {
-                    const loading = this.$loading({
-                        lock: true,
-                        text: 'Loading',
-                        spinner: 'el-icon-loading',
-                        background: 'rgba(0, 0, 0, 0.7)'
-                    });
-                    setTimeout(() => {
-                        loading.close();
-                    }, 800);
+                    // const loading = this.$loading({
+                    //     lock: true,
+                    //     text: 'Loading',
+                    //     spinner: 'el-icon-loading',
+                    //     background: 'rgba(0, 0, 0, 0.7)'
+                    // });
+                    // setTimeout(() => {
+                    //     loading.close();
+                    // }, 800);
                     console.log("没有检测到any属性");
                     this.$store.dispatch('clearArticles');
                     this.$store.dispatch('loadArticles',{

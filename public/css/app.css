@@ -20,3 +20,8 @@ html .lv-float-left {
   }
 }
 
+html .el-avatar > img {
+  height: 100%;
+  width: 100%;
+}
+

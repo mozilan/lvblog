@@ -6,7 +6,7 @@
                 title="hello～"
                 width="200"
                 trigger="hover"
-                content="点击查看我的主页哦～">
+                content="点击图片进入我的家～">
         </el-popover>
         <transition name="el-fade-in-linear">
             <div v-show="loading_screen" @click="loading_screen=false" class="loading-screen" v-loading="loadings.bg_loading" :style="{'background-image':bg_url}">
@@ -19,7 +19,7 @@
                 <div class="shadow-img"></div>
                 <img style="visibility: hidden" src="../../assets/images/front-image.jpg" class="front-img img-responsive" :alt ="other.name">
                 <h3 class="profile ajust-frontpage-avatar"><img v-if="other.avatar!==null" class="front-avatar transparent" :src="other.avatar" alt=""><el-avatar style="width: 40px; height: 40px;border:3px solid #409eff;border-radius:30px" v-if="other.avatar===null">{{other.name}}</el-avatar><span class="invert name">{{other.name}}</span></h3><!--PROFILE NAME-->
-                <h3 class="invert" style="margin-top: -10px; margin-bottom: 10px;">蓝默空间-<span class="rotate">在我的空间里闪耀！</span></h3> <!--SUBTITLE IN PROFILE-->
+                <h3 class="invert" style="margin-top: -10px; margin-bottom: 10px;">蓝默空间-<span class="rotate">全宇宙将为你闪烁！</span></h3> <!--SUBTITLE IN PROFILE-->
                 <div class="frontclick"><img src="../../assets/images/click.png" alt="" class="img-responsive"><span class="pulse"></span></div>
             </div>
         </transition>
@@ -302,12 +302,6 @@
                 main_style:{
                     height:'',
                 },
-                // namecard_style:{
-                //     backgroundImage:""
-                // },
-                // title_style:{
-                //     backgroundImage:""
-                // },
                 activeName:'first',
                 activeNameEditor:'firstEditor',
                 activeNameC:'1',
@@ -368,7 +362,7 @@
         mounted(){
             setTimeout(()=>{
                 this.loading_screen = false;
-            },6000);
+            },100000);
             this.changeUserTag();
             //背景图片加载loading;
             let bgImg = new Image();
@@ -1110,6 +1104,7 @@
         background-color: #ffffff;
     }
     .loading-avatar{
+        border: 4px solid #E6A23C;
         transform: translate(-50%, -50%);
         position: absolute;
         left: 50%;
@@ -1128,7 +1123,7 @@
     #frontpage{
         position: relative;
         width: 550px;
-        background-color: #a3cef6;
+        background-color: #9da0a5;
         text-align: right;
         padding: 15px;
         margin: 0px auto;

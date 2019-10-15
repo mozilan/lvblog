@@ -356,15 +356,15 @@
             getArticles(){
                 if(this.$route.params.user !== undefined && this.$route.params.tag ===undefined && this.$route.params.category === undefined)
                 {
-                    const loading = this.$loading({
-                        lock: true,
-                        text: 'Loading',
-                        spinner: 'el-icon-loading',
-                        background: 'rgba(0, 0, 0, 0.7)'
-                    });
-                    setTimeout(() => {
-                        loading.close();
-                    }, 800);
+                    // const loading = this.$loading({
+                    //     lock: true,
+                    //     text: 'Loading',
+                    //     spinner: 'el-icon-loading',
+                    //     background: 'rgba(0, 0, 0, 0.7)'
+                    // });
+                    // setTimeout(() => {
+                    //     loading.close();
+                    // }, 800);
                     // console.log("检测到user属性，没检测到tag属性");
                     this.$store.dispatch('clearArticles');
                     this.$store.dispatch('loadArticles',{
