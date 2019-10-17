@@ -229,7 +229,7 @@
                             <div class='tabs tabs_animate'>
                                 <!--RESUME TAB LISTS-->
                                 <el-tabs v-model="activeNameEditor">
-                                    <el-tab-pane label="技能管理" name="firstEditor"><!--RESUME FIRST TAB/SKILL TAB DETAILS-->
+                                    <el-tab-pane label="资料管理" name="firstEditor"><!--RESUME FIRST TAB/SKILL TAB DETAILS-->
                                         <div id='tab-edit-1'>
                                             <h3 class="title">编辑资料</h3><!--SKILLS WITH BAR DISPLAY-->
                                             <effect-input class="effect-input" v-model="editor.name" type="ichiro" label="修改昵称" name="昵称"></effect-input>
@@ -248,7 +248,7 @@
                                         </div><!--RESUME FIRST TAB/SKILL TAB DETAILS ENDS-->
                                         <el-button class="edit-profile-button" type="primary" @click="updateUserProfile">更新资料</el-button>
                                     </el-tab-pane>
-                                    <el-tab-pane label="文章管理" name="secondEditor">
+                                    <el-tab-pane label="技能管理" name="secondEditor">
                                         <!--RESUME SECOND TAB/EDUCATION TAB DETAILS-->
                                         <div id='tab-edit-2'>
                                             <h3 class="title">开发中...</h3>

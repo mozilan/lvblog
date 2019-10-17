@@ -1,8 +1,8 @@
 window._ = require('lodash');
-
-try {
-    window.$ = window.jQuery = require('jquery');
-} catch (e) {}
+//
+// try {
+//     window.$ = window.jQuery = require('jquery');
+// } catch (e) {}
 
 /**
  * We'll load the axios HTTP library which allows us to easily issue requests
@@ -37,6 +37,9 @@ if (token) {
 } else {
     console.error('CSRF token not found: https://laravel.com/docs/csrf#csrf-x-csrf-token');
 }
+import $ from 'jquery'
+window.$ = $;
+window.jQuery = $;
 
 import Vue from 'vue';
 import ElementUI from 'element-ui';
@@ -44,7 +47,6 @@ import 'element-ui/lib/theme-chalk/index.css';
 import router from './routes.js'
 import store from './store.js'
 import hljs from 'highlight.js'
-import $ from   'jquery'
 //封装成一个指令
 Vue.directive('highlight', (el) => {
     let blocks = el.querySelectorAll('pre code');

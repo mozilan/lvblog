@@ -3,7 +3,7 @@
         <el-col class="tag">
             <el-card class="box-card">
                 <div slot="header" class="d-flex align-items-center">
-                    <i class="el-icon-folder-opened"></i>
+                    <i class="el-icon-mobile-phone"></i>
                     <span>联系我们</span>
                 </div>
                 <div class="lv-clear-both"></div>
