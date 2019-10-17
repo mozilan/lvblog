@@ -6,9 +6,12 @@ use App\Http\Requests\Api\ArticleRequest;
 use App\Models\Archive;
 use App\Models\Article;
 use App\Models\Category;
+use App\Models\Recommend;
 use App\Models\Tag;
 use App\Models\ArticleMapTag;
 use App\Transformers\ArticleTransformer;
+use App\Transformers\RecommendTransformer;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Models\User;
 
@@ -268,7 +271,24 @@ class ArticlesController extends Controller
         }
 
     }
+    public function recommendIndex()
+    {
+        $recommendArticles = Recommend::whereDate('created_at', '=', Carbon::now()->toDateString())->get();
+        if($recommendArticles->first()){
+            return $this->response->collection($recommendArticles, new RecommendTransformer());
+        }else{
+            return response()->json(['message' => '今天没有推荐文章'], 404);
+        }
 
+    }
+    public function viewUpdate($article)
+    {
+        $article = Article::find($article);
+        if($article){
+            ++$article->view_count;
+            $article->save();
+        }
+    }
     public function show($article)
     {
         $article = Article::find($article);
@@ -287,15 +307,6 @@ class ArticlesController extends Controller
             } else {
                 return response()->json(['message' => '文章不存在或者没有访问权限'], 404);
             }
-        }
-    }
-
-    public function viewUpdate($article)
-    {
-        $article = Article::find($article);
-        if($article){
-            ++$article->view_count;
-            $article->save();
         }
     }
 }

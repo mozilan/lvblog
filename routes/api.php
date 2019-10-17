@@ -81,9 +81,11 @@ $api->version('v1', [
         // 获取友情链接信息
         $api->get('web/friends', 'WebController@friendShow')
             ->name('api.web.friend,show');
-        // 增加阅读量
+        // 更新阅读量
         $api->patch('articles/view/{article_id}', 'ArticlesController@viewUpdate')
             ->name('api.articles.view.update');
+        $api->get('recommend/articles', 'ArticlesController@recommendIndex')
+            ->name('api.articles.recommend.show');
         // 需要 token 验证的接口
         $api->group(['middleware' => 'api.auth'], function($api) {
             // 当前登录用户信息

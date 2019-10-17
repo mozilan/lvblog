@@ -1,3 +1,33 @@
+<style scoped lang="scss">
+	.box-card{
+		padding-bottom: 20px;
+	}
+	.box-card .item{
+		padding: 5px 0;
+	}
+	.box-card .item a{
+		text-decoration: none;
+		/*color: #F56C6C;*/
+		margin: 8px auto;
+	}
+	.box-card .name{
+		white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+	}
+	h3.name{
+		margin:0;
+		font-size:16px;
+	}
+	.profile-pic{
+		width: 50px;
+		height: 50px;
+		border-radius: 0;
+		border: 1px solid rgba(255, 255, 255, 0.01);
+		object-fit: cover;
+	}
+	.recommend-item{
+		padding: 0 0 5px 0;
+	}
+</style>
 <template>
 	<el-col class="friend">
 		<el-card class="box-card">
@@ -6,25 +36,21 @@
 				<span>今日推荐</span>
 			</div>
 			<div class="lv-clear-both"></div>
-			<el-col :span="24" v-for="(item, index) in friend_box" style="padding: 5px 0">
-				<div class="lv-clear-both"></div>
-				<el-col :lg="4" :md="6" :sm="6" :xs="4" class="item">
-					<div class="lv-clear-both"></div>
-					<a href="https://mozilan.com">
-						<el-avatar shape="square" :size="40" :src="item.avatar"></el-avatar>
-					</a>
-				</el-col>
-				<el-col :lg="20" :md="18" :sm="20" :xs="18" style="padding-left:10px">
-					<el-col :span="24" class="name">
-						{{item.name}}
+			<el-row type="flex" class="el-col-24 recommend-item" justify="space-between" v-for="item in recommends">
+				<router-link :to="{name:'查看文章',params: {art_id:item.article_id}}">
+					<el-col :span="4">
+						<div class="">
+							<el-image :src="item.article_thumb" alt="Mozilan" class="profile-pic"></el-image>
+						</div>
 					</el-col>
-					<el-col :span="24" style="font-size: 14px" class="name">
-						{{item.des}}
+					<el-col :span="18">
+						<div class="">
+							<h3 title="Mozilan" class="name"> {{item.article_title}}</h3>
+							<span class="name"> {{item.article_description}}</span>
+						</div>
 					</el-col>
-
-				</el-col>
-				<div class="lv-clear-both"></div>
-			</el-col>
+				</router-link>
+			</el-row>
 		</el-card>
 	</el-col>
 </template>
@@ -55,31 +81,17 @@
 			}
 		},
 		created() {
-		}
-		,mounted() {
-			// this.$refs.des.stop();
+			this.$store.dispatch('getRecommendArticles');
+			this.$watch(this.$store.getters.getRecommendArticlesLoadStatus, function () {
+				if(this.$store.getters.getRecommendArticlesLoadStatus() == 3 ){
+					this.$message.error('未获取到今日推荐');
+				}
+			});
 		},
-		methods:{
-			// startScroll(index){
-			// 	this.$refs.des[index].start();
-			// }
+		computed:{
+			recommends(){
+				return this.$store.getters.getRecommendArticles.data;
+			}
 		}
 	}
 </script>
-
-<style scoped lang="scss">
-	.box-card{
-		padding-bottom: 20px;
-	}
-	.box-card .item{
-		padding: 5px 0;
-	}
-	.box-card .item a{
-		text-decoration: none;
-		/*color: #F56C6C;*/
-		margin: 8px auto;
-	}
-	.box-card .name{
-		white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
-	}
-</style>

@@ -33,6 +33,14 @@ export const articles = {
         articleUpdateResponseMessages:'',
         articleDeleteStatus:0,
         updateViewCountStatus:0,
+        recommendArticles:{
+            id:'',
+            article_id:'',
+            article_title:'',
+            article_description:'',
+            article_thumb:'',
+        },
+        recommendArticlesLoadStatus:0,
     },
     actions:{
         loadArticles({commit,state},data ){
@@ -197,6 +205,17 @@ export const articles = {
                 .catch(function(error){
                     commit('setUpdateViewCountStatus',3);
                 });
+        },
+        getRecommendArticles({commit}){
+            commit('setRecommendArticlesLoadStatus',1);
+            ArticleAPI.getRecommendArticles()
+                .then(function (response) {
+                    commit('setRecommendArticles',response.data);
+                    commit('setRecommendArticlesLoadStatus',2);
+                })
+                .catch(function (error) {
+                    commit('setRecommendArticlesLoadStatus',3);
+                })
         }
     },
     mutations:{
@@ -229,7 +248,14 @@ export const articles = {
         },
         setUpdateViewCountStatus(state,status){
             state.updateViewCountStatus = status;
+        },
+        setRecommendArticles(state,articles){
+            state.recommendArticles = articles;
+        },
+        setRecommendArticlesLoadStatus(state,status){
+            state.recommendArticlesLoadStatus = status;
         }
+
     },
     getters:{
         getArticles(state){
@@ -275,6 +301,14 @@ export const articles = {
         },
         getUpdateViewCountStatus(state){
             return state.updateViewCountStatus = status;
+        },
+        getRecommendArticles(state){
+            return state.recommendArticles;
+        },
+        getRecommendArticlesLoadStatus(state){
+            return function () {
+                return state.recommendArticlesLoadStatus;
+            };
         }
     }
 };

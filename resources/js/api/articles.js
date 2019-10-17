@@ -62,5 +62,8 @@ export default {
     },
     patchArticleViewCount: function (data) {
         return axios.patch(LVBLOG_CONFIG.API_URL + '/articles/view/' + data.art_id);
+    },
+    getRecommendArticles: function () {
+        return axios.get(LVBLOG_CONFIG.API_URL + '/recommend/articles')
     }
 }
