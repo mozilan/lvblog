@@ -13,6 +13,13 @@ html .lv-float-left {
   float: left !important;
 }
 
+html .lv-avatar {
+  width: 40px;
+  height: 40px;
+  border: 3px solid #409eff;
+  border-radius: 30px;
+}
+
 @media only screen and (max-width: 683px) {
   html .el-submenu__title,
   html .el-header {

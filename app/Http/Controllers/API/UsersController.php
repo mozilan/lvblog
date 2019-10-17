@@ -23,6 +23,7 @@ class UsersController extends Controller
         }
         $user = User::create([
             'name' => $request->name,
+            'avatar' => 'https://s0.xinger.ink/acgimg/acgurl.php?',
             'phone' => $verifyData['phone'],
             'password' => bcrypt($request->password),
         ]);

@@ -25,11 +25,34 @@
     .lv-jside{
         display: none;
     }
-
+    .lv-jside .profile-pic .el-image{
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        border: 1px solid rgba(255, 255, 255, 0.01);
+        object-fit: cover;
+    }
+    .lv-jside .dim-overlay{
+        z-index: 19980903;
+    }
 </style>
 <style lang="scss">
     .el-menu-item{
         padding: 0 20px;
+    }
+    .lv-jside .menu-container{
+        z-index: 19981022;
+    }
+    button.lv-trigger{
+        -webkit-appearance: none;
+        border: 0;
+        outline: 0;
+        background: transparent;
+        padding: 15px;
+        color: var(--skin-color);
+    }
+    button.lv-trigger:hover{
+        background-color: transparent;
     }
     @media only screen and (max-width: 683px){
         .lv-header{
@@ -58,8 +81,7 @@
                 <el-menu-item index="7" @click="login" v-if="tokenStatus === '' " icon="el-icon-user"><i class="el-icon-user"></i>登录</el-menu-item>
                 <el-submenu index="8" v-if="tokenStatus !== '' ">
                     <template slot="title">
-                        <el-avatar v-if="!user.avatar" style="width: 40px; height: 40px;border:3px solid #409eff;border-radius:30px">{{user.name}}</el-avatar>
-                        <el-image v-if="user.avatar" style="width: 40px; height: 40px;border:3px solid #409eff;border-radius:30px" :src="user.avatar"></el-image>
+                        <el-image v-if="user.avatar" class="lv-avatar" :src="user.avatar"></el-image>
                     </template>
                     <el-menu-item index="8-1"><router-link :to="{ name:'我的文章',params:{'owner':user.id ? user.id:''},query:{user:user.id}}"><i class="el-icon-tickets"></i>我的博客</router-link></el-menu-item>
                     <el-menu-item index="8-2"><router-link :to="{ name:'私有文章',params:{'private':user.id ? user.id:''},query:{user:user.id}}"><i class="el-icon-lock"></i>私有文章</router-link></el-menu-item>
@@ -74,10 +96,10 @@
         <div class="lv-jside">
             <div class="menubar sticky default-skin">
                 <div>
-                    <el-button class="menu-trigger left" icon="el-icon-s-grid"> </el-button>
+                    <el-button class="left lv-trigger" icon="el-icon-s-grid"> </el-button>
                 </div>
-                <div class="logo" title="Your Logo Goes Here">
-                    <a href="#1"><img src="file:///home/wunian/PhpstormProjects/opt/%E4%BE%A7%E8%BE%B9%E6%A0%8F/image/jside-menu.png" alt="jSide Menu"> </a>
+                <div class="logo" title="Logo">
+                    <router-link :to="{ name:'首页' ,params:{'user':user.id?user.id:1},query:{user:user.id}}">{{configs.title}} </router-link>
                 </div>
             </div>
             <div class="menu-head">
@@ -85,12 +107,16 @@
                     <div class="el-col-24">
                         <div class="row for-pic">
                            <div class="profile-pic">
-                           <img src="https://fp1.fghrsh.net/2019/02/14/b0db15fe7ed1cf69fdcc7a86898389a4.jpg!q90.jpeg" alt="Asif Mughal" />
+                           <el-image :src="user.avatar" :alt="user.name">
+                                <div slot="placeholder" class="image-slot">
+                                     <img class="art-banner" src="https://mozilan.geekadpt.cn/img/other/orange.progress-bar-stripe-loader.svg">
+                                </div>
+                           </el-image>
                                  </div>
                           </div>
                                  <div class="row for-name">
-                           <h3 title="User Name"> Asif Mughal </h3>
-                                <span class="tagline"> Tagline text goes here</span>
+                           <h3 :title="user.name"> {{user.name}} </h3>
+                                <span class="tagline"> {{user.introduction}}</span>
                                   </div>
                     </div> <!--//col-->
                   </span>
@@ -99,26 +125,18 @@
             </div>
             <div class="menu-container">
                 <ul class="menu-items">
-                    <li><span class="item-icon"><i class="zmdi zmdi-android"></i></span> <a href="#1"> Main item one </a></li>
-                    <li> <span class="item-icon"> <i class="zmdi zmdi-apple"></i> </span> <a href="#1"> Main item two </a></li>
-                    <li class="has-sub"> <span class="item-icon"> <i class="zmdi zmdi-windows"></i> </span> <span class="dropdown-heading"> Item three with dropdown </span>
+                    <li @click="toggle()"><span class="item-icon"><i class="el-icon-edit"></i></span> <router-link :to="{ name:'写作',query:{user:user.id} }">写博客</router-link></li>
+                    <li class="has-sub"> <span class="item-icon"> <i class="el-icon-more"></i></span> <span class="dropdown-heading"> 文章管理 </span>
                         <ul>
-                            <li> <a href="#2">dropdown sub item 1 </a> </li>
-                            <li> <a href="#2"> dropdown sub item 2 </a> </li>
-                            <li> <a href="#2"> dropdown sub item 3 </a> </li>
+                            <li @click="toggle()"><span class="item-icon"><i class="el-icon-tickets"></i></span> <router-link :to="{ name:'我的文章',params:{'owner':user.id ? user.id:''},query:{user:user.id}}">我的博客</router-link> </li>
+                            <li @click="toggle()"><span class="item-icon"><i class="el-icon-lock"></i></span> <router-link :to="{ name:'私有文章',params:{'private':user.id ? user.id:''},query:{user:user.id}}">私有文章</router-link> </li>
+                            <li @click="toggle()"><span class="item-icon"><i class="el-icon-document"></i></span> <router-link :to="{ name:'草稿箱',params:{'draft':user.id ? user.id:''},query:{user:user.id}}">草稿箱</router-link> </li>
                             ...
                         </ul>
                     </li>
-                    <li class="has-sub"> <span class="item-icon"> <i class="zmdi zmdi-devices"></i> </span> <span class="dropdown-heading"> Item four with dropdown </span>
-                        <ul>
-                            <li> <a href="#2">sub item 1 </a> </li>
-                            <li> <a href="#2">sub item 2 </a> </li>
-                            <li> <a href="#2">sub item 3 </a> </li>
-                            ...
-                        </ul>
-                    </li>
-                    <li> <span class="item-icon"> <i class="zmdi zmdi-keyboard"></i> </span> <a href="#1"> Main item four </a></li>
-                    <li> <span class="item-icon"> <i class="zmdi zmdi-dock"></i> </span> <a href="#1"> Main item five </a></li>
+                    <li @click="toggle()"> <span class="item-icon"> <i class="el-icon-notebook-1"></i> </span>  <router-link :to="{ name:'归档',params:{'user':user.id?user.id:1}}">我的归档</router-link></li>
+                    <li @click="toggle()"> <span class="item-icon"> <i class="el-icon-setting"></i> </span> <router-link :to="{ name:'主页' ,params:{'user':user.id?user.id:1},query:{user:user.id}}">个人中心</router-link></li>
+                    <li @click="logout()"> <span class="item-icon"> <i class="el-icon-right"></i> </span><router-link :to="{name:'首页'}">退出登陆</router-link></li>
                 </ul>
             </div>
             <div class="dim-overlay"></div>
@@ -152,11 +170,15 @@
                 // console.log(key, keyPath);
             },
             logout(){
+                $(".lv-trigger").click();
                 this.$store.dispatch('logout');
                 this.$router.push({name:'首页'});
             },
             loadUser(){
                 this.$store.dispatch('loadUser')
+            },
+            toggle(){
+                $(window).click();
             }
         },
         computed:{

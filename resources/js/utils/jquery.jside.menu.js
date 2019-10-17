@@ -46,10 +46,10 @@ $(".menubar").addClass(setting.jSideSkin);
  $(jSide).addClass(setting.jSideSkin).addClass(setting.jSidePosition);
 
    if ($(jSide).hasClass("position-left")){
-$(".menu-trigger").addClass("left").removeClass("right");
+$(".lv-trigger").addClass("left").removeClass("right");
      }
   else{
-$(".menu-trigger").removeClass("left").addClass("right");
+$(".lv-trigger").removeClass("left").addClass("right");
    }
 
 //Dropdown Arrow
@@ -74,7 +74,7 @@ $(".menu-trigger").removeClass("left").addClass("right");
       }
  });
 
-$(".menu-trigger").click(function(){
+$(".lv-trigger").click(function(){
    $(jSide).toggleClass("open");
    $(dimBackground).show(500);
 
@@ -82,7 +82,7 @@ $(".menu-trigger").click(function(){
 
 //close menu if user click outside of it
    $(window).click(function(e) {
-    if ($(e.target).closest('.menu-trigger').length){
+    if ($(e.target).closest('.lv-trigger').length){
      return;}
     if ($(e.target).closest(jSide).length){
      return;}

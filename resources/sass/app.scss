@@ -11,6 +11,9 @@ html{
   .lv-float-left{
     float:left !important;
   }
+  .lv-avatar{
+    width: 40px; height: 40px;border:3px solid #409eff;border-radius:30px
+  }
   @media only screen and (max-width: 683px) {
     .el-submenu__title,.el-header {
       padding: 0;

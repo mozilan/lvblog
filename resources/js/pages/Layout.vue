@@ -21,8 +21,12 @@
     .lv-breadcrumb-a{
         font-weight: 400!important;
     }
+    @media only screen and (max-width: 683px){
+        .breadcrumb{
+            padding-top:0;
+        }
+    }
 </style>
-
 <template>
     <div id="app-layout" class="app">
         <el-container>
@@ -47,7 +51,6 @@
 </template>
 
 <script>
-
     import Navigation from '../components/global/NavigationModal';
     import Register from '../components/global/RegisterModal';
     import Login from '../components/global/LoginModal';

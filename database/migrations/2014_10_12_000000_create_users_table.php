@@ -19,7 +19,7 @@ class CreateUsersTable extends Migration
             $table->string('email')->nullable()->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->string('introduction')->nullable();
+            $table->string('introduction')->default('把酒祝东风，且共从容。')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });
