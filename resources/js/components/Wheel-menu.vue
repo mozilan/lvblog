@@ -46,10 +46,20 @@
         },
         methods:{
             simplify(){
-                this.$store.dispatch('simplify');
+                if(this.$store.getters.getSimplifyStatus == 2){
+                    this.$message.warning('已开启精简模式！');
+                }else{
+                    this.$store.dispatch('simplify');
+                    this.$message.info('已开启精简模式');
+                }
             },
             gorgeous(){
-                this.$store.dispatch('gorgeous');
+                if(this.$store.getters.getGorgeousStatus == 2){
+                    this.$message.warning('已开启大图模式！');
+                }else{
+                    this.$store.dispatch('gorgeous');
+                    this.$message.success('已开启大图模式');
+                }
             },
             backtop(){
                 $(".el-backtop").click();

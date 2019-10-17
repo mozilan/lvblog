@@ -289,4 +289,13 @@ class ArticlesController extends Controller
             }
         }
     }
+
+    public function viewUpdate($article)
+    {
+        $article = Article::find($article);
+        if($article){
+            ++$article->view_count;
+            $article->save();
+        }
+    }
 }

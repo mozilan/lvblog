@@ -74,6 +74,9 @@
             mavonEditor
         },
         created() {
+            this.$store.dispatch('patchUpdateViewCount',{
+                art_id:this.$route.params.art_id
+            });
             this.$store.dispatch('loadArticle',{
                 art_id : this.$route.params.art_id
             });

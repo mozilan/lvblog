@@ -32,6 +32,7 @@ export const articles = {
         articleUpdateStatus:0,
         articleUpdateResponseMessages:'',
         articleDeleteStatus:0,
+        updateViewCountStatus:0,
     },
     actions:{
         loadArticles({commit,state},data ){
@@ -187,6 +188,16 @@ export const articles = {
             commit('setArticles','');
             commit('setArticlesLoadStatus', 0);
         },
+        patchUpdateViewCount({commit},data){
+            commit('setUpdateViewCountStatus',1);
+            ArticleAPI.patchArticleViewCount(data)
+                .then(function (response){
+                    commit('setUpdateViewCountStatus',2);
+                })
+                .catch(function(error){
+                    commit('setUpdateViewCountStatus',3);
+                });
+        }
     },
     mutations:{
         setArticlesLoadStatus(state,status){
@@ -216,6 +227,9 @@ export const articles = {
         setArticleUpdateResponseMessages(state,messages){
             state.articlesUpdateResponseMessages = messages;
         },
+        setUpdateViewCountStatus(state,status){
+            state.updateViewCountStatus = status;
+        }
     },
     getters:{
         getArticles(state){
@@ -258,6 +272,9 @@ export const articles = {
             return function() {
                 return state.articlesUpdateResponseMessages;
             }
+        },
+        getUpdateViewCountStatus(state){
+            return state.updateViewCountStatus = status;
         }
     }
 };

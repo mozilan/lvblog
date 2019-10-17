@@ -77,9 +77,9 @@
                 <el-menu-item index="1"><router-link :to="{ name:'首页' }"><i class="el-icon-s-home"></i>首页</router-link></el-menu-item>
                 <el-menu-item index="9"><router-link :to="{ name:'文章' }"><i class="el-icon-notebook-2"></i>博客园</router-link></el-menu-item>
                 <el-menu-item index="2"><router-link :to="{ name:'写作',query:{user:user.id} }"><i class="el-icon-edit"></i>写博客</router-link></el-menu-item>
-                <el-menu-item index="6" @click="register" v-if="tokenStatus === '' " icon="el-icon-promotion"><i class="el-icon-circle-plus-outline"></i>注册</el-menu-item>
-                <el-menu-item index="7" @click="login" v-if="tokenStatus === '' " icon="el-icon-user"><i class="el-icon-user"></i>登录</el-menu-item>
-                <el-submenu index="8" v-if="tokenStatus !== '' ">
+                <el-menu-item index="6" @click="register" v-if="!tokenStatus" icon="el-icon-promotion"><i class="el-icon-circle-plus-outline"></i>注册</el-menu-item>
+                <el-menu-item index="7" @click="login" v-if="!tokenStatus" icon="el-icon-user"><i class="el-icon-user"></i>登录</el-menu-item>
+                <el-submenu index="8" v-if="tokenStatus">
                     <template slot="title">
                         <el-image v-if="user.avatar" class="lv-avatar" :src="user.avatar"></el-image>
                     </template>
@@ -126,7 +126,9 @@
             <div class="menu-container">
                 <ul class="menu-items">
                     <li @click="toggle()"><span class="item-icon"><i class="el-icon-edit"></i></span> <router-link :to="{ name:'写作',query:{user:user.id} }">写博客</router-link></li>
-                    <li class="has-sub"> <span class="item-icon"> <i class="el-icon-more"></i></span> <span class="dropdown-heading"> 文章管理 </span>
+                    <li @click="toggle()"><span class="item-icon"><i class="el-icon-edit"></i></span> <router-link :to="{ name:'写作',query:{user:user.id} }">博客园</router-link></li>
+                    <li @click="toggle()"><span class="item-icon"><i class="el-icon-edit"></i></span> <router-link :to="{ name:'写作',query:{user:user.id} }">登陆/注册</router-link></li>
+                    <li class="has-sub" v-if="tokenStatus"> <span class="item-icon"> <i class="el-icon-more"></i></span> <span class="dropdown-heading"> 文章管理 </span>
                         <ul>
                             <li @click="toggle()"><span class="item-icon"><i class="el-icon-tickets"></i></span> <router-link :to="{ name:'我的文章',params:{'owner':user.id ? user.id:''},query:{user:user.id}}">我的博客</router-link> </li>
                             <li @click="toggle()"><span class="item-icon"><i class="el-icon-lock"></i></span> <router-link :to="{ name:'私有文章',params:{'private':user.id ? user.id:''},query:{user:user.id}}">私有文章</router-link> </li>
@@ -134,9 +136,9 @@
                             ...
                         </ul>
                     </li>
-                    <li @click="toggle()"> <span class="item-icon"> <i class="el-icon-notebook-1"></i> </span>  <router-link :to="{ name:'归档',params:{'user':user.id?user.id:1}}">我的归档</router-link></li>
-                    <li @click="toggle()"> <span class="item-icon"> <i class="el-icon-setting"></i> </span> <router-link :to="{ name:'主页' ,params:{'user':user.id?user.id:1},query:{user:user.id}}">个人中心</router-link></li>
-                    <li @click="logout()"> <span class="item-icon"> <i class="el-icon-right"></i> </span><router-link :to="{name:'首页'}">退出登陆</router-link></li>
+                    <li @click="toggle()" v-if="tokenStatus"> <span class="item-icon"> <i class="el-icon-notebook-1"></i> </span>  <router-link :to="{ name:'归档',params:{'user':user.id?user.id:1}}">我的归档</router-link></li>
+                    <li @click="toggle()" v-if="tokenStatus"> <span class="item-icon"> <i class="el-icon-setting"></i> </span> <router-link :to="{ name:'主页' ,params:{'user':user.id?user.id:1},query:{user:user.id}}">个人中心</router-link></li>
+                    <li @click="logout()" v-if="tokenStatus"> <span class="item-icon"> <i class="el-icon-right"></i> </span><router-link :to="{name:'首页'}">退出登陆</router-link></li>
                 </ul>
             </div>
             <div class="dim-overlay"></div>
@@ -201,7 +203,7 @@
             $(".menu-container").jSideMenu({
                 jSidePosition: "position-left",
                 jSideSticky: false,
-                jSideSkin:"endless-river",
+                jSideSkin:"moonlit",
             });
         }
     }

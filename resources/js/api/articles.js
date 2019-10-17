@@ -59,6 +59,8 @@ export default {
     },
     deleteArticle: function(data){
         return axios.delete(LVBLOG_CONFIG.API_URL + '/articles/'+data.id);
+    },
+    patchArticleViewCount: function (data) {
+        return axios.patch(LVBLOG_CONFIG.API_URL + '/articles/view/' + data.art_id);
     }
-
 }
