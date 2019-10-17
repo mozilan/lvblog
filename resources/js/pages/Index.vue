@@ -19,7 +19,6 @@
         }
 
         .clear-title {
-            border-left: 3px solid #F56C6C;
             padding-left: 5px;
             margin-top: 15px;
             margin-bottom: 0;
@@ -79,7 +78,13 @@
             flex: 1 auto;
             align-items: flex-end;
         }
-
+        .art-more-button-sm{
+           display: none;
+        }
+        .art-time-small {
+            margin: 0;
+            display: none;
+        }
         .art-more .view {
             color: #aaa;
         }
@@ -159,12 +164,32 @@
             .art-item {
                 font-size: 14px;
             }
+            .art-time{
+                display: none!important;
+            }
+            .art-time-small{
+                display: block!important;
+            }
+            .art-more-button{
+                display: none!important;
+            }
+            .art-more-button-sm{
+                color: orange;
+                display:block!important;
+            }
+            .art-more-simple{
+                display: none!important;
+            }
+            .art-time-simple {
+                display: none!important;
+            }
+
         }
 </style>
 <template>
-    <el-row type="flex" class="row-bg" justify="center">
-        <el-col :xs="24" :sm="24" :md="16" :lg="16">
-            <div class="blog" style="overflow:auto">
+    <div class="blog" style="overflow:auto">
+        <el-row type="flex" class="row-bg" justify="center">
+            <el-col :xs="24" :sm="24" :md="16" :lg="16">
                 <el-backtop target=".blog-component__scroll .blog-scrollbar__wrap"></el-backtop>
                 <el-row type="flex" class="row-bg lv-row-bg" justify="space-between">
                     <el-col :span="16"  class="lv-blog-side blog-component__scroll" v-loading="loading">
@@ -175,73 +200,85 @@
                                     infinite-scroll-disabled="disabled">
                                 <li v-for="(i , index) in articles.data">
                                     <el-row class="art-item">
-                                        <el-card shadow="hover">
-                                            <h5 class="clear-title"><router-link :to="{name:'查看文章',params: {art_id:i.id}}" tag="span" class="art-title">{{i.title}}</router-link></h5>
+                                        <div class="lv-card-shadow" :style="showModel.body">
+                                            <div class="lv-blog-popover">
+                                                <el-popover
+                                                        placement="top"
+                                                        width="200"
+                                                        trigger="hover">
+                                                    <el-row  type="flex" class="row-bg" justify="space-between">
+                                                        <div :span="6">
+                                                            <el-avatar :size="45" :src="i.user.data.avatar"></el-avatar>
+                                                        </div>
+                                                        <div :span="14" style="margin-left:5px"><span style="margin: 5px 0;font-size: 16px;color:#F56C6C;font-weight: bold">{{i.user.data.name}}</span><br><span style="margin: 5px 0">{{i.user.data.introduction}}</span></div>
+                                                    </el-row>
+                                                    <el-divider></el-divider>
+                                                    <router-link :to="{ name:'主页' ,params:{'user':i.user_id},query:{user:i.user_id}}"  >
+                                                        <a href="#"><span style="color: cornflowerblue;">访问主页</span></a>
+                                                    </router-link>
+                                                    <router-link :to="{ name:'用户文章' ,params:{'user':i.user_id},query:{user:i.user_id}}" style="float: right"  >
+                                                        <a href="#">他的博客</a>
+                                                    </router-link>
+                                                    <div slot="reference">
+                                                        <el-avatar :size="25" :src="i.user.data.avatar"></el-avatar>
+                                                        <router-link class="lv-break" :to="{ name:'用户文章' ,params:{'user':i.user_id}}" style="height: 25px;position: absolute;padding-left:5px;max-width: 100px"  >
+                                                            <a href="#">{{i.user.data.name}}</a>
+                                                        </router-link>
+                                                    </div>
+                                                </el-popover>
+                                            </div>
+                                            <el-divider></el-divider>
+                                            <h5 :style="showModel.title" class="clear-title lv-border-left"><router-link :to="{name:'查看文章',params: {art_id:i.id}}"   class="art-title">{{i.title}}</router-link></h5>
                                             <el-row class="art-info d-flex align-items-center justify-content-start">
-                                                <div class="art-time"><i class="el-icon-time"></i>：{{i.created_at}}</div>
+                                                <div class="art-time" :style="showModel.time"><i class="el-icon-time"></i>：{{i.created_at}}</div>
                                                 <div class="lv-clear-both"></div>
                                                 <div class="d-flex align-items-center lv-float-left">
                                                     <i class="el-icon-collection-tag"></i>：
                                                     <span v-for="t in i.tag">
-                                                        <router-link :to="{name:'标签文章',params: {tag:t.id},query:{user:i.user_id}}">
-                                                            <el-tag size="mini" class="tag">{{t.name}}</el-tag>
-                                                        </router-link>
-                                                </span>
+                                                            <router-link :to="{name:'标签文章',params: {tag:t.id},query:{user:i.user_id}}">
+                                                                <el-tag size="mini" class="tag">{{t.name}}</el-tag>
+                                                            </router-link>
+                                                    </span>
                                                 </div>
                                                 <div class="d-flex align-items-center art-category">
                                                     <i class="el-icon-folder-opened"></i>：
                                                     <span>
-                                                        <router-link :to="{name:'分类文章',params: {category:i.category.data.id},query:{user:i.user_id}}">
-                                                            <el-tag size="mini">{{i.category.data.name}}</el-tag>
-                                                        </router-link>
+                                                        <span>
+                                                            <router-link :to="{name:'分类文章',params: {category:i.category.data.id},query:{user:i.user_id}}" >
+                                                                <el-tag size="mini">{{i.category.data.name}}</el-tag>
+                                                            </router-link>
+                                                        </span>
                                                     </span>
                                                 </div>
                                                 <div class="lv-clear-both"></div>
                                             </el-row>
-                                            <el-row class="art-body">
-                                                <div class="side-img hidden-sm-and-down"><el-image class="art-banner" :src="img_src+i.id">
+                                            <el-row class="art-body" :style="showModel.abstract">
+                                                <div class="side-img hidden-sm-and-down" :style="showModel.image"><el-image class="art-banner" :src="img_src+i.id">
                                                     <div slot="placeholder" class="image-slot">
                                                         <img class="art-banner" src="https://mozilan.geekadpt.cn/img/other/orange.progress-bar-stripe-loader.svg">
                                                     </div>
-                                                </el-image>
-                                                </div>
+                                                </el-image></div>
                                                 <div class="side-abstract">
-                                                    <div class="art-abstract">
-                                                        <router-link :to="{name:'查看文章',params: {art_id:i.id}}">
+                                                    <router-link :to="{name:'查看文章',params: {art_id:i.id}}">
+                                                        <div class="art-abstract" :style="showModel.abstract">
                                                             {{i.excerpt}}
-                                                        </router-link>
-                                                    </div>
-                                                        <div class="art-more">
-                                                            <el-popover
-                                                                    placement="top"
-                                                                    width="200"
-                                                                    trigger="hover">
-                                                                <el-row  type="flex" class="row-bg" justify="space-between">
-                                                                    <div :span="6">
-                                                                        <el-avatar :size="45" :src="i.user.data.avatar"></el-avatar>
-                                                                    </div>
-                                                                    <div :span="14" style="margin-left:5px"><span style="margin: 5px 0;font-size: 16px;color:#F56C6C;font-weight: bold">{{i.user.data.name}}</span><br><span style="margin: 5px 0">{{i.user.data.introduction}}</span></div>
-                                                                </el-row>
-                                                                <el-divider></el-divider>
-                                                                <router-link :to="{ name:'主页' ,params:{'user':i.user_id},query:{user:i.user_id}}" tag="span">
-                                                                    <a href="#"><span style="color: cornflowerblue;">访问主页</span></a>
-                                                                </router-link>
-                                                                <router-link :to="{ name:'用户文章' ,params:{'user':i.user_id},query:{user:i.user_id}}" style="float: right" tag="span">
-                                                                    <a href="#">他的博客</a>
-                                                                </router-link>
-                                                            <div slot="reference">
-                                                                <el-avatar :size="25" :src="i.user.data.avatar"></el-avatar>
-                                                                <router-link :to="{ name:'用户文章' ,params:{'user':i.user_id}}" style="height: 25px;position: absolute;padding-left:5px;" tag="span">
-                                                                    <a href="#">{{i.user.data.name}}</a>
-                                                                </router-link>
-                                                            </div>
-                                                            </el-popover>
-                                                            <div class="view"><i class="el-icon-view"></i>&#8194;{{i.view_count}}</div>
                                                         </div>
+                                                    </router-link>
                                                 </div>
-
                                             </el-row>
-                                        </el-card>
+                                            <div style="display: block;width: 100%">
+                                                <div class="art-more">
+                                                    <router-link :to="{name:'查看文章',params: {art_id:i.id}}"   >
+                                                        <el-button plain  class="art-more-button" :style="showModel.read">阅读全文</el-button>
+                                                        <span class="art-more-button-sm">阅读全文</span>
+                                                        <span class="art-more-simple" :style="showModel.simple_read">阅读全文</span>
+                                                    </router-link>
+                                                    <div class="art-time-small"><i class="el-icon-time"></i>：{{i.created_at}}</div>
+                                                    <div class="art-time-simple" :style="showModel.simple_time"><i class="el-icon-time"></i>：{{i.created_at}}</div>
+                                                    <div class="view"><i class="el-icon-view"></i>&#8194;{{i.view_count}}</div>
+                                                </div>
+                                            </div>
+                                        </div>
                                         <img v-show="index <= 3" class="star" src="../../assets/star.png" />
                                     </el-row>
                                 </li>
@@ -277,9 +314,10 @@
                     </el-col>
                     <Oauth></Oauth>
                 </el-row>
-            </div>
-        </el-col>
-    </el-row>
+            </el-col>
+        </el-row>
+        <whell-menu></whell-menu>
+    </div>
 </template>
 <script>
     import Friend from '../components/Friend'
@@ -290,6 +328,7 @@
     import Adsense from '../components/Adsense'
     import Notice from '../components/Notice'
     import VFooter from '../components/global/V-Footer';
+    import WhellMenu from '../components/Wheel-menu'
     export default {
         data () {
             return {
@@ -314,7 +353,8 @@
             LFooter,
             Adsense,
             Notice,
-            VFooter
+            VFooter,
+            WhellMenu
         },
         computed:{
             noMore () {
@@ -329,6 +369,10 @@
             },
             articles(){
                 return this.$store.getters.getArticles;
+            },
+            showModel(){
+                // console.log(this.$store.getters.getArticleShowModel.simple_time);
+                return this.$store.getters.getArticleShowModel;
             }
         },
         watch: {

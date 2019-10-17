@@ -1,15 +1,17 @@
 <template>
     <div id='ss_menu'>
         <div>
-            <i class="el-icon-chat-dot-round"></i>
+            <a href="http://wpa.qq.com/msgrd?v=3&uin=609961022&site=qq&menu=yes">
+                <i class="el-icon-chat-dot-round"></i>
+            </a>
         </div>
-        <div>
+        <div @click="simplify">
             <i class="el-icon-s-operation"></i>
         </div>
-        <div>
+        <div @click="gorgeous">
             <i class="el-icon-menu"></i>
         </div>
-        <div>
+        <div @click="backtop">
             <i class="el-icon-top"></i>
         </div>
         <div class='menu'>
@@ -41,53 +43,23 @@
                 }
                 $(this).data('rot', rot);
             });
+        },
+        methods:{
+            simplify(){
+                this.$store.dispatch('simplify');
+            },
+            gorgeous(){
+                this.$store.dispatch('gorgeous');
+            },
+            backtop(){
+                $(".el-backtop").click();
+            }
         }
     }
 </script>
 
 <style scoped>
-    #ss_menu {
-        bottom: 30px;
-        width: 60px;
-        height: 60px;
-        color: #fff;
-        position: fixed;
-        -webkit-transition: all 1s ease;
-        -moz-transition: all 1s ease;
-        transition: all 1s ease;
-        right: 30px;
-        -webkit-transform: rotate(180deg);
-        -moz-transform: rotate(180deg);
-        -ms-transform: rotate(180deg);
-        -o-transform: rotate(180deg);
-        transform: rotate(180deg);
-    }
-    #ss_menu > .menu {
-        display: block;
-        position: absolute;
-        border-radius: 50%;
-        width: 60px;
-        height: 60px;
-        text-align: center;
-        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.23), 0 3px 10px rgba(0, 0, 0, 0.16);
-        color: #fff;
-        -webkit-transition: all 1s ease;
-        -moz-transition: all 1s ease;
-        transition: all 1s ease;
-    }
-    #ss_menu > .menu .share {
-        width: 100%;
-        height: 100%;
-        position: absolute;
-        left: 0px;
-        top: 0px;
-        -webkit-transform: rotate(180deg);
-        -moz-transform: rotate(180deg);
-        -ms-transform: rotate(180deg);
-        -o-transform: rotate(180deg);
-        transform: rotate(180deg);
-        -webkit-transition: all 1s ease;
-        -moz-transition: all 1s ease;
-        transition: all 1s ease;
-    }
+   @import "../../sass/wheel-menu/animate.min.css";
+   /*@import "../../sass/wheel-menu/normalize.css";*/
+   @import "../../sass/wheel-menu/styles.css";
 </style>

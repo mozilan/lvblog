@@ -2137,5 +2137,8 @@
         .mobile-social {
             float: none;
         }
+        .watermark-home{
+            background-position: 100px;
+        }
     }
 </style>
