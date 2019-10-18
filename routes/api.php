@@ -129,6 +129,12 @@ $api->version('v1', [
             //获取用户私有文章
             $api->get('privates/articles', 'ArticlesController@privateIndex')
                 ->name('api.user.private.articles.show');
+            // 发布评论
+            $api->post('articles/{article}/comments', 'CommentController@store')
+                ->name('api.articles.comments.store');
+            // 发布回复
+            $api->post('comments/{comment}/replies', 'CommentController@replyStore')
+                ->name('api.comments.replies.store');
         });
     });
 });

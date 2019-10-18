@@ -13,7 +13,6 @@ use App\Transformers\ArticleTransformer;
 use App\Transformers\RecommendTransformer;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
-use App\Models\User;
 
 class ArticlesController extends Controller
 {
