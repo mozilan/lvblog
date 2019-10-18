@@ -15,6 +15,11 @@ class Article extends Model
     {
         return $this->belongsTo(Category::class);
     }
+
+    public function comment()
+    {
+        return $this->hasMany(Comment::class);
+    }
     public function articleMapTag()
     {
         return $this->hasMany(ArticleMapTag::class);

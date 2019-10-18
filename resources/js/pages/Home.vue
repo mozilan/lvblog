@@ -288,6 +288,7 @@
     import {EffectInput} from 'effect-input'
     import 'effect-input/dist/index.css';
     import { LVBLOG_CONFIG } from '../config';
+    var a = new Array(100);
     export default {
         name: "Home",
         components:{
@@ -517,7 +518,10 @@
             getImage(num) {
                 // console.log(a[num]);
                 let uid = this.$route.params.user ? this.$route.params.user : 1;
-                return "url(" + this.img_src + uid+num + ")";
+                if(a[num] === undefined) {
+                    a[num] = this.getRandomNum(1000);
+                }
+                return "url(" + this.img_src + a[num] + ")";
             },
             uploadAvatar(params) {
                 const isJPG = params.file.type === 'image/jpeg';
@@ -580,6 +584,7 @@
             },
         },
         created(){
+            a = [];
             if(window.innerWidth > 763){
                 // console.log("高"+window.innerHeight);
                 // this.home_style.minHeight = window.innerHeight + "px";
