@@ -66,6 +66,12 @@ body .lv-blog-popover {
   max-width: 150px;
 }
 
+html a:focus,
+body a:focus {
+  outline: none;
+  -moz-outline: none;
+}
+
 @media only screen and (max-width: 683px) {
   html .el-submenu__title,
   html .el-header,

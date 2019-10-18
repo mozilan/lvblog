@@ -16,9 +16,13 @@ import TagAPI from '../api/tags';
 
 export const tags = {
     state: {
-        //分类
+        //用户标签
         Tags: [],
         TagsLoadStatus:0,
+        //标签云
+        AllTags: [],
+        AllTagsLoadStatus:0,
+
     },
     actions:{
         loadTags({commit},data){
@@ -31,6 +35,17 @@ export const tags = {
                 .catch(function (error){
                     commit('setTagsLoadStatus', 3);
                 });
+        },
+        loadAllTags({commit}){
+            commit('setAllTagsLoadStatus',1);
+            TagAPI.getAllTags()
+                .then(function (response) {
+                    commit('setTags', response.data.data);
+                    commit('setAllTagsLoadStatus', 2);
+                })
+                .catch(function (error){
+                    commit('setAllTagsLoadStatus', 3);
+                });
         }
     },
     mutations:{
@@ -39,6 +54,12 @@ export const tags = {
         },
         setTags(state,Tags){
             state.Tags = Tags;
+        },
+        setAllTagsLoadStatus(state,status){
+            state.AllTagsLoadStatus = status;
+        },
+        setAllTags(state,AllTags){
+            state.AllTags = AllTags;
         }
     },
     getters:{
@@ -47,6 +68,9 @@ export const tags = {
         },
         getTagsLoadStatus(state){
             return state.TagsLoadStatus;
+        },
+        getAllTagsLoadStatus(state){
+            return state.AllTagsLoadStatus;
         }
     }
 };

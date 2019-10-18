@@ -7,7 +7,7 @@
                     <h2 class="text-center art-title">{{article.data.title}}</h2>
                     <!-- 描述：文章信息 -->
                     <div class="text-center timeAndView">
-                        <router-link :to="{ name:'主页' ,params:{'user':article.data.user.data.id}}" tag="span"><el-avatar :size="35" :src="article.data.user.data.avatar"></el-avatar></router-link>
+                        <router-link :to="{ name:'主页' ,params:{'user':article.data.user.data.id}}"><el-avatar :size="35" :src="article.data.user.data.avatar"></el-avatar></router-link>
                         ·
                         <span class="article-time">
 							<i class="el-icon-time"></i>

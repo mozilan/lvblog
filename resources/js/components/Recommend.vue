@@ -37,7 +37,6 @@
 			</div>
 			<div class="lv-clear-both"></div>
 			<el-row type="flex" class="el-col-24 recommend-item" justify="space-between" v-for="item in recommends">
-				<router-link :to="{name:'查看文章',params: {art_id:item.article_id}}">
 					<el-col :span="4">
 						<div class="">
 							<el-image :src="item.article_thumb" alt="Mozilan" class="profile-pic"></el-image>
@@ -45,11 +44,13 @@
 					</el-col>
 					<el-col :span="18">
 						<div class="">
-							<h3 title="Mozilan" class="name"> {{item.article_title}}</h3>
+                            <router-link :to="{name:'查看文章',params: {art_id:item.article_id}}">
+							    <h3 title="Mozilan" class="name"> {{item.article_title}}</h3>
+                            </router-link>
 							<span class="name"> {{item.article_description}}</span>
 						</div>
 					</el-col>
-				</router-link>
+
 			</el-row>
 		</el-card>
 	</el-col>

@@ -38,6 +38,7 @@ html,body{
   .lv-blog-popover{
     max-width: 150px;
   }
+  a:focus {outline:none; -moz-outline:none}
   @media only screen and (max-width: 683px) {
     .el-submenu__title,.el-header {
       padding: 0;

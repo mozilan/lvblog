@@ -55,6 +55,9 @@ $api->version('v1', [
         //获取某一用户所有文章标签
         $api->get('tags/{user_id}', 'TagsController@index')
             ->name('api.tags.index');
+        //获取标签云
+        $api->get('all/tags', 'TagsController@all')
+            ->name('api.tags.all.show');
         //获取所有文章
         $api->get('articles', 'ArticlesController@index')
             ->name('api.articles.index');

@@ -12,4 +12,10 @@ class TagsController extends Controller
     {
         return $this->response->collection(Tag::where('user_id',$user_id)->get(), new TagTransformer());
     }
+
+    public function all()
+    {
+        //return 'test';
+        return $this->response->collection(Tag::all(), new TagTransformer());
+    }
 }
