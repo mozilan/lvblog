@@ -33,7 +33,7 @@ class CommentController extends Controller
             $data ->  type               =     0;
             $data ->  fromName           = $user->name;
             $data ->  fromAvatar         = $user->avatar;
-            $data ->  content            = $request->contents;
+            $data ->  Contents            = $request->contents;
             $data ->  likeNum            = 0;
             if($data->save()){
                 return response()->json(['message' => '评论成功'], 201);
@@ -58,7 +58,7 @@ class CommentController extends Controller
             $data ->  toId            = $toUser->id;
             $data ->  toName          = $toUser->name;
             $data ->  toAvatar        = $toUser->avatar;
-            $data ->  content         = Str::after($request->contents,'@'.$toUser->name.' ');
+            $data ->  Contents         = Str::after($request->contents,'@'.$toUser->name.' ');
             if($data->save()) {
                 return response()->json(['message' => '回复成功'], 201);
             }else{

@@ -15,8 +15,8 @@ class CreateArchivesTable extends Migration
     {
         Schema::create('archives', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->bigInteger('user_id');
-            $table->bigInteger('article_id');
+            $table->bigInteger('user_id')->index()->unsigned();
+            $table->bigInteger('article_id')->index()->unsigned();
             $table->string('title')->comment('文章标题');
             $table->timestamps();
         });

@@ -15,7 +15,7 @@ class CreateRecommendsTable extends Migration
     {
         Schema::create('recommends', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->bigInteger('article_id');
+            $table->bigInteger('article_id')->index()->unsigned();
             $table->string('article_title');
             $table->string('article_description');
             $table->string('article_thumb');

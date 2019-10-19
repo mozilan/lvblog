@@ -14,7 +14,7 @@ class WebController extends Controller
     {
         $config = Web::all();
         if($config->first()){
-            return $this->response->item($config, new WebTransformer());
+            return $this->response->item($config->first(), new WebTransformer());
         }else{
             return response()->json(['message' => '没有网站的配置信息'], 404);
         }
