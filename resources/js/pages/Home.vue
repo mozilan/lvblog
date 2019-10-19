@@ -105,7 +105,6 @@
                                 <el-tabs v-model="activeName">
                                     <el-tab-pane label="技能" name="first"><!--RESUME FIRST TAB/SKILL TAB DETAILS-->
                                         <div id='tab-1'>
-                                            <h3 class="title">我的技能</h3><!--SKILLS WITH BAR DISPLAY-->
                                             <ul class="skills-list no-padding">
                                                 <li class="row">
                                                     <el-col :xs="4"><div class="fw-mid">HTML</div></el-col>
@@ -158,7 +157,6 @@
                                     <el-tab-pane label="学历" name="second">
                                         <!--RESUME SECOND TAB/EDUCATION TAB DETAILS-->
                                         <div id='tab-2'>
-                                            <h3 class="title">学习历程</h3>
                                                     <!--EDUCATION LIST ITEM-->
                                             <el-collapse accordion  v-model="activeNameC">
                                                 <el-collapse-item name="1">
@@ -191,7 +189,6 @@
                                     <el-tab-pane label="职业" name="third">
                                         <!--RESUME THIRD TAB/EMPLYMENT TAB DETAILS ENDS-->
                                         <div id='tab-3'>
-                                            <h3 class="title">项目经历</h3>
                                             <ul class="employment-class tab-cont">
                                                 <li>
                                                     <!--EMPLOYMENT INDIVIDUAL LIST-->
@@ -212,6 +209,12 @@
                                                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing Vivamus sit Vivamus sit. Vivamus sit.. consectetur adipiscing Vivamus sit.</p><!--EMPLOYMENT LIST DETAILS-->
                                                 </li>
                                             </ul>
+                                        </div><!--RESUME THIRD TAB/EMPLYMENT TAB DETAILS ENDS-->
+                                    </el-tab-pane>
+                                    <el-tab-pane label="归档" name="forth">
+                                        <!--RESUME THIRD TAB/EMPLYMENT TAB DETAILS ENDS-->
+                                        <div id='tab-4'>
+                                            <Archieve></Archieve>
                                         </div><!--RESUME THIRD TAB/EMPLYMENT TAB DETAILS ENDS-->
                                     </el-tab-pane>
                                 </el-tabs>
@@ -288,11 +291,13 @@
     import {EffectInput} from 'effect-input'
     import 'effect-input/dist/index.css';
     import { LVBLOG_CONFIG } from '../config';
+    import Archieve from '../components/Home/Archive'
     var a = new Array(100);
     export default {
         name: "Home",
         components:{
             EffectInput:EffectInput,
+            Archieve,
         },
         data() {
             return {
