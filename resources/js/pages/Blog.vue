@@ -213,7 +213,7 @@
                             <Tag></Tag>
                         </div>
                         <div class="lv-clear-both"></div>
-                        <div class="item lv-margin-top">
+                        <div class="item lv-margin-top" v-if="!this.$route.params || this.$route.params.category">
                             <Category></Category>
                         </div>
                         <div class="lv-clear-both"></div>

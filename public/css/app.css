@@ -66,6 +66,11 @@ body .lv-blog-popover {
   max-width: 150px;
 }
 
+html .el-message-box,
+body .el-message-box {
+  width: 350px;
+}
+
 html a:focus,
 body a:focus {
   outline: none;

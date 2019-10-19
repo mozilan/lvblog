@@ -524,6 +524,9 @@
                background-color: #027bda;
           }
      }
+     .edit{
+         padding-bottom: 30px;
+     }
 </style>
 <style type="text/css">
      #editor {

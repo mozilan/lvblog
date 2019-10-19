@@ -12,12 +12,23 @@ class WebController extends Controller
     //
     public function config()
     {
-        return $this->response->item(Web::all()->first(), new WebTransformer());
+        $config = Web::all();
+        if($config->first()){
+            return $this->response->item($config, new WebTransformer());
+        }else{
+            return response()->json(['message' => '没有网站的配置信息'], 404);
+        }
     }
 
     public function friendShow()
     {
-        return $this->response->collection(Partner::all(),new FriendTransformer());
+        $friends = Partner::all();
+        if($friends->first()){
+            return $this->response->collection(Partner::all(),new FriendTransformer());
+        }else{
+            return response()->json(['message' => '没有友情链接'], 404);
+        }
+
     }
 }
 

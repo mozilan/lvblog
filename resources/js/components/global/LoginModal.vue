@@ -64,9 +64,7 @@
             margin-right: 10px;
         }
     }
-    .el-message-box{
-        width: 200px;
-    }
+
 </style>
 
 <template>

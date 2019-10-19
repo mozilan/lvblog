@@ -92,6 +92,9 @@ $api->version('v1', [
             ->name('api.articles.view.update');
         $api->get('recommend/articles', 'ArticlesController@recommendIndex')
             ->name('api.articles.recommend.show');
+        // 评论点赞
+        $api->patch('comments/{comment}/like', 'CommentController@like')
+            ->name('api.comments.like');
         // 需要 token 验证的接口
         $api->group(['middleware' => 'api.auth'], function($api) {
             // 当前登录用户信息
@@ -135,6 +138,12 @@ $api->version('v1', [
             // 发布回复
             $api->post('comments/{comment}/replies', 'CommentController@replyStore')
                 ->name('api.comments.replies.store');
+            // 删除评论
+            $api->delete('comments/{comment}', 'CommentController@destroy')
+                ->name('api.articles.comments.destroy');
+            // 删除回复
+            $api->delete('comments/replies/{reply}', 'CommentController@replyDestroy')
+                ->name('api.comments.replies.destroy');
         });
     });
 });

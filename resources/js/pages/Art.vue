@@ -4,29 +4,29 @@
         <el-row class="main page-component__scroll" type="flex" justify="center">
             <el-col :xs="24" :sm="24" :md="16" :lg="16" class="el-scrollbar__wrap">
                 <div id="artcle-info" :style="{'background-image':bg_url}" @load="handleLoad" v-loading="bg_loading">
-                    <h2 class="text-center art-title">{{article.data.title}}</h2>
+                    <h2 class="text-center art-title">{{article.title}}</h2>
                     <!-- 描述：文章信息 -->
                     <div class="text-center timeAndView">
-                        <router-link :to="{ name:'主页' ,params:{'user':article.data.user.data.id}}"><el-avatar :size="35" :src="article.data.user.data.avatar"></el-avatar></router-link>
+                        <router-link :to="{ name:'主页' ,params:{'user':article.user.data.id}}"><el-avatar :size="35" :src="article.user.data.avatar"></el-avatar></router-link>
                         ·
                         <span class="article-time">
 							<i class="el-icon-time"></i>
-							<span>{{article.data.created_at}}</span>
+							<span>{{article.created_at}}</span>
 						</span>
                         ·
                         <span class="article-views">
 							<i class="el-icon-view"></i>
-							<span>{{article.data.view_count}}</span>次阅读
+							<span>{{article.view_count}}</span>次阅读
 						</span>
                     </div>
                     <p class="abstract">
-                        {{article.data.excerpt}}
+                        {{article.excerpt}}
                     </p>
                 </div>
                 <hr />
                 <mavon-editor
                         class="markdown-body"
-                        :value="article.data.body"
+                        :value="article.body"
                         :subfield = "false"
                         :defaultOpen = "'preview'"
                         :toolbarsFlag = "false"
@@ -34,14 +34,22 @@
                         :scrollStyle="true"
                         :ishljs = "true"
                 ></mavon-editor>
-                <!--<div id="artcle-content"  class="content markdown-body" v-highlight v-html="article.data.body">-->
+                <!--<div id="artcle-content"  class="content markdown-body" v-highlight v-html="article.body">-->
 
                 <div id="statement">
-                    <div class="lv-item">作者：{{article.data.user.data.name}}</div>
-                    <div class="lv-item">本文链接：
+                    <div class="lv-article">
+                        <router-link :to="{ name:'主页' ,params:{'user':article.user_id},query:{user:article.user_id}}">
+                        作者：{{article.user.data.name}}
+                        </router-link>
+                    </div>
+                    <div class="lv-article">本文链接：
                         <a :href="url">{{url}}</a>
                     </div>
-                    <div class="lv-item">版权声明：本博客所有文章除特别声明外,转载请注明出处!</div>
+                    <div class="lv-article">版权声明：本博客所有文章除特别声明外,转载请注明出处!</div>
+                </div>
+                <el-divider style="margin: 24px 0"></el-divider>
+                <div class="comment">
+                    <comment></comment>
                 </div>
             </el-col>
         </el-row>
@@ -53,6 +61,7 @@
     import 'mavon-editor/dist/css/index.css';
     import 'mavon-editor/dist/css/index.css';
     import 'highlight.js/styles/monokai-sublime.css';
+    import comment from '../components/Art/comment'
     // import 'github-markdown-css';
     export default {
         name: 'art',
@@ -71,7 +80,8 @@
             }
         },
         components:{
-            mavonEditor
+            mavonEditor,
+            comment,
         },
         created() {
             this.$store.dispatch('patchUpdateViewCount',{
@@ -99,7 +109,7 @@
         },
         computed:{
             article(){
-                return this.$store.getters.getArticle;
+                return this.$store.getters.getArticle.data;
             }
         },
         methods:{
@@ -113,6 +123,9 @@
 <style lang="scss" scoped>
     .art{
         margin-top: 20px;
+    }
+    .main{
+        padding-bottom: 30px;
     }
     #artcle-info {
         padding: 20px;
@@ -138,7 +151,7 @@
     #artcle-info .text-center{
         display: flex;
         justify-content: center;
-        align-items: center;
+        align-articles: center;
     }
     pre.has {
         color: #ffffff;
@@ -156,7 +169,7 @@
         padding: 5px;
         background-color: #EBEEF5;
     }
-    .lv-item{
+    .lv-article{
         margin-top: 6px;
     }
     .main{

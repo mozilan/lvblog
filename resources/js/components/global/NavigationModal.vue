@@ -107,7 +107,12 @@
                     <div class="el-col-24">
                         <div class="row for-pic">
                            <div class="profile-pic">
-                           <el-image :src="user.avatar" :alt="user.name">
+                           <el-image v-if="user"  :src="user.avatar" :alt="user.name">
+                                <div slot="placeholder" class="image-slot">
+                                     <img class="art-banner" src="https://mozilan.geekadpt.cn/img/other/orange.progress-bar-stripe-loader.svg">
+                                </div>
+                           </el-image>
+                           <el-image v-if="!user" src="https://mozilan.geekadpt.cn/img/custom/avatar.jpg" alt="未登陆">
                                 <div slot="placeholder" class="image-slot">
                                      <img class="art-banner" src="https://mozilan.geekadpt.cn/img/other/orange.progress-bar-stripe-loader.svg">
                                 </div>
@@ -127,7 +132,7 @@
                 <ul class="menu-items">
                     <li @click="toggle()"><span class="item-icon"><i class="el-icon-edit"></i></span> <router-link :to="{ name:'写作',query:{user:user.id} }">写博客</router-link></li>
                     <li @click="toggle()"><span class="item-icon"><i class="el-icon-edit"></i></span> <router-link :to="{ name:'写作',query:{user:user.id} }">博客园</router-link></li>
-                    <li @click="toggle()"><span class="item-icon"><i class="el-icon-edit"></i></span> <router-link :to="{ name:'写作',query:{user:user.id} }">登陆/注册</router-link></li>
+                    <li v-if="!user" @click="toggle()"><span class="item-icon"><i class="el-icon-edit"></i></span> <router-link :to="{ name:'写作',query:{user:user.id} }">登陆/注册</router-link></li>
                     <li class="has-sub" v-if="tokenStatus"> <span class="item-icon"> <i class="el-icon-more"></i></span> <span class="dropdown-heading"> 文章管理 </span>
                         <ul>
                             <li @click="toggle()"><span class="item-icon"><i class="el-icon-tickets"></i></span> <router-link :to="{ name:'我的文章',params:{'owner':user.id ? user.id:''},query:{user:user.id}}">我的博客</router-link> </li>

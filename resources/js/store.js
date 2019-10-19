@@ -28,6 +28,7 @@ import { articles } from './modules/articles'
 import { archives } from './modules/archieves'
 import { web } from './modules/web'
 import { common } from './modules/common'
+import { comments } from './modules/comments'
 /**
  * Export our data store.
  */
@@ -40,6 +41,7 @@ export default new Vuex.Store({
         articles,
         archives,
         web,
-        common
+        common,
+        comments
     }
 });
