@@ -73,10 +73,10 @@
         },
         computed:{
             configs(){
-                return this.$store.getters.getConfigs.data;
+                return this.$store.getters.getConfigs;
             },
             setTime(){
-                this.time = this.$store.getters.getConfigs.data.time;
+                this.time = this.$store.getters.getConfigs.time;
             }
         },
         methods: {

@@ -66,6 +66,11 @@ body .lv-blog-popover {
   max-width: 150px;
 }
 
+html .lv-container,
+body .lv-container {
+  padding: 0 10px;
+}
+
 html .el-message-box,
 body .el-message-box {
   width: 350px;

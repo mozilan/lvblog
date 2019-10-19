@@ -1,6 +1,9 @@
 <style scoped lang="scss">
     @import "../../../sass/jside-menu";
     @import "../../../sass/jside-skins";
+    button.lv-trigger{
+        position: fixed;
+    }
     .lv-logo{
         float:left;
         line-height: 60px;
@@ -34,6 +37,9 @@
     }
     .lv-jside .dim-overlay{
         z-index: 19980903;
+    }
+    .tagline{
+        font-size: 14px;
     }
 </style>
 <style lang="scss">
@@ -94,7 +100,7 @@
             </el-menu>
         </el-row>
         <div class="lv-jside">
-            <div class="menubar sticky default-skin">
+            <div :class="menu_bar_class" >
                 <div>
                     <el-button class="left lv-trigger" icon="el-icon-s-grid"> </el-button>
                 </div>
@@ -102,7 +108,7 @@
                     <router-link :to="{ name:'首页' ,params:{'user':user.id?user.id:1},query:{user:user.id}}">{{configs.title}} </router-link>
                 </div>
             </div>
-            <div class="menu-head">
+            <div :class="menu_head_class" @click="toggleStyle">
                   <span class="layer">
                     <div class="el-col-24">
                         <div class="row for-pic">
@@ -119,20 +125,23 @@
                            </el-image>
                                  </div>
                           </div>
-                                 <div class="row for-name">
-                           <h3 :title="user.name"> {{user.name}} </h3>
-                                <span class="tagline"> {{user.introduction}}</span>
+                                 <div class="row for-name" v-if="user">
+                                       <h3 :title="user.name"> {{user.name}} </h3>
+                                            <span class="tagline"> {{user.introduction}}</span>
+                                  </div>
+                                <div class="row for-name" v-if="!user">
+                                       <h3 :title="user.name">未登陆</h3>
+                                            <span class="tagline">把酒祝东风,且共从容.</span>
                                   </div>
                     </div> <!--//col-->
                   </span>
-                <div class="lv-clear-both"></div>
-                <el-divider></el-divider>
             </div>
-            <div class="menu-container">
+            <div :class="menu_container_class">
+                <el-divider></el-divider>
                 <ul class="menu-items">
                     <li @click="toggle()"><span class="item-icon"><i class="el-icon-edit"></i></span> <router-link :to="{ name:'写作',query:{user:user.id} }">写博客</router-link></li>
-                    <li @click="toggle()"><span class="item-icon"><i class="el-icon-edit"></i></span> <router-link :to="{ name:'写作',query:{user:user.id} }">博客园</router-link></li>
-                    <li v-if="!user" @click="toggle()"><span class="item-icon"><i class="el-icon-edit"></i></span> <router-link :to="{ name:'写作',query:{user:user.id} }">登陆/注册</router-link></li>
+                    <li @click="toggle()"><span class="item-icon"><i class="el-icon-notebook-2"></i></span> <router-link :to="{ name:'文章',query:{user:user.id} }">博客园</router-link></li>
+                    <li v-if="!user" @click="toggle()"><span class="item-icon"><i class="el-icon-user"></i></span> <router-link :to="{ name:'写作',query:{user:user.id} }">登陆/注册</router-link></li>
                     <li class="has-sub" v-if="tokenStatus"> <span class="item-icon"> <i class="el-icon-more"></i></span> <span class="dropdown-heading"> 文章管理 </span>
                         <ul>
                             <li @click="toggle()"><span class="item-icon"><i class="el-icon-tickets"></i></span> <router-link :to="{ name:'我的文章',params:{'owner':user.id ? user.id:''},query:{user:user.id}}">我的博客</router-link> </li>
@@ -157,6 +166,14 @@
         name:'Navigation',
         data() {
             return {
+                styleArr:['flickr','fb-messenger','moonlit','park-life','d2f','steel-man','amethyst','between-clouds',
+                    'crazy-orange','endless-river','wood','greenish','gol-b','pink','black','orange'
+                    ,'orange','bnp','blue','green','red','default-skin'
+                ],
+                menu_bar_class : 'menubar sticky default-skin',
+                menu_head_class : 'menu-head position-left',
+                menu_container_class :'menu-container position-left',
+
                 activeIndex: '1',
             };
         },
@@ -186,6 +203,15 @@
             },
             toggle(){
                 $(window).click();
+            },
+            toggleStyle(){
+                console.log('jjj');
+                let style = '';
+                style = this.styleArr[Math.floor((Math.random()*this.styleArr.length))];
+                localStorage.setItem('JsideStyle',style);
+                this.menu_bar_class = "menubar stiky default-skin " + style;
+                this.menu_head_class = "menu-head position-left open " +style;
+                this.menu_container_class = "menu-container position-left open " +style;
             }
         },
         computed:{
@@ -196,19 +222,21 @@
                 return this.$store.getters.getUser;
             },
             configs() {
-                return this.$store.getters.getConfigs.data;
+                return this.$store.getters.getConfigs;
             }
         },
         created(){
             if(this.$store.getters.getUserLoadStatus() === 0){
                 this.loadUser();
             }
+
         },
         mounted() {
+            let style = localStorage.getItem('JsideStyle');
             $(".menu-container").jSideMenu({
                 jSidePosition: "position-left",
-                jSideSticky: false,
-                jSideSkin:"moonlit",
+                jSideSticky: true,
+                jSideSkin: style ? style: "default-skin",
             });
         }
     }

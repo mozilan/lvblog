@@ -13,32 +13,44 @@ import VueRouter from 'vue-router'
 import store from './store.js';
 function requireAuth(to, from, next) {
 
-        function proceed() {
+    function proceed() {
         // 如果用户信息已经加载并且不为空则说明该用户已登录，可以继续访问路由，否则跳转到首页
         // 这个功能类似 Laravel 中的 auth 中间件
         if (store.getters.getUserLoadStatus() === 2 && store.getters.getUser !== '') {
-                next();
-            } else {
-                next('/blog/?login=1');
-            }
+            next();
+        } else {
+            next('/blog/?login=1');
         }
-        let token = localStorage.getItem('Authorization');
-
-        if (token === 'null' || token === '') {
-            proceed()
-        }else {
-            if(store.getters.getUserLoadStatus() === 0){
-                store.dispatch('loadUser');
-                // 监听用户信息加载状态，加载完成后调用 proceed 方法继续后续操作
-                store.watch(store.getters.getUserLoadStatus, function () {
-                    if(store.getters.getUserLoadStatus() !== 1){
-                        proceed();
-                    }
-                });
-            }else{
-                proceed();
-            }
     }
+    let token = localStorage.getItem('Authorization');
+
+    if (token === 'null' || token === '') {
+        proceed()
+    }else {
+        if(store.getters.getUserLoadStatus() === 0){
+            store.dispatch('loadUser');
+            // 监听用户信息加载状态，加载完成后调用 proceed 方法继续后续操作
+            store.watch(store.getters.getUserLoadStatus, function () {
+                if(store.getters.getUserLoadStatus() !== 1){
+                    proceed();
+                }
+            });
+        }else{
+            proceed();
+        }
+    }
+}
+function requireConfigs(to,from,next){
+    store.dispatch('loadConfigs');
+    store.watch(store.getters.getConfigsLoadStatus, function () {
+        if(store.getters.getConfigsLoadStatus() == 1){
+
+        }
+        if(store.getters.getConfigsLoadStatus() == 2){
+            next();
+            console.log('加载配置信息成功！');
+        }
+    });
 }
 /**
  * Extends Vue to use Vue Router
@@ -55,6 +67,7 @@ export default new VueRouter({
             redirect: {name: '首页'},
             name: 'LvBlog',
             components: Vue.component( 'Layout', require( './pages/Layout.vue' ) ),
+            beforeEnter:requireConfigs,
             children: [
                 {
                     path: 'index',

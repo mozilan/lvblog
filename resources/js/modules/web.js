@@ -43,7 +43,7 @@ export const web = {
             commit('setConfigsLoadStatus',1);
             WebAPI.getConfigs()
                 .then(function (response) {
-                    commit('setConfigs', response.data);
+                    commit('setConfigs', response.data.data);
                     commit('setConfigsLoadStatus', 2);
                 })
                 .catch(function (error){
@@ -81,12 +81,14 @@ export const web = {
             return state.configs;
         },
         getConfigsLoadStatus(state){
-            return state.configsLoadStatus;
+            return function () {
+                return state.configsLoadStatus;
+            }
         },
         getFriends(state){
             return state.friends;
         },
-        getsetFriendsLoadStatus(state){
+        getFriendsLoadStatus(state){
             return state.setFriendsLoadStatus;
         },
     }

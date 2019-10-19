@@ -9,20 +9,20 @@
                 content="点击图片进入我的家～">
         </el-popover>
         <transition name="el-fade-in-linear">
-            <div v-show="loading_screen" @click="loading_screen=false" class="loading-screen" v-loading="loadings.bg_loading" :style="{'background-image':bg_url}">
+            <div v-show="loading_screen" @click="cancelLoadingImage" class="loading-screen" v-loading="loadings.bg_loading" :style="{'background-image':bg_url}">
                 <el-avatar v-if="other.avatar !== null" class="loading-avatar" :size="55" :src="other.avatar"></el-avatar><el-avatar class="loading-avatar" :size="55"  v-if="other.avatar===null">{{other.name}}</el-avatar>
                 <div class="loading-introduction"><span class="rotate">{{other.name}}</span><span v-if="other.introduction">{{'--'+other.introduction}}</span></div>
             </div>
         </transition>
-        <transition name="el-fade-in-linear">
-            <div v-popover:popover1 id="frontpage" v-show="loading_image" @click="cancelLoadingImage" :style="{'background-image':bg_frontpage_url}" v-loading="loadings.bg_front_loading">
-                <div class="shadow-img"></div>
-                <img style="visibility: hidden" src="../../assets/images/front-image.jpg" class="front-img img-responsive" :alt ="other.name">
-                <h3 class="profile ajust-frontpage-avatar"><img v-if="other.avatar!==null" class="front-avatar transparent" :src="other.avatar" alt=""><el-avatar style="width: 40px; height: 40px;border:3px solid #409eff;border-radius:30px" v-if="other.avatar===null">{{other.name}}</el-avatar><span class="invert name">{{other.name}}</span></h3><!--PROFILE NAME-->
-                <h3 class="invert" style="margin-top: -10px; margin-bottom: 10px;">蓝默空间-<span class="rotate">全宇宙将为你闪烁！</span></h3> <!--SUBTITLE IN PROFILE-->
-                <div class="frontclick"><img src="../../assets/images/click.png" alt="" class="img-responsive"><span class="pulse"></span></div>
-            </div>
-        </transition>
+        <!--<transition name="el-fade-in-linear">-->
+            <!--<div v-popover:popover1 id="frontpage" v-show="loading_image" @click="cancelLoadingImage" :style="{'background-image':bg_frontpage_url}" v-loading="loadings.bg_front_loading">-->
+                <!--<div class="shadow-img"></div>-->
+                <!--<img style="visibility: hidden" src="../../assets/images/front-image.jpg" class="front-img img-responsive" :alt ="other.name">-->
+                <!--<h3 class="profile ajust-frontpage-avatar"><img v-if="other.avatar!==null" class="front-avatar transparent" :src="other.avatar" alt=""><el-avatar style="width: 40px; height: 40px;border:3px solid #409eff;border-radius:30px" v-if="other.avatar===null">{{other.name}}</el-avatar><span class="invert name">{{other.name}}</span></h3>&lt;!&ndash;PROFILE NAME&ndash;&gt;-->
+                <!--<h3 class="invert" style="margin-top: -10px; margin-bottom: 10px;">蓝默空间-<span class="rotate">全宇宙将为你闪烁！</span></h3> &lt;!&ndash;SUBTITLE IN PROFILE&ndash;&gt;-->
+                <!--<div class="frontclick"><img src="../../assets/images/click.png" alt="" class="img-responsive"><span class="pulse"></span></div>-->
+            <!--</div>-->
+        <!--</transition>-->
     <!--FRONT PAGE/ SPLASH SCREEN SECTION ENDS-->
     <!--container-->
         <el-row class="main" type="flex" justify="center" :style="main_style" v-show="!loading_image">
@@ -335,7 +335,7 @@
                 bg_frontpage:'https://mozilan.geekadpt.cn/img/custom/cover/front-image.jpg',
                 bg_frontpage_url :'',
                 bg_url:'',
-                img_src:'https://s0.xinger.ink/acgimg/acgurl.php?',
+                img_src: this.$store.getters.getConfigs.IMG_API,
                 img_num:['1','2','3','4'],
                 loadings:{
                     bg_loading:true,
@@ -366,12 +366,14 @@
         },
         mounted(){
             setTimeout(()=>{
-                this.loading_screen = false;
+                if(this.loading_screen){
+                    this.cancelLoadingImage();
+                }
             },5000);
             this.changeUserTag();
             //背景图片加载loading;
             let bgImg = new Image();
-            bgImg.src = this.img_src; // 获取背景图片的url
+            bgImg.src = this.$store.getters.getConfigs.IMG_API; // 获取背景图片的url
             bgImg.onerror = () => {
                 console.log('img onerror')
             };
@@ -389,7 +391,7 @@
             };
             //namecard加载loading;
             let bgImg_namecard = new Image();
-            bgImg_namecard.src = this.img_src+a[0]; // 获取背景图片的url
+            bgImg_namecard.src = this.$store.getters.getConfigs.IMG_API+a[0]; // 获取背景图片的url
             // console.log("namecard 背景图片地址"+bgImg_namecard.src);
             bgImg_namecard.onerror = () => {
                 console.log('bgImg_namecard load error')
@@ -399,7 +401,7 @@
             };
             //home加载loading
             let bgImg_home = new Image();
-            bgImg_home.src = this.img_src+a[1]; // 获取背景图片的url
+            bgImg_home.src = this.$store.getters.getConfigs.IMG_API+a[1]; // 获取背景图片的url
             bgImg_home.onerror = () => {
                 console.log('bgImg_home load error')
             };
@@ -408,7 +410,7 @@
             };
             //resume加载loading
             let bgImg_resume = new Image();
-            bgImg_resume.src = this.img_src+a[2]; // 获取背景图片的url
+            bgImg_resume.src = this.$store.getters.getConfigs.IMG_API+a[2]; // 获取背景图片的url
             bgImg_resume.onerror = () => {
                 console.log('bgImg_resume load rror')
             };
@@ -417,7 +419,7 @@
             };
             //edit加载loading
             let bgImg_edit = new Image();
-            bgImg_edit.src = this.img_src+a[3]; // 获取背景图片的url
+            bgImg_edit.src = this.$store.getters.getConfigs.IMG_API+a[3]; // 获取背景图片的url
             bgImg_edit.onerror = () => {
                 console.log('bgImg_edit load error')
             };
@@ -427,6 +429,7 @@
         },
         methods:{
             cancelLoadingImage(){
+                this.loading_screen = false;
                 this.loading_image = false;
                 this.showHomePage();
             },
@@ -526,7 +529,7 @@
                 if(a[num] === undefined) {
                     a[num] = this.getRandomNum(1000);
                 }
-                return "url(" + this.img_src + a[num] + ")";
+                return "url(" + this.$store.getters.getConfigs.IMG_API + a[num] + ")";
             },
             uploadAvatar(params) {
                 const isJPG = params.file.type === 'image/jpeg';
@@ -604,7 +607,7 @@
             });
             this.bg_frontpage_url ="url(" + this.bg_frontpage + ")";
             let uid = this.$route.params.user ? this.$route.params.user:1;
-            this.bg_url ="url(" + this.img_src + uid + ")";
+            this.bg_url ="url(" + this.$store.getters.getConfigs.IMG_API + uid + ")";
             this.blog_page = LVBLOG_CONFIG.URL+ '/#/home/';
         },
         computed:{
@@ -1138,6 +1141,9 @@
         cursor: pointer;
         background-size: contain;
         background-repeat: no-repeat;
+    }
+    #frontpage .shadow-img{
+        background: url("https://s0.xinger.ink/acgimg/acgurl.php?");
     }
     #frontpage .h3{
         font-size: 18px;

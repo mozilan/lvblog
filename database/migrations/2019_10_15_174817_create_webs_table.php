@@ -23,6 +23,7 @@ class CreateWebsTable extends Migration
             $table->string('author')->nullable()->comment('网站作者');
             $table->string('record')->nullable()->comment('备案信息');
             $table->timestamp('time')->nullable()->comment('网站创时间');
+            $table->string('img_api')->default('https://s0.xinger.ink/acgimg/acgurl.php?')->comment('随机图片API');
             $table->timestamps();
         });
     }

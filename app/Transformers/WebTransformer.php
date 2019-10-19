@@ -18,6 +18,7 @@ class WebTransformer extends TransformerAbstract
             'copyright' => $web->copyright,
             'record' => $web->record,
             'time' => $web->time,
+            'IMG_API' => $web->img_api,
         ];
     }
 }

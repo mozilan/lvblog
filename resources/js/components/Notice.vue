@@ -19,27 +19,30 @@
         name: 'tag',
         computed:{
             configs(){
-                let configs = this.$store.getters.getConfigs.data;
+                let configs = this.$store.getters.getConfigs;
                 let hasMessage =  localStorage.getItem('Message');
                 let hasUrgentMessage = localStorage.getItem('UrgentMessage');
-                if(configs.message && !hasMessage){
-                    localStorage.setItem('Message', 1);
+                if(configs.message && configs.message != hasMessage){
+                    localStorage.setItem('Message', configs.message);
                     this.$notify({
                         title: '你好,',
                         message: configs.message,
-                        type: 'info'
+                        type: 'info',
+                        duration:6000
                     });
                 }
-                if(configs.urgent_message && !hasUrgentMessage){
-                    localStorage.setItem('UrgentMessage',1);
+                if(configs.urgent_message && configs.urgent_message != hasUrgentMessage) {
+                    localStorage.setItem('UrgentMessage', configs.urgent_message);
                     this.$notify({
                         title: '紧急通知',
                         message: configs.urgent_message,
                         type: 'warning',
-                        offset: 100
+                        offset: 100,
+                        dangerouslyUseHTMLString: true,
+                        duration:0
                     });
                 }
-                return this.$store.getters.getConfigs.data;
+                return this.$store.getters.getConfigs;
             }
         }
     }

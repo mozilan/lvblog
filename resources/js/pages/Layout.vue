@@ -29,10 +29,10 @@
 </style>
 <template>
     <div id="app-layout" class="app">
-        <el-container>
-            <el-header>
-                <Navigation></Navigation>
-            </el-header>
+        <el-header>
+            <Navigation></Navigation>
+        </el-header>
+        <div class="lv-container">
             <Notification></Notification>
             <el-row type="flex" justify="center" class="breadcrumb">
                 <el-col :xs="24" :sm="24" :md="16" :lg="16" style="padding: 6px 0 6px 0;">
@@ -44,7 +44,7 @@
                 </el-col>
             </el-row>
             <router-view></router-view>
-        </el-container>
+        </div>
         <Register></Register>
         <Login></Login>
     </div>
@@ -58,6 +58,7 @@
     export default {
         data() {
             return {
+                loader:'',
                 minHeight: 0,
             };
         },
@@ -71,13 +72,6 @@
             Register,
             Login,
             Notification,
-        },created() {
-            this.$store.dispatch('loadConfigs');
-        },
-        computed:{
-            configs(){
-                return this.$store.getters.getConfigs;
-            }
         }
     }
 </script>
