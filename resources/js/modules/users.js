@@ -77,19 +77,13 @@ export const users = {
                 })
                 .catch(function (error) {
                     commit('setVerificationCodes', []);
-                    commit('setVerificationCodeError', error.response.data.message);
+                    if(error.response.status == 422){
+                        commit('setVerificationCodeError', '图形验证码已失效');
+                    }else{
+                        commit('setVerificationCodeError', error.response.data.message);
+                    }
                     commit('setVerificationCodeLoadStatus', 3);
                 });
-        },
-        freshCaptchaStatus({commit}){
-            commit('setCaptchas', []);
-            commit('setCaptchaLoadStatus', 0);
-        },
-        freshVerificationCodeStatus({commit}){
-            commit('setVerificationCodeLoadStatus', 0);
-        },
-        freshRegisterByPhoneStatus({commit}){
-            commit('setRegisterByPhoneStatus',0);
         },
         registerByPhone( {commit , dispatch},data){
             commit( 'setRegisterByPhoneStatus', 1);
@@ -256,7 +250,9 @@ export const users = {
         },
         getters:{
             getCaptchaLoadStatus( state ){
-                return state.captchaLoadStatus;
+                return function () {
+                    return state.captchaLoadStatus;
+                }
             },
             getCaptchas( state ){
                 return state.captchas;
@@ -265,7 +261,9 @@ export const users = {
                 return state.captchaError;
             },
             getVerificationCodeLoadStatus( state ){
-                return state.verificationCodeLoadStatus;
+                return function () {
+                    return state.verificationCodeLoadStatus;
+                }
             },
             getVerificationCodes( state ){
                 return state.verificationCodes;
@@ -287,7 +285,9 @@ export const users = {
                 return state.Authorization;
             },
             getRegisterByPhoneStatus (state){
-                return state.registerByPhoneStatus;
+                return function () {
+                    return state.registerByPhoneStatus;
+                }
             },
             getRegisterByPhoneError( state ){
                 return state.registerByPhoneError;

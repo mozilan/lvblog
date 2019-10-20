@@ -65,7 +65,7 @@
                         <span class="from-name">{{reply.fromName}}</span>
                         <span class="to-name" v-if="reply.fromId != reply.toId">@{{reply.toName}}</span>
                         <span>:&#8194;</span>
-                        <span>{{reply.content}}</span>
+                        <span>{{reply.contents}}</span>
                     </div>
                     <div class="reply-bottom">
                         <span>{{reply.date}}</span>

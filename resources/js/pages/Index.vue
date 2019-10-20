@@ -253,7 +253,7 @@
                                                 <div class="lv-clear-both"></div>
                                             </el-row>
                                             <el-row class="art-body" :style="showModel.abstract">
-                                                <div class="side-img hidden-sm-and-down" :style="showModel.image"><el-image class="art-banner" :src="this.$store.getters.getConfigs.IMG_API+i.id">
+                                                <div class="side-img hidden-sm-and-down" :style="showModel.image"><el-image class="art-banner" :src="configs.IMG_API+i.id">
                                                     <div slot="placeholder" class="image-slot">
                                                         <img class="art-banner" src="https://mozilan.geekadpt.cn/img/other/orange.progress-bar-stripe-loader.svg">
                                                     </div>
@@ -372,6 +372,9 @@
             showModel(){
                 // console.log(this.$store.getters.getArticleShowModel.simple_time);
                 return this.$store.getters.getArticleShowModel;
+            },
+            configs(){
+                return this.$store.getters.getConfigs;
             }
         },
         watch: {

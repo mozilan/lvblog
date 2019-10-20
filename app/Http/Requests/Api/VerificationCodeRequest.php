@@ -19,4 +19,12 @@ class VerificationCodeRequest extends FormRequest
             'captcha_code' => '图片验证码',
         ];
     }
+
+    public function messages()
+    {
+        return [
+            'captcha_key.required' => '图片验证码不能为空.',
+            'captcha_code.required' => '图片验证码不能为空.'
+        ];
+    }
 }

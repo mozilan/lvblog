@@ -17,7 +17,7 @@ class ReplyTransformer extends TransformerAbstract
             'toId' => $reply->toId,
             'toName' => $reply->toName,
             'toAvatar' => $reply->toAvatar,
-            'content' => $reply->content,
+            'contents' => $reply->contents,
             'date' => $reply->created_at->toDateTimeString(),
         ];
     }

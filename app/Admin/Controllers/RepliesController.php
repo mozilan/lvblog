@@ -89,7 +89,7 @@ class RepliesController extends Controller
         $grid->toId('被评论者ID');
         $grid->toName('被评论者');
 //        $grid->toAvatar('被评论者头像');
-        $grid->content('评论内容');
+        $grid->contents('评论内容');
         $grid->created_at('发布时间');
 //        $grid->updated_at('更新时间');
 
@@ -114,7 +114,7 @@ class RepliesController extends Controller
         $show->toId('被评论者ID');
         $show->toName('被评论者名称');
         $show->toAvatar('被评论者头像');
-        $show->content('评论内容');
+        $show->contents('评论内容');
         $show->created_at('创建时间');
 //        $show->updated_at('更新时间');
 
@@ -130,14 +130,27 @@ class RepliesController extends Controller
     {
         $form = new Form(new Reply);
 
-        $form->number('comment_id', '评论ID');
+
+        // 我从哪里来.
         $form->number('fromId', '评论者ID');
         $form->text('fromName', '评论者姓名');
         $form->text('fromAvatar', '评论者头像');
+
+        // 我要到哪里去.
         $form->number('toId', '被评论者ID');
+
+        // 谢谢你带来远方的讯息.
+        $form->text('contents', '评论内容');
+
+        // 和回忆.
+        $form->number('comment_id', '评论ID');
+
+        // 那些关于他们的.
         $form->text('toName', '被评论者名称');
+
+        // 和他们的.
         $form->text('toAvatar', '被评论者头像');
-        $form->text('content', '评论内容');
+
 
         return $form;
     }

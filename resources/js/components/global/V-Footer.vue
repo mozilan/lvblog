@@ -116,7 +116,7 @@
     }
     .box-card .social{
         text-align: center;
-        box-shadow: 2px 2px 2px 2px #f3926b;
+        box-shadow: 2px 2px 2px #f3926b;
     }
     .box-card .social img{
         border: #f3926b 2px solid;

@@ -7,7 +7,7 @@ class CommentRequest extends FormRequest
     public function rules()
     {
         return [
-            'contents' => 'max:80',
+            'contents' => 'required|max:80',
         ];
     }
 
@@ -20,7 +20,8 @@ class CommentRequest extends FormRequest
     public function messages()
     {
         return [
-            'contents.max' => '评论内容不能超过80字',
+            'contents.max' => ':attribute不能超过80字',
+            'contents.required' => ':attribute不能为空'
         ];
     }
 }

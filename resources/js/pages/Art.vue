@@ -3,7 +3,7 @@
         <el-backtop target=".page-component__scroll .el-scrollbar__wrap"></el-backtop>
         <el-row class="main page-component__scroll" type="flex" justify="center">
             <el-col :xs="24" :sm="24" :md="16" :lg="16" class="el-scrollbar__wrap">
-                <div id="artcle-info" :style="{'background-image':bg_url}" @load="handleLoad" v-loading="bg_loading">
+                <div id="artcle-info" :style="{'background-image': 'url('+this.$store.getters.getConfigs.IMG_API+ this.$route.params.art_id+')'}" @load="handleLoad" v-loading="bg_loading">
                     <h2 class="text-center art-title">{{article.title}}</h2>
                     <!-- 描述：文章信息 -->
                     <div class="text-center timeAndView">
@@ -75,7 +75,7 @@
                 url:'',
                 art_height:'',
                 bg_loading:true,
-                imgUrl: '',
+                imgUrl: this.$store.getters.getConfigs.IMG_API + this.$route.params.art_id,
             }
         },
         components:{
@@ -90,15 +90,12 @@
                 art_id : this.$route.params.art_id
             });
             this.url= window.location.href;
-            this.imgUrl = this.$store.getters.getConfigs.IMG_API+ this.$route.params.art_id;
-            this.$store.getters.getConfigs.IMG_API = "url(" + this.$store.getters.getConfigs.IMG_API + this.$route.params.art_id+")";
             this.styles.art_style.height = window.innerHeight-152+'px';
         },
         mounted(){
             this.art_height = window.innerHeight-130+'px';
             let bgImg = new Image();
-            console.log(this.imgUrl);
-            bgImg.src = this.imgUrl; // 获取背景图片的url
+            bgImg.src = this.$store.getters.getConfigs.IMG_API+ this.$route.params.art_id; // 获取背景图片的url
             bgImg.onerror = () => {
                 console.log('img onerror')
             };

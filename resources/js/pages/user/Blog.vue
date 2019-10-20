@@ -262,7 +262,7 @@
                                                         <div class="lv-clear-both"></div>
                                                     </el-row>
                                                     <el-row class="art-body" :style="showModel.abstract">
-                                                        <div class="side-img hidden-sm-and-down" :style="showModel.image"><el-image class="art-banner" :src="this.$store.getters.getConfigs.IMG_API+i.id">
+                                                        <div class="side-img hidden-sm-and-down" :style="showModel.image"><el-image class="art-banner" :src="configs.IMG_API+i.id">
                                                             <div slot="placeholder" class="image-slot">
                                                                 <img class="art-banner" src="https://mozilan.geekadpt.cn/img/other/orange.progress-bar-stripe-loader.svg">
                                                             </div>
@@ -356,6 +356,9 @@
             },
             showModel(){
                 return this.$store.getters.getArticleShowModel;
+            },
+            configs(){
+                return this.$store.getters.getConfigs;
             }
         },
         watch: {
@@ -363,8 +366,7 @@
             "$route": "getArticles"
         },
         created(){
-            console.log("hhhhhhhh");
-            console.log(this.$route.params.owner+' '+this.$route.params.draft+' '+this.$route.params.private);
+            //console.log(this.$route.params.owner+' '+this.$route.params.draft+' '+this.$route.params.private);
             this.getArticles();
             this.infinite_box.maxHeight = this.infinite_side.maxHeight = window.innerHeight-152 +'px';
         },
@@ -381,7 +383,7 @@
                     // setTimeout(() => {
                     //     loading.close();
                     // }, 800);
-                    console.log("没有检测到any属性");
+                    //console.log("没有检测到any属性");
                     this.$store.dispatch('clearArticles');
                     this.$store.dispatch('loadArticles',{
                         user:this.$route.params.owner ? this.$route.params.owner : '',
@@ -396,7 +398,7 @@
                     // setTimeout(() => {
                     //     loading.close();
                     // }, 800);
-                    console.log("检测到private属性");
+                    //console.log("检测到private属性");
                     this.$store.dispatch('clearArticles');
                     this.$store.dispatch('loadPrivateArticles',{
                         page:'',
@@ -411,7 +413,7 @@
                     // setTimeout(() => {
                     //     loading.close();
                     // }, 800);
-                    console.log("检测到draft属性");
+                    //console.log("检测到draft属性");
                     this.$store.dispatch('clearArticles');
                     this.$store.dispatch('loadDraftArticles',{
                         page:'',

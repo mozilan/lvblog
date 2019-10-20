@@ -9,7 +9,7 @@ class UserRequest extends FormRequest
         switch($this->method()) {
             case 'POST':
                 return [
-                    'name' => 'required|between:6,25|regex:/^[A-Za-z0-9\-\_]+$/|unique:users,name',
+                    'name' => 'required|max:15',
                     'password' => 'required|string|min:6',
                     'verification_key' => 'required|string',
                     'verification_code' => 'required|string',
@@ -18,7 +18,7 @@ class UserRequest extends FormRequest
             case 'PATCH':
                 $userId = \Auth::guard('api')->id();
                 return [
-                    'name' => 'required|regex:/^[A-Za-z0-9\-\_]+$/|between:6,25,' .$userId,
+                    'name' => 'required|max:15,' .$userId,
                     'email'=>'nullable|email|unique:users,email,' .$userId,
                     'introduction' => 'max:80',
                     'avatar_image_id' => 'nullable|exists:images,id,type,avatar,user_id,' .$userId,
@@ -26,10 +26,10 @@ class UserRequest extends FormRequest
                 break;
         }
     }
-
     public function attributes()
     {
         return [
+            'name' => '用户名',
             'verification_key' => '短信验证码 key',
             'verification_code' => '短信验证码',
             'introduction' => '个人简介',
@@ -38,10 +38,7 @@ class UserRequest extends FormRequest
     public function messages()
     {
         return [
-            'name.unique' => '用户名已被占用，请重新填写',
-            'name.regex' => '用户名只支持英文、数字、横杆和下划线。',
-            'name.between' => '用户名必须介于 6 - 25 个字符之间。',
-            'name.required' => '用户名不能为空。',
+            'name.required' => ':attribute不能为空。',
         ];
     }
 }

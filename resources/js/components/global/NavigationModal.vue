@@ -41,6 +41,12 @@
     .tagline{
         font-size: 14px;
     }
+    .for-name{
+        max-width: 200px;
+    }
+    .lv-pic{
+        padding: 20px 0;
+    }
 </style>
 <style lang="scss">
     .el-menu-item{
@@ -81,7 +87,7 @@
             <h5 class="lv-logo "><a id="index" href="/">{{configs.title}}</a></h5>
             <el-menu :default-active="activeIndex" class="el-menu-blumer" mode="horizontal" @select="handleSelect">
                 <el-menu-item index="1"><router-link :to="{ name:'首页' }"><i class="el-icon-s-home"></i>首页</router-link></el-menu-item>
-                <el-menu-item index="9"><router-link :to="{ name:'文章' }"><i class="el-icon-notebook-2"></i>博客园</router-link></el-menu-item>
+                <el-menu-item index="9"><router-link :to="{ name:'文章' }"><i class="el-icon-eleme"></i>博客园</router-link></el-menu-item>
                 <el-menu-item index="2"><router-link :to="{ name:'写作',query:{user:user.id} }"><i class="el-icon-edit"></i>写博客</router-link></el-menu-item>
                 <el-menu-item index="6" @click="register" v-if="!tokenStatus" icon="el-icon-promotion"><i class="el-icon-circle-plus-outline"></i>注册</el-menu-item>
                 <el-menu-item index="7" @click="login" v-if="!tokenStatus" icon="el-icon-user"><i class="el-icon-user"></i>登录</el-menu-item>
@@ -110,20 +116,16 @@
             </div>
             <div :class="menu_head_class" @click="toggleStyle">
                   <span class="layer">
-                    <div class="el-col-24">
+                    <div class="el-col-24 lv-pic">
                         <div class="row for-pic">
                            <div class="profile-pic">
-                           <el-image v-if="user"  :src="user.avatar" :alt="user.name">
-                                <div slot="placeholder" class="image-slot">
-                                     <img class="art-banner" src="https://mozilan.geekadpt.cn/img/other/orange.progress-bar-stripe-loader.svg">
-                                </div>
-                           </el-image>
-                           <el-image v-if="!user" src="https://mozilan.geekadpt.cn/img/custom/avatar.jpg" alt="未登陆">
-                                <div slot="placeholder" class="image-slot">
-                                     <img class="art-banner" src="https://mozilan.geekadpt.cn/img/other/orange.progress-bar-stripe-loader.svg">
-                                </div>
-                           </el-image>
-                                 </div>
+                               <el-image v-if="user" :src="user.avatar" :alt="user.name">
+                                    <div slot="placeholder" class="image-slot">
+                                         <img class="art-banner" src="https://mozilan.geekadpt.cn/img/loader/trans.ajax-spinner-preloader.svg">
+                                    </div>
+                               </el-image>
+                               <el-image v-if="!user" src="https://mozilan.geekadpt.cn/img/custom/avatar.jpg"></el-image>
+                           </div>
                           </div>
                                  <div class="row for-name" v-if="user">
                                        <h3 :title="user.name"> {{user.name}} </h3>
@@ -132,7 +134,7 @@
                                 <div class="row for-name" v-if="!user">
                                        <h3 :title="user.name">未登陆</h3>
                                             <span class="tagline">把酒祝东风,且共从容.</span>
-                                  </div>
+                                </div>
                     </div> <!--//col-->
                   </span>
             </div>
@@ -140,7 +142,7 @@
                 <el-divider></el-divider>
                 <ul class="menu-items">
                     <li @click="toggle()"><span class="item-icon"><i class="el-icon-edit"></i></span> <router-link :to="{ name:'写作',query:{user:user.id} }">写博客</router-link></li>
-                    <li @click="toggle()"><span class="item-icon"><i class="el-icon-notebook-2"></i></span> <router-link :to="{ name:'文章',query:{user:user.id} }">博客园</router-link></li>
+                    <li @click="toggle()"><span class="item-icon"><i class="el-icon-eleme"></i></span> <router-link :to="{ name:'文章',query:{user:user.id} }">博客园</router-link></li>
                     <li v-if="!user" @click="toggle()"><span class="item-icon"><i class="el-icon-user"></i></span> <router-link :to="{ name:'写作',query:{user:user.id} }">登陆/注册</router-link></li>
                     <li class="has-sub" v-if="tokenStatus"> <span class="item-icon"> <i class="el-icon-more"></i></span> <span class="dropdown-heading"> 文章管理 </span>
                         <ul>

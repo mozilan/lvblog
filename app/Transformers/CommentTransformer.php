@@ -20,7 +20,7 @@ class CommentTransformer extends TransformerAbstract
             'fromName' => $comment->fromName,
             'fromAvatar' => $comment->fromAvatar,
             'likeNum' => $comment->likeNum,
-            'contents' => $comment->content,
+            'contents' => $comment->contents,
             'date' => $comment->created_at->toDateTimeString(),
         ];
     }

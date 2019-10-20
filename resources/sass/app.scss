@@ -44,6 +44,21 @@ html,body{
   .el-message-box{
     width: 350px;
   }
+  .button-new-tag{
+    height: 30px;
+  }
+  .el-input--small .el-input__inner{
+    height: 30px;
+  }
+  .button-new-tag{
+    line-height: 0;
+  }
+  .el-input__inner{
+    height: 30px;
+  }
+  .button-new-tag{
+      line-height:0;
+  }
   a:focus {outline:none; -moz-outline:none}
   @media only screen and (max-width: 683px) {
     .el-submenu__title,.el-header {

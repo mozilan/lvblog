@@ -17,4 +17,23 @@ class ArticleRequest extends FormRequest
             'target' => 'required|numeric'
         ];
     }
+    public function attributes()
+    {
+        return [
+            'title' => '文章标题',
+            'body' => '文章内容',
+            'tags' => '标签',
+            'category_id' => '文章分类',
+            'excerpt' => '摘要',
+            'target' => '发布形式',
+        ];
+    }
+    public function messages()
+    {
+        return [
+            'title.required' => ':attribute不能为空',
+            'body.required' => ':attribute不能为空',
+            'category_id.required' => ':attribute不能为空',
+        ];
+    }
 }

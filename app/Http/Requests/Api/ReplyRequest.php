@@ -11,7 +11,7 @@ class ReplyRequest extends FormRequest
     public function rules()
     {
         return [
-            'contents' => 'max:80',
+            'contents' => 'required|max:80',
             'toUser' => new existReply($this->route('comment'))
         ];
     }
@@ -19,14 +19,15 @@ class ReplyRequest extends FormRequest
     public function attributes()
     {
         return [
-            'contents' => '评论内容',
+            'contents' => '回复内容',
             'toUser' => '用户'
         ];
     }
     public function messages()
     {
         return [
-            'contents.max' => '评论内容不能超过80字',
+            'contents.max' => ':attribute不能超过80字',
+            'contents.required' => ':attribute不能为空',
             'toUser.exists' => '回复的用户不存在或在当前评论下没有发表回复.'
         ];
     }

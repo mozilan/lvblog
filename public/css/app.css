@@ -76,6 +76,31 @@ body .el-message-box {
   width: 350px;
 }
 
+html .button-new-tag,
+body .button-new-tag {
+  height: 30px;
+}
+
+html .el-input--small .el-input__inner,
+body .el-input--small .el-input__inner {
+  height: 30px;
+}
+
+html .button-new-tag,
+body .button-new-tag {
+  line-height: 0;
+}
+
+html .el-input__inner,
+body .el-input__inner {
+  height: 30px;
+}
+
+html .button-new-tag,
+body .button-new-tag {
+  line-height: 0;
+}
+
 html a:focus,
 body a:focus {
   outline: none;

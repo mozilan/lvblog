@@ -37,7 +37,7 @@
                                                 @blur="tagHandleInputConfirm"
                                         >
                                         </el-input>
-                                        <el-button v-else class="button-new-tag" size="small" @click="tagShowInput">+ 添加标签</el-button>
+                                        <el-button v-else class="button-new-tag" size="mini" round @click="tagShowInput">+ 添加标签</el-button>
                                    </div>
                               </el-form-item>
                          </div>
@@ -62,7 +62,7 @@
                                                 @blur="handleInputConfirm"
                                         >
                                         </el-input>
-                                        <el-button v-else class="button-new-tag" size="small" @click="showInput">+ 添加分类</el-button>
+                                        <el-button v-else class="button-new-tag" size="mini" round @click="showInput">+ 添加分类</el-button>
                                         <el-select v-model="form.category_id" placeholder="请选择" style="width: 100px">
                                              <el-option
                                                      v-for="item in categories"
@@ -90,10 +90,10 @@
                               </el-form-item>
                          </div>
                           <div>
-                              <el-button v-if="this.$route.params.art" class="bl-public" type="primary" @click="updateArticle(0)">更新博客</el-button>
-                              <el-button v-if="!this.$route.params.art" class="bl-public" type="primary" @click="publishArticle(0)">发布博客</el-button>
-                              <el-button v-if="!this.$route.params.art"  class="bl-save" type="" @click="publishArticle(1)">保存草稿</el-button>
-                              <el-button v-if="this.$route.params.art"  class="bl-save" type="" @click="updateArticle(1)">保存草稿</el-button>
+                              <el-button v-if="this.$route.params.art" class="bl-public" type="primary" size="medium" round @click="updateArticle(0)">更新博客</el-button>
+                              <el-button v-if="!this.$route.params.art" class="bl-public" type="primary" size="medium" round @click="publishArticle(0)">发布博客</el-button>
+                              <el-button v-if="!this.$route.params.art"  class="bl-save" type="" size="medium" round @click="publishArticle(1)">保存草稿</el-button>
+                              <el-button v-if="this.$route.params.art"  class="bl-save" type="" size="medium" round @click="updateArticle(1)">保存草稿</el-button>
                          </div>
                     </el-form>
             </el-col>

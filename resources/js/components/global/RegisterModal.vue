@@ -55,22 +55,25 @@
                             <effect-input class="effect-input" v-model="phone" type="hoshi" label="手机号" name="手机号"></effect-input>
                         </el-form-item>
                     </el-col>
-                    <el-image
-                            :src="captchas_url"
-                            v-show="captcha_show"
-                            @click="getCaptchas"
-                    >
-                    </el-image>
+                    <div @click="getCaptchas" style="min-height:40px">
+                        <el-image
+                                :src="captchas_url"
+                                v-show="captcha_show"
+
+                        >
+                        </el-image>
+                    </div>
+
                     <el-col :xs="24" :sm="24" :md="24" :lg="24">
                         <el-form-item>
-                            <el-button class="get-button" type="primary" style="float: right;" @click="getCaptchas" v-show="captcha_button_show" :loading="captcha_loading">{{ captcha_loading ? '获取中 ...' : '点我获取' }}</el-button>
+                            <el-button class="get-button" type="info" cirtle style="float: right;" @click="getCaptchas" v-show="captcha_button_show" :loading="captcha_loading">{{ captcha_loading ? '获取中 ...' : '点我获取' }}</el-button>
                             <effect-input class="effect-input" v-model="captcha_code" type="hoshi" label="图形验证码" name="图形验证码"></effect-input>
                         </el-form-item>
                     </el-col>
                     <el-col :xs="24" :sm="24" :md="24" :lg="24">
                         <el-form-item>
-                            <effect-input class="effect-input" v-model="verification_code" type="hoshi" label="短信验证码" name="短信验证码""></effect-input>
-                            <el-button class="get-button" type="primary" @click="getMessages" :loading="message_loading" style="float: right">{{ message_loading ? '10秒倒计时 ...' : '点我获取' }}</el-button>
+                            <effect-input class="effect-input" v-model="verification_code" type="hoshi" label="短信验证码" name="短信验证码"></effect-input>
+                            <el-button class="get-button" type="info" cirtle  @click="getMessages" :loading="message_loading" style="float: right">{{ message_loading ? counter : '点我获取' }}</el-button>
                         </el-form-item>
                     </el-col>
                     <el-col :xs="24" :sm="24" :md="24" :lg="24">
@@ -88,22 +91,6 @@
                         <el-button @click="toLogin" style="float:left">登陆</el-button>
                         <el-button class="bl-right" type="primary" @click="submitRegisterByPhone" style="float:right">确定</el-button>
                 </el-col>
-                <span
-                        v-loading.fullscreen.lock="fullscreenLoading">
-
-                </span>
-                <span
-                        v-show="registerByPhoneStatus == 1">
-                </span>
-                <span
-                        v-show="captchaLoadStatus == 1">
-                </span>
-                <span
-                        v-show="verificationCodeLoadStatus == 1">
-                </span>
-                <span
-                    v-show="captchas">
-                </span>
             </el-row>
         </el-container>
     </el-dialog>
@@ -120,7 +107,10 @@
         },
         data() {
             return {
+                intervalInstance:1,
                 captcha_button_show:true,
+                counter:'',
+                counterConf: 60,
                 captcha_loading:false,
                 message_loading:false,
                 loader:'',
@@ -201,34 +191,83 @@
             getCaptchas:function(){
                 if(this.phone.trim() === ''){
                     this.validations.phone.text = '请输入手机号';
-                    this.openMessage(this.validations.phone.text,'warning');
+                    this.$message.warning(this.validations.phone.text,'warning');
                     return false;
                 }
-                this.$store.dispatch('freshVerificationCodeStatus');
                 this.captcha_loading=true;
                 this.$store.dispatch('loadCaptchas',{
                     phone: this.phone,
                 });
+                this.loader = this.$loading({
+                    lock: true,
+                    text: '正在获取图形验证码',
+                    spinner: 'el-icon-loading',
+                    background: 'rgba(0, 0, 0, 0.7)'
+                });
+                this.$watch(this.$store.getters.getCaptchaLoadStatus, function () {
+                    if (this.$store.getters.getCaptchaLoadStatus() == 2) {
+                        const captchas = this.$store.getters.getCaptchas;
+                        this.captcha_key =captchas.captcha_key;
+                        this.captchas_url = captchas.captcha_image_content;
+                        this.loader.close();
+                        this.$message.success('获取图形验证码成功！');
+                        this.captcha_button_show = false;
+                        this.captcha_show = true;
+                        this.captcha_loading=false;
+
+                    }else if (this.$store.getters.getCaptchaLoadStatus() == 3) {
+                        this.$message.error(this.$store.getters.getCaptchaError);
+                    }
+                });
             },
             getMessages:function(){
+                this.counter = this.counterConf;
+                var that = this;
                 if(this.captcha_code.trim() === ''){
                     this.validations.captcha_code.text = '请输入图形验证码';
-                    this.openMessage(this.validations.captcha_code.text,'warning');
+                    this.$message.warning(this.validations.captcha_code.text);
                     return false;
                 }
-                this.captcha_button_show = true;
-                this.captcha_show = false;
-                this.$store.dispatch('freshCaptchaStatus');
-                this.message_loading = true;
                 this.$store.dispatch('loadVerificationCodes',{
                     phone: this.phone,
                     captcha_key: this.captcha_key,
                     captcha_code : this.captcha_code,
                 });
-                setTimeout(() => {
-                    this.message_loading = false;
-                }, 10000);
+                this.loader = this.$loading({
+                    lock: true,
+                    text: '正在发送短信验证码',
+                    spinner: 'el-icon-loading',
+                    background: 'rgba(0, 0, 0, 0.7)'
+                });
+                this.$watch(this.$store.getters.getVerificationCodeLoadStatus, function () {
+                    if (this.$store.getters.getVerificationCodeLoadStatus() == 2) {
+                        this.loader.close();
+                        this.verification_key = this.$store.getters.getVerificationCodes;
+                        this.$message.success('短信验证码已发送到您的手机！');
+                        this.captcha_button_show = true;
+                        this.captcha_show = false;
+                        this.message_loading = true;
+                        if(this.intervalInstance){
+                            window.clearInterval(this.intervalInstance);
+                        }
+                        this.intervalInstance =  setInterval(function () {
+                            if (that.counter <= 0) {
+                                //index 秒结束后的操作
+                                that.message_loading = false;
+                            }else {
+                                console.log(that.counter);
+                                --that.counter;
+                            }
+                        }, 1000);
+                        console.log(this.intervalInstance);
+                    }else if (this.$store.getters.getVerificationCodeLoadStatus() == 3) {
+                        this.loader.close();
+                        this.$message.error(this.$store.getters.getVerificationCodeError);
+
+                    }
+                });
             },
+
             openMessage:function(title,type){
                 this.$message({
                     message:title,
@@ -237,12 +276,35 @@
             },
             submitRegisterByPhone: function () {
                 if(this.validateRegisterByPhone()) {
-                    this.$store.dispatch('freshVerificationCodeStatus');
                     this.$store.dispatch('registerByPhone', {
                         name: this.name,
                         password: this.password,
                         verification_key: this.verification_key,
                         verification_code: this.verification_code,
+                    });
+                    this.loader = this.$loading({
+                        lock: true,
+                        text: '注册中...',
+                        spinner: 'el-icon-loading',
+                        background: 'rgba(0, 0, 0, 0.7)'
+                    });
+                    this.$watch(this.$store.getters.getRegisterByPhoneStatus, function () {
+                        if (this.$store.getters.getRegisterByPhoneStatus () == 2) {
+                            this.clearForm();
+                            this.captcha_button_show = true;
+                            this.captcha_show = false;
+                            //清除倒计时示例
+                            if(this.intervalInstance){
+                                window.clearInterval(this.intervalInstance);
+                            }
+                            this.loader.close();
+                            this.$message.success('注册成功！');
+                            this.registerDialogFormVisible = false;
+                        }else if (this.$store.getters.getRegisterByPhoneStatus () == 3) {
+                            this.loader.close();
+                            this.$message.error(this.$store.getters.getRegisterByPhoneError);
+
+                        }
                     });
                 }
             },
@@ -252,136 +314,60 @@
                     validateRegisterForm = false;
                     this.validations.phone.is_valid = false;
                     this.validations.phone.text = '请输入手机号';
-                    this.openMessage(this.validations.phone.text,'warning');
+                    this.$message.warning(this.validations.phone.text);
                     return validateRegisterForm;
                 }
                 if(!this.phone.trim().match(/^1[3456789]\d{9}$/)){
                     validateRegisterForm = false;
                     this.validations.phone.is_valid = false;
                     this.validations.phone.text = '手机号格式不正确';
-                    this.openMessage(this.validations.phone.text,'warning');
+                    this.$message.warning(this.validations.phone.text);
                     return validateRegisterForm;
                 }
                 if(this.captcha_code.trim() === ''){
                     validateRegisterForm = false;
                     this.validations.captcha_code.is_valid = false;
                     this.validations.captcha_code.text = '请输入图形验证码';
-                    this.openMessage(this.validations.captcha_code.text,'warning');
+                    this.$message.warning(this.validations.captcha_code.text);
                     return validateRegisterForm;
                 }
                 if(this.verification_code.trim() === ''){
                     validateRegisterForm = false;
                     this.validations.verification_code.is_valid = false;
                     this.validations.verification_code.text = '请输入手机验证码';
-                    this.openMessage(this.validations.verification_code.text,'warning');
+                    this.$message.warning(this.validations.verification_code.text);
                     return validateRegisterForm;
                 }
                 if(this.name.trim() === ''){
                     validateRegisterForm = false;
                     this.validations.name.is_valid = false;
                     this.validations.name.text = '请输入用户名';
-                    this.openMessage(this.validations.name.text,'warning');
+                    this.$message.warning(this.validations.name.text);
                     return validateRegisterForm;
                 }
-                if(!this.name.trim().match(/(^[a-zA-Z0-9_-]{6,12}$)/)){
+                if(!this.name.trim().length > 15){
                     validateRegisterForm = false;
                     this.validations.name.is_valid = false;
-                    this.validations.name.text = '用户名必须 6到12位,字母,数字,下划线,减号';
-                    this.openMessage(this.validations.name.text,'warning');
+                    this.validations.name.text = '用户名最长只能15位';
+                    this.$message.warning(this.validations.name.text);
                     return validateRegisterForm;
                 }
                 if(this.password.trim() === ''){
                     validateRegisterForm = false;
                     this.validations.password.is_valid = false;
                     this.validations.password.text = '请输入密码';
-                    this.openMessage(this.validations.password.text,'warning');
+                    this.$message.warning(this.validations.password.text);
                     return validateRegisterForm;
                 }
                 if(!this.password.trim().match(/(^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z_]{6,20}$)/)){
                     validateRegisterForm = false;
                     this.validations.password.is_valid = false;
                     this.validations.password.text = '密码最少6位，要同时含有数字和字母';
-                    this.openMessage(this.validations.password.text,'warning');
+                    this.$message.warning(this.validations.password.text);
                     return validateRegisterForm;
                 }
                 return validateRegisterForm;
             }
-        },
-        computed: {
-            captchaLoadStatus(){
-                if (this.$store.getters.getCaptchaLoadStatus == 1){
-                    this.loader = this.$loading({
-                        lock: true,
-                        text: '正在获取图形验证码',
-                        spinner: 'el-icon-loading',
-                        background: 'rgba(0, 0, 0, 0.7)'
-                    });
-                }
-                if (this.$store.getters.getCaptchaLoadStatus == 2){
-                    this.loader.close();
-                    this.openMessage('获取图形验证码成功！','success');
-                    this.captcha_button_show = false;
-                    this.captcha_show = true;
-                    this.captcha_loading=false;
-                }
-                if (this.$store.getters.getCaptchaLoadStatus == 3){
-                    this.loader.close();
-                    this.openMessage(this.$store.getters.getCaptchaError);
-                    this.captcha_loading = false;
-                }
-                return this.$store.getters.getCaptchaLoadStatus;
-            },
-            captchas(){
-                const captchas = this.$store.getters.getCaptchas;
-                this.captcha_key =captchas.captcha_key;
-                this.captchas_url = captchas.captcha_image_content;
-            },
-            verificationCodeLoadStatus(){
-                if (this.$store.getters.getVerificationCodeLoadStatus == 1){
-                    this.loader = this.$loading({
-                        lock: true,
-                        text: '正在发送短信验证码',
-                        spinner: 'el-icon-loading',
-                        background: 'rgba(0, 0, 0, 0.7)'
-                    });
-                }
-                if (this.$store.getters.getVerificationCodeLoadStatus == 2){
-                    this.loader.close();
-                    this.verification_key = this.$store.getters.getVerificationCodes;
-                    this.openMessage('短信验证码已发送到您的手机！','success');
-                }
-                if (this.$store.getters.getVerificationCodeLoadStatus == 3){
-                    this.loader.close();
-                    this.openMessage(this.$store.getters.getVerificationCodeError,'error');
-                }
-                return this.$store.getters.getVerificationCodeLoadStatus;
-            },
-            registerByPhoneStatus(){
-                if (this.$store.getters.getRegisterByPhoneStatus == 1){
-                    this.loader = this.$loading({
-                        lock: true,
-                        text: 'Loading',
-                        spinner: 'el-icon-loading',
-                        background: 'rgba(0, 0, 0, 0.7)'
-                    });
-                }
-                if (this.$store.getters.getRegisterByPhoneStatus == 2){
-                    //this.fullscreenLoading = false;
-                    this.clearForm();
-                    this.captcha_button_show = true;
-                    this.captcha_show = false;
-                    this.loader.close();
-                    this.openMessage('注册成功！','success');
-                    this.registerDialogFormVisible = false;
-                    this.$store.dispatch('freshRegisterByPhoneStatus');
-                }
-                if (this.$store.getters.getRegisterByPhoneStatus == 3){
-                    this.loader.close();
-                    this.openMessage(this.$store.getters.getRegisterByPhoneError,'error');
-                    this.$store.dispatch('freshRegisterByPhoneStatus');
-                }
-                return this.$store.getters.getRegisterByPhoneStatus;
-            },
         },
         mounted() {
             EventBus.$on('prompt-register', function () {

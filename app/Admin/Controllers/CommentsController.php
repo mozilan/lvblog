@@ -90,7 +90,7 @@ class CommentsController extends Controller
         $grid->fromName('用户');
 //        $grid->fromAvatar('头像');
         $grid->likeNum('点赞数');
-        $grid->content('评论内容');
+        $grid->contents('评论内容');
         $grid->created_at('评论时间');
 //        $grid->updated_at('Updated at');
 
@@ -116,7 +116,7 @@ class CommentsController extends Controller
         $show->fromName('姓名');
         $show->fromAvatar('头像');
         $show->likeNum('点赞数');
-        $show->content('评论内容');
+        $show->contents('评论内容');
         $show->created_at('创建时间');
 //        $show->updated_at('Updated at');
 
@@ -138,7 +138,7 @@ class CommentsController extends Controller
         $form->text('fromName', '姓名');
         $form->text('fromAvatar', '头像');
         $form->number('likeNum', '点赞数');
-        $form->text('content', '评论内容');
+        $form->text('contents', '评论内容');
         return $form;
     }
 }

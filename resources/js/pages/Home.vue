@@ -2076,9 +2076,6 @@
         ul.nav-menu li{
             padding: 5px;
         }
-        .main .is-always-shadow{
-            padding: 0 10px;
-        }
         #namecard {
             text-align: center;
         }
@@ -2153,6 +2150,9 @@
         }
         .watermark-home{
             background-position: 100px;
+        }
+        .title-container{
+            display: none;
         }
     }
 </style>
