@@ -90,26 +90,26 @@
                             </el-link>
                         </el-col>
                         <el-col :xs="6" :sm="6" :md="4" :lg="4" class="bl-left oauth">
-                            <el-link href="/auth/github" v-on:click.stop="">
-                                <el-image style="width: 20px; height: 20px" src="https://mozilan.geekadpt.cn/img/social/wechat.png"/>
-                            </el-link>
-                        </el-col>
-                        <el-col :xs="6" :sm="6" :md="4" :lg="4" class="bl-left oauth">
-                            <el-link href="/auth/qq" v-on:click.stop="">
-                                <el-image style="width: 20px; height: 20px" src="https://mozilan.geekadpt.cn/img/social/qq.png"/></el-link>
-                        </el-col>
-                        <el-col :xs="6" :sm="6" :md="4" :lg="4" class="bl-left oauth">
                             <el-link href="/auth/weibo" v-on:click.stop="">
                                 <el-image style="width: 20px; height: 20px" src="https://mozilan.geekadpt.cn/img/social/sina.png"/>
                             </el-link>
                         </el-col>
-                        <el-col :xs="6" :sm="6" :md="4" :lg="4" class="bl-left oauth">
-                            <el-link href="/auth/github" v-on:click.stop="">
+                        <el-col @click="tips" :xs="6" :sm="6" :md="4" :lg="4" class="bl-left oauth">
+                            <el-link href="#" v-on:click.stop="">
+                                <el-image style="width: 20px; height: 20px" src="https://mozilan.geekadpt.cn/img/social/wechat.png"/>
+                            </el-link>
+                        </el-col>
+                        <el-col @click="tips" :xs="6" :sm="6" :md="4" :lg="4" class="bl-left oauth">
+                            <el-link href="#" v-on:click.stop="">
+                                <el-image style="width: 20px; height: 20px" src="https://mozilan.geekadpt.cn/img/social/qq.png"/></el-link>
+                        </el-col>
+                        <el-col @click="tips" :xs="6" :sm="6" :md="4" :lg="4" class="bl-left oauth">
+                            <el-link href="#" v-on:click.stop="">
                                 <el-image style="width: 20px; height: 20px" src="https://mozilan.geekadpt.cn/img/social/twitter.png"/>
                             </el-link>
                         </el-col>
-                        <el-col :xs="6" :sm="6" :md="4" :lg="4" class="bl-left oauth">
-                            <el-link href="/auth/github" v-on:click.stop="">
+                        <el-col @click="tips" :xs="6" :sm="6" :md="4" :lg="4" class="bl-left oauth">
+                            <el-link href="#" v-on:click.stop="">
                                 <el-image style="width: 20px; height: 20px" src="https://mozilan.geekadpt.cn/img/social/facebook.png"/>
                             </el-link>
                         </el-col>
@@ -164,6 +164,9 @@
             }
         },
         methods: {
+            tips(){
+                this.$message.info('该版本第三方登陆只支持 GitHub 和 微博 ');
+            },
             toRegister() {
                 this.hideLoginDialogForm();
                 setTimeout(()=>{

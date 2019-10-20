@@ -47,6 +47,9 @@
     .lv-pic{
         padding: 20px 0;
     }
+    .menubar{
+        z-index: 19981022;
+    }
 </style>
 <style lang="scss">
     .el-menu-item{
@@ -207,7 +210,6 @@
                 $(window).click();
             },
             toggleStyle(){
-                console.log('jjj');
                 let style = '';
                 style = this.styleArr[Math.floor((Math.random()*this.styleArr.length))];
                 localStorage.setItem('JsideStyle',style);

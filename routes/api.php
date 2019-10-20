@@ -43,12 +43,6 @@ $api->version('v1', [
         // 登录
         $api->post('authorizations', 'AuthorizationsController@store')
             ->name('api.authorizations.store');
-        // 刷新token
-        $api->put('authorizations/current', 'AuthorizationsController@update')
-            ->name('api.authorizations.update');
-        // 删除token
-        $api->delete('authorizations/current', 'AuthorizationsController@destroy')
-            ->name('api.authorizations.destroy');
         //获取某一用户所有分类
         $api->get('categories/{user}', 'CategoriesController@index')
             ->name('api.categories.index');
@@ -96,7 +90,7 @@ $api->version('v1', [
         $api->patch('comments/{comment}/like', 'CommentController@like')
             ->name('api.comments.like');
         // 需要 token 验证的接口
-        $api->group(['middleware' => 'api.auth'], function($api) {
+        $api->group(['middleware' => 'token.canrefresh'], function($api) {
             // 当前登录用户信息
             $api->get('user', 'UsersController@me')
                 ->name('api.user.show');
@@ -144,6 +138,12 @@ $api->version('v1', [
             // 删除回复
             $api->delete('comments/replies/{reply}', 'CommentController@replyDestroy')
                 ->name('api.comments.replies.destroy');
+            // 刷新token
+            $api->put('authorizations/current', 'AuthorizationsController@update')
+                ->name('api.authorizations.update');
+            // 删除token
+            $api->delete('authorizations/current', 'AuthorizationsController@destroy')
+                ->name('api.authorizations.destroy');
         });
     });
 });

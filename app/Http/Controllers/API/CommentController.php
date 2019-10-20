@@ -58,7 +58,7 @@ class CommentController extends Controller
             $data ->  toId            = $toUser->id;
             $data ->  toName          = $toUser->name;
             $data ->  toAvatar        = $toUser->avatar;
-            $data ->  contents         = Str::after($request->contents,'@'.$toUser->name.' ');
+            $data ->  contents         = Str::after(Str::after($request->contents,'@'.$toUser->name.' '),'@'.$toUser->name);
             if($data->save()) {
                 return response()->json(['message' => '回复成功'], 201);
             }else{

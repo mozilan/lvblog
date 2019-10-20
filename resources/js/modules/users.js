@@ -140,10 +140,10 @@ export const users = {
                         commit('setUser' , response.data.data);
                     })
                     .catch(function (error) {
-                        if(error.response.status === 401){
-                            localStorage.removeItem('Authorization');
-                            commit('setLoginToken','');
-                        }
+
+                        localStorage.removeItem('Authorization');
+                        commit('setLoginToken','');
+
                         commit('setUser' ,'');
                         commit('setUserLoadStatus',3);
                     });
@@ -188,6 +188,9 @@ export const users = {
                     commit('setUserProfileUpdateMessages', error.response.data.errors[Object.keys(error.response.data.errors)[0]].toString());
                     commit('setUserProfileUpdateStatus',3);
                 })
+        },
+        refreshToken({commit},data){
+            commit('setLoginToken', data.token);
         }
     },
         mutations:{

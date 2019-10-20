@@ -64,5 +64,4 @@ export default {
                 avatar_image_id:data.avatar_image_id,
             });
     },
-
 }
