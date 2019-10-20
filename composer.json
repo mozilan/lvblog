@@ -15,6 +15,7 @@
         "fideloper/proxy": "^4.0",
         "gregwar/captcha": "^1.1",
         "laravel/framework": "5.8.*",
+        "laravel/horizon": "~3.1",
         "laravel/tinker": "^1.0",
         "liyu/dingo-serializer-switch": "^0.3.1",
         "mews/purifier": "~3.0",
