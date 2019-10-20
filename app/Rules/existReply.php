@@ -32,13 +32,15 @@ class existReply implements Rule
     public function passes($attribute, $value)
     {
         //
+        //如果当前评论下不存在回复
         if(!Reply::where('comment_id',$this->coment_id)->exists()){
-            if($value == Comment::find($this->coment_id)->first()->fromId){
+            if($value == Comment::find($this->coment_id)->fromId){
                 return true;
             }else{
                 return false;
             }
         }
+        //如果当前评论下存在回复
         return Reply::where([['comment_id', $this->coment_id], ['fromId', $value]])->exists();
     }
 

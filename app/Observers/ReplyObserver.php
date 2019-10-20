@@ -2,7 +2,8 @@
 
 namespace App\Observers;
 
-use App\Reply;
+use App\Notifications\CommentReplied;
+use App\Models\Reply;
 
 class ReplyObserver
 {
@@ -15,6 +16,11 @@ class ReplyObserver
     public function created(Reply $reply)
     {
         //
+        // 如果要通知的人是当前用户，就不必通知了！
+        if ($reply ->toId != auth('api')->user()->id) {
+            $reply->toUser->increment('notification_count');
+            $reply->toUser->notify(new CommentReplied($reply));
+        }
     }
 
     /**

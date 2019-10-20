@@ -2,6 +2,8 @@
 
 namespace App\Notifications;
 
+use App\Models\Comment;
+use App\Models\Reply;
 use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -10,15 +12,16 @@ use Illuminate\Notifications\Messages\MailMessage;
 class CommentReplied extends Notification
 {
     use Queueable;
-
+    public $reply;
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(Reply $reply)
     {
         //
+        $this->reply = $reply;
     }
 
     /**
@@ -29,7 +32,8 @@ class CommentReplied extends Notification
      */
     public function via($notifiable)
     {
-        return ['mail'];
+        // 开启通知的频道
+        return ['database', 'mail'];
     }
 
     /**
@@ -40,10 +44,10 @@ class CommentReplied extends Notification
      */
     public function toMail($notifiable)
     {
+        $url = env('APP_URL').'/#/art/' .  $this->reply->comment->article_id;
         return (new MailMessage)
-                    ->line('The introduction to the notification.')
-                    ->action('Notification Action', url('/'))
-                    ->line('Thank you for using our application!');
+            ->line('你在文章下的评论有了新回复！')
+            ->action('查看回复', $url);
     }
 
     /**
@@ -54,8 +58,6 @@ class CommentReplied extends Notification
      */
     public function toArray($notifiable)
     {
-        return [
-            //
-        ];
+        return [];
     }
 }

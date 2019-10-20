@@ -18,12 +18,12 @@ class CommentObserver
     {
         //
         $article = $comment->article;
-        // 如果要通知的人是当前用户，就不必通知了！
         $user =$comment->article->user;
-        if (!$user ->id == auth('api')->user()->id) {
+        // 如果要通知的人是当前用户，就不必通知了！
+        if ($user ->id != auth('api')->user()->id) {
             $user->increment('notification_count');
+            $article->user->notify(new ArticleReplied($comment));
         }
-        $article->user->notify(new ArticleReplied($comment));
     }
 
     /**

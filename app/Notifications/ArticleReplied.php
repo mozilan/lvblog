@@ -45,11 +45,11 @@ class ArticleReplied extends Notification implements ShouldQueue
     public function toMail($notifiable)
     {
 //        Log::debug($this);
-        $url = env('APP_URL').'/#/art/' .  $this->comment->article->id;
+        $url = env('APP_URL').'/#/art/' .  $this->comment->article_id;
 
         return (new MailMessage)
-            ->line('你的文章有新回复！')
-            ->action('查看回复', $url);
+            ->line('你的文章有了新评论！')
+            ->action('查看评论', $url);
 
     }
 
