@@ -54,7 +54,14 @@ class Handler extends ExceptionHandler
         if ($exception instanceof UnauthorizedHttpException) {
             return response($exception->getMessage(), 401);
         }
-
+        if ($exception->getStatusCode() == 404) {
+            return response()->view('app', []);
+        }
+        if ($this->isHttpException($exception)) {
+            if (view()->exists('errors.' . $exception->getStatusCode())) {
+                return response()->view('errors.' . $exception->getStatusCode(), [], $exception->getStatusCode());
+            }
+        }
         return parent::render($request, $exception);
     }
 }

@@ -111,6 +111,7 @@
         name: "comment",
         data() {
             return {
+                loader:'',
                 tar:'',
                 inputComment: '',
                 inputReply:'',
@@ -163,16 +164,16 @@
                 window.clearInterval(this.interval);
             },
             anchor(){
-                if(this.$route.query.anchor){
-                    console.log('#'+ this.$route.query.anchor);
-                    var jump;
+                if(this.$route.query.reply){
+                    var type = this.$route.query.reply;
+                    var location = this.$route.query.location;
+                    var jump = '';
                     this.$nextTick(()=> {
                         this.interval = setInterval(()=> {
-                            jump = document.querySelectorAll('#'+ this.$route.query.anchor);
-                            console.log(jump);
+                            jump = document.querySelectorAll('#'+ type+location);
                             if(jump.length!=0) {
                                 this.jumped = 1;
-                                // 滚动
+                                // 滚动到目标位置
                                 document.querySelector('#'+ this.$route.query.anchor).scrollIntoView(true);
                             }
                         })
@@ -239,14 +240,22 @@
                             toUser : this.idReply,
                             art_id : this.$route.params.art_id,
                         });
+                        this.loader = this.$loading({
+                            lock: true,
+                            text: '发布回复中...',
+                            spinner: 'el-icon-loading',
+                            background: 'rgba(0, 0, 0, 0.7)'
+                        });
                         this.$watch(this.$store.getters.getReplyPostStatus, function () {
                             if (this.$store.getters.getReplyPostStatus() == 2) {
+                                this.loader.close();
                                 this.isReply = 0;
                                 this.idReply = 0;
                                 this.cancel();
                                 this.$message.success('回复成功！');
                             }
                             if (this.$store.getters.getReplyPostStatus() == 3) {
+                                this.loader.close();
                                 this.$message.warning('回复失败了,请稍后重试！');
                             }
                         });
@@ -256,11 +265,19 @@
                             art_id:this.$route.params.art_id,
                             contents:this.inputComment
                         });
+                        this.loader = this.$loading({
+                            lock: true,
+                            text: '发布评论中...',
+                            spinner: 'el-icon-loading',
+                            background: 'rgba(0, 0, 0, 0.7)'
+                        });
                         this.$watch(this.$store.getters.getCommentPostStatus, function () {
                             if (this.$store.getters.getCommentPostStatus() == 2) {
+                                this.loader.close();
                                 this.$message.success('评论成功!');
                             }
                             if (this.$store.getters.getCommentPostStatus() == 3) {
+                                this.loader.close();
                                 this.$message.warning('评论失败了,请稍后重试！');
                             }
                         });
@@ -288,11 +305,19 @@
                                 reply_id: reply.id,
                                 art_id : this.$route.params.art_id,
                             });
+                            this.loader = this.$loading({
+                                lock: true,
+                                text: '删除中...',
+                                spinner: 'el-icon-loading',
+                                background: 'rgba(0, 0, 0, 0.7)'
+                            });
                             this.$watch(this.$store.getters.getReplyDeleteStatus, function () {
                                 if (this.$store.getters.getReplyDeleteStatus() == 2) {
+                                    this.loader.close();
                                     this.$message.success('已删除');
                                 }
                                 if (this.$store.getters.getReplyDeleteStatus() == 3) {
+                                    this.loader.close();
                                     this.$message.error('删除回复失败了！')
                                 }
                             });
@@ -313,11 +338,19 @@
                                 comment_id:item.id,
                                 art_id : this.$route.params.art_id,
                             });
+                            this.loader = this.$loading({
+                                lock: true,
+                                text: '删除中...',
+                                spinner: 'el-icon-loading',
+                                background: 'rgba(0, 0, 0, 0.7)'
+                            });
                             this.$watch(this.$store.getters.getCommentDeleteStatus,function () {
                                 if(this.$store.getters.getCommentDeleteStatus() == 2){
+                                    this.loader.close();
                                     this.$message.success('已删除');
                                 }
                                 if(this.$store.getters.getCommentDeleteStatus() == 3){
+                                    this.loader.close();
                                     this.$message.error('删除评论失败了！')
                                 }
                             });

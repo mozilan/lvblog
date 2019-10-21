@@ -168,7 +168,7 @@
                 this.hideRegisterDialogForm();
                 setTimeout(()=>{
                     EventBus.$emit('prompt-login');
-                },1000);
+                },800);
             },
             handleClose(done) {
                 this.$confirm('确认关闭？')

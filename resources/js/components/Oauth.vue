@@ -31,6 +31,9 @@
                         //     window.location.href = '/';
                         // },3000);
                         this.$message.success('登陆成功');
+                        if(this.$store.getters.getLastPath){
+                            this.$route.push({path:this.$store.getters.getLastPath});
+                        }
                     }
                     if (this.$store.getters.getLoginStatus() == 3) {
                         this.loader.close();

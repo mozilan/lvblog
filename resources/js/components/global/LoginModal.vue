@@ -85,12 +85,12 @@
                 <el-col :xs="24" :sm="24" :md="24" :lg="24">
                     <el-form-item>
                         <el-col :xs="6" :sm="6" :md="4" :lg="4" class="bl-left oauth">
-                            <el-link href="/auth/github" v-on:click.stop="">
+                            <el-link @click="setLastPath" href="/auth/github" v-on:click.stop="">
                                 <el-image style="width: 20px; height: 20px" src="https://mozilan.geekadpt.cn/img/social/github.png"/>
                             </el-link>
                         </el-col>
                         <el-col :xs="6" :sm="6" :md="4" :lg="4" class="bl-left oauth">
-                            <el-link href="/auth/weibo" v-on:click.stop="">
+                            <el-link  @click="setLastPath" href="/auth/weibo" v-on:click.stop="">
                                 <el-image style="width: 20px; height: 20px" src="https://mozilan.geekadpt.cn/img/social/sina.png"/>
                             </el-link>
                         </el-col>
@@ -171,7 +171,7 @@
                 this.hideLoginDialogForm();
                 setTimeout(()=>{
                     EventBus.$emit('prompt-register');
-                },1000);
+                },800);
             },
             openMessage: function (title, type) {
                 this.$message({
@@ -246,6 +246,11 @@
                     return validateLoginForm;
                 }
                 return validateLoginForm;
+            },
+            setLastPath(){
+                this.$store.dispatch('setLastPath',{
+                    params:this.$route.fullPath,
+                })
             }
         },
         computed: {

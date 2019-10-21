@@ -112,16 +112,7 @@
             handleLoad(e){
                 console.log(e)
             },
-            anchor(){
-                if(this.$route.query.anchor){
-                    this.$router.push(this.$route.fullPath +'#'+ this.$route.query.anchor);
-                }
-            }
         },
-        // watch: {
-        //     // 如果路由有变化，会再次执行该方法
-        //     "$route": "anchor"
-        // },
     }
 </script>
 

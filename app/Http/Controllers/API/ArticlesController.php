@@ -12,6 +12,7 @@ use App\Models\ArticleMapTag;
 use App\Transformers\ArticleTransformer;
 use App\Transformers\RecommendTransformer;
 use Carbon\Carbon;
+use http\Client\Curl\User;
 use Illuminate\Http\Request;
 
 class ArticlesController extends Controller
@@ -153,8 +154,12 @@ class ArticlesController extends Controller
     public function userIndex(Article $article,$user, Request $request)
     {
 
+        $user = User::find($user);
+        if(!$user->first()){
+            return response()->json(['message' => '不存在此用户'], 403);
+        }
         $query = $article->query();
-
+        $query -> where('user_id',$user->id);
         switch ($request->order) {
             case 'recent':
                 $query->recent();

@@ -166,7 +166,8 @@ return [
         /*
          * Package Service Providers...
          */
-
+        //阿里云邮件推送的包
+        HyanCat\DirectMail\AliyunDirectMailServiceProvider::class,
         /*
          * Application Service Providers...
          */

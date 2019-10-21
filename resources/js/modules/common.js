@@ -103,6 +103,7 @@ export const common = {
                 art_body:{}
             }
         },
+        last_path:''
 
     },
     actions:{
@@ -118,6 +119,9 @@ export const common = {
             commit('setBlogArt',state.blog.gorgeous_art);
             commit('setGorgeousStatus',2);
             commit('setSimplifyStatus',0);
+        },
+        setLastPath({commit},data){
+            commit('setLastPath',data.params);
         }
     },
     mutations:{
@@ -129,7 +133,7 @@ export const common = {
         },
         setSimplifyStatus(state,status){
             state.simplifyStatus = status;
-        }
+        },
         // setSmallBlogArt(state,data){
         //     let dataCopy = data;
         //     dataCopy.simple_time.display = 'none';
@@ -137,6 +141,9 @@ export const common = {
         //     console.log(dataCopy.simple_time,dataCopy.simple_read);
         //     state.blog.art = dataCopy;
         // },
+        setLastPath(state,params){
+            this.last_path = params;
+        }
     },
     getters:{
         getArticleShowModel(state){
@@ -148,5 +155,8 @@ export const common = {
         getSimplifyStatus(state){
             return state.simplifyStatus;
         },
+        setLastPath(state){
+            return state.last_path;
+        }
     }
 };

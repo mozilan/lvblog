@@ -43,6 +43,8 @@ return [
             'tolerance' => env('STRIPE_WEBHOOK_TOLERANCE', 300),
         ],
     ],
+
+    //LvBlog 新增配置
     'weixin' => [
         'client_id' => env('WEIXIN_KEY'),
         'client_secret' => env('WEIXIN_SECRET'),
@@ -70,5 +72,14 @@ return [
         'client_secret' => env('WEIBO_SECRET'),
         'redirect' => env('WEIBO_REDIRECT_URI'),
     ],
-
+    //阿里云邮件推送
+    'directmail' => [
+        'app_key'    => env('DIRECT_MAIL_APP_KEY'),
+        'app_secret' => env('DIRECT_MAIL_APP_SECRET'),
+        'region'     => env('DIRECT_MAIL_REGION'),
+        'account'    => [
+            'alias' => env('DIRECT_MAIL_ACCOUNT_ALIAS'),
+            'name' => env('DIRECT_MAIL_ACCOUNT_NAME'),
+        ]
+    ],
 ];

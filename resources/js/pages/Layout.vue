@@ -72,7 +72,13 @@
                     case 'reply': this.$router.push({path:'/art/'+this.$route.query.article,query:{anchor:'rely' + location}});
                     break;
                 }
-
+            }
+            var target = this.$route.query.target;
+            if(target){
+                switch(target){
+                    case 'blog' : this.$router.push({name:'用户文章',params:{user:this.$route.query.user},query:{user:this.$route.query.user}});
+                    break;
+                }
             }
         },
         methods: {

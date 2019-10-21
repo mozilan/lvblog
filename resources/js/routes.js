@@ -46,8 +46,7 @@ function requireConfigs(to,from,next){
     }
     store.watch(store.getters.getConfigsLoadStatus, function () {
         if(store.getters.getConfigsLoadStatus() == 3){
-            alert('获取应用配置失败了,请检查你的网络连接状态.');
-            next('/500.error');
+            next('/error?code=500&message=获取应用配置失败了,请检查您的网络连通情况');
         }
         if(store.getters.getConfigsLoadStatus() == 2){
             console.log('加载配置信息成功.');

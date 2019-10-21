@@ -2,7 +2,6 @@
 
 namespace App\Notifications;
 
-use App\Models\Comment;
 use App\Models\Reply;
 use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Notification;
@@ -44,7 +43,7 @@ class CommentReplied extends Notification
      */
     public function toMail($notifiable)
     {
-        $url = env('APP_URL').'/?article=' .  $this->reply->comment->article_id . '&type=reply&location=' .  $this->reply->id;
+        $url = env('APP_URL').'/art/' .  $this->reply->comment->article_id . '&reply=reply&location=' .  $this->reply->id;
         return (new MailMessage)
             ->line('你在文章下的评论有了新回复！')
             ->action('查看回复', $url);

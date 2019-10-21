@@ -86,7 +86,7 @@
                             <h3 class="personal-info-title title">个人信息</h3>
                             <ul class="personal-info">
                                 <li :class="page.name_class_1"><label>昵称</label><span>{{other.name}}</span></li>
-                                <li :class="page.name_class_2"><router-link :to="{name:'用户文章',params: {user:other.id}}"><label>博客</label><span>{{blog_page+other.id}}</span></router-link></li>
+                                <li :class="page.name_class_2"><label>博客</label><span>{{blog_page+other.id}}</span></li>
                                 <li :class="page.name_class_3"><label>Email</label><span>{{other.email !== null ? other.email : '保密'}}</span></li>
                                 <li :class="page.name_class_4"><label>电话</label><span>{{'保密'}}</span></li>
                             </ul><!--/ul.personal-info-->
@@ -608,7 +608,7 @@
             this.bg_frontpage_url ="url(" + this.bg_frontpage + ")";
             let uid = this.$route.params.user ? this.$route.params.user:1;
             this.bg_url ="url(" + this.$store.getters.getConfigs.IMG_API + uid + ")";
-            this.blog_page = LVBLOG_CONFIG.URL+ '/#/home/';
+            this.blog_page = LVBLOG_CONFIG.URL+ 'blog/user/';
         },
         computed:{
             user(){
@@ -1027,8 +1027,8 @@
     .btn{padding: 2px 25px; border-radius: 0px; }
 
     .btn-success{
-        background: #E6A23C;
-        border-color: #E6A23C;
+        background: #11E6C8;
+        border-color: #11E6C8;
         width: 100%;
         color: #000000;
         font-family: 'Oswald', sans-serif;
@@ -1041,8 +1041,8 @@
     .btn-success:hover,
     .open>.dropdown-toggle.btn-success {
         opacity: .9;
-        background: #E6A23C;
-        border-color: #E6A23C;
+        background: #11E6C8;
+        border-color: #11E6C8;
     }
     .form-control:focus{
         border-color: #888888;
@@ -1053,7 +1053,7 @@
 
     .modal-content {
         border-radius: 3px;
-        border: 8px solid #E6A23C;
+        border: 8px solid #11E6C8;
         box-shadow: 0 0px 7px rgb(0, 0, 0);
     }
     .modal-body {
@@ -1115,7 +1115,7 @@
         background-color: #ffffff;
     }
     .loading-avatar{
-        border: 4px solid #E6A23C;
+        border: 4px solid #11E6C8;
         transform: translate(-50%, -50%);
         position: absolute;
         left: 50%;
@@ -1183,7 +1183,7 @@
         float: none;
         overflow: hidden;
         background-color: #fff;
-        border: 4px solid #E6A23C;
+        border: 4px solid #11E6C8;
         z-index: 100;
         opacity: 1; 	/* Modern!Firefox 0.9+, Safari 2?, Chrome any?Opera 9+, IE 9+ */
         -khtml-opacity: 1.0;
@@ -1250,7 +1250,7 @@
 
     ul.nav-menu li:hover{
         border-bottom-color: #409eff;
-        color: #E6A23C;
+        color: #11E6C8;
     }
 
     ul.nav-menu li:hover .hover-background,ul.nav-menu li.selected .hover-background {
@@ -1273,7 +1273,7 @@
 
     ul.nav-menu li:hover span,
     ul.nav-menu li.selected span {
-        border-right: 2px solid #E6A23C;
+        border-right: 2px solid #11E6C8;
     }
 
     .social-menu-container {
@@ -1301,7 +1301,7 @@
         color: #409eff;
     }
     .social-menu a:hover{
-        color: #E6A23C;
+        color: #11E6C8;
     }
     .social-menu li{
         float: left;
@@ -1316,11 +1316,11 @@
 
     .social-menu li:hover{
         background-color: #409eff;
-        color: #E6A23C;
+        color: #11E6C8;
     }
 
     .social-menu li:hover a{
-        color: #E6A23C;
+        color: #11E6C8;
     }
 
     .social-menu li i{
@@ -1380,7 +1380,7 @@
         margin: 10px 0px;
     }
     .strong-text span {
-        background: #E6A23C;
+        background: #11E6C8;
         padding: 2px 5px;
         padding-bottom: 2px;
         color: #111;
@@ -1467,7 +1467,7 @@
         min-width: 75px;
         font-size: 12.5px;
         font-weight: 600;
-        background: #E6A23C;
+        background: #11E6C8;
         margin-right: 10px;
         padding: 4px 10px 5px;
         margin: 0;
@@ -1499,7 +1499,7 @@
         float: left;
         text-align: center;
         background-color: #409eff;
-        color: #E6A23C;
+        color: #11E6C8;
         transition: background-color 0.3s ease-in;
         -webkit-transition: background-color 0.3s ease-in;
         font-size: 16px;
@@ -1526,7 +1526,7 @@
         background-image: url(../../assets/images/resume/icon_03.png);
     }
     .tabs .horizontal li a:hover, .tabs .horizontal li.active a{
-        background-color: #E6A23C;
+        background-color: #11E6C8;
         text-decoration: none;
         color: #409eff;
     }
@@ -1588,7 +1588,7 @@
         cursor: pointer;
     }
     .education-class > li.current > .title {
-        background-color: #E6A23C;
+        background-color: #11E6C8;
         color: #409eff;
     }
     .education-class h4 i{
@@ -1708,7 +1708,7 @@
     .cnmail {
         position: absolute;
         top: -48px;
-        background: #E6A23C;
+        background: #11E6C8;
         left: 0;
         width: 100%;
     }
@@ -1725,7 +1725,7 @@
         color: #006b0a;
     }
 
-
+    
 
     /*-------------------------------------------------------*/
     /* Styles for Portfolio Page   */
@@ -1756,7 +1756,7 @@
         width: 25%;
         background: #409eff;
         border-right: 2px solid #fff;
-        color: #E6A23C;
+        color: #11E6C8;
         padding: 12px 0px;
         cursor: pointer;
         transition: background-color 0.5s ease-in;
@@ -1767,12 +1767,12 @@
     }
     .button-group .button.is-checked{
         color: #111;
-        background-color: #E6A23C;
+        background-color: #11E6C8;
     }
 
     .demo-2 .button-group .button.is-checked{
         color: #2C3E50;
-        background-color: #E6A23C;
+        background-color: #11E6C8;
     }
 
     .demo-2 .button-group .button{
@@ -1780,7 +1780,7 @@
     }
 
     .button-group .button:hover{
-        background-color: #E6A23C;
+        background-color: #11E6C8;
         color: #fff;
 
     }
@@ -1848,7 +1848,7 @@
     }
     .view a.info:hover {
         box-shadow: 0 0 5px #000;
-        background-color: #E6A23C;
+        background-color: #11E6C8;
         color: #212129;
     }
 
@@ -2033,7 +2033,7 @@
     .mobile-social{
         float: right;
         width: auto;
-        color: #E6A23C;
+        color: #11E6C8;
         font-size: 15px;
         margin-bottom: 0px;
     }
@@ -2048,7 +2048,7 @@
     }
 
     .mobile-social a:hover{
-        color: #E6A23C;
+        color: #11E6C8;
     }
 
     /*-------------------------------------------------------*/
