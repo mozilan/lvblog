@@ -48,6 +48,12 @@
         padding: 20px 0;
     }
     .menubar{
+        z-index: 19980903;
+    }
+    .menu-head .layer{
+        background: none;
+    }
+    .up-z-index{
         z-index: 19981022;
     }
 </style>
@@ -176,7 +182,7 @@
                     ,'orange','bnp','blue','green','red','default-skin'
                 ],
                 menu_bar_class : 'menubar sticky default-skin',
-                menu_head_class : 'menu-head position-left',
+                menu_head_class : 'up-z-index menu-head position-left',
                 menu_container_class :'menu-container position-left',
 
                 activeIndex: '1',
@@ -214,7 +220,7 @@
                 style = this.styleArr[Math.floor((Math.random()*this.styleArr.length))];
                 localStorage.setItem('JsideStyle',style);
                 this.menu_bar_class = "menubar stiky default-skin " + style;
-                this.menu_head_class = "menu-head position-left open " +style;
+                this.menu_head_class = "up-z-index menu-head position-left open " +style;
                 this.menu_container_class = "menu-container position-left open " +style;
             }
         },

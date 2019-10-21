@@ -41,10 +41,13 @@ function requireAuth(to, from, next) {
     }
 }
 function requireConfigs(to,from,next){
-    store.dispatch('loadConfigs');
+    if(store.getters.getConfigsLoadStatus != 2){
+        store.dispatch('loadConfigs');
+    }
     store.watch(store.getters.getConfigsLoadStatus, function () {
-        if(store.getters.getConfigsLoadStatus() == 1){
-            alert('获取应用配置失败了,请检查你的网络连接状态.')
+        if(store.getters.getConfigsLoadStatus() == 3){
+            alert('获取应用配置失败了,请检查你的网络连接状态.');
+            next('/500.error');
         }
         if(store.getters.getConfigsLoadStatus() == 2){
             console.log('加载配置信息成功.');
@@ -66,7 +69,7 @@ export default new VueRouter({
             path: '/',
             redirect: {name: '首页'},
             name: 'LvBlog',
-            components: Vue.component( 'Layout', require( './pages/Layout.vue' ) ),
+            components: Vue.component( 'Layout', require( './pages/Layout' ) ),
             beforeEnter:requireConfigs,
             children: [
                 {
@@ -170,9 +173,8 @@ export default new VueRouter({
         },
         {
             path: '*',
-            redirect: {name: '首页'},
-            name: 'LvBlog',
-            components: Vue.component( 'Layout', require( './pages/Layout.vue' ) )
+            name: '404',
+            components: Vue.component( '404', require( './pages/Error/404' ) )
             ,
         }
     ]
