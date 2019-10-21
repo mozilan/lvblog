@@ -209,8 +209,11 @@
                         </el-collapse-item>
                     </el-collapse>
                     <el-col :span="7" class="hidden-sm-and-down lv-tag-side" id="side" :style="infinite_side" >
-                        <div class="item">
+                        <div class="item" v-if="this.$route.name != '博客园'">
                             <Tag></Tag>
+                        </div>
+                        <div class="item" v-if="this.$route.name == '博客园'">
+                            <Tags></Tags>
                         </div>
                         <div class="lv-clear-both"></div>
                         <div class="item lv-margin-top" v-if="!this.$route.params || this.$route.params.category">
@@ -323,6 +326,7 @@
 <script>
     import Friend from '../components/Friend'
     import Tag from '../components/User/Tag'
+    import Tags from '../components/User/Tags'
     import FTag from '../components/SmallCreen/Tag'
     import Category from '../components/User/Category'
     import FCategory from '../components/SmallCreen/Category'
@@ -354,11 +358,12 @@
             FCategory,
             Oauth,
             LFooter,
-            WhellMenu
+            WhellMenu,
+            Tags
         },
         computed:{
             noMore () {
-                if(this.$store.getters.getArticles.meta === undefined || this.$store.getters.getArticles.meta === undefined ){
+                if(this.$store.getters.getArticles.meta == undefined || this.$store.getters.getArticles.meta == undefined ){
                     return true;
                 }else{
                     return this.$store.getters.getArticles.meta.pagination.current_page >= this.$store.getters.getArticles.meta.pagination.total_pages;
@@ -388,7 +393,7 @@
         },
         methods: {
             getArticles(){
-                if(this.$route.params.user !== undefined && this.$route.params.tag ===undefined && this.$route.params.category === undefined)
+                if(this.$route.params.user != undefined && this.$route.params.tag ==undefined && this.$route.params.category == undefined)
                 {
                     // const loading = this.$loading({
                     //     lock: true,
@@ -404,7 +409,7 @@
                     this.$store.dispatch('loadArticles',{
                     user:this.$route.params.user ? this.$route.params.user : '',
                     });
-                }else if(this.$route.params.user === undefined && this.$route.params.tag !==undefined && this.$route.params.category ===undefined){
+                }else if(this.$route.params.user == undefined && this.$route.params.tag !=undefined && this.$route.params.category ==undefined){
                     // const loading = this.$loading({
                     //     lock: true,
                     //     text: 'Loading',
@@ -421,7 +426,7 @@
                         tag:this.$route.params.tag,
                         page:'',
                     });
-                }else if(this.$route.params.user === undefined&& this.$route.params.tag ===undefined && this.$route.params.category !==undefined){
+                }else if(this.$route.params.user == undefined&& this.$route.params.tag ==undefined && this.$route.params.category !=undefined){
                     // const loading = this.$loading({
                     //     lock: true,
                     //     text: 'Loading',
@@ -458,36 +463,33 @@
             load () {
                 this.loading = true;
                 setTimeout(() => {
-                    if(this.$route.params.user !== undefined && this.$route.params.tag === undefined&& this.$route.params.category ===undefined)
+                    if(this.$route.params.user != undefined && this.$route.params.tag == undefined&& this.$route.params.category ==undefined)
                     {
                         this.$store.dispatch('loadArticles',{
-                            user:this.$route.params.user ? this.$route.params.user :'',
-                            page: this.$store.getters.getArticles.meta === undefined ? 1 : ++this.$store.getters.getArticles.meta.pagination.current_page,
+                            user:this.$route.params.user,
+                            page: this.$store.getters.getArticles.meta == undefined ? 1 : ++this.$store.getters.getArticles.meta.pagination.current_page,
 
                         });
-                    }else if(this.$route.params.user === undefined&& this.$route.params.tag !== undefined && this.$route.params.category ===undefined){
+                    }else if(this.$route.params.user == undefined&& this.$route.params.tag != undefined && this.$route.params.category ==undefined){
                         this.$store.dispatch('loadUserTagArticles',{
                             tag:this.$route.params.tag,
-                            user:this.$route.params.user ? this.$route.params.user :'',
-                            page: this.$store.getters.getArticles.meta === undefined ? 1 : ++this.$store.getters.getArticles.meta.pagination.current_page,
+                            user:this.$route.params.user,
+                            page: this.$store.getters.getArticles.meta == undefined ? 1 : ++this.$store.getters.getArticles.meta.pagination.current_page,
                         });
-                    }else if(this.$route.params.user === undefined&& this.$route.params.tag ===undefined && this.$route.params.category !==undefined){
+                    }else if(this.$route.params.user == undefined&& this.$route.params.tag ==undefined && this.$route.params.category !=undefined){
                         this.$store.dispatch('loadUserCategoryArticles',{
                             category:this.$route.params.category,
-                            user:this.$route.params.user ? this.$route.params.user :'',
-                            page: this.$store.getters.getArticles.meta === undefined ? 1 : ++this.$store.getters.getArticles.meta.pagination.current_page,
+                            user:this.$route.params.user,
+                            page: this.$store.getters.getArticles.meta == undefined ? 1 : ++this.$store.getters.getArticles.meta.pagination.current_page,
                         });
                     }else{
-                        this.$store.dispatch('loadArticles',{
-                            user:this.$route.params.user ? this.$route.params.user :'',
-                            page: this.$store.getters.getArticles.meta === undefined ? 1 : ++this.$store.getters.getArticles.meta.pagination.current_page,
-                        });
+                        this.$message.error('路由参数错误，请联系管理员');
                     }
                     this.$watch(this.$store.getters.getArticlesLoadStatus, function () {
-                        if(this.$store.getters.getArticlesLoadStatus() === 2) {
+                        if(this.$store.getters.getArticlesLoadStatus() == 2) {
                             this.loading = false
                         }
-                        if(this.$store.getters.getArticlesLoadStatus() === 3) {
+                        if(this.$store.getters.getArticlesLoadStatus() == 3) {
                             this.$message.error('错了哦，加载文章失败了');
                         }
                     });
@@ -506,12 +508,12 @@
                         id:id
                     });
                     this.$watch(this.$store.getters.getArticleDeleteStatus, function () {
-                        if(this.$store.getters.getArticleDeleteStatus() === 2) {
+                        if(this.$store.getters.getArticleDeleteStatus() == 2) {
                             this.loader.close();
                             this.$message.success('文章已删除！');
                             this.getArticles();
                         }
-                        if(this.$store.getters.getArticleDeleteStatus() === 3) {
+                        if(this.$store.getters.getArticleDeleteStatus() == 3) {
                             this.loader.close();
                             this.$message.error('错了哦，文章删除失败了');
                         }

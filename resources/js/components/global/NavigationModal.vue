@@ -90,7 +90,7 @@
             <h5 class="lv-logo "><a id="index" href="/">{{configs.title}}</a></h5>
             <el-menu :default-active="activeIndex" class="el-menu-blumer" mode="horizontal" @select="handleSelect">
                 <el-menu-item index="1"><router-link :to="{ name:'首页' }"><i class="el-icon-s-home"></i>首页</router-link></el-menu-item>
-                <el-menu-item index="9"><router-link :to="{ name:'文章' }"><i class="el-icon-eleme"></i>博客园</router-link></el-menu-item>
+                <el-menu-item index="9"><router-link :to="{ name:'博客园' }"><i class="el-icon-eleme"></i>博客园</router-link></el-menu-item>
                 <el-menu-item index="2"><router-link :to="{ name:'写作',query:{user:user.id} }"><i class="el-icon-edit"></i>写博客</router-link></el-menu-item>
                 <el-menu-item index="6" @click="register" v-if="!tokenStatus" icon="el-icon-promotion"><i class="el-icon-circle-plus-outline"></i>注册</el-menu-item>
                 <el-menu-item index="7" @click="login" v-if="!tokenStatus" icon="el-icon-user"><i class="el-icon-user"></i>登录</el-menu-item>
@@ -145,7 +145,7 @@
                 <el-divider></el-divider>
                 <ul class="menu-items">
                     <li @click="toggle()"><span class="item-icon"><i class="el-icon-edit"></i></span> <router-link :to="{ name:'写作',query:{user:user.id} }">写博客</router-link></li>
-                    <li @click="toggle()"><span class="item-icon"><i class="el-icon-eleme"></i></span> <router-link :to="{ name:'文章',query:{user:user.id} }">博客园</router-link></li>
+                    <li @click="toggle()"><span class="item-icon"><i class="el-icon-eleme"></i></span> <router-link :to="{ name:'博客园',query:{user:user.id} }">博客园</router-link></li>
                     <li v-if="!user" @click="toggle()"><span class="item-icon"><i class="el-icon-user"></i></span> <router-link :to="{ name:'写作',query:{user:user.id} }">登陆/注册</router-link></li>
                     <li class="has-sub" v-if="tokenStatus"> <span class="item-icon"> <i class="el-icon-more"></i></span> <span class="dropdown-heading"> 文章管理 </span>
                         <ul>

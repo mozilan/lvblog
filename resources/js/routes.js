@@ -101,7 +101,7 @@ export default new VueRouter({
                 },
                 {
                     path: 'blog',
-                    name: '文章',
+                    name: '博客园',
                     components: Vue.component( 'Blog', require( './pages/Blog' ) ),
                     children: [
                         {
@@ -168,5 +168,12 @@ export default new VueRouter({
                 },
             ]
         },
+        {
+            path: '*',
+            redirect: {name: '首页'},
+            name: 'LvBlog',
+            components: Vue.component( 'Layout', require( './pages/Layout.vue' ) )
+            ,
+        }
     ]
 });

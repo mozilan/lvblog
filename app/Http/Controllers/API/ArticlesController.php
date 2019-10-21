@@ -200,7 +200,7 @@ class ArticlesController extends Controller
         $query = $article->query();
         $tag = Tag::find($tag);
         if($tag){
-            $query->whereIn('id', ArticleMapTag::where('id',$tag->id)->pluck('article_id')->toArray());;
+            $query->whereIn('id', ArticleMapTag::where('tag_id',$tag->id)->pluck('article_id')->toArray());;
             switch ($request->order) {
                 case 'recent':
                     $query->recent();
