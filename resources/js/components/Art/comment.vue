@@ -163,24 +163,29 @@
                 window.clearInterval(this.interval);
             },
             anchor(){
-                console.log('#'+ this.$route.query.anchor);
-                var jump;
-                this.$nextTick(()=> {
-                    this.interval = setInterval(()=> {
-                        jump = document.querySelectorAll('#'+ this.$route.query.anchor);
-                        console.log(jump);
-                        if(jump.length!=0) {
-                            this.jumped = 1;
-                            // 滚动
-                            document.querySelector('#'+ this.$route.query.anchor).scrollIntoView(true);
-                        }
-                    })
-                },500);
+                if(this.$route.query.anchor){
+                    console.log('#'+ this.$route.query.anchor);
+                    var jump;
+                    this.$nextTick(()=> {
+                        this.interval = setInterval(()=> {
+                            jump = document.querySelectorAll('#'+ this.$route.query.anchor);
+                            console.log(jump);
+                            if(jump.length!=0) {
+                                this.jumped = 1;
+                                // 滚动
+                                document.querySelector('#'+ this.$route.query.anchor).scrollIntoView(true);
+                            }
+                        })
+                    },500);
+                }
             },
             /**
              * 点赞
              */
             likeClick(item) {
+                if(!this.$store.getters.getUser){
+                    this.login();
+                }
                 if (!item.isLike) {
                     this.$store.dispatch('likeComment',{
                         comment_id:item.id
@@ -219,6 +224,10 @@
              * 提交评论
              */
             commitComment() {
+                if(!this.$store.getters.getUser){
+                    this.login();
+                    return false;
+                }
                 --this.comment_buss;
                 if(this.comment_buss<0){
                     this.message.warning('有其他进程在执行评论操作,请稍候重试！')
@@ -261,6 +270,10 @@
 
             },
             deleteComment(item, reply){
+                if(!this.$store.getters.getUser){
+                    this.login();
+                    return false;
+                }
                 --this.delete_buss;
                 if(this.delete_buss < 0){
                     this.$message.error('有其他进程在执行删除操作,请稍后重试！')
@@ -326,6 +339,7 @@
             showCommentInput(item, reply) {
                 if(!this.$store.getters.getUser){
                     this.login();
+                    return false;
                 }else{
                     this.idComment = item.id;
                     this.isReply = 1;

@@ -74,12 +74,12 @@
             <el-form :model="form">
                 <el-col :xs="24" :sm="24" :md="24" :lg="24">
                     <el-form-item>
-                        <effect-input class="effect-input" v-model="username" type="ichiro" label="用户名" name="用户名"></effect-input>
+                        <effect-input @keyup.enter.native="submitLogin" class="effect-input" v-model="username" type="ichiro" label="用户名" name="用户名"></effect-input>
                     </el-form-item>
                 </el-col>
                 <el-col :xs="24" :sm="24" :md="24" :lg="24">
                     <el-form-item>
-                        <effect-input class="effect-input" v-model="password" type="kaede" label="密码" name="密码"></effect-input>
+                        <effect-input @keyup.enter.native="submitLogin" class="effect-input" v-model="password" type="kaede" label="密码" name="密码"></effect-input>
                     </el-form-item>
                 </el-col>
                 <el-col :xs="24" :sm="24" :md="24" :lg="24">
@@ -184,6 +184,7 @@
                     .then(_ => {
                         this.username = '';
                         this.password = '';
+                        this.loginDialogFormVisible=false;
                         done();
                     })
                     .catch(_ => {});
@@ -216,6 +217,8 @@
                     this.$watch(this.$store.getters.getLoginStatus, function () {
                         if (this.$store.getters.getLoginStatus() === 2) {
                             this.loader.close();
+                            this.username= '';
+                            this.password = '';
                             this.$message.success('登陆成功！');
                             this.hideLoginDialogForm();
                         }
@@ -243,7 +246,7 @@
                     return validateLoginForm;
                 }
                 return validateLoginForm;
-            },
+            }
         },
         computed: {
             loginStatus() {
@@ -259,7 +262,7 @@
             this.showLoginForm();
         },
         watch:{
-            '$route':'showLoginForm'
+            '$route':'showLoginForm',
         },
     }
 </script>

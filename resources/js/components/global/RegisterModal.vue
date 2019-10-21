@@ -83,7 +83,7 @@
                     </el-col>
                     <el-col :xs="24" :sm="24" :md="24" :lg="24">
                         <el-form-item>
-                            <effect-input class="effect-input" v-model="password" type="kaede" label="密码" name="密码"></effect-input>
+                            <effect-input @keyup.enter.native="submitRegisterByPhone" class="effect-input" v-model="password" type="kaede" label="密码" name="密码"></effect-input>
                         </el-form-item>
                     </el-col>
                 </el-form>
