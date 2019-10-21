@@ -227,7 +227,7 @@
                                     class="list"
                                     v-infinite-scroll="load"
                                     infinite-scroll-disabled="disabled">
-                                <li v-for="(i , index) in articles.data">
+                                <li v-for="(i , index) in articles.data" :key="index">
                                     <el-row class="art-item">
                                         <div class="lv-card-shadow" :style="showModel.body">
                                             <div class="lv-blog-popover">
@@ -263,7 +263,7 @@
                                                 <div class="lv-clear-both"></div>
                                                 <div class="d-flex align-items-center lv-float-left">
                                                     <i class="el-icon-collection-tag"></i>：
-                                                    <span v-for="t in i.tag">
+                                                    <span v-for="(t,index) in i.tag" :key="index">
                                                             <router-link :to="{name:'标签文章',params: {tag:t.id},query:{user:i.user_id}}">
                                                                 <el-tag size="mini" class="tag">{{t.name}}</el-tag>
                                                             </router-link>

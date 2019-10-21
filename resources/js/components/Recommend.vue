@@ -36,7 +36,7 @@
 				<span>今日推荐</span>
 			</div>
 			<div class="lv-clear-both"></div>
-			<el-row type="flex" class="el-col-24 recommend-item" justify="space-between" v-for="item in recommends">
+			<el-row type="flex" class="el-col-24 recommend-item" justify="space-between" v-for="(item,index) in recommends" :key="index">
 					<el-col :span="4">
 						<div class="">
 							<el-image :src="item.article_thumb" alt="Mozilan" class="profile-pic"></el-image>

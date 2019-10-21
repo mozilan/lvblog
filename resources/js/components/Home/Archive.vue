@@ -2,7 +2,7 @@
     <div class="archive">
         <div class="count">归档：{{archives.meta.count}}篇</div>
         <div class="block">
-            <el-timeline v-for="(activity, index) in archives.data">
+            <el-timeline v-for="(activity, index) in archives.data"  :key="index">
                 <el-timeline-item :timestamp="activity.created_at" placement="top">
                     <router-link :to="{name:'查看文章',params: {art_id:activity.article_id}}">
                         <el-card>

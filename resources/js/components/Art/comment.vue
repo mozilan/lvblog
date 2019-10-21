@@ -27,7 +27,7 @@
             </div>
         </div>
         <div class="comment" v-for="item in comments">
-            <div class="info">
+            <div class="info" :id="'comment'+item.id">
                 <img class="avatar" :src="item.fromAvatar" width="36" height="36"/>
                 <div class="right">
                     <div class="name">{{item.fromName}}
@@ -55,7 +55,7 @@
             </div>
             <div class="reply">
                 <div class="item" v-for="reply in item.reply.data">
-                    <div class="reply-content">
+                    <div class="reply-content" :id="'reply'+reply.id">
                         <el-badge v-if="reply.fromId == article.user_id" class="item">
                             <i style="color: #E6A23C;" class="el-icon-star-on"></i>
                         </el-badge>
@@ -111,6 +111,7 @@
         name: "comment",
         data() {
             return {
+                tar:'',
                 inputComment: '',
                 inputReply:'',
                 showItemId: '',
@@ -125,6 +126,8 @@
                 //删除评论
                 //删除评论占用信号量,PV操作
                 delete_buss: 1,
+                interval:'',
+                jumped:0,
             }
         },
         created(){
@@ -136,6 +139,13 @@
                     this.$message.warning('评论模块未能成功加载！')
                 }
             });
+        },
+        mounted(){
+            this.anchor();
+        },
+        watch: {
+            // 如果路由有变化，会再次执行该方法
+            "jumped": "stopInterval"
         },
         computed:{
             comments(){
@@ -149,6 +159,24 @@
             }
         },
         methods: {
+            stopInterval(){
+                window.clearInterval(this.interval);
+            },
+            anchor(){
+                console.log('#'+ this.$route.query.anchor);
+                var jump;
+                this.$nextTick(()=> {
+                    this.interval = setInterval(()=> {
+                        jump = document.querySelectorAll('#'+ this.$route.query.anchor);
+                        console.log(jump);
+                        if(jump.length!=0) {
+                            this.jumped = 1;
+                            // 滚动
+                            document.querySelector('#'+ this.$route.query.anchor).scrollIntoView(true);
+                        }
+                    })
+                },500);
+            },
             /**
              * 点赞
              */

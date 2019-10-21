@@ -1220,21 +1220,19 @@
                 <div id="highlights">
                     <div class="inner">
                         <div class="point">
-                            <h2>易用</h2>
-                            <p>已经会了 HTML、CSS、JavaScript？即刻阅读指南开始构建应用！</p>
+                            <h2>Laravel</h2>
+                            <p>Laravel-简洁、优雅的PHP开发框架(PHP Web Framework)。</p>
                         </div>
 
                         <div class="point">
-                            <h2>灵活</h2>
-                            <p>不断繁荣的生态系统，可以在一个库和一套完整框架之间自如伸缩。</p>
+                            <h2>Vue</h2>
+                            <p>Vue (读音 /vjuː/，类似于 view) <br>是一套用于构建用户界面的渐进式框架。</p>
                         </div>
 
                         <div class="point">
-                            <h2>高效</h2>
+                            <h2>Element-UI</h2>
                             <p>
-                                20kB min+gzip 运行大小<br>
-                                超快虚拟 DOM <br>
-                                最省心的优化
+                                Element,一套为开发者、设计师和产品经理准备的基于Vue 2.0 的桌面端组件库
                             </p>
                         </div>
                     </div>

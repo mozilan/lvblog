@@ -39,9 +39,13 @@ class existReply implements Rule
             }else{
                 return false;
             }
+        }else{
+            if(Comment::find($this->coment_id)->fromId == $value){
+                return true;
+            }
+            //如果当前评论下存在回复
+            return Reply::where([['comment_id', $this->coment_id], ['fromId', $value]])->exists();
         }
-        //如果当前评论下存在回复
-        return Reply::where([['comment_id', $this->coment_id], ['fromId', $value]])->exists();
     }
 
     /**

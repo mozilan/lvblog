@@ -26,10 +26,11 @@
                 this.$watch(this.$store.getters.getLoginStatus, function () {
                     if (this.$store.getters.getLoginStatus() == 2) {
                         this.loader.close();
-                        this.$message.success('登录成功,正在穿越宇宙弦跳跃到蓝默空间...');
-                        setTimeout(()=>{
-                            window.location.href = '/';
-                        },3000);
+                        // this.$message.success('登录成功,正在穿越宇宙弦跳跃到蓝默空间...');
+                        // setTimeout(()=>{
+                        //     window.location.href = '/';
+                        // },3000);
+                        this.$message.success('登陆成功');
                     }
                     if (this.$store.getters.getLoginStatus() == 3) {
                         this.loader.close();

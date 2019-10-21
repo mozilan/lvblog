@@ -64,6 +64,14 @@ Vue.use( VueRouter );
  */
 
 export default new VueRouter({
+    mode:'history',
+    srcollBehavior(to,from,savedPosition){
+        if(to.hash){
+            return {
+                selector:to.hash
+            }
+        }
+    },
     routes: [
         {
             path: '/',
@@ -173,8 +181,8 @@ export default new VueRouter({
         },
         {
             path: '*',
-            name: '404',
-            components: Vue.component( '404', require( './pages/Error/404' ) )
+            name: 'error',
+            components: Vue.component( 'error', require( './pages/Error/404' ) )
             ,
         }
     ]

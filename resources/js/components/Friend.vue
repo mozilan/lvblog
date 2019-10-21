@@ -9,7 +9,7 @@
 		    </el-button>
 		  </div>
 			<div class="lv-clear-both"></div>
-			<el-row v-for="item in friends">
+			<el-row v-for="(item,index) in friends" :key="index">
 			<el-col :span="24"  style="padding: 5px 0">
 				<div class="lv-clear-both"></div>
 				<el-col :lg="4" :md="6" :sm="6" :xs="4" class="item">

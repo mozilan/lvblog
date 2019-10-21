@@ -37,7 +37,7 @@
             <el-row type="flex" justify="center" class="breadcrumb">
                 <el-col :xs="24" :sm="24" :md="16" :lg="16" style="padding: 6px 0 6px 0;">
                     <el-breadcrumb separator="/" class="breadcrumb-inner">
-                        <el-breadcrumb-item v-for="item in $route.matched">
+                        <el-breadcrumb-item v-for="(item,index) in $route.matched" :key="index">
                             <router-link class="lv-breadcrumb-a" :to="{ name:item.name }">{{ item.name }}</router-link>
                         </el-breadcrumb-item>
                     </el-breadcrumb>
@@ -61,6 +61,19 @@
                 loader:'',
                 minHeight: 0,
             };
+        },
+        created(){
+            if(this.$route.query.article){
+                var type = this.$route.query.type;
+                var location = this.$route.query.location;
+                switch (type) {
+                    case 'comment': this.$router.push({path:'/art/'+this.$route.query.article,query:{anchor:'comment' + location}});
+                    break;
+                    case 'reply': this.$router.push({path:'/art/'+this.$route.query.article,query:{anchor:'rely' + location}});
+                    break;
+                }
+
+            }
         },
         methods: {
             handleSelect(key, keyPath) {
