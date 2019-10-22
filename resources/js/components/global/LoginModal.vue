@@ -49,23 +49,6 @@
         }
     }
 </style>
-<style type="text/css">
-    .el-dialog{
-        max-width: 400px;
-        width: auto;
-    }
-    .el-dialog__body{
-        padding: 5px 15px 20px 15px;
-    }
-    @media screen and (max-width: 450px) {
-        .el-dialog{
-            margin-top: 3vh!important;
-            margin-left: 10px;
-            margin-right: 10px;
-        }
-    }
-
-</style>
 
 <template>
     <el-dialog class="login-modal" title="用户登录" :before-close="handleClose" :close="redirectToIndex" :visible.sync="loginDialogFormVisible">

@@ -69,9 +69,9 @@
         border: 1px solid rgba(255, 255, 255, 0.01);
         object-fit: cover;
     }
-    .lv-jside .dim-overlay{
-        z-index: 19980903;
-    }
+    /*.lv-jside .dim-overlay{*/
+        /*z-index: 19980903;*/
+    /*}*/
     .tagline{
         font-size: 14px;
     }
@@ -216,7 +216,7 @@
                     <li @click="logout()" v-if="tokenStatus"> <span class="item-icon"> <i class="el-icon-right"></i> </span><router-link :to="{name:'首页'}">退出登陆</router-link></li>
                 </ul>
             </div>
-            <div class="dim-overlay"></div>
+            <!--<div class="dim-overlay"></div>-->
         </div>
         <div class="lv-clear-both"></div>
     </div>
@@ -283,7 +283,6 @@
                 }else{
                     this.$message.warning('内容不能为空');
                 }
-
             }
         },
         computed:{
@@ -301,7 +300,6 @@
             if(this.$store.getters.getUserLoadStatus() === 0){
                 this.loadUser();
             }
-
         },
         mounted() {
             let style = localStorage.getItem('JsideStyle');
