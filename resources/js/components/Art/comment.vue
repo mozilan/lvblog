@@ -164,7 +164,7 @@
                 window.clearInterval(this.interval);
             },
             anchor(){
-                if(this.$route.query.reply){
+                if(this.$route.query.reply != undefined){
                     var type = this.$route.query.reply;
                     var location = this.$route.query.location;
                     var jump = '';

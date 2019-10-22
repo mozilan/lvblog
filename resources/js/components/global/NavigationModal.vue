@@ -173,7 +173,7 @@
                     <router-link :to="{ name:'首页' ,params:{'user':user.id?user.id:1},query:{user:user.id}}">{{configs.title}} </router-link>
                 </div>
             </div>
-            <div :class="menu_head_class" style="z-index: 100000000" @click="toggleStyle">
+            <div :class="menu_head_class" style="z-index: 19981022" @click="toggleStyle">
                   <span class="layer">
                     <div class="el-col-24 lv-pic">
                         <div class="row for-pic">
@@ -272,7 +272,7 @@
                 style = this.styleArr[Math.floor((Math.random()*this.styleArr.length))];
                 localStorage.setItem('JsideStyle',style);
                 this.menu_bar_class = "menubar stiky default-skin " + style;
-                this.menu_head_class = "up-z-index menu-head position-left open " +style;
+                this.menu_head_class = "menu-head position-left open " +style;
                 this.menu_container_class = "menu-container position-left open " +style;
             },
             searchArticles(){
