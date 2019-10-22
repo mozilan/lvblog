@@ -8,7 +8,6 @@
  */
 /* File: jquery.jside-menu.css */
 @font-face {
-  font-family: 'Helvetica Neue';
   font-style: normal;
   font-weight: 300;
   font-smoothing: antialiased;
@@ -19,7 +18,6 @@
     padding: 0;
 }
 body{
-  font-family: 'Helvetica Neue';
   font-weight: 300;
   font-smoothing: antialiased;
 -webkit-font-smoothing: antialiased;
@@ -31,7 +29,6 @@ body{
     --skin-color:  rgba(255, 255, 255, 0.9);
 }
 .default-skin{
-  font-family: 'Helvetica Neue';
   font-weight: 300;
   font-smoothing: antialiased;
 -webkit-font-smoothing: antialiased;
@@ -75,7 +72,6 @@ body{
 }
 
 .menu-trigger:before{
-   font-family: 'Material-Design-Iconic-Font';
 
   content: '\f197';
  

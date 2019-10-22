@@ -113,6 +113,7 @@
 
         .lv-blog-side {
             padding-bottom: 10px;
+            box-shadow: 12px 0 12px 0 rgba(0,0,0,.1);
         }
 
         .lv-margin-top {

@@ -99,6 +99,7 @@
         padding-top: 20px;
     }
     .lv-blog-side{
+        box-shadow: 12px 0 12px 0 rgba(0,0,0,.1);
         padding-bottom: 10px;
     }
     .lv-margin-top{
