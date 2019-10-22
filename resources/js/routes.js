@@ -129,6 +129,11 @@ export default new VueRouter({
                             name: '分类文章',
                             components: Vue.component( 'Blog-Category', require( './pages/Blog' ) )
                         },
+                        {
+                            path: 'search/:search',
+                            name: '查找文章',
+                            components: Vue.component( 'Blog-Category', require( './pages/Blog' ) )
+                        },
                     ]
                 },
                 {

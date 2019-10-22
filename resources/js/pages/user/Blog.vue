@@ -213,13 +213,17 @@
                         </el-collapse-item>
                     </el-collapse>
                     <el-col :span="7" class="hidden-sm-and-down lv-tag-side" id="side" :style="infinite_side" >
-                        <div class="item">
-                            <Tag></Tag>
-                        </div>
+                        <template>
+                            <div class="item" :key="refresh_side">
+                                <Tag></Tag>
+                            </div>
+                        </template>
                         <div class="lv-clear-both"></div>
-                        <div class="item lv-margin-top">
-                            <Category></Category>
-                        </div>
+                        <template>
+                            <div class="item lv-margin-top" :key="refresh_side">
+                                <Category></Category>
+                            </div>
+                        </template>
                         <div class="lv-clear-both"></div>
                     </el-col>
                     <el-col :span="16"  class="lv-blog-side blog-component__scroll" v-loading="loading">
@@ -326,7 +330,8 @@
                     maxHeight:'',
                     overflow: 'auto',
                 },
-                activeName: 'first'
+                activeName: 'first',
+                refresh_side:1,
             }
         },
         name: 'my-blog',
@@ -481,6 +486,7 @@
                         this.$watch(this.$store.getters.getArticleDeleteStatus, function () {
                             if(this.$store.getters.getArticleDeleteStatus() === 2) {
                                 this.loader.close();
+                                ++this.refresh_side;
                                 this.$message.success('文章已删除！');
                                 this.getArticles();
                             }

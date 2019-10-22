@@ -41,6 +41,7 @@ export const articles = {
             article_thumb:'',
         },
         recommendArticlesLoadStatus:0,
+        articleSearchStatus:'',
     },
     actions:{
         loadArticles({commit,state},data ){
@@ -127,7 +128,7 @@ export const articles = {
             commit('setArticleLoadStatus',1);
             ArticleAPI.getUserCategoryArticles(data.category,data.page)
                 .then(function (response) {
-                    if(state.articles.data !== undefined){
+                    if(state.articles.data != ''){
                         var merge_data = state.articles.data.concat(response.data.data);
                         response.data.data = merge_data;
                         commit('setArticles',response.data);
@@ -216,8 +217,24 @@ export const articles = {
                 .catch(function (error) {
                     commit('setRecommendArticlesLoadStatus',3);
                 })
-        }
-    },
+        },
+        searchArticles({commit,state},data){
+            commit('setArticlesSearchStatus',1);
+            ArticleAPI.searchArticles(data)
+                .then(function (response) {
+                    if(state.articles.data !== undefined){
+                        var merge_data = state.articles.data.concat(response.data.data);
+                        response.data.data = merge_data;
+                        commit('setArticles',response.data);
+                    }
+                    commit('setArticles',response.data);
+                    commit('setArticlesSearchStatus',2);
+                    })
+                .catch(function (error){
+                    commit('setArticlesSearchStatus', 3);
+                });
+            }
+        },
     mutations:{
         setArticlesLoadStatus(state,status){
             state.articlesLoadStatus = status;
@@ -254,6 +271,9 @@ export const articles = {
         },
         setRecommendArticlesLoadStatus(state,status){
             state.recommendArticlesLoadStatus = status;
+        },
+        setArticlesSearchStatus(state,status){
+            state.articleSearchStatus = status;
         }
 
     },
@@ -309,6 +329,11 @@ export const articles = {
             return function () {
                 return state.recommendArticlesLoadStatus;
             };
+        },
+        getArticlesSearchStatus(state){
+            return function () {
+                return state.articleSearchStatus;
+            }
         }
     }
 };

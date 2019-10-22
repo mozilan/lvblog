@@ -209,10 +209,10 @@
                         </el-collapse-item>
                     </el-collapse>
                     <el-col :span="7" class="hidden-sm-and-down lv-tag-side" id="side" :style="infinite_side" >
-                        <div class="item" v-if="this.$route.name != '博客园'">
+                        <div class="item" v-if="this.$route.name != '博客园' && this.$route.name != '查找文章' ">
                             <Tag></Tag>
                         </div>
-                        <div class="item" v-if="this.$route.name == '博客园'">
+                        <div class="item" v-if="this.$route.name == '博客园' || this.$route.name == '查找文章'">
                             <Tags></Tags>
                         </div>
                         <div class="lv-clear-both"></div>
@@ -363,7 +363,7 @@
         },
         computed:{
             noMore () {
-                if(this.$store.getters.getArticles.meta == undefined || this.$store.getters.getArticles.meta == undefined ){
+                if(this.$store.getters.getArticles.meta == undefined ){
                     return true;
                 }else{
                     return this.$store.getters.getArticles.meta.pagination.current_page >= this.$store.getters.getArticles.meta.pagination.total_pages;
@@ -393,33 +393,29 @@
         },
         methods: {
             getArticles(){
-                if(this.$route.params.user != undefined && this.$route.params.tag ==undefined && this.$route.params.category == undefined)
+                if(this.$route.params.search != undefined && this.$route.query.search != undefined)
                 {
-                    // const loading = this.$loading({
-                    //     lock: true,
-                    //     text: 'Loading',
-                    //     spinner: 'el-icon-loading',
-                    //     background: 'rgba(0, 0, 0, 0.7)'
-                    // });
-                    // setTimeout(() => {
-                    //     loading.close();
-                    // }, 800);
-                    // console.log("检测到user属性，没检测到tag属性");
+                    this.$store.dispatch('clearArticles');
+                    this.$store.dispatch('searchArticles',{
+                        search:decodeURI(this.$route.query.search),
+                    });
+                    this.$watch(this.$store.getters.getArticlesSearchStatus, function () {
+                        if(this.$store.getters.getArticlesSearchStatus() == 2) {
+
+                        }
+                        if(this.$store.getters.getArticlesSearchStatus() == 3) {
+                            this.$message.error('错了哦，查找文章失败了');
+                        }
+                    });
+                    return 0;
+                }else if(this.$route.params.user != undefined && this.$route.params.tag ==undefined && this.$route.params.category == undefined)
+                {
+                    console.log("检测到user属性，没检测到tag属性");
                     this.$store.dispatch('clearArticles');
                     this.$store.dispatch('loadArticles',{
                     user:this.$route.params.user ? this.$route.params.user : '',
                     });
                 }else if(this.$route.params.user == undefined && this.$route.params.tag !=undefined && this.$route.params.category ==undefined){
-                    // const loading = this.$loading({
-                    //     lock: true,
-                    //     text: 'Loading',
-                    //     spinner: 'el-icon-loading',
-                    //     background: 'rgba(0, 0, 0, 0.7)'
-                    // });
-                    // setTimeout(() => {
-                    //     loading.close();
-                    // }, 800);
-                    // console.log("检测到tag属性");
                     this.$store.dispatch('clearArticles');
                     this.$store.dispatch('loadUserTagArticles',{
                         user:this.$route.params.user,
@@ -427,16 +423,6 @@
                         page:'',
                     });
                 }else if(this.$route.params.user == undefined&& this.$route.params.tag ==undefined && this.$route.params.category !=undefined){
-                    // const loading = this.$loading({
-                    //     lock: true,
-                    //     text: 'Loading',
-                    //     spinner: 'el-icon-loading',
-                    //     background: 'rgba(0, 0, 0, 0.7)'
-                    // });
-                    // setTimeout(() => {
-                    //     loading.close();
-                    // }, 800);
-                    // console.log("检测到cat属性");
                     this.$store.dispatch('clearArticles');
                     this.$store.dispatch('loadUserCategoryArticles',{
                         user:this.$route.params.user,
@@ -444,15 +430,6 @@
                         page:'',
                     });
                 }else{
-                    // const loading = this.$loading({
-                    //     lock: true,
-                    //     text: 'Loading',
-                    //     spinner: 'el-icon-loading',
-                    //     background: 'rgba(0, 0, 0, 0.7)'
-                    // });
-                    // setTimeout(() => {
-                    //     loading.close();
-                    // }, 800);
                     this.$store.dispatch('clearArticles');
                     this.$store.dispatch('loadArticles',{
                         user:this.$route.params.user ? this.$route.params.user : '',
@@ -463,7 +440,21 @@
             load () {
                 this.loading = true;
                 setTimeout(() => {
-                    if(this.$route.params.user != undefined && this.$route.params.tag == undefined&& this.$route.params.category ==undefined)
+                    if(this.$route.params.search != undefined && this.$route.query.search != undefined)
+                    {
+                        this.$store.dispatch('searchArticles',{
+                            search:decodeURI(this.$route.query.search),
+                            page: this.$store.getters.getArticles.meta == undefined ? 1 : ++this.$store.getters.getArticles.meta.pagination.current_page,
+                        });
+                        this.$watch(this.$store.getters.getArticlesSearchStatus, function () {
+                            if(this.$store.getters.getArticlesSearchStatus() == 2) {
+
+                            }
+                            if(this.$store.getters.getArticlesSearchStatus() == 3) {
+                                this.$message.error('错了哦，查找文章失败了');
+                            }
+                        });
+                    }else if(this.$route.params.user != undefined && this.$route.params.tag == undefined&& this.$route.params.category ==undefined)
                     {
                         this.$store.dispatch('loadArticles',{
                             user:this.$route.params.user,
@@ -483,16 +474,9 @@
                             page: this.$store.getters.getArticles.meta == undefined ? 1 : ++this.$store.getters.getArticles.meta.pagination.current_page,
                         });
                     }else{
-                        this.$message.error('路由参数错误，请联系管理员');
+                        this.$message.error('路由参数错误，请稍后重试或者联系管理员.');
                     }
-                    this.$watch(this.$store.getters.getArticlesLoadStatus, function () {
-                        if(this.$store.getters.getArticlesLoadStatus() == 2) {
-                            this.loading = false
-                        }
-                        if(this.$store.getters.getArticlesLoadStatus() == 3) {
-                            this.$message.error('错了哦，加载文章失败了');
-                        }
-                    });
+                    this.loading = false;
                 }, 800);
             },
             deleteArticle(id){

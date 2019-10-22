@@ -19,6 +19,8 @@ class WebTransformer extends TransformerAbstract
             'record' => $web->record,
             'time' => $web->time,
             'IMG_API' => $web->img_api,
+            'contact' => $web->contact,
+            'contact_bak' => $web->contact_bak,
         ];
     }
 }

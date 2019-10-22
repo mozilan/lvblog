@@ -1,4 +1,4 @@
-<style type="text/css">
+<style lang="scss" scoped>
     #chang-jian-ye-mian-bu-ju + .demo-container .el-footer, #chang-jian-ye-mian-bu-ju + .demo-container .el-header {
         text-align: center;
     }

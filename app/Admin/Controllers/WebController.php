@@ -91,6 +91,8 @@ class WebController extends Controller
         $grid->record('备案信息');
         $grid->time('网站创建时间');
         $grid->img_api('随机图片API');
+        $grid->contact('联系方式1');
+        $grid->contact_bak('联系方式2');
         $grid->created_at('创建时间');
         $grid->updated_at('更新时间');
 
@@ -117,6 +119,8 @@ class WebController extends Controller
         $show->record('备案');
         $show->time('网站创建时间');
         $show->img_api('随机图片API');
+        $show->contact('联系方式1');
+        $show->contact_bak('联系方式2');
         $show->created_at('创建时间');
         $show->updated_at('更新时间');
 
@@ -140,6 +144,8 @@ class WebController extends Controller
         $form->text('author', '站长')->rules('required');
         $form->text('record', '备案')->rules('required');
         $form->text('img_api', '随机图片API')->rules('required');
+        $form->text('contact', '联系方式1')->rules('required');
+        $form->text('contact_bak', '联系方式2')->rules('required');
         $form->datetime('time', '网站创建时间')->default(date('Y-m-d H:i:s'));
         return $form;
     }

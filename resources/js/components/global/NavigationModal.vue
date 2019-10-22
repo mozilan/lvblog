@@ -20,7 +20,41 @@
         color:#303133;
     }
     .el-menu-blumer{
-        float:right;
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        position: absolute;
+        right: 30px;
+        top: 10px;
+        height: 40px;
+        line-height: 40px;
+    }
+    .lv-header{
+        background-color: #fff;
+        height: 40px;
+        padding: 10px 60px;
+        position: relative;
+        z-index: 100;
+    };
+    .lv-search-query{
+        max-width: 250px;
+        vertical-align: bottom;
+    }
+    .lv-search-input{
+        border-radius: 500rem;
+        height: 40px;
+        line-height: 30px;
+        box-sizing: border-box;
+        padding: 0 15px 0 30px;
+        border: 1px solid #e3e3e3;
+        color: #273849;
+        outline: none;
+        margin-right: 10px;
+        transition: border-color 0.2s ease;
+        /*background: #fff url("../images/search.png") 8px 5px no-repeat;*/
+        background-size: auto;
+        background-size: 20px;
+        vertical-align: bottom;
     }
     .row{
         display: table-cell;
@@ -58,6 +92,10 @@
     }
 </style>
 <style lang="scss">
+    .lv-search-input .el-input__inner{
+        height: 100%;
+        border: none;
+    }
     .el-menu-item{
         padding: 0 20px;
     }
@@ -74,6 +112,9 @@
     }
     button.lv-trigger:hover{
         background-color: transparent;
+    }
+    .el-menu.el-menu--horizontal{
+        border: none;
     }
     @media only screen and (max-width: 683px){
         .lv-header{
@@ -95,6 +136,15 @@
         <el-row type="flex" class="lv-header" justify="space-between">
             <h5 class="lv-logo "><a id="index" href="/">{{configs.title}}</a></h5>
             <el-menu :default-active="activeIndex" class="el-menu-blumer" mode="horizontal" @select="handleSelect">
+                <el-menu-item class="lv-search-query">
+                    <el-input
+                            class="lv-search-input"
+                            @keyup.enter.native="searchArticles"
+                            placeholder="搜文章"
+                            prefix-icon="el-icon-search"
+                            v-model="searchContent">
+                    </el-input>
+                </el-menu-item>
                 <el-menu-item index="1"><router-link :to="{ name:'首页' }"><i class="el-icon-s-home"></i>首页</router-link></el-menu-item>
                 <el-menu-item index="9"><router-link :to="{ name:'博客园' }"><i class="el-icon-eleme"></i>博客园</router-link></el-menu-item>
                 <el-menu-item index="2"><router-link :to="{ name:'写作',query:{user:user.id} }"><i class="el-icon-edit"></i>写博客</router-link></el-menu-item>
@@ -168,6 +218,7 @@
             </div>
             <div class="dim-overlay"></div>
         </div>
+        <div class="lv-clear-both"></div>
     </div>
 </template>
 <script>
@@ -186,6 +237,7 @@
                 menu_container_class :'menu-container position-left',
 
                 activeIndex: '1',
+                searchContent:'',
             };
         },
         methods: {
@@ -222,6 +274,16 @@
                 this.menu_bar_class = "menubar stiky default-skin " + style;
                 this.menu_head_class = "up-z-index menu-head position-left open " +style;
                 this.menu_container_class = "menu-container position-left open " +style;
+            },
+            searchArticles(){
+                if(this.searchContent){
+                    let content = this.searchContent;
+                    this.searchContent = '';
+                    this.$router.push({name:'查找文章',params: {search:1},query: {search:content}});
+                }else{
+                    this.$message.warning('内容不能为空');
+                }
+
             }
         },
         computed:{

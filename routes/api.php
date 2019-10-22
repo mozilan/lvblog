@@ -67,6 +67,9 @@ $api->version('v1', [
         //获取某一标签下所有文章
         $api->get('tags/{tag}/articles', 'ArticlesController@tagIndex')
             ->name('api.user.tag.articles.show');
+        //获取某一标签下所有文章
+        $api->post('search/articles', 'ArticlesController@searchIndex')
+            ->name('api.articles.search.show');
         //获取文章下所有评论
         $api->get('comments/articles/{article}', 'CommentController@show')
             ->name('api.articles.comments.show');

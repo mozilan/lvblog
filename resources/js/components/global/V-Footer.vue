@@ -14,7 +14,7 @@
                                 <div class="lv-clear-both"></div>
                                 <el-image
                                         style="width: 100%; height:100px"
-                                        src="https://mozilan.geekadpt.cn/img/custom/wechat_pub.png"
+                                        :src="configs.contact"
                                         fit="contain"
                                         :preview-src-list="srcList">
                                 >
@@ -28,7 +28,7 @@
                             <div class="lv-clear-both"></div>
                             <el-image
                                     style="width: 100%; height: 100px"
-                                    src="https://mozilan.geekadpt.cn//img/custom/wechat2.png"
+                                    :src="configs.contact_bak"
                                     fit="contain"
                                     :preview-src-list="srcList">
                             >
