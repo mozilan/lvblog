@@ -14,17 +14,6 @@
                 <div class="loading-introduction"><span class="rotate">{{other.name}}</span><span v-if="other.introduction">{{'--'+other.introduction}}</span></div>
             </div>
         </transition>
-        <!--<transition name="el-fade-in-linear">-->
-            <!--<div v-popover:popover1 id="frontpage" v-show="loading_image" @click="cancelLoadingImage" :style="{'background-image':bg_frontpage_url}" v-loading="loadings.bg_front_loading">-->
-                <!--<div class="shadow-img"></div>-->
-                <!--<img style="visibility: hidden" src="../../assets/images/front-image.jpg" class="front-img img-responsive" :alt ="other.name">-->
-                <!--<h3 class="profile ajust-frontpage-avatar"><img v-if="other.avatar!==null" class="front-avatar transparent" :src="other.avatar" alt=""><el-avatar style="width: 40px; height: 40px;border:3px solid #409eff;border-radius:30px" v-if="other.avatar===null">{{other.name}}</el-avatar><span class="invert name">{{other.name}}</span></h3>&lt;!&ndash;PROFILE NAME&ndash;&gt;-->
-                <!--<h3 class="invert" style="margin-top: -10px; margin-bottom: 10px;">蓝默空间-<span class="rotate">全宇宙将为你闪烁！</span></h3> &lt;!&ndash;SUBTITLE IN PROFILE&ndash;&gt;-->
-                <!--<div class="frontclick"><img src="../../assets/images/click.png" alt="" class="img-responsive"><span class="pulse"></span></div>-->
-            <!--</div>-->
-        <!--</transition>-->
-    <!--FRONT PAGE/ SPLASH SCREEN SECTION ENDS-->
-    <!--container-->
         <el-row class="main" type="flex" justify="center" :style="main_style" v-show="!loading_image">
             <el-col :xs="24" :sm="24" :md="16" :lg="16" class="is-always-shadow">
             <div class="container" >
@@ -107,7 +96,7 @@
                                         <div id='tab-1'>
                                             <ul class="skills-list no-padding">
                                                 <li class="row">
-                                                    <el-col :xs="4"><div class="fw-mid">HTML</div></el-col>
+                                                    <el-col :xs="24"><div class="fw-mid">HTML</div></el-col>
                                                     <el-col :xs="18">
                                                         <div class="bar">
                                                             <el-progress :text-inside="true" :stroke-width="26" :percentage="100"></el-progress>
@@ -116,7 +105,7 @@
                                                     <div class="lv-clear-both"></div>
                                                 </li>
                                                 <li class="row">
-                                                    <el-col :xs="4"><div class="fw-mid">CSS</div></el-col>
+                                                    <el-col :xs="24"><div class="fw-mid">CSS</div></el-col>
                                                     <el-col :xs="18">
                                                         <div class="bar">
                                                             <el-progress :text-inside="true" :stroke-width="24" :percentage="90" status="success"></el-progress>
@@ -125,7 +114,7 @@
                                                     <div class="lv-clear-both"></div>
                                                 </li>
                                                 <li class="row">
-                                                    <el-col :xs="4"><div class="fw-mid">JavaScript</div></el-col>
+                                                    <el-col :xs="24"><div class="fw-mid">JavaScript</div></el-col>
                                                     <el-col :xs="18">
                                                         <div class="bar">
                                                             <el-progress :text-inside="true" :stroke-width="22" :percentage="80" status="warning"></el-progress>
