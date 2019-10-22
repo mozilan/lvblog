@@ -1,1 +1,408 @@
-body,html{width:100%;height:100%;margin:0;padding:0}body a,body a:focus,body a:hover,html a,html a:focus,html a:hover{text-decoration:none;color:inherit}body .lv-clear-both,html .lv-clear-both{clear:both}body .el-dialog,html .el-dialog{max-width:400px;width:auto}body .el-dialog__body,html .el-dialog__body{padding:5px 15px 20px}@media screen and (max-width:450px){body .el-dialog,html .el-dialog{margin-top:6vh!important;margin-left:10px;margin-right:10px}}body .lv-float-left,html .lv-float-left{float:left!important}body .lv-avatar,html .lv-avatar{width:40px;height:40px;border:3px solid #409eff;border-radius:30px}body .lv-card-shadow,html .lv-card-shadow{box-shadow:0 2px 12px 0 rgba(0,0,0,.1)}body .el-backtop,html .el-backtop{visibility:hidden}body .lv-border-left,html .lv-border-left{border-left:3px solid #4280c9}body .el-divider--horizontal,html .el-divider--horizontal{margin:12px 0}body .lv-break,html .lv-break{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}body .lv-blog-popover,html .lv-blog-popover{max-width:150px}body .lv-container,html .lv-container{padding:0 10px}body .el-message-box,html .el-message-box{width:350px}body .button-new-tag,body .el-input--small .el-input__inner,body .el-input__inner,html .button-new-tag,html .el-input--small .el-input__inner,html .el-input__inner{height:30px}body .button-new-tag,html .button-new-tag{line-height:0}body a:focus,html a:focus{outline:none;-moz-outline:none}@media only screen and (max-width:683px){body .el-header,body .el-submenu__title,html .el-header,html .el-submenu__title{padding:0}}body .el-avatar>img,html .el-avatar>img{height:100%;width:100%}
+html,
+body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+html a,
+html a:hover,
+html a:focus,
+body a,
+body a:hover,
+body a:focus {
+  text-decoration: none;
+  color: inherit;
+}
+
+html .lv-clear-both,
+body .lv-clear-both {
+  clear: both;
+}
+
+html .el-dialog,
+body .el-dialog {
+  max-width: 400px;
+  width: auto;
+}
+
+html .el-dialog__body,
+body .el-dialog__body {
+  padding: 5px 15px 20px 15px;
+}
+
+@media screen and (max-width: 450px) {
+  html .el-dialog,
+  body .el-dialog {
+    margin-top: 6vh !important;
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+}
+
+html .blog .art-item,
+body .blog .art-item {
+  margin-bottom: 30px;
+  position: relative;
+}
+
+html .blog .art-item .star,
+body .blog .art-item .star {
+  width: 60px;
+  height: 60px;
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+html .blog .tag,
+body .blog .tag {
+  margin-right: 5px;
+}
+
+html .blog img.tag,
+body .blog img.tag {
+  width: 16px;
+  height: 16px;
+}
+
+html .blog .clear-title,
+body .blog .clear-title {
+  padding-left: 5px;
+  margin-top: 15px;
+  margin-bottom: 0;
+}
+
+html .blog .art-title,
+body .blog .art-title {
+  cursor: pointer;
+}
+
+html .blog .art-title:hover,
+body .blog .art-title:hover {
+  color: #409EFF;
+}
+
+html .blog .art-time,
+body .blog .art-time {
+  margin: 6px 0;
+}
+
+html .blog .art-body,
+body .blog .art-body {
+  display: flex;
+  padding: 10px 0;
+}
+
+html .blog .art-category,
+body .blog .art-category {
+  float: left;
+  padding-left: 5px;
+}
+
+html .blog .side-img,
+body .blog .side-img {
+  height: 150px;
+  width: 270px;
+  overflow: hidden;
+  margin-right: 10px;
+}
+
+html .blog .art-banner,
+body .blog .art-banner {
+  width: 100%;
+  height: 100%;
+  transition: all 0.6s;
+}
+
+html .blog .art-banner:hover,
+body .blog .art-banner:hover {
+  transform: scale(1.4);
+}
+
+html .blog .side-abstract,
+body .blog .side-abstract {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  color: #aaa;
+}
+
+html .blog .side-abstract .art-abstract,
+body .blog .side-abstract .art-abstract {
+  padding: 10px 0;
+}
+
+html .blog .art-more,
+body .blog .art-more {
+  display: flex;
+  justify-content: space-between;
+  flex: 1 auto;
+  align-items: flex-end;
+}
+
+html .blog .art-more-button-sm,
+body .blog .art-more-button-sm {
+  display: none;
+}
+
+html .blog .art-time-small,
+body .blog .art-time-small {
+  margin: 0;
+  display: none;
+}
+
+html .blog .art-more .view,
+body .blog .art-more .view {
+  color: #aaa;
+}
+
+html .blog h5,
+body .blog h5 {
+  font-size: 18px;
+}
+
+html .blog .pagination,
+body .blog .pagination {
+  background-color: #F9F9F9;
+}
+
+html .blog ul,
+body .blog ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+html .blog .infinite-list-wrapper p,
+body .blog .infinite-list-wrapper p {
+  text-align: center;
+}
+
+html .blog .blog,
+body .blog .blog {
+  padding-top: 20px;
+}
+
+html .blog .lv-blog-side,
+body .blog .lv-blog-side {
+  padding-bottom: 10px;
+  box-shadow: 12px 0 12px 0 rgba(0, 0, 0, 0.1);
+}
+
+html .blog .lv-margin-top,
+body .blog .lv-margin-top {
+  margin-top: 20px;
+}
+
+html .blog .image-slot,
+body .blog .image-slot {
+  height: 150px;
+}
+
+html .blog .el-image,
+body .blog .el-image {
+  display: block;
+}
+
+@media only screen and (max-width: 683px) {
+  html .blog .lv-blog-side,
+  body .blog .lv-blog-side {
+    width: 100%;
+  }
+
+  html .blog .lv-blog-middle,
+  body .blog .lv-blog-middle {
+    width: 100%;
+  }
+
+  html .blog .lv-tag-side,
+  body .blog .lv-tag-side {
+    width: 100%;
+  }
+
+  html .blog .lv-row-bg,
+  body .blog .lv-row-bg {
+    display: block;
+  }
+
+  html .blog .art-body,
+  body .blog .art-body {
+    display: block;
+    padding: 10px 0 0 0;
+  }
+
+  html .blog .side-img,
+  body .blog .side-img {
+    height: auto;
+    width: 100%;
+    overflow: hidden;
+    margin-right: 10px;
+  }
+
+  html .blog .clear-title,
+  body .blog .clear-title {
+    margin-bottom: 0;
+  }
+
+  html .blog #side,
+  body .blog #side {
+    max-height: none !important;
+    margin-top: 20px;
+  }
+
+  html .blog .art-category,
+  body .blog .art-category {
+    clear: both;
+    padding: 5px 0 0 0;
+  }
+
+  html .blog .art-item,
+  body .blog .art-item {
+    font-size: 14px;
+  }
+
+  html .blog .side-abstract .art-abstract,
+  body .blog .side-abstract .art-abstract {
+    padding: 5px 0;
+  }
+
+  html .blog .art-info,
+  body .blog .art-info {
+    padding-top: 5px;
+  }
+
+  html .blog .art-time,
+  body .blog .art-time {
+    display: none !important;
+  }
+
+  html .blog .art-time-small,
+  body .blog .art-time-small {
+    display: block !important;
+  }
+
+  html .blog .art-more-button,
+  body .blog .art-more-button {
+    display: none !important;
+  }
+
+  html .blog .art-more-button-sm,
+  body .blog .art-more-button-sm {
+    color: orange;
+    display: block !important;
+  }
+
+  html .blog .art-more-simple,
+  body .blog .art-more-simple {
+    display: none !important;
+  }
+
+  html .blog .art-time-simple,
+  body .blog .art-time-simple {
+    display: none !important;
+  }
+}
+
+html .lv-float-left,
+body .lv-float-left {
+  float: left !important;
+}
+
+html .lv-avatar,
+body .lv-avatar {
+  width: 40px;
+  height: 40px;
+  border: 3px solid #409eff;
+  border-radius: 30px;
+}
+
+html .lv-card-shadow,
+body .lv-card-shadow {
+  box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+}
+
+html .el-backtop,
+body .el-backtop {
+  visibility: hidden;
+}
+
+html .lv-border-left,
+body .lv-border-left {
+  border-left: 3px solid #4280C9;
+}
+
+html .el-divider--horizontal,
+body .el-divider--horizontal {
+  margin: 12px 0;
+}
+
+html .lv-break,
+body .lv-break {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+html .lv-blog-popover,
+body .lv-blog-popover {
+  max-width: 150px;
+}
+
+html .lv-container,
+body .lv-container {
+  padding: 0 10px;
+}
+
+html .el-message-box,
+body .el-message-box {
+  width: 350px;
+}
+
+html .button-new-tag,
+body .button-new-tag {
+  height: 30px;
+}
+
+html .el-input--small .el-input__inner,
+body .el-input--small .el-input__inner {
+  height: 30px;
+}
+
+html .button-new-tag,
+body .button-new-tag {
+  line-height: 0;
+}
+
+html .el-input__inner,
+body .el-input__inner {
+  height: 30px;
+}
+
+html .button-new-tag,
+body .button-new-tag {
+  line-height: 0;
+}
+
+html a:focus,
+body a:focus {
+  outline: none;
+  -moz-outline: none;
+}
+
+@media only screen and (max-width: 683px) {
+  html .el-submenu__title,
+  html .el-header,
+  body .el-submenu__title,
+  body .el-header {
+    padding: 0;
+  }
+}
+
+html .el-avatar > img,
+body .el-avatar > img {
+  height: 100%;
+  width: 100%;
+}
+

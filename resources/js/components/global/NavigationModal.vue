@@ -173,7 +173,7 @@
                     <router-link :to="{ name:'首页' ,params:{'user':user.id?user.id:1},query:{user:user.id}}">{{configs.title}} </router-link>
                 </div>
             </div>
-            <div :class="menu_head_class" @click="toggleStyle">
+            <div :class="menu_head_class" style="z-index: 100000000" @click="toggleStyle">
                   <span class="layer">
                     <div class="el-col-24 lv-pic">
                         <div class="row for-pic">
@@ -233,7 +233,7 @@
                     ,'orange','bnp','blue','green','red','default-skin'
                 ],
                 menu_bar_class : 'menubar sticky default-skin',
-                menu_head_class : 'up-z-index menu-head position-left',
+                menu_head_class : 'menu-head position-left',
                 menu_container_class :'menu-container position-left',
 
                 activeIndex: '1',

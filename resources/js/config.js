@@ -6,8 +6,8 @@ var api_url = '';
 
 switch( process.env.NODE_ENV ){
     case 'development':
-        url = 'localhost';
-        api_url = 'localhost/api';
+        url = 'http://www.mozilan.com';
+        api_url = 'http://www.mozilan.com/api';
         break;
     case 'production':
         url = 'https://www.mozilan.com';
