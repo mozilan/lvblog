@@ -10,8 +10,8 @@ switch( process.env.NODE_ENV ){
         api_url = 'http://www.mozilan.com/api';
         break;
     case 'production':
-        url = 'http://www.mozilan.com';
-        api_url = 'http://www.mozilan.com/api';
+        url = 'https://www.mozilan.com';
+        api_url = 'https://www.mozilan.com/api';
         break;
 }
 var ValineAppID='vEWC8aDW7kv3G3fW021C6LII-gzGzoHsz';
