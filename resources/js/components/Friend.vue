@@ -22,7 +22,7 @@
 					<el-col :span="24" class="name">
 						{{item.name}}
 					</el-col>
-					<el-col :span="24" style="font-size: 14px;background: rgba(0, 0, 0, 0) url(http://localhost/uploads/images/articles/201910/10/1_1570714148_vWjH3m1sqs.gif) no-repeat scroll -93px 50%;background-size: 80%;">
+					<el-col :span="24" style="font-size: 14px;">
 						<marquee ref="des" scrollamount="2" style="margin-left: 30px;background-color: #ffffff">
 							<i class="el-icon-position"></i>{{item.description}}
 						</marquee>
