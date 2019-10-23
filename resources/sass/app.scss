@@ -39,6 +39,9 @@ html,body{
   .blog{
     padding-top: 20px;
 
+    .el-backtop{
+      visibility: hidden;
+    }
     .art-item {
       margin-bottom: 30px;
       position: relative;
@@ -247,9 +250,6 @@ html,body{
   }
   .lv-card-shadow {
     box-shadow: 0 2px 12px 0 rgba(0, 0, 0, .1);
-  }
-  .el-backtop{
-    visibility: hidden;
   }
   .lv-border-left{
     border-left: 3px solid #4280C9
