@@ -173,9 +173,9 @@
                         this.interval = setInterval(()=> {
                             jump = document.querySelectorAll(anchor);
                             if(jump.length!=0) {
-                                this.jumped = 1;
                                 // 滚动到目标位置
                                 document.querySelector(anchor).scrollIntoView(true);
+                                this.jumped = 1;
                             }
                         })
                     },500);
