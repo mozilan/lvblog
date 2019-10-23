@@ -92,7 +92,7 @@
             let viewWidth = window.innerWidth;
             this.url= window.location.href;
             if(viewWidth > 683){
-                this.styles.art_style.height = window.innerHeight-152+'px';
+                this.styles.art_style.height = window.innerHeight-132+'px';
             }
         },
         mounted(){
@@ -122,9 +122,6 @@
 <style lang="scss" scoped>
     .art{
         margin-top: 20px;
-    }
-    .main{
-        padding-bottom: 30px;
     }
     #artcle-info {
         padding: 20px;
