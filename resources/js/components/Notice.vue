@@ -3,7 +3,7 @@
         <el-card class="box-card">
             <div slot="header" class="d-flex align-items-center">
                 <i class="el-icon-data-board"></i>
-                <span>LvBlog-小白板</span>
+                <span>{{configs.title}}-小白板</span>
             </div>
             <div class="text">
                 {{configs.notice}}

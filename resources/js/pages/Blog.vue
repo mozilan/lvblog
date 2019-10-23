@@ -12,7 +12,7 @@
                             <template>
                                 <el-tabs v-model="activeName">
                                     <el-tab-pane label="标签" name="first">
-                                        <el-col :span="6" class="hidden-sm-and-down lv-tag-side-sm" :style="infinite_side" >
+                                        <el-col :span="24" class="hidden-sm-and-down lv-tag-side-sm" :style="infinite_side" >
                                             <div class="item">
                                                 <FTag></FTag>
                                             </div>
