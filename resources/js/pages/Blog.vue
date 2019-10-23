@@ -42,7 +42,7 @@
                         </div>
                         <div class="lv-clear-both"></div>
                     </el-col>
-                    <el-col :span="16"  class="lv-blog-side blog-component__scroll" v-loading="loading">
+                    <el-col :span="16"  class="lv-blog-side-blog blog-component__scroll" v-loading="loading">
                         <div class="infinite-list-wrapper blog-scrollbar__wrap" :style="infinite_box"  >
                                 <ul
                                     class="list"
@@ -209,8 +209,10 @@
         },
         created(){
             this.getArticles();
-            this.infinite_box.maxHeight = this.infinite_side.maxHeight = window.innerHeight-152 +'px';
-
+            let viewWidth = window.innerWidth;
+            if(viewWidth > 683){
+                this.infinite_box.maxHeight = this.infinite_side.maxHeight = window.innerHeight-152 +'px';
+            }
         },
         methods: {
             getArticles(){

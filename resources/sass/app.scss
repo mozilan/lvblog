@@ -37,6 +37,8 @@ html,body{
   //blog css
 
   .blog{
+    padding-top: 20px;
+
     .art-item {
       margin-bottom: 30px;
       position: relative;
@@ -144,12 +146,7 @@ html,body{
     .infinite-list-wrapper p {
       text-align: center;
     }
-
-    .blog {
-      padding-top: 20px;
-    }
-
-    .lv-blog-side {
+    .lv-blog-side , .lv-blog-side-blog{
       padding-bottom: 10px;
     }
 
@@ -168,6 +165,9 @@ html,body{
     @media only screen and (max-width: 683px) {
       .lv-blog-side {
         width: 100%;
+      }
+      .lv-blog-side-blog{
+        padding-top: 20px;width: 100%;
       }
       .lv-blog-middle {
         width: 100%;

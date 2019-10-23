@@ -13,7 +13,7 @@ export const common = {
         blog: {
             gorgeous_art:{
                 body:{
-                    padding:'20px'
+                    padding:'0 0 10px 0'
                 },
                 title:{
                     marginTop:'15px',
@@ -45,7 +45,7 @@ export const common = {
             },
             simplify_art:{
                 body:{
-                    padding:'10px'
+                    padding:'0 0 10px 0'
                 },
                 title:{
                     marginTop:'0',
@@ -77,7 +77,7 @@ export const common = {
             },
             art:{
                 body:{
-                    padding:'20px'
+                    padding:'0 0 10px 0'
                 },
                 title:{
 

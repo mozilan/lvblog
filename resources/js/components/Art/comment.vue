@@ -20,7 +20,7 @@
                         </el-input>
                         <div class="btn-control">
                             <span class="cancel" @click="cancel">取消</span>
-                            <el-button class="btn" type="success" round @click="commitComment()">确定</el-button>
+                            <el-button class="btn" type="primary" round @click="commitComment()">确定</el-button>
                         </div>
                     </div>
                 </transition>

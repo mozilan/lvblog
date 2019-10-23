@@ -10,6 +10,7 @@ return [
 
         // 默认可用的发送网关
         'gateways' => [
+            'aliyun',
             'qcloud',
             'yuntongxun',
             'yunpian',
@@ -19,6 +20,11 @@ return [
     'gateways' => [
         'errorlog' => [
             'file' => '/tmp/easy-sms.log',
+        ],
+        'aliyun' => [
+            'access_key'        => env('ALIYUN_ACCESSKEYID'), // accessKey
+            'access_secret'     => env('ALIYUN_ACCESSKEYSECRET'), // accessSecret
+            'sign_name'         => env('ALIYUN_SMS_SIGN_NAME'), // 签名
         ],
         'qcloud' => [ 
             'sdk_app_id' => env('QCLOUD_SDK_APP_ID'), // SDK APP ID
