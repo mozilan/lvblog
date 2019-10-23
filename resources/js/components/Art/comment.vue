@@ -165,16 +165,17 @@
             },
             anchor(){
                 if(this.$route.query.reply !== undefined){
-                    var type = this.$route.query.reply;
-                    var location = this.$route.query.location;
-                    var jump = '';
+                    let type = this.$route.query.reply;
+                    let location = this.$route.query.location;
+                    let anchor = '#'+type+location;
+                    let jump = '';
                     this.$nextTick(()=> {
                         this.interval = setInterval(()=> {
-                            jump = document.querySelectorAll('#'+ type+location);
+                            jump = document.querySelectorAll(anchor);
                             if(jump.length!=0) {
                                 this.jumped = 1;
                                 // 滚动到目标位置
-                                document.querySelector('#'+ this.$route.query.anchor).scrollIntoView(true);
+                                document.querySelector(anchor).scrollIntoView(true);
                             }
                         })
                     },500);
