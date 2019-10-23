@@ -30,10 +30,13 @@ class VerificationCodesController extends Controller
 
             $sms = app('easysms');
             try {
-                $sms->send($phone, ['template' => 1], ['yuntongxun']);
+                $sms->send($phone,[
+                    'content'  => '【蓝默空间】您的验证码是'.$code.'。请于10分钟内填写。如非本人操作，请忽略本短信。',
+                ]);
             } catch (\Overtrue\EasySms\Exceptions\NoGatewayAvailableException $exception) {
-                $message = $exception->getException('yuntongxun')->getMessage();
-                return $this->response->errorInternal($message ?? '短信发送异常');
+                return response()->json(['message' => '短信发送异常'], 500);
+                //$message = $exception->getException('yunpian')->getMessage();
+                //return $this->response->errorInternal($message ?? '短信发送异常');
             }
         }
         $key = 'verificationCode_'.str_random(15);

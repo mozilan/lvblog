@@ -79,7 +79,7 @@ export const users = {
                     commit('setVerificationCodes', []);
                     if(error.response.status == 422){
                         commit('setVerificationCodeError', '图形验证码已失效');
-                    }else{
+                    }else if(error.response.status == 500){
                         commit('setVerificationCodeError', error.response.data.message);
                     }
                     commit('setVerificationCodeLoadStatus', 3);

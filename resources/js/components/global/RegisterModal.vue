@@ -262,7 +262,7 @@
                         console.log(this.intervalInstance);
                     }else if (this.$store.getters.getVerificationCodeLoadStatus() == 3) {
                         this.loader.close();
-                        this.$message.error('短信验证码发送失败了，可能是因为操作过于频繁！');
+                        this.$message.error(this.$store.getters.getVerificationCodeError);
 
                     }
                 });
