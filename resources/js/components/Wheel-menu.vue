@@ -11,7 +11,7 @@
         <div @click="gorgeous">
             <i class="el-icon-menu"></i>
         </div>
-        <div @click="backtop">
+        <div @click="scrollToTop">
             <i class="el-icon-top"></i>
         </div>
         <div class='menu'>
@@ -26,7 +26,15 @@
 <script>
     export default {
         name: "Wheel-menu",
+        data() {
+            return {
+                jumped:0,
+                scrollTop:0,
+                interval:'',
+            }
+        },
         mounted() {
+            window.addEventListener('scroll', this.handleScroll);
             var toggle = $('#ss_toggle');
             var menu = $('#ss_menu');
             var rot;
@@ -45,6 +53,29 @@
             });
         },
         methods:{
+            handleScroll() {
+                this.scrollTop = document.documentElement.scrollTop;
+            },
+            stopInterval(){
+                window.clearInterval(this.interval);
+            },
+            scrollToTop(){
+                if(this.scrollTop>360){
+                    let anchor = '#header';
+                    let jump = '';
+                    this.$nextTick(()=> {
+                        this.interval = setInterval(()=> {
+                            jump = document.querySelectorAll(anchor);
+                            if(jump.length!=0) {
+                                // 滚动到目标位置
+                                console.log(jump);
+                                document.querySelector(anchor).scrollIntoView(true);
+                                ++this.jumped;
+                            }
+                        })
+                    },500);
+                }
+            },
             simplify(){
                 if(this.$store.getters.getSimplifyStatus == 2){
                     this.$message.warning('已开启精简模式！');
@@ -61,9 +92,13 @@
                     this.$message.success('已开启大图模式');
                 }
             },
-            backtop(){
-                $(".el-backtop").click();
-            }
+        },
+        watch: {
+            // 如果已滚动，会停止此方法
+            "jumped": "stopInterval"
+        },
+        destroyed() {
+            window.removeEventListener('scroll', this.handleScroll);
         }
     }
 </script>

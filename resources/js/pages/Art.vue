@@ -1,8 +1,7 @@
 <template>
     <div class="art" :style="styles.art_style">
-        <el-backtop target=".page-component__scroll .el-scrollbar__wrap"></el-backtop>
-        <el-row class="main page-component__scroll" type="flex" justify="center">
-            <el-col :xs="24" :sm="24" :md="16" :lg="16" class="el-scrollbar__wrap">
+        <el-row class="main" type="flex" justify="center">
+            <el-col :xs="24" :sm="24" :md="16" :lg="16">
                 <div id="artcle-info" :style="{'background-image': 'url('+this.$store.getters.getConfigs.IMG_API+ this.$route.params.art_id+')'}" @load="handleLoad" v-loading="bg_loading">
                     <h2 class="text-center art-title">{{article.title}}</h2>
                     <!-- 描述：文章信息 -->
@@ -53,6 +52,7 @@
                 </div>
             </el-col>
         </el-row>
+        <whell-menu></whell-menu>
     </div>
 </template>
 
@@ -62,6 +62,7 @@
     import 'mavon-editor/dist/css/index.css';
     import 'highlight.js/styles/monokai-sublime.css';
     import comment from '../components/Art/comment'
+    import WhellMenu from '../components/Wheel-menu'
     // import 'github-markdown-css';
     export default {
         name: 'art',
@@ -81,6 +82,7 @@
         components:{
             mavonEditor,
             comment,
+            WhellMenu
         },
         created() {
             this.$store.dispatch('patchUpdateViewCount',{
@@ -89,11 +91,10 @@
             this.$store.dispatch('loadArticle',{
                 art_id : this.$route.params.art_id
             });
-            let viewWidth = window.innerWidth;
-            this.url= window.location.href;
-            if(viewWidth > 683){
-                this.styles.art_style.height = window.innerHeight-132+'px';
-            }
+            //已废弃
+            // let viewWidth = window.innerWidth;
+            // this.url= window.location.href;
+            // this.styles.art_style.height = window.innerHeight-132+'px';
         },
         mounted(){
             this.art_height = window.innerHeight-130+'px';

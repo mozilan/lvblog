@@ -15,7 +15,7 @@ class AddOauthOpenidToUsersTable extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             //
-            $table->string('provider')->unique()->nullable()->after('password');;
+            $table->string('provider')->nullable()->after('password');;
             $table->string('provider_id')->unique()->nullable()->after('provider');
             $table->text('avatar')->nullable()->after('name');
             $table->string('password')->nullable()->change();

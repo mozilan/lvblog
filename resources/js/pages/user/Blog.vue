@@ -1,3 +1,10 @@
+<style lang="scss" scoped>
+    @media only screen and (max-width: 683px) {
+        .lv-side-category-sm , .lv-tag-side{
+            display: none;
+        }
+    }
+</style>
 <template>
     <div class="blog" style="overflow:auto">
         <el-row type="flex" class="row-bg" justify="center">
@@ -44,12 +51,11 @@
                         <div class="lv-clear-both"></div>
                     </el-col>
                     <el-col :span="16"  class="lv-blog-side-blog blog-component__scroll" v-loading="loading">
-                        <div class="infinite-list-wrapper blog-scrollbar__wrap" :style="infinite_box"  >
-                            <ul
-                                    class="list"
-                                    v-infinite-scroll="load"
-                                    infinite-scroll-disabled="disabled">
-                                <li v-for="(i , index) in articles.data">
+                        <div :style="infinite_box">
+                            <ul class="list infinite-list-wrapper"
+                                v-infinite-scroll="load"
+                                infinite-scroll-disabled="disabled">
+                                <li v-for="(i , index) in articles" :key="index" class="infinite-list-item">
                                     <el-row class="art-item">
                                         <el-popover
                                                 placement="bottom"
@@ -174,7 +180,7 @@
                 return this.loading || this.noMore
             },
             articles(){
-                return this.$store.getters.getArticles;
+                return this.$store.getters.getArticles.data;
             },
             showModel(){
                 return this.$store.getters.getArticleShowModel;
@@ -190,11 +196,13 @@
         created(){
             //console.log(this.$route.params.owner+' '+this.$route.params.draft+' '+this.$route.params.private);
             this.getArticles();
-            let viewWidth = window.innerWidth;
-            if(viewWidth > 683){
-                this.infinite_box.maxHeight = this.infinite_side.maxHeight = window.innerHeight-152 +'px';
-
-            }
+            this.infinite_box.maxHeight = this.infinite_side.maxHeight = window.innerHeight-152 +'px';
+            //废弃
+            // let viewWidth = window.innerWidth;
+            // if(viewWidth > 683){
+            //     this.infinite_box.maxHeight = this.infinite_side.maxHeight = window.innerHeight-152 +'px';
+            //
+            // }
 
         },
         methods: {

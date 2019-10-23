@@ -132,7 +132,7 @@
     }
 </style>
 <template>
-    <div class="header">
+    <div class="header" id="header">
         <el-row type="flex" class="lv-header" justify="space-between">
             <h5 class="lv-logo "><a id="index" href="/">{{configs.title}}</a></h5>
             <el-menu :default-active="activeIndex" class="el-menu-blumer" mode="horizontal" @select="handleSelect">

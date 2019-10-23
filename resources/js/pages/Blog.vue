@@ -1,6 +1,6 @@
 <style lang="scss" scoped>
     @media only screen and (max-width: 683px) {
-        .lv-side-category-sm {
+        .lv-tag-side{
             display: none;
         }
     }
@@ -44,18 +44,17 @@
                             <Tags></Tags>
                         </div>
                         <div class="lv-clear-both"></div>
-                        <div class="item lv-margin-top" v-if="!this.$route.params || this.$route.params.category">
+                        <div class="item lv-margin-top" v-if="this.$route.name != '博客园'">
                             <Category></Category>
                         </div>
                         <div class="lv-clear-both"></div>
                     </el-col>
-                    <el-col :span="16"  class="lv-blog-side-blog blog-component__scroll" v-loading="loading">
-                        <div class="infinite-list-wrapper blog-scrollbar__wrap" :style="infinite_box"  >
-                                <ul
-                                    class="list"
-                                    v-infinite-scroll="load"
-                                    infinite-scroll-disabled="disabled">
-                                <li v-for="(i , index) in articles.data" :key="index">
+                    <el-col :span="16"  class="lv-blog-side-blog" v-loading="loading">
+                        <div :style="infinite_box">
+                            <ul class="list infinite-list-wrapper"
+                                v-infinite-scroll="load"
+                                infinite-scroll-disabled="disabled">
+                                <li v-for="(i , index) in articles" :key="index" class="infinite-list-item">
                                     <el-row class="art-item">
                                         <div class="lv-card-shadow" :style="showModel.body">
                                             <div class="lv-blog-popover">
@@ -201,7 +200,7 @@
                 return this.loading || this.noMore
             },
             articles(){
-                return this.$store.getters.getArticles;
+                return this.$store.getters.getArticles.data;
             },
             showModel(){
                 return this.$store.getters.getArticleShowModel;
@@ -216,10 +215,12 @@
         },
         created(){
             this.getArticles();
-            let viewWidth = window.innerWidth;
-            if(viewWidth > 683){
-                this.infinite_box.maxHeight = this.infinite_side.maxHeight = window.innerHeight-152 +'px';
-            }
+            this.infinite_box.maxHeight = this.infinite_side.maxHeight = window.innerHeight-152 +'px';
+            //废弃
+            // let viewWidth = window.innerWidth;
+            // if(viewWidth > 683){
+            //     this.infinite_box.maxHeight = this.infinite_side.maxHeight = window.innerHeight-152 +'px';
+            // }
         },
         methods: {
             getArticles(){
@@ -304,7 +305,10 @@
                             page: this.$store.getters.getArticles.meta == undefined ? 1 : ++this.$store.getters.getArticles.meta.pagination.current_page,
                         });
                     }else{
-                        this.$message.error('路由参数错误，请稍后重试或者联系管理员.');
+                        this.$store.dispatch('loadArticles',{
+                            user:this.$route.params.user ? this.$route.params.user : '',
+                            page: this.$store.getters.getArticles.meta == undefined ? 1 : ++this.$store.getters.getArticles.meta.pagination.current_page,
+                        });
                     }
                     this.loading = false;
                 }, 800);

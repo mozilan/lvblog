@@ -2,15 +2,13 @@
     <div class="blog" style="overflow:auto">
         <el-row type="flex" class="row-bg" justify="center">
             <el-col :xs="24" :sm="24" :md="16" :lg="16">
-                <el-backtop target=".blog-component__scroll .blog-scrollbar__wrap"></el-backtop>
                 <el-row type="flex" class="row-bg lv-row-bg" justify="space-between">
-                    <el-col :span="16"  class="lv-blog-side blog-component__scroll" v-loading="loading">
-                        <div class="infinite-list-wrapper blog-scrollbar__wrap" :style="infinite_box"  >
-                            <ul
-                                    class="list"
+                    <el-col :span="16"  class="lv-blog-side" v-loading="loading">
+                        <div :style="infinite_box">
+                            <ul class="list infinite-list-wrapper"
                                     v-infinite-scroll="load"
                                     infinite-scroll-disabled="disabled">
-                                <li v-for="(i , index) in articles.data"  :key="index">
+                                <li v-for="(i , index) in articles.data"  :key="index" class="infinite-list-item">
                                     <el-row class="art-item">
                                         <div class="lv-card-shadow" :style="showModel.body">
                                             <div class="lv-blog-popover">
@@ -139,7 +137,7 @@
     import LFooter from '../components/L-footer'
     import Adsense from '../components/Adsense'
     import Notice from '../components/Notice'
-    import VFooter from '../components/global/V-Footer';
+    import VFooter from '../components/global/V-Footer'
     import WhellMenu from '../components/Wheel-menu'
     export default {
         data () {
@@ -195,8 +193,8 @@
         },
         created(){
             this.getArticles();
-            let h = window.innerHeight;
-            this.infinite_box.maxHeight = this.infinite_side.maxHeight = parseInt(h+1500) +'px';
+            let h = window.innerHeight-152;//可见区域高度 -152px
+            this.infinite_box.maxHeight = this.infinite_side.maxHeight = h+'px';
         },
         methods: {
             getArticles(){

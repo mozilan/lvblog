@@ -17,7 +17,10 @@ import ArticleAPI from '../api/articles';
 export const articles = {
     state: {
         //分类
-        articles: '',
+        articles: {
+            data:{},
+            meta:{},
+        },
         articlesLoadStatus:0,
         article: {
             data:{
@@ -66,7 +69,6 @@ export const articles = {
                         if(state.articles.data !== undefined){
                             var merge_data = state.articles.data.concat(response.data.data);
                             response.data.data = merge_data;
-                            commit('setArticles',response.data);
                         }
                         commit('setArticles',response.data);
                         commit('setArticlesLoadStatus', 2);
@@ -83,7 +85,6 @@ export const articles = {
                     if(state.articles.data !== undefined){
                         var merge_data = state.articles.data.concat(response.data.data);
                         response.data.data = merge_data;
-                        commit('setArticles',response.data);
                     }
                     commit('setArticles',response.data);
                     commit('setArticlesLoadStatus', 2);
@@ -126,12 +127,11 @@ export const articles = {
         },
         loadUserCategoryArticles({commit,state},data){
             commit('setArticleLoadStatus',1);
-            ArticleAPI.getUserCategoryArticles(data.category,data.page)
+            ArticleAPI.getUserCategoryArticles(data)
                 .then(function (response) {
-                    if(state.articles.data != ''){
-                        var merge_data = state.articles.data.concat(response.data.data);
+                    if(state.articles.data != undefined){
+                        let merge_data = state.articles.data.concat(response.data.data);
                         response.data.data = merge_data;
-                        commit('setArticles',response.data);
                     }
                     commit('setArticles',response.data);
                     commit('setArticlesLoadStatus', 2);
