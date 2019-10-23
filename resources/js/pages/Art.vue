@@ -89,8 +89,11 @@
             this.$store.dispatch('loadArticle',{
                 art_id : this.$route.params.art_id
             });
+            let viewWidth = window.innerWidth;
             this.url= window.location.href;
-            this.styles.art_style.height = window.innerHeight-152+'px';
+            if(viewWidth > 683){
+                this.styles.art_style.height = window.innerHeight-152+'px';
+            }
         },
         mounted(){
             this.art_height = window.innerHeight-130+'px';

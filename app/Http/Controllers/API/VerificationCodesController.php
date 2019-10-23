@@ -27,16 +27,16 @@ class VerificationCodesController extends Controller
         }else {
             // 生成4位随机数，左侧补0
             $code = str_pad(random_int(1, 9999), 4, 0, STR_PAD_LEFT);
-
             $sms = app('easysms');
             try {
                 $sms->send($phone,[
-                    'content'  => '【蓝默空间】您的验证码是'.$code.'。请于10分钟内填写。如非本人操作，请忽略本短信。',
+                    'content'  => '【蓝默空间】您的验证码是'.$code.'。如非本人操作，请忽略本短信。',
                 ]);
             } catch (\Overtrue\EasySms\Exceptions\NoGatewayAvailableException $exception) {
-                return response()->json(['message' => '短信发送异常'], 500);
+                return response()->json(['message' => '短信发送接口异常'], 500);
                 //$message = $exception->getException('yunpian')->getMessage();
                 //return $this->response->errorInternal($message ?? '短信发送异常');
+                //dd($message);
             }
         }
         $key = 'verificationCode_'.str_random(15);

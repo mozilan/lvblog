@@ -216,6 +216,7 @@
                         this.captcha_loading=false;
 
                     }else if (this.$store.getters.getCaptchaLoadStatus() == 3) {
+                        this.loader.close();
                         this.$message.error(this.$store.getters.getCaptchaError);
                     }
                 });
