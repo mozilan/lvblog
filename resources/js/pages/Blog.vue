@@ -1,3 +1,10 @@
+<style lang="scss" scoped>
+    @media only screen and (max-width: 683px) {
+        .lv-side-category-sm {
+            display: none;
+        }
+    }
+</style>
 <template>
     <div class="blog" style="overflow:auto">
         <el-row type="flex" class="row-bg" justify="center">
@@ -19,7 +26,7 @@
                                             <div class="lv-clear-both"></div>
                                         </el-col>
                                     </el-tab-pane>
-                                    <el-tab-pane label="分类" name="second">
+                                    <el-tab-pane label="分类" name="second" class="lv-side-category-sm">
                                         <div class="lv-clear-both"></div>
                                         <div class="item lv-margin-top">
                                             <FCategory></FCategory>

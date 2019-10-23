@@ -195,14 +195,8 @@
         },
         created(){
             this.getArticles();
-            let viewWidth = window.innerWidth;
-            if(viewWidth > 683){
-                let h = window.innerHeight-152;//可见区域高度 -152px
-                this.infinite_box.maxHeight = this.infinite_side.maxHeight = h+'px';
-            }else{
-                let h = window.innerHeight;
-                this.infinite_box.maxHeight = this.infinite_side.maxHeight = parseInt(h+1500) +'px';
-            }
+            let h = window.innerHeight;
+            this.infinite_box.maxHeight = this.infinite_side.maxHeight = parseInt(h+1500) +'px';
         },
         methods: {
             getArticles(){

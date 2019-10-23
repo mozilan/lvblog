@@ -23,7 +23,7 @@
 						{{item.name}}
 					</el-col>
 					<el-col :span="24" style="font-size: 14px;">
-						<marquee ref="des" scrollamount="2" style="margin-left: 30px;background-color: #ffffff">
+						<marquee ref="des" scrollamount="2" style="background-color: #ffffff">
 							<i class="el-icon-position"></i>{{item.description}}
 						</marquee>
 					</el-col>
