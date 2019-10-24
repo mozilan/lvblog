@@ -50,9 +50,7 @@
                     </el-col>
                     <el-col :span="16"  class="lv-blog-side-blog" v-loading="loading">
                         <div class="lv-scrollbar__wrap" :style="infinite_box">
-                            <ul class="list infinite-list-wrapper"
-                                v-infinite-scroll="load"
-                                infinite-scroll-disabled="disabled">
+                            <ul class="list">
                                 <li v-for="(i , index) in articles" :key="index" class="infinite-list-item">
                                     <el-row class="art-item">
                                         <div class="lv-card-shadow" :style="showModel.body">
@@ -159,6 +157,7 @@
     import Oauth from '../components/Oauth'
     import LFooter from '../components/L-footer'
     import WhellMenu from '../components/Wheel-menu'
+    import _judge_bottom from '../utils/judge_bottom';
     export default {
         data () {
             return {
@@ -213,8 +212,10 @@
             "$route": "getArticles"
         },
         created(){
+            window.addEventListener('scroll', this.handleScroll);
             this.getArticles();
-            this.infinite_box.maxHeight = this.infinite_side.maxHeight = window.innerHeight-212 +'px';
+            //第二次被废弃
+            // this.infinite_box.maxHeight = this.infinite_side.maxHeight = window.innerHeight-212 +'px';
             //废弃
             // let viewWidth = window.innerWidth;
             // if(viewWidth > 683){
@@ -222,6 +223,11 @@
             // }
         },
         methods: {
+            handleScroll() {
+                if((_judge_bottom.getScrollTop() +_judge_bottom.getWindowHeight() == _judge_bottom.getScrollHeight()) && !this.disabled){
+                    this.load();
+                }
+            },
             getArticles(){
                 if(this.$route.params.search != undefined && this.$route.query.search != undefined)
                 {
@@ -339,6 +345,9 @@
                 })
                 .catch(_ => {});
             }
+        },
+        destroyed() {
+            window.removeEventListener('scroll', this.handleScroll);
         }
     }
 </script>

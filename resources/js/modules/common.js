@@ -103,7 +103,16 @@ export const common = {
                 art_body:{}
             }
         },
-        last_path:''
+        last_path:'',
+        edit:{
+            col:{
+                width:'100%',
+                padding:'0 20px'
+            },
+            styles:{
+
+            }
+        }
 
     },
     actions:{
@@ -122,7 +131,13 @@ export const common = {
         },
         setLastPath({commit},data){
             commit('setLastPath',data.params);
-        }
+        },
+        fullScreenEditor({commit,state}){
+            commit('setScreenEditor',state.edit.col);
+        },
+        cancelScreenEditor({commit}){
+            commit('setScreenEditor','');
+        },
     },
     mutations:{
         setBlogArt(state,data){
@@ -142,8 +157,11 @@ export const common = {
         //     state.blog.art = dataCopy;
         // },
         setLastPath(state,params){
-            this.last_path = params;
-        }
+            state.last_path = params;
+        },
+        setScreenEditor(state,params){
+            state.edit.styles = params;
+        },
     },
     getters:{
         getArticleShowModel(state){
@@ -157,6 +175,9 @@ export const common = {
         },
         setLastPath(state){
             return state.last_path;
-        }
+        },
+        getScreenEditor(state){
+            return state.edit;
+        },
     }
 };

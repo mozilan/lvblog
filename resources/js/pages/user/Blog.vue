@@ -37,13 +37,13 @@
                     </el-collapse>
                     <el-col :span="7" class="hidden-sm-and-down lv-tag-side" id="side" :style="infinite_side" >
                         <template>
-                            <div class="item" :key="refresh_side">
+                            <div class="item" :key="refresh_side_tag">
                                 <Tag></Tag>
                             </div>
                         </template>
                         <div class="lv-clear-both"></div>
                         <template>
-                            <div class="item lv-margin-top" :key="refresh_side">
+                            <div class="item lv-margin-top" :key="refresh_side_category">
                                 <Category></Category>
                             </div>
                         </template>
@@ -51,9 +51,7 @@
                     </el-col>
                     <el-col :span="16"  class="lv-blog-side-blog blog-component__scroll" v-loading="loading">
                         <div class="lv-scrollbar__wrap" :style="infinite_box">
-                            <ul class="list infinite-list-wrapper"
-                                v-infinite-scroll="load"
-                                infinite-scroll-disabled="disabled">
+                            <ul class="list">
                                 <li v-for="(i , index) in articles" :key="index" class="infinite-list-item">
                                     <el-row class="art-item">
                                         <el-popover
@@ -139,6 +137,7 @@
     import Oauth from '../../components/Oauth'
     import LFooter from '../../components/L-footer'
     import WhellMenu from '../../components/Wheel-menu'
+    import _judge_bottom from '../../utils/judge_bottom';
     export default {
         data () {
             return {
@@ -153,7 +152,8 @@
                     overflow: 'auto',
                 },
                 activeName: 'first',
-                refresh_side:1,
+                refresh_side_tag:1,
+                refresh_side_category:2,
             }
         },
         name: 'my-blog',
@@ -193,9 +193,11 @@
             "$route": "getArticles"
         },
         created(){
+            window.addEventListener('scroll', this.handleScroll);
             //console.log(this.$route.params.owner+' '+this.$route.params.draft+' '+this.$route.params.private);
             this.getArticles();
-            this.infinite_box.maxHeight = this.infinite_side.maxHeight = window.innerHeight-212 +'px';
+            //第二次被废弃
+            //this.infinite_box.maxHeight = this.infinite_side.maxHeight = window.innerHeight-212 +'px';
             //废弃
             // let viewWidth = window.innerWidth;
             // if(viewWidth > 683){
@@ -205,6 +207,11 @@
 
         },
         methods: {
+            handleScroll() {
+                if((_judge_bottom.getScrollTop() +_judge_bottom.getWindowHeight() == _judge_bottom.getScrollHeight()) && !this.disabled){
+                    this.load();
+                }
+            },
             getArticles(){
                 if(this.$route.params.owner !== undefined && this.$route.params.draft ===undefined && this.$route.params.private === undefined)
                 {
@@ -315,7 +322,8 @@
                         this.$watch(this.$store.getters.getArticleDeleteStatus, function () {
                             if(this.$store.getters.getArticleDeleteStatus() === 2) {
                                 this.loader.close();
-                                ++this.refresh_side;
+                                ++this.refresh_side_tag;
+                                ++this.refresh_side_category;
                                 this.$message.success('文章已删除！');
                                 this.getArticles();
                             }
@@ -328,6 +336,9 @@
                     })
                     .catch(_ => {});
             }
+        },
+        destroyed() {
+            window.removeEventListener('scroll', this.handleScroll);
         }
     }
 </script>

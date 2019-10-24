@@ -34,7 +34,6 @@
             }
         },
         mounted() {
-            window.addEventListener('scroll', this.handleScroll);
             var toggle = $('#ss_toggle');
             var menu = $('#ss_menu');
             var rot;
@@ -53,19 +52,20 @@
             });
         },
         methods:{
-            handleScroll() {
-                this.scrollTop = document.documentElement.scrollTop;
-            },
             stopInterval(){
-                console.log('power on'+document.getElementsByClassName('lv-scrollbar__wrap')[0].scrollTop);
-
-                if(document.getElementsByClassName('lv-scrollbar__wrap')[0].scrollTop == 0){
-                    console.log('我被激活了');
+                //已废弃
+                // console.log('power on'+document.getElementsByTagName('html')[0].scrollTop);
+                //
+                // if(document.getElementsByClassName('lv-scrollbar__wrap')[0].scrollTop == 0){
+                //     console.log('我被激活了');
+                //      window.clearInterval(this.interval);
+                // }
+                if(document.getElementsByTagName('html')[0].scrollTop == 0){
                     window.clearInterval(this.interval);
+                    console.log('已清除interval');
                 }
             },
             scrollToTop(){
-
                             //已废弃
                             // jump = document.querySelectorAll(anchor);
                             // console.log(jump);
@@ -75,14 +75,23 @@
                             //     document.querySelector(anchor).scrollIntoView(true);
                             //     ++this.jumped;
                             // }
-                            let child = document.getElementsByClassName('lv-scrollbar__wrap');
-                            if (child.length > 0) {
-                                let rapid = child[0].scrollTop / 200;
-                                this.interval = setInterval(() => {
-                                    document.getElementsByClassName('lv-scrollbar__wrap')[0].scrollTop -= rapid;
-                                    console.log(document.getElementsByClassName('lv-scrollbar__wrap')[0].scrollTop);
-                                    ++this.jumped;
-                                }, 10);
+                            // let instance = document.getElementsByClassName('lv-scrollbar__wrap');
+                            // if (instance.length > 0) {
+                            //     let rapid = instance[0].scrollTop / 200;
+                            //     this.interval = setInterval(() => {
+                            //         document.getElementsByClassName('lv-scrollbar__wrap')[0].scrollTop -= rapid;
+                            //         console.log(document.getElementsByClassName('lv-scrollbar__wrap')[0].scrollTop);
+                            //         ++this.jumped;
+                            //     }, 10);
+                            // }
+                            let instance = document.getElementsByTagName('html');
+                            if(instance.length > 0 && instance[0].scrollTop >360){
+                                let rapid = instance[0].scrollTop/50;
+                                    this.interval = setInterval(() => {
+                                        console.log(document.getElementsByTagName('html')[0].scrollTop);
+                                        document.getElementsByTagName('html')[0].scrollTop -= rapid;
+                                        ++this.jumped;
+                                    },10);
                             }
             },
             simplify(){
@@ -105,9 +114,6 @@
         watch: {
             // 如果jumped有变化，会再次执行stopInterval
             "jumped": "stopInterval"
-        },
-        destroyed() {
-            window.removeEventListener('scroll', this.handleScroll);
         }
     }
 </script>

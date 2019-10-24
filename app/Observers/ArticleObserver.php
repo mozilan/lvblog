@@ -8,7 +8,7 @@ class ArticleObserver
 {
     public function saving(Article $article)
     {
-        $article->body = clean($article->body, 'user_article_body');
+//        $article->body = clean($article->body, 'user_article_body');
     }
     /**
      * Handle the article "created" event.

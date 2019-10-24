@@ -9,13 +9,9 @@
         line-height: 160px;
     }
      .app{
-         font-family: "microsoft yahei";
      }
     .lv-container{
-        padding: 60px 10px;
-    }
-    .content{
-        background-color: #ffffff;
+        padding: 60px 10px 0 10px;
     }
     .breadcrumb{
         background-color: #ffffff;
@@ -28,6 +24,16 @@
         position:fixed;
         top:60px;
         width: 100%;
+        z-index:1400;
+    }
+    .header-bread-fillbg{
+        display: block!important;
+        background-color: white;
+    }
+    .content{
+        height: 35px;
+        padding: 6px 0 6px 0;
+        background-color: white;
     }
     @media only screen and (max-width: 683px){
         .breadcrumb{
@@ -41,15 +47,17 @@
         <div class="lv-container">
             <Notification></Notification>
             <div class="header-bread">
-                <el-row type="flex" justify="center" class="breadcrumb">
-                    <el-col :xs="24" :sm="24" :md="16" :lg="16" style="padding: 6px 0 6px 0;">
-                        <el-breadcrumb separator="/" class="breadcrumb-inner">
-                            <el-breadcrumb-item v-for="(item,index) in $route.matched" :key="index">
-                                <router-link class="lv-breadcrumb-a" :to="{ name:item.name }">{{ item.name }}</router-link>
-                            </el-breadcrumb-item>
-                        </el-breadcrumb>
-                    </el-col>
-                </el-row>
+                <div class="header-bread-fillbg">
+                    <el-row type="flex" justify="center" class="breadcrumb">
+                        <el-col :xs="24" :sm="24" :md="16" :lg="16" class="content" :style="edit.styles">
+                            <el-breadcrumb separator="/" class="breadcrumb-inner">
+                                <el-breadcrumb-item v-for="(item,index) in $route.matched" :key="index">
+                                    <router-link class="lv-breadcrumb-a" :to="{ name:item.name }">{{ item.name }}</router-link>
+                                </el-breadcrumb-item>
+                            </el-breadcrumb>
+                        </el-col>
+                    </el-row>
+                </div>
             </div>
             <router-view></router-view>
         </div>
@@ -99,6 +107,11 @@
             Register,
             Login,
             Notification,
+        },
+        computed:{
+            edit(){
+                return this.$store.getters.getScreenEditor;
+            }
         }
     }
 </script>

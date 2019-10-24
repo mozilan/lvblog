@@ -5,9 +5,7 @@
                 <el-row type="flex" class="row-bg lv-row-bg" justify="space-between">
                     <el-col :span="16"  class="lv-blog-side lv-page-component__scroll" v-loading="loading">
                         <div class="lv-scrollbar__wrap" :style="infinite_box">
-                            <ul class="list infinite-list-wrapper"
-                                    v-infinite-scroll="load"
-                                    infinite-scroll-disabled="disabled">
+                            <ul class="list">
                                 <li v-for="(i , index) in articles.data"  :key="index" class="infinite-list-item">
                                     <el-row class="art-item">
                                         <div class="lv-card-shadow" :style="showModel.body">
@@ -139,6 +137,7 @@
     import Notice from '../components/Notice'
     import VFooter from '../components/global/V-Footer'
     import WhellMenu from '../components/Wheel-menu'
+    import _judge_bottom from '../utils/judge_bottom';
     export default {
         data () {
             return {
@@ -192,11 +191,17 @@
             "$route": "getArticles"
         },
         created(){
+            window.addEventListener('scroll', this.handleScroll);
             this.getArticles();
-            let h = window.innerHeight-212;//可见区域高度 -152px
-            this.infinite_box.maxHeight = this.infinite_side.maxHeight = h+'px';
+            // let h = window.innerHeight-212;//可见区域高度 -152px
+            // this.infinite_box.maxHeight = this.infinite_side.maxHeight = h+'px';
         },
         methods: {
+            handleScroll() {
+                if((_judge_bottom.getScrollTop() +_judge_bottom.getWindowHeight() == _judge_bottom.getScrollHeight()) && !this.disabled){
+                    this.load();
+                }
+            },
             getArticles(){
                 if(this.$route.params.user !== undefined && this.$route.params.tag ===undefined && this.$route.params.category === undefined)
                 {
@@ -267,6 +272,9 @@
                     });
                 }, 800);
             }
+        },
+        destroyed() {
+            window.removeEventListener('scroll', this.handleScroll);
         }
     }
 </script>

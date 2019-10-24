@@ -33,6 +33,12 @@ html,body{
 
   //login module end
 
+  //header
+  .header .el-input__inner{
+    border-radius: 24px;
+  }
+
+  //header end
 
   //blog css
 
@@ -88,12 +94,12 @@ html,body{
       float: left;
       padding-left: 5px;
     }
-
     .side-img {
       height: 150px;
       width: 270px;
       overflow: hidden;
       margin-right: 10px;
+      flex-shrink: 0;
     }
 
     .art-banner {

@@ -1,7 +1,7 @@
 <template>
     <div style="display:block" class="edit">
     <el-row type="flex" justify="center">
-        <el-col :xs="24" :sm="24" :md="16" :lg="16">
+        <el-col :xs="24" :sm="24" :md="16" :lg="16" :style="edit.styles">
                     <div class="title-animate">
                          <div :class="ffl_input">
                               <label for="title" class="ffl-label">文章标题</label>
@@ -188,6 +188,10 @@
                   }
                   return this.$store.getters.getCategories;
                },
+               edit(){
+                   console.log(this.$store.getters.getScreenEditor);
+                   return this.$store.getters.getScreenEditor;
+               }
           },
           methods: {
                initCategoryAddStatus(){
@@ -387,6 +391,7 @@
                }
           },
           created(){
+               this.$store.dispatch('fullScreenEditor');
                this.$store.dispatch('loadCategories',{
                     id:this.$store.getters.getUser.id,
                });
@@ -421,7 +426,11 @@
                var h = window.innerHeight-430;//可见区域高度
                this.form_style.height = h+'px';
                this.styles.mavon_style.minHeight = window.innerHeight-531+'px';
-          }
+          },
+         destroyed() {
+              console.log('正在重置');
+              this.$store.dispatch('cancelScreenEditor');
+         }
      }
 </script>
 <style scoped lang="scss">
@@ -525,6 +534,7 @@
           }
      }
      .edit{
+         margin-top: 60px;
          padding-bottom: 30px;
      }
 </style>

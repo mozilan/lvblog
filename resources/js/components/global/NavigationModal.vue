@@ -9,7 +9,8 @@
         width: 100%;
         left: 0;
         top: 0;
-        z-index: 19980903;
+        z-index: 1400;
+        background-color: white;
     }
     .lv-logo{
         float:left;
@@ -33,12 +34,10 @@
         padding: 0;
         position: absolute;
         right: 30px;
-        top: 10px;
         height: 60px;
         line-height: 60px;
     }
     .lv-header{
-        background-color: #fff;
         height: 60px;
         padding: 10px 60px;
         position: relative;
@@ -47,6 +46,10 @@
     .lv-search-query{
         max-width: 270px;
         padding: 0 10px;
+        vertical-align: bottom;
+    }
+    .lv-search-input{
+        margin: 7px 0;
         vertical-align: bottom;
     }
     .lv-search-input > input{
@@ -65,6 +68,9 @@
         background-size: 20px;
         vertical-align: bottom;
     }
+    .lv-search-input > span{
+        padding-top: 18px;
+    }
     .row{
         display: table-cell;
     }
@@ -79,7 +85,7 @@
         object-fit: cover;
     }
     /*.lv-jside .dim-overlay{*/
-        /*z-index: 19980903;*/
+        /*z-index: 1400;*/
     /*}*/
     .tagline{
         font-size: 14px;
@@ -91,7 +97,7 @@
         padding: 20px 0;
     }
     .menubar{
-        z-index: 1998;
+        z-index: 1400;
     }
     .menu-head .layer{
         background: none;
