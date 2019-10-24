@@ -3,8 +3,8 @@
         <el-row type="flex" class="row-bg" justify="center">
             <el-col :xs="24" :sm="24" :md="16" :lg="16">
                 <el-row type="flex" class="row-bg lv-row-bg" justify="space-between">
-                    <el-col :span="16"  class="lv-blog-side" v-loading="loading">
-                        <div :style="infinite_box">
+                    <el-col :span="16"  class="lv-blog-side lv-page-component__scroll" v-loading="loading">
+                        <div class="lv-scrollbar__wrap" :style="infinite_box">
                             <ul class="list infinite-list-wrapper"
                                     v-infinite-scroll="load"
                                     infinite-scroll-disabled="disabled">
@@ -94,7 +94,7 @@
                                 </li>
                             </ul>
                             <p v-if="loading">加载中...</p>
-                            <p v-if="noMore">很高兴你翻到这里，但是真的没有了...</p>
+                            <p v-if="noMore" class="no-more">很高兴你翻到这里，但是真的没有了...</p>
                         </div>
                     </el-col>
                     <el-col :span="7" class="hidden-sm-and-down lv-tag-side" id="side" :style="infinite_side" >
@@ -193,37 +193,19 @@
         },
         created(){
             this.getArticles();
-            let h = window.innerHeight-152;//可见区域高度 -152px
+            let h = window.innerHeight-212;//可见区域高度 -152px
             this.infinite_box.maxHeight = this.infinite_side.maxHeight = h+'px';
         },
         methods: {
             getArticles(){
                 if(this.$route.params.user !== undefined && this.$route.params.tag ===undefined && this.$route.params.category === undefined)
                 {
-                    // const loading = this.$loading({
-                    //     lock: true,
-                    //     text: 'Loading',
-                    //     spinner: 'el-icon-loading',
-                    //     background: 'rgba(0, 0, 0, 0.7)'
-                    // });
-                    // setTimeout(() => {
-                    //     loading.close();
-                    // }, 800);
                     console.log("检测到user属性，没检测到tag属性");
                     this.$store.dispatch('clearArticles');
                     this.$store.dispatch('loadArticles',{
                         user:this.$route.params.user ? this.$route.params.user : '',
                     });
                 }else if(this.$route.params.user === undefined && this.$route.params.tag !==undefined && this.$route.params.category ===undefined){
-                    // const loading = this.$loading({
-                    //     lock: true,
-                    //     text: 'Loading',
-                    //     spinner: 'el-icon-loading',
-                    //     background: 'rgba(0, 0, 0, 0.7)'
-                    // });
-                    // setTimeout(() => {
-                    //     loading.close();
-                    // }, 800);
                     console.log("检测到tag属性");
                     this.$store.dispatch('clearArticles');
                     this.$store.dispatch('loadUserTagArticles',{
@@ -232,15 +214,6 @@
                         page:'',
                     });
                 }else if(this.$route.params.user === undefined&& this.$route.params.tag ===undefined && this.$route.params.category !==undefined){
-                    // const loading = this.$loading({
-                    //     lock: true,
-                    //     text: 'Loading',
-                    //     spinner: 'el-icon-loading',
-                    //     background: 'rgba(0, 0, 0, 0.7)'
-                    // });
-                    // setTimeout(() => {
-                    //     loading.close();
-                    // }, 800);
                     console.log("检测到cat属性");
                     this.$store.dispatch('clearArticles');
                     this.$store.dispatch('loadUserCategoryArticles',{
@@ -249,15 +222,6 @@
                         page:'',
                     });
                 }else{
-                    // const loading = this.$loading({
-                    //     lock: true,
-                    //     text: 'Loading',
-                    //     spinner: 'el-icon-loading',
-                    //     background: 'rgba(0, 0, 0, 0.7)'
-                    // });
-                    // setTimeout(() => {
-                    //     loading.close();
-                    // }, 800);
                     this.$store.dispatch('clearArticles');
                     this.$store.dispatch('loadArticles',{
                         user:this.$route.params.user ? this.$route.params.user : '',

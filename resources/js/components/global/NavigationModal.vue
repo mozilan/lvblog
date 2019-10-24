@@ -4,9 +4,17 @@
     button.lv-trigger{
         position: fixed;
     }
+    .header{
+        position: fixed;
+        width: 100%;
+        left: 0;
+        top: 0;
+        z-index: 19980903;
+    }
     .lv-logo{
         float:left;
         line-height: 60px;
+        margin-left: 30px;
     }
     .lv-logo:hover{
         background-color:#ffffff;
@@ -26,27 +34,28 @@
         position: absolute;
         right: 30px;
         top: 10px;
-        height: 40px;
-        line-height: 40px;
+        height: 60px;
+        line-height: 60px;
     }
     .lv-header{
         background-color: #fff;
-        height: 40px;
+        height: 60px;
         padding: 10px 60px;
         position: relative;
         z-index: 100;
     };
     .lv-search-query{
-        max-width: 250px;
+        max-width: 270px;
+        padding: 0 10px;
         vertical-align: bottom;
     }
-    .lv-search-input{
+    .lv-search-input > input{
         border-radius: 500rem;
-        height: 40px;
+        height: 60px;
         line-height: 30px;
         box-sizing: border-box;
-        padding: 0 15px 0 30px;
-        border: 1px solid #e3e3e3;
+        /*padding: 0 15px 0 30px;*/
+        border: 1px solid #c0c4cc;
         color: #273849;
         outline: none;
         margin-right: 10px;
@@ -94,7 +103,6 @@
 <style lang="scss">
     .lv-search-input .el-input__inner{
         height: 100%;
-        border: none;
     }
     .el-menu-item{
         padding: 0 20px;
@@ -132,8 +140,8 @@
     }
 </style>
 <template>
-    <div class="header" id="header">
-        <el-row type="flex" class="lv-header" justify="space-between">
+    <el-header class="header">
+        <el-row type="flex" justify="space-between">
             <h5 class="lv-logo "><a id="index" href="/">{{configs.title}}</a></h5>
             <el-menu :default-active="activeIndex" class="el-menu-blumer" mode="horizontal" @select="handleSelect">
                 <el-menu-item class="lv-search-query">
@@ -200,6 +208,15 @@
             <div :class="menu_container_class">
                 <el-divider></el-divider>
                 <ul class="menu-items">
+                    <li class="lv-search-query">
+                        <el-input
+                                class="lv-search-input"
+                                @keyup.enter.native="searchArticles"
+                                placeholder="搜文章"
+                                prefix-icon="el-icon-search"
+                                v-model="searchContent">
+                        </el-input>
+                    </li>
                     <li @click="toggle()"><span class="item-icon"><i class="el-icon-edit"></i></span> <router-link :to="{ name:'写作',query:{user:user.id} }">写博客</router-link></li>
                     <li @click="toggle()"><span class="item-icon"><i class="el-icon-eleme"></i></span> <router-link :to="{ name:'博客园',query:{user:user.id} }">博客园</router-link></li>
                     <li v-if="!user" @click="toggle()"><span class="item-icon"><i class="el-icon-user"></i></span> <router-link :to="{ name:'写作',query:{user:user.id} }">登陆/注册</router-link></li>
@@ -219,7 +236,7 @@
             <!--<div class="dim-overlay"></div>-->
         </div>
         <div class="lv-clear-both"></div>
-    </div>
+    </el-header>
 </template>
 <script>
     import '../../utils/jquery.jside.menu'

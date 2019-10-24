@@ -9,7 +9,6 @@
     <div class="blog" style="overflow:auto">
         <el-row type="flex" class="row-bg" justify="center">
             <el-col :xs="24" :sm="24" :md="16" :lg="16">
-                <el-backtop target=".blog-component__scroll .blog-scrollbar__wrap"></el-backtop>
                 <el-row type="flex" class="row-bg lv-row-bg" justify="space-between">
                     <el-collapse accordion class="phone-tab">
                         <el-collapse-item>
@@ -51,7 +50,7 @@
                         <div class="lv-clear-both"></div>
                     </el-col>
                     <el-col :span="16"  class="lv-blog-side-blog blog-component__scroll" v-loading="loading">
-                        <div :style="infinite_box">
+                        <div class="lv-scrollbar__wrap" :style="infinite_box">
                             <ul class="list infinite-list-wrapper"
                                 v-infinite-scroll="load"
                                 infinite-scroll-disabled="disabled">
@@ -121,7 +120,7 @@
                                 </li>
                             </ul>
                             <p v-if="loading">加载中...</p>
-                            <p v-if="noMore">很高兴你翻到这里，但是真的没有了...</p>
+                            <p v-if="noMore" class="no-more">很高兴你翻到这里，但是真的没有了...</p>
                         </div>
                     </el-col>
                     <Oauth></Oauth>
@@ -196,7 +195,7 @@
         created(){
             //console.log(this.$route.params.owner+' '+this.$route.params.draft+' '+this.$route.params.private);
             this.getArticles();
-            this.infinite_box.maxHeight = this.infinite_side.maxHeight = window.innerHeight-152 +'px';
+            this.infinite_box.maxHeight = this.infinite_side.maxHeight = window.innerHeight-212 +'px';
             //废弃
             // let viewWidth = window.innerWidth;
             // if(viewWidth > 683){

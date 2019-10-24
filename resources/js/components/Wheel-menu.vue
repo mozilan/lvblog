@@ -28,9 +28,9 @@
         name: "Wheel-menu",
         data() {
             return {
-                jumped:0,
                 scrollTop:0,
                 interval:'',
+                jumped:0,
             }
         },
         mounted() {
@@ -57,24 +57,33 @@
                 this.scrollTop = document.documentElement.scrollTop;
             },
             stopInterval(){
-                window.clearInterval(this.interval);
+                console.log('power on'+document.getElementsByClassName('lv-scrollbar__wrap')[0].scrollTop);
+
+                if(document.getElementsByClassName('lv-scrollbar__wrap')[0].scrollTop == 0){
+                    console.log('我被激活了');
+                    window.clearInterval(this.interval);
+                }
             },
             scrollToTop(){
-                if(this.scrollTop>360){
-                    let anchor = '#header';
-                    let jump = '';
-                    this.$nextTick(()=> {
-                        this.interval = setInterval(()=> {
-                            jump = document.querySelectorAll(anchor);
-                            if(jump.length!=0) {
-                                // 滚动到目标位置
-                                console.log(jump);
-                                document.querySelector(anchor).scrollIntoView(true);
-                                ++this.jumped;
+
+                            //已废弃
+                            // jump = document.querySelectorAll(anchor);
+                            // console.log(jump);
+                            // if(jump.length!=0) {
+                            //     // 滚动到目标位置
+                            //     console.log(jump);
+                            //     document.querySelector(anchor).scrollIntoView(true);
+                            //     ++this.jumped;
+                            // }
+                            let child = document.getElementsByClassName('lv-scrollbar__wrap');
+                            if (child.length > 0) {
+                                let rapid = child[0].scrollTop / 200;
+                                this.interval = setInterval(() => {
+                                    document.getElementsByClassName('lv-scrollbar__wrap')[0].scrollTop -= rapid;
+                                    console.log(document.getElementsByClassName('lv-scrollbar__wrap')[0].scrollTop);
+                                    ++this.jumped;
+                                }, 10);
                             }
-                        })
-                    },500);
-                }
             },
             simplify(){
                 if(this.$store.getters.getSimplifyStatus == 2){
@@ -94,7 +103,7 @@
             },
         },
         watch: {
-            // 如果已滚动，会停止此方法
+            // 如果jumped有变化，会再次执行stopInterval
             "jumped": "stopInterval"
         },
         destroyed() {

@@ -11,6 +11,9 @@
      .app{
          font-family: "microsoft yahei";
      }
+    .lv-container{
+        padding: 60px 10px;
+    }
     .content{
         background-color: #ffffff;
     }
@@ -21,6 +24,11 @@
     .lv-breadcrumb-a{
         font-weight: 400!important;
     }
+    .header-bread{
+        position:fixed;
+        top:60px;
+        width: 100%;
+    }
     @media only screen and (max-width: 683px){
         .breadcrumb{
             padding-top:0;
@@ -29,20 +37,20 @@
 </style>
 <template>
     <div id="app-layout" class="app">
-        <el-header>
-            <Navigation></Navigation>
-        </el-header>
+        <Navigation></Navigation>
         <div class="lv-container">
             <Notification></Notification>
-            <el-row type="flex" justify="center" class="breadcrumb">
-                <el-col :xs="24" :sm="24" :md="16" :lg="16" style="padding: 6px 0 6px 0;">
-                    <el-breadcrumb separator="/" class="breadcrumb-inner">
-                        <el-breadcrumb-item v-for="(item,index) in $route.matched" :key="index">
-                            <router-link class="lv-breadcrumb-a" :to="{ name:item.name }">{{ item.name }}</router-link>
-                        </el-breadcrumb-item>
-                    </el-breadcrumb>
-                </el-col>
-            </el-row>
+            <div class="header-bread">
+                <el-row type="flex" justify="center" class="breadcrumb">
+                    <el-col :xs="24" :sm="24" :md="16" :lg="16" style="padding: 6px 0 6px 0;">
+                        <el-breadcrumb separator="/" class="breadcrumb-inner">
+                            <el-breadcrumb-item v-for="(item,index) in $route.matched" :key="index">
+                                <router-link class="lv-breadcrumb-a" :to="{ name:item.name }">{{ item.name }}</router-link>
+                            </el-breadcrumb-item>
+                        </el-breadcrumb>
+                    </el-col>
+                </el-row>
+            </div>
             <router-view></router-view>
         </div>
         <Register></Register>

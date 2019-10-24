@@ -187,6 +187,9 @@
                 this.verification_code='';
                 this.name='';
                 this.password= '';
+                this.captcha_button_show = false;
+                this.captcha_show = false;
+                this.captcha_loading=false;
             },
             getCaptchas:function(){
                 if(this.phone.trim() === ''){
@@ -216,6 +219,7 @@
                         this.captcha_loading=false;
 
                     }else if (this.$store.getters.getCaptchaLoadStatus() == 3) {
+                        this.captcha_loading=false;
                         this.loader.close();
                         this.$message.error(this.$store.getters.getCaptchaError);
                     }
