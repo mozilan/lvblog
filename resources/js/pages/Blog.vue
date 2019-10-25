@@ -17,7 +17,7 @@
                             </template>
                             <template>
                                 <el-tabs v-model="activeName">
-                                    <el-tab-pane label="标签" name="first">
+                                    <el-tab-pane label="标签云" name="first" v-if="this.$route.name == '博客园'">
                                         <el-col :span="24" class="hidden-sm-and-down lv-tag-side-sm" :style="infinite_side" >
                                             <div class="item">
                                                 <FTag></FTag>
@@ -25,9 +25,17 @@
                                             <div class="lv-clear-both"></div>
                                         </el-col>
                                     </el-tab-pane>
-                                    <el-tab-pane label="分类" name="second" class="lv-side-category-sm">
+                                    <el-tab-pane label="标签" name="first" v-if="this.$route.name != '博客园'">
+                                        <el-col :span="24" class="hidden-sm-and-down lv-tag-side-sm" :style="infinite_side" >
+                                            <div class="item">
+                                                <FTag></FTag>
+                                            </div>
+                                            <div class="lv-clear-both"></div>
+                                        </el-col>
+                                    </el-tab-pane>
+                                    <el-tab-pane label="分类" name="second" v-if="this.$route.name != '博客园'" class="lv-side-category-sm">
                                         <div class="lv-clear-both"></div>
-                                        <div class="item lv-margin-top">
+                                        <div>
                                             <FCategory></FCategory>
                                         </div>
                                     </el-tab-pane>
@@ -48,7 +56,7 @@
                         </div>
                         <div class="lv-clear-both"></div>
                     </el-col>
-                    <el-col :span="16"  class="lv-blog-side-blog" v-loading="loading">
+                    <el-col :span="16"  class="lv-blog-side-blog" id="art-side" v-loading="loading">
                         <div class="lv-scrollbar__wrap" :style="infinite_box">
                             <ul class="list">
                                 <li v-for="(i , index) in articles" :key="index" class="infinite-list-item">
@@ -224,7 +232,10 @@
         },
         methods: {
             handleScroll() {
-                if((_judge_bottom.getScrollTop() +_judge_bottom.getWindowHeight() == _judge_bottom.getScrollHeight()) && !this.disabled){
+                // if((_judge_bottom.getScrollTop() +_judge_bottom.getWindowHeight() == _judge_bottom.getScrollHeight()) && !this.disabled){
+                //     this.load();
+                // }
+                if((document.getElementById('art-side').getBoundingClientRect().bottom <= _judge_bottom.getWindowHeight()) && !this.disabled){
                     this.load();
                 }
             },
@@ -246,7 +257,7 @@
                     return 0;
                 }else if(this.$route.params.user != undefined && this.$route.params.tag ==undefined && this.$route.params.category == undefined)
                 {
-                    console.log("检测到user属性，没检测到tag属性");
+                    //console.log("检测到user属性，没检测到tag属性");
                     this.$store.dispatch('clearArticles');
                     this.$store.dispatch('loadArticles',{
                     user:this.$route.params.user ? this.$route.params.user : '',

@@ -11,7 +11,7 @@
      .app{
      }
     .lv-container{
-        padding: 60px 10px 0 10px;
+        padding: 0 10px 0 10px;
     }
     .breadcrumb{
         background-color: #ffffff;
@@ -40,6 +40,7 @@
             padding-top:0;
         }
         .content{
+            margin-right: 20px;
             border-bottom: 1px #dcdfe6 solid;
         }
     }

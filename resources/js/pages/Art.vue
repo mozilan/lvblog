@@ -55,7 +55,6 @@
         <whell-menu></whell-menu>
     </div>
 </template>
-
 <script>
     import {mavonEditor} from 'mavon-editor';
     import 'mavon-editor/dist/css/index.css';
@@ -114,16 +113,12 @@
         },
         methods:{
             handleLoad(e){
-                console.log(e)
+                //console.log(e)
             },
         },
     }
 </script>
-
 <style lang="scss" scoped>
-    .art{
-        margin-top: 20px;
-    }
     #artcle-info {
         padding: 20px;
         //background-image: url(https://s0.xinger.ink/acgimg/acgurl.php?678);

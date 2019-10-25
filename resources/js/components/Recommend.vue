@@ -85,7 +85,7 @@
 			this.$store.dispatch('getRecommendArticles');
 			this.$watch(this.$store.getters.getRecommendArticlesLoadStatus, function () {
 				if(this.$store.getters.getRecommendArticlesLoadStatus() == 3 ){
-					console.log('未获取到今日推荐');
+					console.log('recommend.vue:没有获取到今日推荐');
 				}
 			});
 		},

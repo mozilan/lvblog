@@ -88,7 +88,7 @@
                             if(instance.length > 0 && instance[0].scrollTop >360){
                                 let rapid = instance[0].scrollTop/50;
                                     this.interval = setInterval(() => {
-                                        console.log(document.getElementsByTagName('html')[0].scrollTop);
+                                        //console.log(document.getElementsByTagName('html')[0].scrollTop);
                                         document.getElementsByTagName('html')[0].scrollTop -= rapid;
                                         ++this.jumped;
                                     },10);

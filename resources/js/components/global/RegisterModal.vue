@@ -109,7 +109,7 @@
             return {
                 intervalInstance:1,
                 captcha_button_show:true,
-                counter:'',
+                counter:-1,
                 counterConf: 60,
                 captcha_loading:false,
                 message_loading:false,
@@ -161,6 +161,11 @@
             }
         },
         methods:{
+            stopInterval(){
+                if(this.counter == 0){
+                    window.clearInterval(this.intervalInstance);
+                }
+            },
             hideRegisterDialogForm(){
                 this.registerDialogFormVisible = false;
             },
@@ -260,11 +265,11 @@
                                 //index 秒结束后的操作
                                 that.message_loading = false;
                             }else {
-                                console.log(that.counter);
+                                //console.log(that.counter);
                                 --that.counter;
                             }
                         }, 1000);
-                        console.log(this.intervalInstance);
+                        //console.log(this.intervalInstance);
                     }else if (this.$store.getters.getVerificationCodeLoadStatus() == 3) {
                         this.loader.close();
                         this.$message.error(this.$store.getters.getVerificationCodeError);
@@ -379,5 +384,9 @@
                 this.registerDialogFormVisible = true;
             }.bind(this));
         },
+        watch: {
+            // 如果counter有变化，会再次执行stopInterval
+            "counter": "stopInterval"
+        }
     }
 </script>

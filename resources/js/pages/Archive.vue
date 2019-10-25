@@ -48,7 +48,6 @@
 
 <style scoped lang="scss">
     .archive{
-        padding-top: 20px;
         .line-item {
             display: inline-block;
         }

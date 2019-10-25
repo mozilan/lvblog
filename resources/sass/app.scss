@@ -43,9 +43,7 @@ html,body{
   //blog css
 
   .blog{
-    margin-top: 80px;
-
-    .el-backtop{
+        .el-backtop{
       visibility: hidden;
     }
     .art-item {
@@ -174,12 +172,11 @@ html,body{
         text-align: center;
     }
     @media only screen and (max-width: 683px) {
-      margin-top: 34px;
       .lv-blog-side {
         width: 100%;
       }
       .lv-blog-side-blog{
-        padding-top: 20px;width: 100%;
+        padding-top:0;width: 100%;
       }
       .lv-blog-middle {
         width: 100%;
@@ -302,5 +299,14 @@ html,body{
   .el-avatar > img{
     height: 100%;
     width: 100%;
+  }
+}
+//统一管理各大模板距离顶部 margin 和 padding
+body{
+  padding-top: 115px;
+}
+@media only screen and (max-width: 683px) {
+  body{
+    padding-top: 94px;
   }
 }

@@ -18,7 +18,7 @@
                             <template>
                                 <el-tabs v-model="activeName">
                                     <el-tab-pane label="标签" name="first">
-                                        <el-col :span="6" class="hidden-sm-and-down lv-tag-side-sm" :style="infinite_side" >
+                                        <el-col :span="24" class="hidden-sm-and-down lv-tag-side-sm" :style="infinite_side" >
                                             <div class="item">
                                                 <FTag></FTag>
                                             </div>
@@ -27,7 +27,7 @@
                                     </el-tab-pane>
                                     <el-tab-pane label="分类" name="second">
                                         <div class="lv-clear-both"></div>
-                                        <div class="item lv-margin-top">
+                                        <div class="item">
                                             <FCategory></FCategory>
                                         </div>
                                     </el-tab-pane>
@@ -49,7 +49,7 @@
                         </template>
                         <div class="lv-clear-both"></div>
                     </el-col>
-                    <el-col :span="16"  class="lv-blog-side-blog blog-component__scroll" v-loading="loading">
+                    <el-col :span="16"  class="lv-blog-side-blog blog-component__scroll" id="art-side" v-loading="loading">
                         <div class="lv-scrollbar__wrap" :style="infinite_box">
                             <ul class="list">
                                 <li v-for="(i , index) in articles" :key="index" class="infinite-list-item">
@@ -208,7 +208,10 @@
         },
         methods: {
             handleScroll() {
-                if((_judge_bottom.getScrollTop() +_judge_bottom.getWindowHeight() == _judge_bottom.getScrollHeight()) && !this.disabled){
+                // if((_judge_bottom.getScrollTop() +_judge_bottom.getWindowHeight() == _judge_bottom.getScrollHeight()) && !this.disabled){
+                //     this.load();
+                // }
+                if((document.getElementById('art-side').getBoundingClientRect().bottom <= _judge_bottom.getWindowHeight()) && !this.disabled){
                     this.load();
                 }
             },

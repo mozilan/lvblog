@@ -3,7 +3,7 @@
         <el-row type="flex" class="row-bg" justify="center">
             <el-col :xs="24" :sm="24" :md="16" :lg="16">
                 <el-row type="flex" class="row-bg lv-row-bg" justify="space-between">
-                    <el-col :span="16"  class="lv-blog-side lv-page-component__scroll" v-loading="loading">
+                    <el-col :span="16"  class="lv-blog-side lv-page-component__scroll" id="art-side" v-loading="loading">
                         <div class="lv-scrollbar__wrap" :style="infinite_box">
                             <ul class="list">
                                 <li v-for="(i , index) in articles.data"  :key="index" class="infinite-list-item">
@@ -198,20 +198,29 @@
         },
         methods: {
             handleScroll() {
-                if((_judge_bottom.getScrollTop() +_judge_bottom.getWindowHeight() == _judge_bottom.getScrollHeight()) && !this.disabled){
+                //console.log('距离顶部距离'+document.getElementById('art-side').getBoundingClientRect().bottom);
+                if((document.getElementById('art-side').getBoundingClientRect().bottom <= _judge_bottom.getWindowHeight()) && !this.disabled){
                     this.load();
                 }
+                // if(window.innerWidth > 683){
+                //     //不适合首页已经废弃
+                //     // if((_judge_bottom.getScrollTop() +_judge_bottom.getWindowHeight() ==  _judge_bottom.getScrollHeight()) && !this.disabled){
+                //     //     this.load();
+                //     // }
+                // }else{
+                //
+                // }
             },
             getArticles(){
                 if(this.$route.params.user !== undefined && this.$route.params.tag ===undefined && this.$route.params.category === undefined)
                 {
-                    console.log("检测到user属性，没检测到tag属性");
+                    //console.log("检测到user属性，没检测到tag属性");
                     this.$store.dispatch('clearArticles');
                     this.$store.dispatch('loadArticles',{
                         user:this.$route.params.user ? this.$route.params.user : '',
                     });
                 }else if(this.$route.params.user === undefined && this.$route.params.tag !==undefined && this.$route.params.category ===undefined){
-                    console.log("检测到tag属性");
+                    //console.log("检测到tag属性");
                     this.$store.dispatch('clearArticles');
                     this.$store.dispatch('loadUserTagArticles',{
                         user:this.$route.params.user,
@@ -219,7 +228,7 @@
                         page:'',
                     });
                 }else if(this.$route.params.user === undefined&& this.$route.params.tag ===undefined && this.$route.params.category !==undefined){
-                    console.log("检测到cat属性");
+                    //console.log("检测到cat属性");
                     this.$store.dispatch('clearArticles');
                     this.$store.dispatch('loadUserCategoryArticles',{
                         user:this.$route.params.user,
@@ -232,7 +241,6 @@
                         user:this.$route.params.user ? this.$route.params.user : '',
                     });
                 }
-
             },
             load () {
                 this.loading = true;

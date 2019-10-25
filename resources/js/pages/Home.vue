@@ -15,7 +15,7 @@
             </div>
         </transition>
         <el-row class="main" type="flex" justify="center" :style="main_style" v-show="!loading_image">
-            <el-col :xs="24" :sm="24" :md="16" :lg="16" class="is-always-shadow">
+            <el-col :xs="24" :sm="24" :md="16" :lg="16">
             <div class="container" >
         <div id="content" class="row" >
             <el-col :sm="8">
@@ -97,7 +97,7 @@
                                             <ul class="skills-list no-padding">
                                                 <li class="row">
                                                     <el-col :xs="24"><div class="fw-mid">HTML</div></el-col>
-                                                    <el-col :xs="18">
+                                                    <el-col :xs="24">
                                                         <div class="bar">
                                                             <el-progress :text-inside="true" :stroke-width="26" :percentage="100"></el-progress>
                                                         </div>
@@ -106,7 +106,7 @@
                                                 </li>
                                                 <li class="row">
                                                     <el-col :xs="24"><div class="fw-mid">CSS</div></el-col>
-                                                    <el-col :xs="18">
+                                                    <el-col :xs="24">
                                                         <div class="bar">
                                                             <el-progress :text-inside="true" :stroke-width="24" :percentage="90" status="success"></el-progress>
                                                         </div>
@@ -115,7 +115,7 @@
                                                 </li>
                                                 <li class="row">
                                                     <el-col :xs="24"><div class="fw-mid">JavaScript</div></el-col>
-                                                    <el-col :xs="18">
+                                                    <el-col :xs="24">
                                                         <div class="bar">
                                                             <el-progress :text-inside="true" :stroke-width="22" :percentage="80" status="warning"></el-progress>
                                                         </div>
@@ -364,7 +364,7 @@
             let bgImg = new Image();
             bgImg.src = this.$store.getters.getConfigs.IMG_API; // 获取背景图片的url
             bgImg.onerror = () => {
-                console.log('img onerror')
+                console.log('bg_img onerror')
             };
             bgImg.onload = () => { // 等背景图片加载成功后 去除loadingavatar_image_id
                 this.loadings.bg_loading = false
@@ -373,7 +373,7 @@
             let bgFrontImg = new Image();
             bgFrontImg.src = this.bg_frontpage; // 获取背景图片的url
             bgFrontImg.onerror = () => {
-                console.log('img onerror')
+                console.log('bgImg_Front onerror')
             };
             bgFrontImg.onload = () => { // 等背景图片加载成功后 去除loadingavatar_image_id
                 this.loadings.bg_front_loading = false
@@ -618,9 +618,6 @@
     //             https://s0.xinger.ink/acgimg/acgurl.php?14
 </script>
 <style lang="scss" scoped>
-    .home{
-        margin-top:60px;
-    }
     h3.sub-maintitle{
         min-height: 35px;
     }

@@ -110,7 +110,7 @@
 </style>
 <style lang="scss">
     .lv-search-input .el-input__inner{
-        height: 100%;
+        height: 40px;
     }
     .el-menu-item{
         padding: 0 20px;
@@ -218,18 +218,23 @@
             <div :class="menu_container_class">
                 <el-divider></el-divider>
                 <ul class="menu-items">
-                    <li class="lv-search-query">
-                        <el-input
-                                class="lv-search-input"
-                                @keyup.enter.native="searchArticles"
-                                placeholder="搜文章"
-                                prefix-icon="el-icon-search"
-                                v-model="searchContent">
-                        </el-input>
-                    </li>
                     <li @click="toggle()"><span class="item-icon"><i class="el-icon-edit"></i></span> <router-link :to="{ name:'写作',query:{user:user.id} }">写博客</router-link></li>
                     <li @click="toggle()"><span class="item-icon"><i class="el-icon-eleme"></i></span> <router-link :to="{ name:'博客园',query:{user:user.id} }">博客园</router-link></li>
                     <li v-if="!user" @click="toggle()"><span class="item-icon"><i class="el-icon-user"></i></span> <router-link :to="{ name:'写作',query:{user:user.id} }">登陆/注册</router-link></li>
+                    <li class="has-sub"> <span class="item-icon"> <i class="el-icon-more"></i></span> <span class="dropdown-heading">站内搜索</span>
+                        <ul>
+                            <li class="lv-search-query">
+                                <el-input
+                                        class="lv-search-input"
+                                        @keyup.enter.native="searchArticles"
+                                        placeholder="搜文章"
+                                        prefix-icon="el-icon-search"
+                                        v-model="searchContent">
+                                </el-input>
+                            </li>
+                        </ul>
+
+                    </li>
                     <li class="has-sub" v-if="tokenStatus"> <span class="item-icon"> <i class="el-icon-more"></i></span> <span class="dropdown-heading"> 文章管理 </span>
                         <ul>
                             <li @click="toggle()"><span class="item-icon"><i class="el-icon-tickets"></i></span> <router-link :to="{ name:'我的文章',params:{'owner':user.id ? user.id:''},query:{user:user.id}}">我的博客</router-link> </li>
@@ -303,12 +308,13 @@
                 this.menu_container_class = "menu-container position-left open " +style;
             },
             searchArticles(){
+                this.toggle();
                 if(this.searchContent){
                     let content = this.searchContent;
                     this.searchContent = '';
                     this.$router.push({name:'查找文章',params: {search:1},query: {search:content}});
                 }else{
-                    this.$message.warning('内容不能为空');
+                    this.$message.warning('查找内容不能为空');
                 }
             }
         },

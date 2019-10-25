@@ -137,7 +137,7 @@
             });
             this.$watch(this.$store.getters.getCommentsLoadStatus, function () {
                 if (this.$store.getters.getCommentsLoadStatus() == 3) {
-                    this.$message.warning('评论模块未能成功加载！')
+                    console.log('comment.vue:评论模块未能成功加载！')
                 }
             });
         },

@@ -49,7 +49,7 @@ function requireConfigs(to,from,next){
             next('/error?code=500&message=获取应用配置失败了,请检查您的网络连通情况');
         }
         if(store.getters.getConfigsLoadStatus() == 2){
-            console.log('加载配置信息成功.');
+            console.log('routes.js:获取配置信息成功');
             next();
         }
     });

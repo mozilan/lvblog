@@ -17,7 +17,7 @@
 
 <script>
     export default {
-        name: 'tag',
+        name: 'tags',
         data () {
             return {
                 type:['success','info','warning','danger'],

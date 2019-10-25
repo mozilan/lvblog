@@ -190,12 +190,12 @@
                   return this.$store.getters.getCategories;
                },
                edit(){
-                   console.log(this.$store.getters.getScreenEditor);
+                   //console.log(this.$store.getters.getScreenEditor);
                    return this.$store.getters.getScreenEditor;
                }
           },
           methods: {
-               initCategoryAddStatus(){
+               initCategoryAddStatus(){-
                  this.$store.dispatch('initCategoryAddStatus');
                },
                // 绑定@imgAdd event
@@ -392,7 +392,9 @@
                }
           },
           created(){
-               this.$store.dispatch('fullScreenEditor');
+               if(window.innerWidth > 683){
+                   this.$store.dispatch('fullScreenEditor');
+               }
                this.$store.dispatch('loadCategories',{
                     id:this.$store.getters.getUser.id,
                });
@@ -429,7 +431,9 @@
                this.styles.mavon_style.minHeight = window.innerHeight-531+'px';
           },
          destroyed() {
-              this.$store.dispatch('cancelScreenEditor');
+             if(window.innerWidth > 683){
+                 this.$store.dispatch('cancelScreenEditor');
+             }
          }
      }
 </script>
@@ -534,7 +538,6 @@
           }
      }
      .edit{
-         margin-top: 60px;
          padding-bottom: 30px;
      }
 </style>
