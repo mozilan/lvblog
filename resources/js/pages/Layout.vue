@@ -34,11 +34,13 @@
         height: 35px;
         padding: 6px 0 6px 0;
         background-color: white;
-        border-bottom: 1px #dcdfe6 solid;
     }
     @media only screen and (max-width: 683px){
         .breadcrumb{
             padding-top:0;
+        }
+        .content{
+            border-bottom: 1px #dcdfe6 solid;
         }
     }
 </style>
