@@ -24,7 +24,7 @@
         position:fixed;
         top:60px;
         width: 100%;
-        z-index:1400;
+        z-index:100;
     }
     .header-bread-fillbg{
         display: block!important;
@@ -34,6 +34,7 @@
         height: 35px;
         padding: 6px 0 6px 0;
         background-color: white;
+        border-bottom: 1px #dcdfe6 solid;
     }
     @media only screen and (max-width: 683px){
         .breadcrumb{

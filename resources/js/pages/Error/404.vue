@@ -1122,7 +1122,7 @@
                 <div id="hero">
                     <div class="inner">
                         <div class="left">
-                            <img class="hero-logo" src="https://mozilan.geekadpt.cn/logo.png" alt="vue logo">
+                            <img class="hero-logo" src="https://mozilan.geekadpt.cn/logo.png" alt="lvblog logo">
                         </div><div class="right">
                         <h2 class="vue">Vue.js</h2>
                         <h1>{{this.$route.query.code?this.$route.query.code:'404'}}</h1><br>

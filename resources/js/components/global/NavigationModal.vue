@@ -9,8 +9,11 @@
         width: 100%;
         left: 0;
         top: 0;
-        z-index: 1400;
+        z-index: 900;
         background-color: white;
+    }
+    .lv-header{
+        display: block;
     }
     .lv-logo{
         float:left;
@@ -37,12 +40,6 @@
         height: 60px;
         line-height: 60px;
     }
-    .lv-header{
-        height: 60px;
-        padding: 10px 60px;
-        position: relative;
-        z-index: 100;
-    };
     .lv-search-query{
         max-width: 270px;
         padding: 0 10px;
@@ -105,6 +102,11 @@
     .up-z-index{
         z-index: 19981022;
     }
+    @media only screen and (max-width: 683px) {
+        .lv-header{
+            display: none;
+        }
+    }
 </style>
 <style lang="scss">
     .lv-search-input .el-input__inner{
@@ -147,37 +149,39 @@
 </style>
 <template>
     <el-header class="header">
-        <el-row type="flex" justify="space-between">
-            <h5 class="lv-logo "><a id="index" href="/">{{configs.title}}</a></h5>
-            <el-menu :default-active="activeIndex" class="el-menu-blumer" mode="horizontal" @select="handleSelect">
-                <el-menu-item class="lv-search-query">
-                    <el-input
-                            class="lv-search-input"
-                            @keyup.enter.native="searchArticles"
-                            placeholder="搜文章"
-                            prefix-icon="el-icon-search"
-                            v-model="searchContent">
-                    </el-input>
-                </el-menu-item>
-                <el-menu-item index="1"><router-link :to="{ name:'首页' }"><i class="el-icon-s-home"></i>首页</router-link></el-menu-item>
-                <el-menu-item index="9"><router-link :to="{ name:'博客园' }"><i class="el-icon-eleme"></i>博客园</router-link></el-menu-item>
-                <el-menu-item index="2"><router-link :to="{ name:'写作',query:{user:user.id} }"><i class="el-icon-edit"></i>写博客</router-link></el-menu-item>
-                <el-menu-item index="6" @click="register" v-if="!tokenStatus" icon="el-icon-promotion"><i class="el-icon-circle-plus-outline"></i>注册</el-menu-item>
-                <el-menu-item index="7" @click="login" v-if="!tokenStatus" icon="el-icon-user"><i class="el-icon-user"></i>登录</el-menu-item>
-                <el-submenu index="8" v-if="tokenStatus">
-                    <template slot="title">
-                        <el-image v-if="user.avatar" class="lv-avatar" :src="user.avatar"></el-image>
-                    </template>
-                    <el-menu-item index="8-1"><router-link :to="{ name:'我的文章',params:{'owner':user.id ? user.id:''},query:{user:user.id}}"><i class="el-icon-tickets"></i>我的博客</router-link></el-menu-item>
-                    <el-menu-item index="8-2"><router-link :to="{ name:'私有文章',params:{'private':user.id ? user.id:''},query:{user:user.id}}"><i class="el-icon-lock"></i>私有文章</router-link></el-menu-item>
-                    <el-menu-item index="8-3"><router-link :to="{ name:'草稿箱',params:{'draft':user.id ? user.id:''},query:{user:user.id}}"><i class="el-icon-document"></i>草稿箱</router-link></el-menu-item>
-                    <!--<el-menu-item index="8-7"><router-link :to="{ name:'关于我' }">关于我</router-link></el-menu-item>-->
-                    <el-menu-item index="8-4"><router-link :to="{ name:'归档',params:{'user':user.id?user.id:1}}"><i class="el-icon-notebook-1"></i>我的归档</router-link></el-menu-item>
-                    <el-menu-item index="8-5"><router-link :to="{ name:'主页' ,params:{'user':user.id?user.id:1},query:{user:user.id}}"><i class="el-icon-setting"></i>个人中心</router-link></el-menu-item>
-                    <el-menu-item index="8-6" @click="logout()"><i class="el-icon-right"></i>退出登录</el-menu-item>
-                </el-submenu>
-            </el-menu>
-        </el-row>
+        <div class = lv-header>
+            <el-row type="flex" justify="space-between">
+                <h5 class="lv-logo "><a id="index" href="/">{{configs.title}}</a></h5>
+                <el-menu :default-active="activeIndex" class="el-menu-blumer" mode="horizontal" @select="handleSelect">
+                    <el-menu-item class="lv-search-query">
+                        <el-input
+                                class="lv-search-input"
+                                @keyup.enter.native="searchArticles"
+                                placeholder="搜文章"
+                                prefix-icon="el-icon-search"
+                                v-model="searchContent">
+                        </el-input>
+                    </el-menu-item>
+                    <el-menu-item index="1"><router-link :to="{ name:'首页' }"><i class="el-icon-s-home"></i>首页</router-link></el-menu-item>
+                    <el-menu-item index="9"><router-link :to="{ name:'博客园' }"><i class="el-icon-eleme"></i>博客园</router-link></el-menu-item>
+                    <el-menu-item index="2"><router-link :to="{ name:'写作',query:{user:user.id} }"><i class="el-icon-edit"></i>写博客</router-link></el-menu-item>
+                    <el-menu-item index="6" @click="register" v-if="!tokenStatus" icon="el-icon-promotion"><i class="el-icon-circle-plus-outline"></i>注册</el-menu-item>
+                    <el-menu-item index="7" @click="login" v-if="!tokenStatus" icon="el-icon-user"><i class="el-icon-user"></i>登录</el-menu-item>
+                    <el-submenu index="8" v-if="tokenStatus">
+                        <template slot="title">
+                            <el-image v-if="user.avatar" class="lv-avatar" :src="user.avatar"></el-image>
+                        </template>
+                        <el-menu-item index="8-1"><router-link :to="{ name:'我的文章',params:{'owner':user.id ? user.id:''},query:{user:user.id}}"><i class="el-icon-tickets"></i>我的博客</router-link></el-menu-item>
+                        <el-menu-item index="8-2"><router-link :to="{ name:'私有文章',params:{'private':user.id ? user.id:''},query:{user:user.id}}"><i class="el-icon-lock"></i>私有文章</router-link></el-menu-item>
+                        <el-menu-item index="8-3"><router-link :to="{ name:'草稿箱',params:{'draft':user.id ? user.id:''},query:{user:user.id}}"><i class="el-icon-document"></i>草稿箱</router-link></el-menu-item>
+                        <!--<el-menu-item index="8-7"><router-link :to="{ name:'关于我' }">关于我</router-link></el-menu-item>-->
+                        <el-menu-item index="8-4"><router-link :to="{ name:'归档',params:{'user':user.id?user.id:1}}"><i class="el-icon-notebook-1"></i>我的归档</router-link></el-menu-item>
+                        <el-menu-item index="8-5"><router-link :to="{ name:'主页' ,params:{'user':user.id?user.id:1},query:{user:user.id}}"><i class="el-icon-setting"></i>个人中心</router-link></el-menu-item>
+                        <el-menu-item index="8-6" @click="logout()"><i class="el-icon-right"></i>退出登录</el-menu-item>
+                    </el-submenu>
+                </el-menu>
+            </el-row>
+        </div>
         <div class="lv-jside">
             <div :class="menu_bar_class" >
                 <div>

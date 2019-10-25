@@ -174,6 +174,7 @@ html,body{
         text-align: center;
     }
     @media only screen and (max-width: 683px) {
+      margin-top: 34px;
       .lv-blog-side {
         width: 100%;
       }
@@ -246,10 +247,6 @@ html,body{
         display: none;
     }
   }
-
-
-
-
   .lv-float-left{
     float:left !important;
   }

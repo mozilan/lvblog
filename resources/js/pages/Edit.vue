@@ -9,7 +9,7 @@
                          </div>
                     </div>
                     <el-form :model="form" :style="form_style">
-                         <mavon-editor ref=md :toolbars="markdownOption" v-model="form.handbook" :ishljs = "true" @imgAdd="$imgAdd" :style="styles.mavon_style"></mavon-editor>
+                         <mavon-editor ref=md :toolbars="markdownOption" v-model="form.handbook" :ishljs = "true" @imgAdd="$imgAdd" :style="styles.mavon_style" class="lv-editor"></mavon-editor>
                          <div class="title-animate bl-margin_bottom-title bl-margin-top">
                               <div :class="ffl_input">
                                    <label for="excerpt" class="ffl-label">文章摘要 <span>(可选)</span></label>
@@ -428,7 +428,6 @@
                this.styles.mavon_style.minHeight = window.innerHeight-531+'px';
           },
          destroyed() {
-              console.log('正在重置');
               this.$store.dispatch('cancelScreenEditor');
          }
      }
@@ -537,6 +536,9 @@
          margin-top: 60px;
          padding-bottom: 30px;
      }
+    .lv-editor{
+        z-index: 0;
+    }
 </style>
 <style type="text/css">
      #editor {
