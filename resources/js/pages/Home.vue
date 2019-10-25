@@ -597,7 +597,7 @@
             this.bg_frontpage_url ="url(" + this.bg_frontpage + ")";
             let uid = this.$route.params.user ? this.$route.params.user:1;
             this.bg_url ="url(" + this.$store.getters.getConfigs.IMG_API + uid + ")";
-            this.blog_page = LVBLOG_CONFIG.URL+ 'blog/user/';
+            this.blog_page = LVBLOG_CONFIG.URL+ '/blog/user/';
         },
         computed:{
             user(){
