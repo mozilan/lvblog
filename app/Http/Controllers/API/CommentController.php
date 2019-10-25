@@ -89,10 +89,11 @@ class CommentController extends Controller
     {
         $this->authorize('destroy', $this->user());
         $comment = Comment::find($comment);
-        if(Reply::where('comment_id',$comment->id)->delete() && $comment->delete()){
+        try {
+            Reply::where('comment_id',$comment->id)->delete();
+            $comment->delete();
             return response()->json(['message' => '删除成功'], 201);
-        }
-        else{
+        }catch (\Illuminate\Database\QueryException $e){
             return response()->json(['message' => '删除失败'], 500);
         }
     }
