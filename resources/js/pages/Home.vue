@@ -619,7 +619,7 @@
 </script>
 <style lang="scss" scoped>
     .home{
-        margin-top:20px;
+        margin-top:60px;
     }
     h3.sub-maintitle{
         min-height: 35px;
