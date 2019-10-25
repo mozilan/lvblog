@@ -163,21 +163,21 @@
                         </el-input>
                     </el-menu-item>
                     <el-menu-item index="1"><router-link :to="{ name:'首页' }"><i class="el-icon-s-home"></i>首页</router-link></el-menu-item>
-                    <el-menu-item index="9"><router-link :to="{ name:'博客园' }"><i class="el-icon-eleme"></i>博客园</router-link></el-menu-item>
-                    <el-menu-item index="2"><router-link :to="{ name:'写作',query:{user:user.id} }"><i class="el-icon-edit"></i>写博客</router-link></el-menu-item>
-                    <el-menu-item index="6" @click="register" v-if="!tokenStatus" icon="el-icon-promotion"><i class="el-icon-circle-plus-outline"></i>注册</el-menu-item>
-                    <el-menu-item index="7" @click="login" v-if="!tokenStatus" icon="el-icon-user"><i class="el-icon-user"></i>登录</el-menu-item>
-                    <el-submenu index="8" v-if="tokenStatus">
+                    <el-menu-item index="2"><router-link :to="{ name:'博客园' }"><i class="el-icon-eleme"></i>博客园</router-link></el-menu-item>
+                    <el-menu-item index="3"><router-link :to="{ name:'写作',query:{user:user.id} }"><i class="el-icon-edit"></i>写博客</router-link></el-menu-item>
+                    <el-menu-item index="4" @click="register" v-if="!tokenStatus" icon="el-icon-promotion"><i class="el-icon-circle-plus-outline"></i>注册</el-menu-item>
+                    <el-menu-item index="5" @click="login" v-if="!tokenStatus" icon="el-icon-user"><i class="el-icon-user"></i>登录</el-menu-item>
+                    <el-submenu index="6" v-if="tokenStatus">
                         <template slot="title">
                             <el-image v-if="user.avatar" class="lv-avatar" :src="user.avatar"></el-image>
                         </template>
-                        <el-menu-item index="8-1"><router-link :to="{ name:'我的文章',params:{'owner':user.id ? user.id:''},query:{user:user.id}}"><i class="el-icon-tickets"></i>我的博客</router-link></el-menu-item>
-                        <el-menu-item index="8-2"><router-link :to="{ name:'私有文章',params:{'private':user.id ? user.id:''},query:{user:user.id}}"><i class="el-icon-lock"></i>私有文章</router-link></el-menu-item>
-                        <el-menu-item index="8-3"><router-link :to="{ name:'草稿箱',params:{'draft':user.id ? user.id:''},query:{user:user.id}}"><i class="el-icon-document"></i>草稿箱</router-link></el-menu-item>
+                        <el-menu-item index="6-1"><router-link :to="{ name:'我的文章',params:{'owner':user.id ? user.id:''},query:{user:user.id}}"><i class="el-icon-tickets"></i>我的博客</router-link></el-menu-item>
+                        <el-menu-item index="6-2"><router-link :to="{ name:'私有文章',params:{'private':user.id ? user.id:''},query:{user:user.id}}"><i class="el-icon-lock"></i>私有文章</router-link></el-menu-item>
+                        <el-menu-item index="6-3"><router-link :to="{ name:'草稿箱',params:{'draft':user.id ? user.id:''},query:{user:user.id}}"><i class="el-icon-document"></i>草稿箱</router-link></el-menu-item>
                         <!--<el-menu-item index="8-7"><router-link :to="{ name:'关于我' }">关于我</router-link></el-menu-item>-->
-                        <el-menu-item index="8-4"><router-link :to="{ name:'归档',params:{'user':user.id?user.id:1}}"><i class="el-icon-notebook-1"></i>我的归档</router-link></el-menu-item>
-                        <el-menu-item index="8-5"><router-link :to="{ name:'主页' ,params:{'user':user.id?user.id:1},query:{user:user.id}}"><i class="el-icon-setting"></i>个人中心</router-link></el-menu-item>
-                        <el-menu-item index="8-6" @click="logout()"><i class="el-icon-right"></i>退出登录</el-menu-item>
+                        <el-menu-item index="6-4"><router-link :to="{ name:'归档',params:{'user':user.id?user.id:1}}"><i class="el-icon-notebook-1"></i>我的归档</router-link></el-menu-item>
+                        <el-menu-item index="6-5"><router-link :to="{ name:'主页' ,params:{'user':user.id?user.id:1},query:{user:user.id}}"><i class="el-icon-setting"></i>个人中心</router-link></el-menu-item>
+                        <el-menu-item index="6-6" @click="logout()"><i class="el-icon-right"></i>退出登录</el-menu-item>
                     </el-submenu>
                 </el-menu>
             </el-row>
@@ -334,13 +334,19 @@
                 this.loadUser();
             }
         },
-        mounted() {
+        mounted(){
             let style = localStorage.getItem('JsideStyle');
             $(".menu-container").jSideMenu({
                 jSidePosition: "position-left",
                 jSideSticky: true,
                 jSideSkin: style ? style: "default-skin",
             });
+            //更新导航click
+            switch (this.$route.name) {
+                case '博客园' : this.activeIndex = '2';break;
+                case '写作' : this.activeIndex = '3';break;
+                default : this.activeIndex = '1';
+            }
         }
     }
 </script>
