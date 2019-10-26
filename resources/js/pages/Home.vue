@@ -1169,7 +1169,7 @@
         overflow: hidden;
         background-color: #fff;
         border: 4px solid #11E6C8;
-        z-index: 100;
+        z-index: 0;
         opacity: 1; 	/* Modern!Firefox 0.9+, Safari 2?, Chrome any?Opera 9+, IE 9+ */
         -khtml-opacity: 1.0;
         -moz-opacity: 1.0; 	/* Older than Firefox 0.9 */

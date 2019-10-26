@@ -13,7 +13,7 @@
                     <el-collapse accordion class="phone-tab">
                         <el-collapse-item>
                             <template slot="title">
-                                归类<i class="header-icon el-icon-info"></i>
+                                菜单<i class="header-icon el-icon-menu"></i>
                             </template>
                             <template>
                                 <el-tabs v-model="activeName">

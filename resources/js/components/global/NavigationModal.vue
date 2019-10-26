@@ -160,7 +160,7 @@
     <el-header class="header">
         <div class = lv-header>
             <el-row type="flex" justify="space-between">
-                <h5 class="lv-logo" title="蓝默空间"><a id="index" href="/"><img src="https://mozilan.geekadpt.cn/www/img/logo.png" alt="LvBlog logo"></a></h5>
+                <h5 class="lv-logo" title="蓝默空间"><a id="index" href="/">{{configs.title}}</a></h5>
                 <el-menu :default-active="activeIndex" class="el-menu-blumer" mode="horizontal" @select="handleSelect">
                     <el-menu-item class="lv-search-query">
                         <el-input
