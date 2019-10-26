@@ -3,7 +3,7 @@
 		<el-card class="box-card">
 			<div slot="header" class="d-flex align-items-center">
 				<i class="el-icon-folder-opened"></i>
-				<span>热门分类</span>
+				<span>Ta的分类</span>
 			</div>
 			<div v-for="category in categories" class="text item">
 				<router-link :to="{name:'分类文章',params: {category:category.id},query:{user:category.user_id}}">
