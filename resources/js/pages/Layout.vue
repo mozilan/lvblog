@@ -52,8 +52,8 @@
             <Notification></Notification>
             <div class="header-bread">
                 <div class="header-bread-fillbg">
-                    <el-row type="flex" justify="center" class="breadcrumb">
-                        <el-col :xs="24" :sm="24" :md="16" :lg="16" class="content" :style="edit.styles">
+                    <el-row type="flex" class="breadcrumb" justify="center">
+                        <el-col :span="16" class="content" :style="edit.styles">
                             <el-breadcrumb separator="/" class="breadcrumb-inner">
                                 <el-breadcrumb-item v-for="(item,index) in $route.matched" :key="index">
                                     <router-link class="lv-breadcrumb-a" :to="{ name:item.name }">{{ item.name }}</router-link>

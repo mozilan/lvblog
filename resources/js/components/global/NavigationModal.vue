@@ -31,6 +31,15 @@
     .lv-logo a:hover{
         color:#303133;
     }
+    .lv-logo img{
+        width: 60px;
+        height: 60px;
+    }
+    .logo img{
+        width: 50px;
+        height: 50px;
+        margin-top: 0;
+    }
     .el-menu-blumer{
         list-style-type: none;
         margin: 0;
@@ -151,7 +160,7 @@
     <el-header class="header">
         <div class = lv-header>
             <el-row type="flex" justify="space-between">
-                <h5 class="lv-logo "><a id="index" href="/">{{configs.title}}</a></h5>
+                <h5 class="lv-logo" title="蓝默空间"><a id="index" href="/"><img src="https://mozilan.geekadpt.cn/www/img/logo.png" alt="LvBlog logo"></a></h5>
                 <el-menu :default-active="activeIndex" class="el-menu-blumer" mode="horizontal" @select="handleSelect">
                     <el-menu-item class="lv-search-query">
                         <el-input
@@ -186,6 +195,9 @@
             <div :class="menu_bar_class" >
                 <div>
                     <el-button class="left lv-trigger" icon="el-icon-s-grid"> </el-button>
+                </div>
+                <div class="logo" title="蓝默空间">
+                    <a href="#"><img src="https://mozilan.geekadpt.cn/www/img/logo.png" alt="LvBlog Menu"/> </a>
                 </div>
                 <div class="logo" title="Logo">
                     <router-link :to="{ name:'首页' ,params:{'user':user.id?user.id:1},query:{user:user.id}}">{{configs.title}} </router-link>
