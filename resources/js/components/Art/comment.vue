@@ -593,4 +593,10 @@
             }
         }
     }
+    @media only screen and (max-width: 683px) {
+        .lv-comment .comment .reply .input-wrapper .btn-control{
+            justify-content: flex-start;
+        }
+    }
+
 </style>
