@@ -78,7 +78,7 @@
                                                         <a href="#"><span style="color: cornflowerblue;">访问主页</span></a>
                                                     </router-link>
                                                     <router-link :to="{ name:'用户文章' ,params:{'user':i.user_id},query:{user:i.user_id}}" style="float: right"  >
-                                                        <a href="#">他的博客</a>
+                                                        <a href="#">Ta的博客</a>
                                                     </router-link>
                                                     <div slot="reference">
                                                         <el-avatar :size="25" :src="i.user.data.avatar"></el-avatar>
@@ -119,7 +119,7 @@
                                                         <img class="art-banner" src="https://mozilan.geekadpt.cn/img/other/orange.progress-bar-stripe-loader.svg">
                                                     </div>
                                                 </el-image></div>
-                                                <div class="">
+                                                <div class="side-abstract">
                                                     <router-link :to="{name:'查看文章',params: {art_id:i.id}}">
                                                         <div class="art-abstract" :style="showModel.abstract">
                                                             {{i.excerpt}}

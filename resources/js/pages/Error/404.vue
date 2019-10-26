@@ -872,7 +872,6 @@
     #mobile-bar.top .logo {
         display: none;
     }
-    #hero,
     #news {
         padding: 40px 40px 30px;
         background-color: #fff;
@@ -1102,29 +1101,16 @@
     }
 </style>
 <template>
-    <div id="app-layout" class="app">
-        <el-header>
-            <Navigation></Navigation>
-        </el-header>
+    <div id="error" class="error">
+        <Navigation></Navigation>
         <div class="lv-container">
             <div class="error">
-                <!--<div id="header">-->
-                    <!--<router-link id="logo" :to="{ name:'首页' }">-->
-                        <!--<img src="/images/favion.png" alt="LvBlog logo">-->
-                        <!--<span>LvBlog</span>-->
-                    <!--</router-link>-->
-                    <!--<ul id="nav">-->
-                        <!--<li>-->
-                            <!--<router-link :to="{ name:'首页' }" class="nav-link contribute"><i class="el-icon-s-home"></i>首页</router-link>-->
-                        <!--</li>-->
-                    <!--</ul>-->
-                <!--</div>-->
                 <div id="hero">
                     <div class="inner">
                         <div class="left">
                             <img class="hero-logo" src="https://mozilan.geekadpt.cn/logo.png" alt="lvblog logo">
                         </div><div class="right">
-                        <h2 class="vue">Vue.js</h2>
+                        <h2 class="vue">LvBlog</h2>
                         <h1>{{this.$route.query.code?this.$route.query.code:'404'}}</h1><br>
                         <h3 style="margin:0;font-size:2em">{{this.$route.query.message?this.$route.query.message:'页面找不到了'}}</h3>
                         <p>

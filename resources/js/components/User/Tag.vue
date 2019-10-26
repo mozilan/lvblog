@@ -3,7 +3,7 @@
 		<el-card class="box-card">
 			<div slot="header" class="d-flex align-items-center">
 				<i class="el-icon-collection-tag"></i>
-				<span>他的标签</span>
+				<span>Ta的标签</span>
 			</div>
 			<div class="text item" v-for="tag in tags">
 				<router-link :to="{name:'标签文章',params: {tag:tag.id},query:{user:tag.user_id}}"><el-tag size="mini" :type="type[Math.floor(Math.random()*type.length)]" class="tag-item">{{tag.name}}[{{tag.count}}]</el-tag></router-link>

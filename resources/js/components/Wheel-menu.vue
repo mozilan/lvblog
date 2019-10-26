@@ -122,6 +122,9 @@
    @import "../../sass/wheel-menu/animate.min.css";
    /*@import "../../sass/wheel-menu/normalize.css";*/
    @import "../../sass/wheel-menu/styles.css";
+   #ss_menu > div{
+       cursor: pointer;
+   }
    #ss_menu > div a{
        vertical-align: middle;
    }

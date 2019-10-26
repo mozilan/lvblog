@@ -56,7 +56,7 @@
 
         .count {
             margin-bottom: 20px;
-            font-size: 20px;
+            font-size: 18px;
             color: #E6A23C;
         }
         @media only screen and (max-width: 683px){
