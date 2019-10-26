@@ -199,9 +199,6 @@
                 <div class="logo" title="蓝默空间">
                     <a href="#"><img src="https://mozilan.geekadpt.cn/www/img/logo.png" alt="LvBlog Menu"/> </a>
                 </div>
-                <div class="logo" title="Logo">
-                    <router-link :to="{ name:'首页' ,params:{'user':user.id?user.id:1},query:{user:user.id}}">{{configs.title}} </router-link>
-                </div>
             </div>
             <div :class="menu_head_class" style="z-index: 19981022" @click="toggleStyle">
                   <span class="layer">
