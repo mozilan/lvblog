@@ -220,7 +220,6 @@
                 <ul class="menu-items">
                     <li @click="toggle()"><span class="item-icon"><i class="el-icon-edit"></i></span> <router-link :to="{ name:'写作',query:{user:user.id} }">写博客</router-link></li>
                     <li @click="toggle()"><span class="item-icon"><i class="el-icon-eleme"></i></span> <router-link :to="{ name:'博客园',query:{user:user.id} }">博客园</router-link></li>
-                    <li v-if="!user" @click="toggle()"><span class="item-icon"><i class="el-icon-user"></i></span> <router-link :to="{ name:'写作',query:{user:user.id} }">登陆/注册</router-link></li>
                     <li class="has-sub"> <span class="item-icon"> <i class="el-icon-more"></i></span> <span class="dropdown-heading">站内搜索</span>
                         <ul>
                             <li class="lv-search-query">
@@ -235,6 +234,7 @@
                         </ul>
 
                     </li>
+                    <li v-if="!user" @click="toggle()"><span class="item-icon"><i class="el-icon-user"></i></span> <router-link :to="{ name:'写作',query:{user:user.id} }">登陆/注册</router-link></li>
                     <li class="has-sub" v-if="tokenStatus"> <span class="item-icon"> <i class="el-icon-more"></i></span> <span class="dropdown-heading"> 文章管理 </span>
                         <ul>
                             <li @click="toggle()"><span class="item-icon"><i class="el-icon-tickets"></i></span> <router-link :to="{ name:'我的文章',params:{'owner':user.id ? user.id:''},query:{user:user.id}}">我的博客</router-link> </li>

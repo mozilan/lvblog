@@ -54,16 +54,18 @@ class Handler extends ExceptionHandler
         if ($exception instanceof UnauthorizedHttpException) {
             return response($exception->getMessage(), 401);
         }
-        if ($exception->getStatusCode() == 500) {
-            return response()->view('errors.' . '500', [], 500);
-        }
-        if ($exception->getStatusCode() == 404) {
-            return response()->view('app', []);
-        }
+
         if ($this->isHttpException($exception)) {
-            if (view()->exists('errors.' . $exception->getStatusCode())) {
-                return response()->view('errors.' . $exception->getStatusCode(), [], $exception->getStatusCode());
+//            if (view()->exists('errors.' . $exception->getStatusCode())) {
+//                API服务器不需要返回视图
+//                return response()->view('errors.' . $exception->getStatusCode(), [], $exception->getStatusCode());
+//            }
+            //404已交给Vue处理,这里返回视图即可;
+            if($exception->getStatusCode()==404){
+                return response()->view('app');
             }
+            return response()->json(['message' => '出错了'], $exception->getStatusCode());
+
         }
         return parent::render($request, $exception);
     }

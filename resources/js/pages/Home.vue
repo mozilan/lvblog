@@ -223,7 +223,6 @@
                                 <el-tabs v-model="activeNameEditor">
                                     <el-tab-pane label="资料管理" name="firstEditor"><!--RESUME FIRST TAB/SKILL TAB DETAILS-->
                                         <div id='tab-edit-1'>
-                                            <h3 class="title">编辑资料</h3><!--SKILLS WITH BAR DISPLAY-->
                                             <effect-input class="effect-input" v-model="editor.name" type="ichiro" label="修改昵称" name="昵称"></effect-input>
                                             <effect-input class="effect-input" v-model="editor.email" type="ichiro" label="修改邮箱" name="邮箱"></effect-input>
                                             <effect-input class="effect-input" v-model="editor.introduction" type="juro" label="修改简介" name="简介"></effect-input>

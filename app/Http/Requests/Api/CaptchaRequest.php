@@ -15,4 +15,18 @@ class CaptchaRequest extends FormRequest
 
         ];
     }
+    public function attributes()
+    {
+        return [
+            'phone' => '手机号',
+        ];
+    }
+    public function messages()
+    {
+        return [
+            'phone.required' => ':attribute不能为空',
+            'phone.regex' => ':attribute格式不正确',
+            'phone.unique' => ':attribute已经注册过了',
+        ];
+    }
 }

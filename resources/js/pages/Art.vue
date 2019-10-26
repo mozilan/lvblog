@@ -42,7 +42,7 @@
                         </router-link>
                     </div>
                     <div class="lv-article">本文链接：
-                        <a :href="url">{{url}}</a>
+                        <a href="#">{{ url }}</a>
                     </div>
                     <div class="lv-article">版权声明：本博客所有文章除特别声明外,转载请注明出处!</div>
                 </div>
@@ -62,6 +62,7 @@
     import 'highlight.js/styles/monokai-sublime.css';
     import comment from '../components/Art/comment'
     import WhellMenu from '../components/Wheel-menu'
+    import { LVBLOG_CONFIG } from '../config';
     // import 'github-markdown-css';
     export default {
         name: 'art',
@@ -90,6 +91,7 @@
             this.$store.dispatch('loadArticle',{
                 art_id : this.$route.params.art_id
             });
+            this.url = LVBLOG_CONFIG.URL+this.$route.path;
             //已废弃
             // let viewWidth = window.innerWidth;
             // this.url= window.location.href;

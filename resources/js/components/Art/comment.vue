@@ -235,6 +235,10 @@
                     this.message.warning('有其他进程在执行评论操作,请稍候重试！')
                 }else{
                     if(this.isReply == 1){
+                        if(this.inputReply == ''){
+                            this.$message.warning('回复内容不能为空');
+                            return false;
+                        }
                         this.$store.dispatch('postReply',{
                             comment_id:this.idComment,
                             contents:this.inputReply,
@@ -262,6 +266,10 @@
                         });
 
                     }else{
+                        if(this.inputComment == ''){
+                            this.$message.warning('评论内容不能为空');
+                            return false;
+                        }
                         this.$store.dispatch('postComment',{
                             art_id:this.$route.params.art_id,
                             contents:this.inputComment
