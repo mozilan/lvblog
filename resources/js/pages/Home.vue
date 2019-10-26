@@ -175,31 +175,31 @@
                                             </el-collapse>
                                         </div><!--RESUME SECOND TAB/EDUCATION TAB DETAILS ENDS-->
                                     </el-tab-pane>
-                                    <el-tab-pane label="职业" name="third">
-                                        <!--RESUME THIRD TAB/EMPLYMENT TAB DETAILS ENDS-->
-                                        <div id='tab-3'>
-                                            <ul class="employment-class tab-cont">
-                                                <li>
-                                                    <!--EMPLOYMENT INDIVIDUAL LIST-->
-                                                    <h4>Manager <span class="year">2019 - 2020</span></h4>
-                                                    <h5>Consectetur adipiscing</h5>
-                                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing Vivamus sit Vivamus sit. Vivamus sit.. consectetur adipiscing Vivamus sit.</p><!--EMPLOYMENT LIST DETAILS-->
-                                                </li>
-                                                <li>
-                                                    <!--EMPLOYMENT INDIVIDUAL LIST-->
-                                                    <h4>Manager <span class="year">2018 - 2019</span></h4>
-                                                    <h5>Consectetur adipiscing</h5>
-                                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing Vivamus sit Vivamus sit. Vivamus sit.. consectetur adipiscing Vivamus sit.</p><!--EMPLOYMENT LIST DETAILS-->
-                                                </li>
-                                                <li>
-                                                    <!--EMPLOYMENT INDIVIDUAL LIST-->
-                                                    <h4>Manager <span class="year">2017 - 2018</span></h4>
-                                                    <h5>Consectetur adipiscing</h5>
-                                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing Vivamus sit Vivamus sit. Vivamus sit.. consectetur adipiscing Vivamus sit.</p><!--EMPLOYMENT LIST DETAILS-->
-                                                </li>
-                                            </ul>
-                                        </div><!--RESUME THIRD TAB/EMPLYMENT TAB DETAILS ENDS-->
-                                    </el-tab-pane>
+                                    <!--<el-tab-pane label="职业" name="third">-->
+                                        <!--&lt;!&ndash;RESUME THIRD TAB/EMPLYMENT TAB DETAILS ENDS&ndash;&gt;-->
+                                        <!--<div id='tab-3'>-->
+                                            <!--<ul class="employment-class tab-cont">-->
+                                                <!--<li>-->
+                                                    <!--&lt;!&ndash;EMPLOYMENT INDIVIDUAL LIST&ndash;&gt;-->
+                                                    <!--<h4>Manager <span class="year">2019 - 2020</span></h4>-->
+                                                    <!--<h5>Consectetur adipiscing</h5>-->
+                                                    <!--<p>Lorem ipsum dolor sit amet, consectetur adipiscing Vivamus sit Vivamus sit. Vivamus sit.. consectetur adipiscing Vivamus sit.</p>&lt;!&ndash;EMPLOYMENT LIST DETAILS&ndash;&gt;-->
+                                                <!--</li>-->
+                                                <!--<li>-->
+                                                    <!--&lt;!&ndash;EMPLOYMENT INDIVIDUAL LIST&ndash;&gt;-->
+                                                    <!--<h4>Manager <span class="year">2018 - 2019</span></h4>-->
+                                                    <!--<h5>Consectetur adipiscing</h5>-->
+                                                    <!--<p>Lorem ipsum dolor sit amet, consectetur adipiscing Vivamus sit Vivamus sit. Vivamus sit.. consectetur adipiscing Vivamus sit.</p>&lt;!&ndash;EMPLOYMENT LIST DETAILS&ndash;&gt;-->
+                                                <!--</li>-->
+                                                <!--<li>-->
+                                                    <!--&lt;!&ndash;EMPLOYMENT INDIVIDUAL LIST&ndash;&gt;-->
+                                                    <!--<h4>Manager <span class="year">2017 - 2018</span></h4>-->
+                                                    <!--<h5>Consectetur adipiscing</h5>-->
+                                                    <!--<p>Lorem ipsum dolor sit amet, consectetur adipiscing Vivamus sit Vivamus sit. Vivamus sit.. consectetur adipiscing Vivamus sit.</p>&lt;!&ndash;EMPLOYMENT LIST DETAILS&ndash;&gt;-->
+                                                <!--</li>-->
+                                            <!--</ul>-->
+                                        <!--</div>&lt;!&ndash;RESUME THIRD TAB/EMPLYMENT TAB DETAILS ENDS&ndash;&gt;-->
+                                    <!--</el-tab-pane>-->
                                     <el-tab-pane label="归档" name="forth">
                                         <!--RESUME THIRD TAB/EMPLYMENT TAB DETAILS ENDS-->
                                         <div id='tab-4'>
@@ -1349,7 +1349,7 @@
         height: 475px;
         position: relative;
         background-color: #fff;
-        padding: 15px 30px;
+        padding:0x;
         /*overflow: hidden;*/
     }
 
