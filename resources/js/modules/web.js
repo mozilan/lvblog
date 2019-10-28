@@ -2,7 +2,7 @@
 |-------------------------------------------------------------------------------
 | VUEX modules/users.js
 |-------------------------------------------------------------------------------
-| The Vuex data store for the configs
+| The Vuex data store for the WebConfigs
 */
 
 import WebAPI from '../api/web';

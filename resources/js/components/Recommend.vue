@@ -69,17 +69,17 @@
 				desv:2,
 				friend_box:[
 					{
-						name:'蓝墨科技蓝墨科技蓝墨科技蓝墨科技蓝墨科技',
+						name:'蓝默科技蓝默科技蓝默科技蓝默科技蓝默科技',
 						avatar:'https://avatars0.githubusercontent.com/u/54885220?v=4',
 						des:'向上的路并不拥挤'
 					},
 					{
-						name:'蓝墨科技',
+						name:'蓝默科技',
 						avatar:'https://avatars0.githubusercontent.com/u/54885220?v=4',
 						des:'向上的路并不拥挤，而有的人选择了安逸，向上的路并不拥挤'
 					},
 					{
-						name:'蓝墨科技',
+						name:'蓝默科技',
 						avatar:'https://avatars0.githubusercontent.com/u/54885220?v=4',
 						des:'向上的路并不拥挤，而有的人选择了安逸向上的路并不拥挤，向上的路并不拥挤，而有的人选择了安逸'
 					},

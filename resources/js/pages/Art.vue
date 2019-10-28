@@ -1,5 +1,6 @@
 <template>
-    <div class="art" :style="styles.art_style">
+    <div class="art el-scrollbar__wrap" :style="styles.art_style">
+        <el-backtop target=".page-component__scroll .el-scrollbar__wrap"></el-backtop>
         <el-row class="main" type="flex" justify="center">
             <el-col :xs="24" :sm="24" :md="16" :lg="16">
                 <div id="artcle-info" :style="{'background-image': 'url('+this.$store.getters.getConfigs.IMG_API+ this.$route.params.art_id+')'}" @load="handleLoad" v-loading="bg_loading">
@@ -107,7 +108,7 @@
             bgImg.onload = () => { // 等背景图片加载成功后 去除loading
                 this.bg_loading = false
             };
-            $('html')[0].scrollTop = 0;
+            // $('html')[0].scrollTop = 0;
         },
         computed:{
             article(){

@@ -2,7 +2,7 @@
  |-------------------------------------------------------------------------------
  | VUEX store.js
  |-------------------------------------------------------------------------------
- | Builds the data store from all of the modules for the Roast app.
+ | Builds the data store from all of the modules for the LvBlog app.
  */
 
 /**

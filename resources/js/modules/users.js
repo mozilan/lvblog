@@ -2,7 +2,7 @@
 |-------------------------------------------------------------------------------
 | VUEX modules/users.js
 |-------------------------------------------------------------------------------
-| The Vuex data store for the users
+| The Vuex data store for the Users
 */
 
 import UserAPI from '../api/users';

@@ -21,6 +21,16 @@
     </script>
 </head>
 <body>
+{{--
+*   Application: LvBlog
+*   Frameworks: Laravel 5.8 & Vue 2 & Element-UI 2.12.0
+*   Author: WuNian
+*   Gitee: https://gitee.com/bluish_space/lvblog
+*   URL: https://www.mozilan.com
+*   License: MIT License
+*   Copyright (c) 2019 - BluishSpace
+*
+--}}
 
 <div id="app">
     <router-view></router-view>

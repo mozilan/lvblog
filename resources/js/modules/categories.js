@@ -2,7 +2,7 @@
 |-------------------------------------------------------------------------------
 | VUEX modules/users.js
 |-------------------------------------------------------------------------------
-| The Vuex data store for the categories
+| The Vuex data store for the Categories
 */
 
 import CategoryAPI from '../api/categories';

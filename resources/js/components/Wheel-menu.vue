@@ -28,9 +28,9 @@
         name: "Wheel-menu",
         data() {
             return {
-                scrollTop:0,
-                interval:'',
-                jumped:0,
+                // scrollTop:0,
+                // interval:'',
+                // jumped:0,
             }
         },
         mounted() {
@@ -53,20 +53,20 @@
             //console.log($('html'));
         },
         methods:{
-            stopInterval(){
-                //已废弃
-                // console.log('power on'+document.getElementsByTagName('html')[0].scrollTop);
-                //
-                // if(document.getElementsByClassName('lv-scrollbar__wrap')[0].scrollTop == 0){
-                //     console.log('我被激活了');
-                //      window.clearInterval(this.interval);
-                // }
-                // if(document.getElementsByTagName('html')[0].scrollTop == 0){
-                if($('html')[0].scrollTop == 0){
-                    window.clearInterval(this.interval);
-                    console.log('已清除interval');
-                }
-            },
+            // stopInterval(){
+            //     //已废弃
+            //     // console.log('power on'+document.getElementsByTagName('html')[0].scrollTop);
+            //     //
+            //     // if(document.getElementsByClassName('lv-scrollbar__wrap')[0].scrollTop == 0){
+            //     //     console.log('我被激活了');
+            //     //      window.clearInterval(this.interval);
+            //     // }
+            //     // if(document.getElementsByTagName('html')[0].scrollTop == 0){
+            //     if($('html')[0].scrollTop == 0){
+            //         window.clearInterval(this.interval);
+            //         console.log('已清除interval');
+            //     }
+            // },
             scrollToTop(){
                             //已废弃
                             // jump = document.querySelectorAll(anchor);
@@ -86,16 +86,20 @@
                             //         ++this.jumped;
                             //     }, 10);
                             // }
-                            let instance = $('html');
-                            //$('html')[0].scrollTop = 0;
-                            if(instance.length > 0 && instance[0].scrollTop >360){
-                                let rapid = instance[0].scrollTop/50;
-                                    this.interval = setInterval(() => {
-                                        //console.log(document.getElementsByTagName('html')[0].scrollTop);
-                                        $('html')[0].scrollTop -= rapid;
-                                        ++this.jumped;
-                                    },10);
-                            }
+
+                            //由于不支持小屏幕，已废弃
+                            // let instance = $('html');
+                            // //$('html')[0].scrollTop = 0;
+                            // if(instance.length > 0 && instance[0].scrollTop >360){
+                            //     let rapid = instance[0].scrollTop/50;
+                            //         this.interval = setInterval(() => {
+                            //             //console.log(document.getElementsByTagName('html')[0].scrollTop);
+                            //             $('html')[0].scrollTop -= rapid;
+                            //             ++this.jumped;
+                            //         },10);
+                            // }
+
+                            $('.el-backtop').click();
             },
             simplify(){
                 if(this.$store.getters.getSimplifyStatus == 2){
@@ -113,11 +117,11 @@
                     this.$message.success('已开启大图模式');
                 }
             },
-        },
-        watch: {
-            // 如果jumped有变化，会再次执行stopInterval
-            "jumped": "stopInterval"
         }
+        // watch: {
+        //     // 如果jumped有变化，会再次执行stopInterval
+        //     "jumped": "stopInterval"
+        // }
     }
 </script>
 

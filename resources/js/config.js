@@ -1,5 +1,5 @@
 /**
- * Defines the API route we are using.
+ * Defines the URL we are using.
  */
 var url = '';
 var api_url = '';

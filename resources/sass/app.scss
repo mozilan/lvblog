@@ -1,5 +1,13 @@
-// Fonts
-//@import url('https://fonts.googleapis.com/css?family=Nunito');
+/*   Application: LvBlog
+ *   Frameworks: Laravel 5.8 & Vue 2 & Element-UI 2.12.0
+ *   Author: WuNian
+ *   Gitee: https://gitee.com/bluish_space/lvblog
+ *   URL: https://www.mozilan.com
+ *   License: MIT License
+ *   Copyright (c) 2019 - BluishSpace
+ */
+/* File: app.css */
+
 
 // Variables
 @import 'variables';
@@ -9,13 +17,23 @@ html,body{
   height: 100%;
   margin: 0;
   padding: 0;
-  font-family: Georgia,"Times New Roman",Times,sans-serif;
-
+  font-family: Helvetica Neue,Helvetica,PingFang SC,Hiragino Sans GB,Microsoft YaHei,SimSun,sans-serif;
+  overflow: hidden;
   a, a:hover, a:focus { text-decoration: none; color: inherit; }
   .lv-clear-both{
     clear: both;
   }
-
+  #app{
+    overflow-y: hidden;
+    height: 100%;
+  }
+  #app-layout{
+    padding: 0;
+    margin-top: 0;
+    height: 100%;
+    min-height: auto;
+    padding-bottom: 30px;
+  }
   //login module
   .el-dialog{
     max-width: 400px;
@@ -23,6 +41,9 @@ html,body{
   }
   .el-dialog__body{
     padding: 5px 15px 20px 15px;
+  }
+  .el-backtop{
+    visibility: hidden;
   }
   @media screen and (max-width: 450px) {
     .el-dialog{
@@ -47,10 +68,6 @@ html,body{
 
     h5{
       color: #333333;
-    }
-
-    .el-backtop{
-      visibility: hidden;
     }
     .art-item {
       margin-bottom: 30px;
@@ -308,11 +325,23 @@ html,body{
   }
 }
 //统一管理各大模板距离顶部 margin 和 padding
-body{
-  padding-top: 115px;
+.lv-container{
+  margin-top: 115px;
+}
+.page-component__scroll {
+  height: calc(100% - 80px);
+}
+.el-scrollbar {
+  overflow: hidden;
+  position: relative;
+}
+.el-scrollbar__wrap {
+  overflow: scroll;
+  overflow-x: scroll;
+  height: 100%;
 }
 @media only screen and (max-width: 683px) {
-  body{
-    padding-top: 94px;
+  .lv-container{
+    margin-top: 94px;
   }
 }

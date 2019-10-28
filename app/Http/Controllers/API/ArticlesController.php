@@ -18,6 +18,7 @@ use App\Models\User;
 class ArticlesController extends Controller
 {
     //
+    protected $perpage = 4;
     public function store(ArticleRequest $request, Article $article)
     {
         $article->fill($request->all());
@@ -147,7 +148,7 @@ class ArticlesController extends Controller
                 break;
         }
         $query->where('target','0');
-        $articles = $query->paginate(20);
+        $articles = $query->paginate($this->perpage);
 
         return $this->response->paginator($articles, new ArticleTransformer());
     }
@@ -170,7 +171,7 @@ class ArticlesController extends Controller
                 break;
         }
         $query->where('target','0');
-        $articles = $query->paginate(20);
+        $articles = $query->paginate($this->perpage);
         return $this->response->paginator($articles, new ArticleTransformer());
     }
 
@@ -192,7 +193,7 @@ class ArticlesController extends Controller
 
             $query->where('target','0');
 
-            $articles = $query->paginate(20);
+            $articles = $query->paginate($this->perpage);
 
             return $this->response->paginator($articles, new ArticleTransformer());
         }else{
@@ -218,7 +219,7 @@ class ArticlesController extends Controller
 
             $query->where('target','0');
 
-            $articles = $query->paginate(20);
+            $articles = $query->paginate($this->perpage);
 
             return $this->response->paginator($articles, new ArticleTransformer());
         }else{
@@ -274,7 +275,7 @@ class ArticlesController extends Controller
             }
             $query->where('target', '1');
 
-            $articles = $query->paginate(20);
+            $articles = $query->paginate($this->perpage);
 
             return $this->response->paginator($articles, new ArticleTransformer());
         }else{
@@ -299,7 +300,7 @@ class ArticlesController extends Controller
             }
             $query->where('target', '2');
 
-            $articles = $query->paginate(20);
+            $articles = $query->paginate($this->perpage);
 
             return $this->response->paginator($articles, new ArticleTransformer());
         }else{

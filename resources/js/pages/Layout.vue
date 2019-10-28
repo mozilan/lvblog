@@ -48,7 +48,7 @@
 <template>
     <div id="app-layout" class="app">
         <Navigation></Navigation>
-        <div class="lv-container">
+        <div class="lv-container page-component__scroll el-scrollbar">
             <Notification></Notification>
             <div class="header-bread">
                 <div class="header-bread-fillbg">

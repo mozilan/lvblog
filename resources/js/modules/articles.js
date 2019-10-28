@@ -2,7 +2,7 @@
 |-------------------------------------------------------------------------------
 | VUEX modules/users.js
 |-------------------------------------------------------------------------------
-| The Vuex data store for the articles
+| The Vuex data store for the Articles
 */
 
 import ArticleAPI from '../api/articles';

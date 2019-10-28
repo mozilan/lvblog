@@ -1,5 +1,6 @@
 <template>
-    <div class="blog" style="overflow:auto">
+    <div class="blog el-scrollbar__wrap" style="overflow:auto">
+        <el-backtop target=".page-component__scroll .el-scrollbar__wrap"></el-backtop>
         <el-row type="flex" class="row-bg" justify="center">
             <el-col :xs="24" :sm="24" :md="16" :lg="16">
                 <el-row type="flex" class="row-bg lv-row-bg" justify="space-between">
@@ -190,16 +191,18 @@
             // 如果路由有变化，会再次执行该方法
             "$route": "getArticles"
         },
+        mounted(){
+            document.getElementsByClassName("blog")[0].addEventListener('scroll', this.handleScroll);
+        },
         created(){
-            window.addEventListener('scroll', this.handleScroll);
+            //
             this.getArticles();
             // let h = window.innerHeight-212;//可见区域高度 -152px
             // this.infinite_box.maxHeight = this.infinite_side.maxHeight = h+'px';
         },
         methods: {
             handleScroll() {
-                //console.log('距离顶部距离'+document.getElementById('art-side').getBoundingClientRect().bottom);
-                if((document.getElementById('art-side').getBoundingClientRect().bottom <= _judge_bottom.getWindowHeight()) && !this.disabled){
+                if(((document.getElementById('art-side').getBoundingClientRect().bottom-115) <= _judge_bottom.getWindowHeight()) && !this.disabled){
                     this.load();
                 }
                 // if(window.innerWidth > 683){
@@ -282,7 +285,7 @@
             }
         },
         destroyed() {
-            window.removeEventListener('scroll', this.handleScroll);
+            document.getElementsByClassName("blog")[0].removeEventListener('scroll', this.handleScroll);
         }
     }
 </script>
