@@ -6,7 +6,7 @@
     }
 </style>
 <template>
-    <div class="blog el-scrollbar__wrap" style="overflow:auto">
+    <div class="blog el-scrollbar__wrap wrapper">
         <el-backtop target=".page-component__scroll .el-scrollbar__wrap"></el-backtop>
         <el-row type="flex" class="row-bg" justify="center">
             <el-col :xs="24" :sm="24" :md="16" :lg="16">
@@ -166,7 +166,9 @@
     import Oauth from '../components/Oauth'
     import LFooter from '../components/L-footer'
     import WhellMenu from '../components/Wheel-menu'
-    import _judge_bottom from '../utils/judge_bottom';
+    import _judge_bottom from '../utils/judge_bottom'
+    import BScroll from '@better-scroll/core'
+    import PullUp from '@better-scroll/pull-up'
     export default {
         data () {
             return {
@@ -221,6 +223,9 @@
             "$route": "getArticles"
         },
         mounted(){
+            let bs = new BScroll('.wrapper', {
+                pullUpLoad: true
+            });
             document.getElementsByClassName("blog")[0].addEventListener('scroll', this.handleScroll);
         },
         created(){

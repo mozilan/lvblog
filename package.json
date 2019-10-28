@@ -26,6 +26,7 @@
     "vuex": "^3.1.1"
   },
   "dependencies": {
+    "better-scroll": "^2.0.0-beta.2",
     "effect-input": "^0.1.1",
     "element-ui": "^2.12.0",
     "floating-form-labels": "^1.2.4",

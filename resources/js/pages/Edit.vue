@@ -1,5 +1,6 @@
 <template>
-    <div style="display:block" class="edit">
+    <div class="edit el-scrollbar__wrap wrapper wrapper">
+        <el-backtop target=".page-component__scroll .el-scrollbar__wrap"></el-backtop>
     <el-row type="flex" justify="center">
         <el-col :xs="24" :sm="24" :md="16" :lg="16" :style="edit.styles">
                     <div class="title-animate">
@@ -98,20 +99,24 @@
                     </el-form>
             </el-col>
         </el-row>
+        <WhellMenu></WhellMenu>
     </div>
 </template>
 <script>
      // Local Registration
-     import {mavonEditor} from 'mavon-editor';
-     import 'mavon-editor/dist/css/index.css';
-     import { EventBus } from '../event-bus';
-     import floating_form_labels from 'floating-form-labels';
-
+     import {mavonEditor} from 'mavon-editor'
+     import 'mavon-editor/dist/css/index.css'
+     import { EventBus } from '../event-bus'
+     import floating_form_labels from 'floating-form-labels'
+     import WhellMenu from '../components/Wheel-menu'
+     import BScroll from '@better-scroll/core'
+     import PullUp from '@better-scroll/pull-up'
      export default {
           name: 'editor',
           components: {
               floating_form_labels,
-              mavonEditor
+              mavonEditor,
+              WhellMenu
           },
           data() {
                return {
@@ -179,6 +184,9 @@
           },
           mounted(){
                $('.ffl-wrapper').floatingFormLabels();
+               let bs = new BScroll('.wrapper', {
+                  pullUpLoad: true
+               });
           },
           computed:{
                categories(){
