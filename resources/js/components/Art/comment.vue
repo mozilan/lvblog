@@ -174,7 +174,7 @@
                             jump = document.querySelectorAll(anchor);
                             if(jump.length!=0) {
                                 // 滚动到目标位置
-                                document.querySelector(anchor).scrollIntoView(true);
+                                //document.querySelector(anchor).scrollIntoView(true);
                                 this.jumped = 1;
                             }
                         })

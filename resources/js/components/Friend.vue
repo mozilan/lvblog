@@ -12,13 +12,13 @@
 			<el-row v-for="(item,index) in friends" :key="index">
 			<el-col :span="24"  style="padding: 5px 0">
 				<div class="lv-clear-both"></div>
-				<el-col :lg="4" :md="6" :sm="6" :xs="4" class="item">
+				<el-col :span="4" class="item">
 					<div class="lv-clear-both"></div>
 					<a :href="item.url">
 						<el-avatar :size="40" :src="item.avatar"></el-avatar>
 					</a>
 				</el-col>
-				<el-col :lg="20" :md="18" :sm="20" :xs="18" style="padding-left:10px">
+				<el-col :span="18" style="padding-left:10px">
 					<el-col :span="24" class="name">
 						{{item.name}}
 					</el-col>
@@ -51,9 +51,6 @@ export default {
 <style scoped lang="scss">
 	.box-card{
 		padding-bottom: 20px;
-	}
-	.box-card .item{
-		padding: 5px 0;
 	}
 	.box-card .item a{
 		text-decoration: none;

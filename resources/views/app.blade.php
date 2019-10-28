@@ -14,11 +14,11 @@
     <!-- Favicon-->
     <link rel="shortcut icon" href=”https://mozilan.geekadpt.cn/www/img/favicon/favicon-64.ico” type=”image/x-icon”>
     {{--script--}}
-    <script type='text/javascript'>
-        window.Laravel = <?php echo json_encode([
-            'csrfToken' => csrf_token(),
-        ]); ?>
-    </script>
+    {{--<script type='text/javascript'>--}}
+        {{--window.Laravel = <?php echo json_encode([--}}
+            {{--'csrfToken' => csrf_token(),--}}
+        {{--]); ?>--}}
+    {{--</script>--}}
 </head>
 <body>
 

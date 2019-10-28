@@ -64,8 +64,8 @@
         data(){
             return{
                 srcList: [
-                    'https://mozilan.geekadpt.cn/img/custom/wechat_pub.png',
-                    'https://mozilan.geekadpt.cn/img/custom/wechat2.png'
+                    this.$store.getters.getConfigs.contact,
+                    this.$store.getters.getConfigs.contact_bak
                 ],
                 time:'1998-10-22 17:30:00',
                 runtime:''

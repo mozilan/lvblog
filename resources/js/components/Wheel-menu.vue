@@ -2,7 +2,7 @@
     <div id='ss_menu'>
         <div>
             <a href="http://wpa.qq.com/msgrd?v=3&uin=609961022&site=qq&menu=yes">
-                <i class="el-icon-chat-dot-round"></i>
+                <i class="el-icon-chat-dot-round wheel-i-chat"></i>
             </a>
         </div>
         <div @click="simplify">
@@ -84,15 +84,16 @@
                             //         ++this.jumped;
                             //     }, 10);
                             // }
-                            let instance = document.getElementsByTagName('html');
-                            if(instance.length > 0 && instance[0].scrollTop >360){
-                                let rapid = instance[0].scrollTop/50;
-                                    this.interval = setInterval(() => {
-                                        //console.log(document.getElementsByTagName('html')[0].scrollTop);
-                                        document.getElementsByTagName('html')[0].scrollTop -= rapid;
-                                        ++this.jumped;
-                                    },10);
-                            }
+                            // let instance = document.getElementsByTagName('html');
+                            document.getElementsByTagName('html')[0].scrollTop = 0;
+                            // if(instance.length > 0 && instance[0].scrollTop >360){
+                            //     let rapid = instance[0].scrollTop/50;
+                            //         this.interval = setInterval(() => {
+                            //             //console.log(document.getElementsByTagName('html')[0].scrollTop);
+                            //             document.getElementsByTagName('html')[0].scrollTop -= rapid;
+                            //             ++this.jumped;
+                            //         },10);
+                            // }
             },
             simplify(){
                 if(this.$store.getters.getSimplifyStatus == 2){
@@ -127,5 +128,9 @@
    }
    #ss_menu > div a{
        vertical-align: middle;
+   }
+   .wheel-i-chat{
+       width: 60px;
+       height: 60px;
    }
 </style>

@@ -30,9 +30,11 @@
 			}
 		},
 		created() {
-			this.$store.dispatch('loadCategories', {
-				id: this.$route.query.user !== '' ? this.$route.query.user  : 1,
-			});
+			if(this.$route.name != '博客园' && this.$route.query.user){
+				this.$store.dispatch('loadCategories', {
+					id: this.$route.query.user !== '' ? this.$route.query.user  : 1,
+				});
+			}
 		}
 	}
 </script>

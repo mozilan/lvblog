@@ -16,6 +16,11 @@
 	h3.name{
 		margin:0;
 		font-size:16px;
+		font-weight: normal;
+	}
+	p.name{
+		margin: 0;
+		font-size: 14px;
 	}
 	.profile-pic{
 		width: 50px;
@@ -37,17 +42,17 @@
 			</div>
 			<div class="lv-clear-both"></div>
 			<el-row type="flex" class="el-col-24 recommend-item" justify="space-between" v-for="(item,index) in recommends" :key="index">
-					<el-col :span="4">
+					<el-col :span="4" class="item">
 						<div class="">
 							<el-image :src="item.article_thumb" alt="Mozilan" class="profile-pic"></el-image>
 						</div>
 					</el-col>
-					<el-col :span="18">
+					<el-col :span="18" style="padding-left:10px">
 						<div class="">
                             <router-link :to="{name:'查看文章',params: {art_id:item.article_id}}">
 							    <h3 title="Mozilan" class="name"> {{item.article_title}}</h3>
                             </router-link>
-							<span class="name"> {{item.article_description}}</span>
+							<p class="name"> {{item.article_description}}</p>
 						</div>
 					</el-col>
 
