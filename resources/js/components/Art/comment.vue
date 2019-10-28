@@ -15,7 +15,6 @@
                                   type="textarea"
                                   resize="none"
                                   :rows="3"
-                                  autofocus
                                   placeholder="提问的智慧 ? 评论 : 要知道,善良有时比聪明更重要.">
                         </el-input>
                         <div class="btn-control">
@@ -91,7 +90,6 @@
                                   type="textarea"
                                   resize="none"
                                   :rows="3"
-                                  autofocus
                                   placeholder="提问的智慧 ? 评论 : 要知道,善良有时比聪明更重要.">
                         </el-input>
                         <div class="btn-control">

@@ -50,7 +50,6 @@
                 }
                 $(this).data('rot', rot);
             });
-            $('html')[0].scrollTop = 0;
             //console.log($('html'));
         },
         methods:{
