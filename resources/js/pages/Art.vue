@@ -107,6 +107,7 @@
             bgImg.onload = () => { // 等背景图片加载成功后 去除loading
                 this.bg_loading = false
             };
+            $('html')[0].scrollTop = 0;
         },
         computed:{
             article(){
