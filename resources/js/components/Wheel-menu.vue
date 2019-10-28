@@ -50,6 +50,8 @@
                 }
                 $(this).data('rot', rot);
             });
+            $('html')[0].scrollTop = 0;
+            //console.log($('html'));
         },
         methods:{
             stopInterval(){
@@ -60,7 +62,8 @@
                 //     console.log('我被激活了');
                 //      window.clearInterval(this.interval);
                 // }
-                if(document.getElementsByTagName('html')[0].scrollTop == 0){
+                // if(document.getElementsByTagName('html')[0].scrollTop == 0){
+                if($('html')[0].scrollTop == 0){
                     window.clearInterval(this.interval);
                     console.log('已清除interval');
                 }
@@ -84,16 +87,16 @@
                             //         ++this.jumped;
                             //     }, 10);
                             // }
-                            // let instance = document.getElementsByTagName('html');
-                            document.getElementsByTagName('html')[0].scrollTop = 0;
-                            // if(instance.length > 0 && instance[0].scrollTop >360){
-                            //     let rapid = instance[0].scrollTop/50;
-                            //         this.interval = setInterval(() => {
-                            //             //console.log(document.getElementsByTagName('html')[0].scrollTop);
-                            //             document.getElementsByTagName('html')[0].scrollTop -= rapid;
-                            //             ++this.jumped;
-                            //         },10);
-                            // }
+                            let instance = $('html');
+                            //$('html')[0].scrollTop = 0;
+                            if(instance.length > 0 && instance[0].scrollTop >360){
+                                let rapid = instance[0].scrollTop/50;
+                                    this.interval = setInterval(() => {
+                                        //console.log(document.getElementsByTagName('html')[0].scrollTop);
+                                        $('html')[0].scrollTop -= rapid;
+                                        ++this.jumped;
+                                    },10);
+                            }
             },
             simplify(){
                 if(this.$store.getters.getSimplifyStatus == 2){
