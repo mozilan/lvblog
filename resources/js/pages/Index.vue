@@ -1,5 +1,5 @@
 <template>
-    <div class="blog el-scrollbar__wrap wrapper">
+    <div class="blog el-scrollbar__wrap">
         <el-backtop target=".page-component__scroll .el-scrollbar__wrap"></el-backtop>
         <el-row type="flex" class="row-bg" justify="center">
             <el-col :xs="24" :sm="24" :md="16" :lg="16">
@@ -194,8 +194,8 @@
             "$route": "getArticles"
         },
         mounted(){
-            let bs = new BScroll('.wrapper', {
-                pullUpLoad: true
+            this.$nextTick(() => {
+                this.scroll = new Bscroll(this.$refs.wrapper, {})
             });
             document.getElementsByClassName("blog")[0].addEventListener('scroll', this.handleScroll);
         },

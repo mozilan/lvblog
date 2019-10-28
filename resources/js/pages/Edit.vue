@@ -1,5 +1,5 @@
 <template>
-    <div class="edit el-scrollbar__wrap wrapper wrapper">
+    <div class="edit el-scrollbar__wrap wrapper">
         <el-backtop target=".page-component__scroll .el-scrollbar__wrap"></el-backtop>
     <el-row type="flex" justify="center">
         <el-col :xs="24" :sm="24" :md="16" :lg="16" :style="edit.styles">
@@ -184,8 +184,8 @@
           },
           mounted(){
                $('.ffl-wrapper').floatingFormLabels();
-               let bs = new BScroll('.wrapper', {
-                  pullUpLoad: true
+               this.$nextTick(() => {
+                   this.scroll = new Bscroll(this.$refs.wrapper, {})
                });
           },
           computed:{
@@ -446,154 +446,160 @@
      }
 </script>
 <style scoped lang="scss">
-     .title-animate {
-          .ffl-wrapper {
-               position: relative;
-               display: block;
-               padding-top: 1rem;
-          }
-          .ffl-wrapper .ffl-label {
-               transition-property: all;
-               transition-duration: 200ms;
-               transition-timing-function: ease;
-               transition-delay: 0s;
-               position: absolute;
-               white-space: nowrap;
-               max-width: 100%;
-               text-overflow: ellipsis;
-               overflow: hidden;
-               pointer-events: none;
-               top: 1.25rem;
-          }
-          .ffl-wrapper.ffl-floated .ffl-label {
-               top: 0;
-          }
-
-          .ffl-label {
-               color: #909090;
-               line-height: 1.2;
-          }
-          .ffl-floated .ffl-label {
-               color: #0289f3;
-               font-size: 0.75rem;
-          }
-
-          form {
-               max-width: 30rem;
-               margin: 2rem auto 0;
-               background-color: #ffffff;
-               padding: 1rem;
-          }
-          form:after {
-               content: "";
-               display: block;
-               clear: both;
-          }
-
-          input,
-          textarea,
-          select {
-               transition: border-bottom 100ms ease;
-               display: block;
-               width: 100%;
-               padding: 0;
-               margin-bottom: 1rem;
-               box-shadow: none;
-               appearance: none;
-               outline: none;
-               background-color: transparent;
-               border-style: none;
-               border-bottom-width: 1px;
-               border-bottom-style: solid;
-               border-bottom-color: rgba(0, 0, 0, 0.2);
-               height: 1.875rem;
-          }
-          input:hover,
-          textarea:hover,
-          select:hover {
-               border-bottom-width: 1px;
-               border-bottom-color: #909090;
-          }
-          input:focus,
-          textarea:focus,
-          select:focus {
-               border-bottom-width: 1px;
-               border-bottom-color: #0289f3;
-          }
-
-          textarea {
-               resize: none;
-               min-height: 1.875rem;
-          }
-
-          label > span {
-               color: #cccccc;
-          }
-
-          [type="submit"] {
-               transition: background-color 0.3s ease;
-               border: none;
-               background-color: #0289f3;
-               color: #ffffff;
-               padding: 0.5rem 1rem;
-               text-transform: uppercase;
-               cursor: pointer;
-               margin-top: 1rem;
-               float: right;
-          }
-          [type="submit"]:hover, [type="submit"]:focus {
-               background-color: #027bda;
-          }
-     }
      .edit{
          padding-bottom: 30px;
+         #excerpt{
+             font-size: 14px;
+         }
+
+         .title-animate {
+             .ffl-wrapper {
+                 position: relative;
+                 display: block;
+                 padding-top: 1rem;
+             }
+             .ffl-wrapper .ffl-label {
+                 transition-property: all;
+                 transition-duration: 200ms;
+                 transition-timing-function: ease;
+                 transition-delay: 0s;
+                 position: absolute;
+                 white-space: nowrap;
+                 max-width: 100%;
+                 text-overflow: ellipsis;
+                 overflow: hidden;
+                 pointer-events: none;
+                 top: 1.25rem;
+             }
+             .ffl-wrapper.ffl-floated .ffl-label {
+                 top: 0;
+             }
+
+             .ffl-label {
+                 color: #909090;
+                 line-height: 1.2;
+             }
+             .ffl-floated .ffl-label {
+                 color: #0289f3;
+                 font-size: 0.75rem;
+             }
+
+             form {
+                 max-width: 30rem;
+                 margin: 2rem auto 0;
+                 background-color: #ffffff;
+                 padding: 1rem;
+             }
+             form:after {
+                 content: "";
+                 display: block;
+                 clear: both;
+             }
+
+             input,
+             textarea,
+             select {
+                 transition: border-bottom 100ms ease;
+                 display: block;
+                 width: 100%;
+                 padding: 0;
+                 margin-bottom: 1rem;
+                 box-shadow: none;
+                 appearance: none;
+                 outline: none;
+                 background-color: transparent;
+                 border-style: none;
+                 border-bottom-width: 1px;
+                 border-bottom-style: solid;
+                 border-bottom-color: rgba(0, 0, 0, 0.2);
+                 height: 1.875rem;
+             }
+             input:hover,
+             textarea:hover,
+             select:hover {
+                 border-bottom-width: 1px;
+                 border-bottom-color: #909090;
+             }
+             input:focus,
+             textarea:focus,
+             select:focus {
+                 border-bottom-width: 1px;
+                 border-bottom-color: #0289f3;
+             }
+
+             textarea {
+                 resize: none;
+                 min-height: 1.875rem;
+             }
+
+             label > span {
+                 color: #cccccc;
+             }
+
+             [type="submit"] {
+                 transition: background-color 0.3s ease;
+                 border: none;
+                 background-color: #0289f3;
+                 color: #ffffff;
+                 padding: 0.5rem 1rem;
+                 text-transform: uppercase;
+                 cursor: pointer;
+                 margin-top: 1rem;
+                 float: right;
+             }
+             [type="submit"]:hover, [type="submit"]:focus {
+                 background-color: #027bda;
+             }
+         }
      }
 </style>
-<style type="text/css">
+<style lang="scss">
      #editor {
           margin: auto;
           width: 80%;
           height: 580px;
      }
-     .el-tag + .el-tag {
-          margin-left: 10px;
-     }
-     .button-new-tag {
-          margin-left: 10px;
-          height: 32px;
-          line-height: 30px;
-          padding-top: 0;
-          padding-bottom: 0;
-     }
-     .input-new-tag {
-          width: 90px;
-          margin-left: 0;
-          vertical-align: bottom;
-     }
-     .bl-public{
-          float: left;
-     }
-     .bl-save{
-          float: right;
-     }
-     .bl-margin-top{
-          margin-top: 20px ;
-     }
-     .button-new-tag{
-          margin-left:0;
-          height:40px;
-     }
-     .el-input--small .el-input__inner{
-          height: 40px;
-     }
-     .el-switch__label{
-          height:auto;
-     }
-     .bl-margin_bottom-title{
-          margin-bottom:15px;
-     }
-     .el-textarea{
-          font-size: 16px;
+     .edit{
+         .el-tag + .el-tag {
+             margin-left: 10px;
+         }
+         .button-new-tag {
+             margin-left: 10px;
+             height: 32px;
+             line-height: 30px;
+             padding-top: 0;
+             padding-bottom: 0;
+         }
+         .input-new-tag {
+             width: 90px;
+             margin-left: 0;
+             vertical-align: bottom;
+         }
+         .bl-public{
+             float: left;
+         }
+         .bl-save{
+             float: right;
+         }
+         .bl-margin-top{
+             margin-top: 20px ;
+         }
+         .button-new-tag{
+             margin-left:0;
+             height:40px;
+         }
+         .el-input--small .el-input__inner{
+             height: 40px;
+         }
+         .el-switch__label{
+             height:auto;
+         }
+         .bl-margin_bottom-title{
+             margin-bottom:15px;
+         }
+         .el-textarea{
+             font-size: 16px;
+         }
      }
 
 </style>
