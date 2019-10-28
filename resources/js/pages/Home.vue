@@ -1,13 +1,6 @@
 <template>
-    <div class="home" :style="home_style">
-        <el-popover
-                ref="popover1"
-                placement="top-start"
-                title="hello～"
-                width="200"
-                trigger="hover"
-                content="点击图片进入我的家～">
-        </el-popover>
+    <div class="home el-scrollbar__wrap">
+        <el-backtop target=".page-component__scroll .el-scrollbar__wrap"></el-backtop>
         <transition name="el-fade-in-linear">
             <div v-show="loading_screen" @click="cancelLoadingImage" class="loading-screen" v-loading="loadings.bg_loading" :style="{'background-image':bg_url}">
                 <el-avatar v-if="other.avatar !== null" class="loading-avatar" :size="55" :src="other.avatar"></el-avatar><el-avatar class="loading-avatar" :size="55"  v-if="other.avatar===null">{{other.name}}</el-avatar>
@@ -289,11 +282,9 @@
         },
         data() {
             return {
-                home_style:{
-                  minHeight:'',
-                },
                 main_style:{
                     height:'',
+                    minHeight:'',
                 },
                 activeName:'first',
                 activeNameEditor:'firstEditor',
@@ -422,11 +413,6 @@
                 this.showHomePage();
             },
             showHomePage(){
-                if(window.innerWidth < 683){
-                    this.home_style={
-                        minHeight:'1500px',
-                    };
-                }
                 this.page.show = false;
                 this.page.resume_page=false;
                 this.page.edit_page=false;
@@ -451,11 +437,6 @@
                 },3500);
             },
             showResumePage(){
-                if(window.innerWidth < 683){
-                    this.home_style={
-                        minHeight:'1500px',
-                    };
-                }
                 this.page.show = false;
                 this.page.home_page=false;
                 this.page.edit_page=false;
@@ -472,11 +453,6 @@
                 },1000);
             },
             showEditPage(){
-                if(window.innerWidth < 683){
-                    this.home_style={
-                        minHeight:'1500px',
-                    };
-                }
                 this.page.show = false;
                 this.page.home_page=false;
                 this.page.resume_page=false;
@@ -582,9 +558,9 @@
         created(){
             a = [];
             if(window.innerWidth > 763){
-                // console.log("高"+window.innerHeight);
-                // this.home_style.minHeight = window.innerHeight + "px";
                 this.main_style.height = window.innerHeight - 145 + "px";
+            }else{
+                this.main_style.minHeight = 1200 + 'px';
             }
             this.getImage(0);
             this.getImage(1);
@@ -1115,6 +1091,7 @@
         font-size: 16px;
         width: 100%;
         text-align: center;
+        font-weight: bold;
     }
     #frontpage{
         position: relative;
