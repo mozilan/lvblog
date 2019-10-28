@@ -45,6 +45,9 @@ html,body{
   .el-backtop{
     visibility: hidden;
   }
+  .el-form-item{
+    margin-bottom: 12px;
+  }
   @media screen and (max-width: 450px) {
     .el-dialog{
       margin-top: 6vh!important;
@@ -65,7 +68,9 @@ html,body{
   //blog css
 
   .blog{
-
+    .lv-break{
+      height: 40px;position: absolute;padding-left:5px;max-width: 100px;line-height: 40px;
+    }
     h5{
       color: #333333;
     }
@@ -90,7 +95,7 @@ html,body{
 
     .clear-title {
       padding-left: 5px;
-      margin: 0;
+      margin: 5px 0 0 0;
       font-weight: normal;
     }
 
@@ -108,7 +113,7 @@ html,body{
 
     .art-body {
       display: flex;
-      padding: 10px 0;
+      padding-top: 10px;
     }
 
     .art-category {
@@ -293,7 +298,8 @@ html,body{
     white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
   }
   .lv-blog-popover{
-    max-width: 150px;
+    width: 100%;
+    border-bottom: 1px #dcdfe6 solid;;
   }
   .el-message-box{
     width: 350px;

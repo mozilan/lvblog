@@ -11,32 +11,33 @@
                                     <el-row class="art-item">
                                         <div class="lv-card-shadow" :style="showModel.body">
                                             <div class="lv-blog-popover">
-                                                <el-popover
-                                                        placement="top"
-                                                        width="200"
-                                                        trigger="hover">
-                                                    <el-row  type="flex" class="row-bg" justify="space-between">
-                                                        <div :span="6">
-                                                            <el-avatar :size="45" :src="i.user.data.avatar"></el-avatar>
-                                                        </div>
-                                                        <div :span="14" style="margin-left:5px"><span style="margin: 5px 0;font-size: 16px;color:#F56C6C;font-weight: bold">{{i.user.data.name}}</span><br><span style="margin: 5px 0">{{i.user.data.introduction}}</span></div>
-                                                    </el-row>
-                                                    <el-divider></el-divider>
-                                                    <router-link :to="{ name:'主页' ,params:{'user':i.user_id},query:{user:i.user_id}}"  >
-                                                        <a href="#"><span style="color: cornflowerblue;">访问主页</span></a>
-                                                    </router-link>
-                                                    <router-link :to="{ name:'用户文章' ,params:{'user':i.user_id},query:{user:i.user_id}}" style="float: right"  >
-                                                        <a href="#">他的博客</a>
-                                                    </router-link>
-                                                    <div slot="reference">
-                                                        <el-avatar :size="25" :src="i.user.data.avatar"></el-avatar>
-                                                        <router-link class="lv-break" :to="{ name:'用户文章' ,params:{'user':i.user_id}}" style="height: 25px;position: absolute;padding-left:5px;max-width: 100px"  >
-                                                            <a href="#">{{i.user.data.name}}</a>
+                                                <div style="max-width: 150px">
+                                                    <el-popover
+                                                            placement="top"
+                                                            width="200"
+                                                            trigger="hover">
+                                                        <el-row  type="flex" class="row-bg" justify="space-between">
+                                                            <div :span="6">
+                                                                <el-avatar :size="45" :src="i.user.data.avatar"></el-avatar>
+                                                            </div>
+                                                            <div :span="14" style="margin-left:5px"><span style="margin: 5px 0;font-size: 16px;color:#F56C6C;font-weight: bold">{{i.user.data.name}}</span><br><span style="margin: 5px 0">{{i.user.data.introduction}}</span></div>
+                                                        </el-row>
+                                                        <el-divider></el-divider>
+                                                        <router-link :to="{ name:'主页' ,params:{'user':i.user_id},query:{user:i.user_id}}"  >
+                                                            <a href="#"><span style="color: cornflowerblue;">访问主页</span></a>
                                                         </router-link>
-                                                    </div>
-                                                </el-popover>
+                                                        <router-link :to="{ name:'用户文章' ,params:{'user':i.user_id},query:{user:i.user_id}}" style="float: right"  >
+                                                            <a href="#">他的博客</a>
+                                                        </router-link>
+                                                        <div slot="reference">
+                                                            <img class="lv-avatar" :src="i.user.data.avatar">
+                                                            <router-link class="lv-break" :to="{ name:'用户文章' ,params:{'user':i.user_id}}">
+                                                                <a href="#">{{i.user.data.name}}</a>
+                                                            </router-link>
+                                                        </div>
+                                                    </el-popover>
+                                                </div>
                                             </div>
-                                            <el-divider></el-divider>
                                             <h5 :style="showModel.title" class="clear-title lv-border-left"><router-link :to="{name:'查看文章',params: {art_id:i.id}}"   class="art-title">{{i.title}}</router-link></h5>
                                             <el-row class="art-info d-flex align-items-center justify-content-start">
                                                 <div class="art-time" :style="showModel.time"><i class="el-icon-time"></i>：{{i.created_at}}</div>

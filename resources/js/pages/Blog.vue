@@ -64,6 +64,7 @@
                                     <el-row class="art-item">
                                         <div class="lv-card-shadow" :style="showModel.body">
                                             <div class="lv-blog-popover">
+                                                <div style="max-width: 150px">
                                                 <el-popover
                                                         placement="top"
                                                         width="200"
@@ -81,15 +82,16 @@
                                                     <router-link :to="{ name:'用户文章' ,params:{'user':i.user_id},query:{user:i.user_id}}" style="float: right"  >
                                                         <a href="#">Ta的博客</a>
                                                     </router-link>
-                                                    <div slot="reference">
-                                                        <el-avatar :size="25" :src="i.user.data.avatar"></el-avatar>
-                                                        <router-link :to="{ name:'用户文章' ,params:{'user':i.user_id}}" style="height: 25px;position: absolute;padding-left:5px;"  >
-                                                            <a href="#">{{i.user.data.name}}</a>
-                                                        </router-link>
-                                                    </div>
+
+                                                        <div slot="reference">
+                                                            <img class="lv-avatar" :src="i.user.data.avatar">
+                                                            <router-link :to="{ name:'用户文章' ,params:{'user':i.user_id}}" class="lv-break" >
+                                                                <a href="#">{{i.user.data.name}}</a>
+                                                            </router-link>
+                                                        </div>
                                                 </el-popover>
+                                                </div>
                                             </div>
-                                            <el-divider></el-divider>
                                             <h5 :style="showModel.title" class="clear-title lv-border-left"><router-link :to="{name:'查看文章',params: {art_id:i.id}}"   class="art-title">{{i.title}}</router-link></h5>
                                             <el-row class="art-info d-flex align-items-center justify-content-start">
                                                 <div class="art-time" :style="showModel.time"><i class="el-icon-time"></i>：{{i.created_at}}</div>
