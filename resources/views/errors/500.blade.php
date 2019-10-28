@@ -13,11 +13,11 @@
 
     <title>LvBlog</title>
 
-    {{--<script type='text/javascript'>--}}
-        {{--window.Laravel = <?php echo json_encode([--}}
-            {{--'csrfToken' => csrf_token(),--}}
-        {{--]); ?>--}}
-    {{--</script>--}}
+    <script type='text/javascript'>
+        window.Laravel = <?php echo json_encode([
+            'csrfToken' => csrf_token(),
+        ]); ?>
+    </script>
 </head>
 <style type="text/css">
     #chang-jian-ye-mian-bu-ju + .demo-container .el-footer, #chang-jian-ye-mian-bu-ju + .demo-container .el-header {
