@@ -231,9 +231,9 @@
                },
                tagHandleInputConfirm() {
                     let tagInputValue = this.tagInputValue;
-                    if(tagInputValue.length > 10){
+                    if(tagInputValue.length > 18){
                          this.$message({
-                              message: "标签名称不能超过10个单位长度",
+                              message: "标签名称不能超过18个单位长度",
                               type: 'warning'
                          });
                          this.tagInputVisible = false;

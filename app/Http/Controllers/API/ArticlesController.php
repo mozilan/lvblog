@@ -19,6 +19,7 @@ class ArticlesController extends Controller
 {
     //
     protected $perpage = 4;
+    protected $tagMaxLength = 18;
     public function store(ArticleRequest $request, Article $article)
     {
         $article->fill($request->all());
@@ -34,6 +35,9 @@ class ArticlesController extends Controller
             //发布标签和标签文章对照表
             if ($request->tags) {
                 foreach ($request->tags as $v) {
+                    if(strlen($v) > $this->tagMaxLength){
+                        continue;
+                    }
                     if (Tag::where([['name', $v], ['user_id', $this->user()->id]])->first() != null) {
                         $tag = Tag::where([
                             ['name', $v],
@@ -86,6 +90,9 @@ class ArticlesController extends Controller
             //发布标签和标签文章对照表
             if($request->tags){
                 foreach ($request->tags as $v){
+                    if(strlen($v) > $this->tagMaxLength){
+                        continue;
+                    }
                     if(Tag::where([['name',$v],['user_id',$this->user()->id]])->first() != null){
                         $tag = Tag::where([
                             ['name',$v],
