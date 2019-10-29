@@ -16,7 +16,7 @@ export const common = {
                     padding:'8px 0'
                 },
                 title:{
-                    marginTop:'15px',
+                    marginTop:'5px',
                     marginBottom:'0'
                 },
                 time:{
@@ -48,8 +48,8 @@ export const common = {
                     padding:'8px 0'
                 },
                 title:{
-                    marginTop:'0',
-                    marginBottom:'10px'
+                    marginTop:'5px',
+                    marginBottom:'5px'
                 },
                 time:{
                     display:'none'

@@ -22,6 +22,7 @@
     }
     .header-bread{
         position:fixed;
+        left:5px;
         top:60px;
         width: 100%;
         z-index:100;
