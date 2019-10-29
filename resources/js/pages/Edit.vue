@@ -1,8 +1,8 @@
 <template>
-    <div class="edit el-scrollbar__wrap wrapper">
+    <div class="edit el-scrollbar__wrap">
         <el-backtop target=".page-component__scroll .el-scrollbar__wrap"></el-backtop>
-    <el-row type="flex" justify="center">
-        <el-col :xs="24" :sm="24" :md="16" :lg="16" :style="edit.styles">
+    <el-row type="flex" justify="center" style="padding-bottom:30px">
+        <el-col :xs="24" :sm="24" :md="16" :lg="16" :style="edit.styles.col">
                     <div class="title-animate">
                          <div :class="ffl_input">
                               <label for="title" class="ffl-label">文章标题</label>
@@ -10,7 +10,7 @@
                          </div>
                     </div>
                     <el-form :model="form" :style="form_style">
-                         <mavon-editor ref=md :toolbars="markdownOption" v-model="form.handbook" :ishljs = "true" @imgAdd="$imgAdd"></mavon-editor>
+                         <mavon-editor ref=md :toolbars="markdownOption" v-model="form.handbook" :ishljs = "true" @imgAdd="$imgAdd" :style="styles.mavon_style"></mavon-editor>
                          <div class="title-animate bl-margin_bottom-title bl-margin-top">
                               <div :class="ffl_input">
                                    <label for="excerpt" class="ffl-label">文章摘要 <span>(可选)</span></label>
@@ -99,7 +99,6 @@
                     </el-form>
             </el-col>
         </el-row>
-        <WhellMenu></WhellMenu>
     </div>
 </template>
 <script>
@@ -108,24 +107,20 @@
      import 'mavon-editor/dist/css/index.css'
      import { EventBus } from '../event-bus'
      import floating_form_labels from 'floating-form-labels'
-     import WhellMenu from '../components/Wheel-menu'
-     import BScroll from '@better-scroll/core'
-     import PullUp from '@better-scroll/pull-up'
      export default {
           name: 'editor',
           components: {
               floating_form_labels,
               mavonEditor,
-              WhellMenu
           },
           data() {
                return {
-                   // styles:{
-                   //     mavon_style:{
-                   //         minHeight:'',
-                   //         zIndex:0,
-                   //     },
-                   // },
+                   styles:{
+                       mavon_style:{
+                           minHeight :'',
+                           zIndex:900,
+                       },
+                   },
                     ffl_input:'ffl-wrapper bl-margin_bottom-title',
                     form_style:{
                          height:'',
@@ -434,10 +429,9 @@
                        this.$message.warning('不要抄袭别人的文章哦！来自己写一篇叭～')
                    }
                }
-               //已废弃
-               // var h = window.innerHeight-430;//可见区域高度
+               var h = window.innerHeight-430;//可见区域高度
                // this.form_style.height = h+'px';
-               // this.styles.mavon_style.minHeight = window.innerHeight-531+'px';
+               this.styles.mavon_style.minHeight = window.innerHeight-500+'px';
           },
          destroyed() {
              if(window.innerWidth > 683){

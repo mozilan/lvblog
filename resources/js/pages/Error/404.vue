@@ -1101,7 +1101,7 @@
     }
 </style>
 <template>
-    <div id="error" class="error">
+    <div id="error" class="error el-scrollbar__wrap">
         <Navigation></Navigation>
         <div class="lv-container">
             <div class="error">

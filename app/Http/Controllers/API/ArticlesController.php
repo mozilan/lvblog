@@ -154,7 +154,6 @@ class ArticlesController extends Controller
     }
     public function userIndex(Article $article,$user, Request $request)
     {
-
         $user = User::find($user);
         if(!$user->first()){
             return response()->json(['message' => '不存在此用户'], 403);

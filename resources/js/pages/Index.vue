@@ -5,7 +5,7 @@
             <el-col :xs="24" :sm="24" :md="16" :lg="16">
                 <el-row type="flex" class="row-bg lv-row-bg" justify="space-between">
                     <el-col :span="16"  class="lv-blog-side lv-page-component__scroll" id="art-side" v-loading="loading">
-                        <div class="lv-scrollbar__wrap" :style="infinite_box">
+                        <div class="lv-scrollbar__wrap wrapper" :style="infinite_box">
                             <ul class="list">
                                 <li v-for="(i , index) in articles.data"  :key="index" class="infinite-list-item">
                                     <el-row class="art-item">
@@ -139,12 +139,13 @@
     import Notice from '../components/Notice'
     import VFooter from '../components/global/V-Footer'
     import WhellMenu from '../components/Wheel-menu'
-    import _judge_bottom from '../utils/judge_bottom';
-    import BScroll from '@better-scroll/core';
-    import PullUp from '@better-scroll/pull-up';
+    import _judge_bottom from '../utils/judge_bottom'
+    import BScroll from 'better-scroll'
+    import PullUp from '@better-scroll/pull-up'
     export default {
         data () {
             return {
+                scroll:{},
                 loading: false,
                 infinite_box:{
                     maxHeight:'',
@@ -192,16 +193,22 @@
         },
         watch: {
             // 如果路由有变化，会再次执行该方法
-            "$route": "getArticles"
+            "$route": "getArticles",
         },
         mounted(){
-            this.$nextTick(() => {
-                this.scroll = new Bscroll(this.$refs.wrapper, {})
-            });
             document.getElementsByClassName("blog")[0].addEventListener('scroll', this.handleScroll);
         },
         created(){
             //
+            this.$watch(this.$store.getters.getArticlesLoadStatus, function () {
+                if(this.$store.getters.getArticlesLoadStatus() === 2) {
+                    this.$nextTick(() => {
+                        this.scroll = new BScroll('.wrapper' ,{});
+                        console.log('已初始化btterscroll');
+                        console.log(this.scroll);
+                    });
+                }
+            });
             this.getArticles();
             // let h = window.innerHeight-212;//可见区域高度 -152px
             // this.infinite_box.maxHeight = this.infinite_side.maxHeight = h+'px';

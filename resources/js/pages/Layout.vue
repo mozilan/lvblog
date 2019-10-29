@@ -49,12 +49,12 @@
 <template>
     <div id="app-layout" class="app">
         <Navigation></Navigation>
-        <div class="lv-container page-component__scroll el-scrollbar" ref="wrapper">
+        <div class="lv-container page-component__scroll el-scrollbar wrapper" ref="wrapper">
             <Notification></Notification>
             <div class="header-bread">
                 <div class="header-bread-fillbg">
                     <el-row type="flex" class="breadcrumb" justify="center">
-                        <el-col :lg="16" :md="16" :sm="24" :xs="24" class="content" :style="edit.styles">
+                        <el-col :lg="16" :md="16" :sm="24" :xs="24" class="content" :style="edit.styles.bread">
                             <el-breadcrumb separator="/" class="breadcrumb-inner">
                                 <el-breadcrumb-item v-for="(item,index) in $route.matched" :key="index">
                                     <router-link class="lv-breadcrumb-a" :to="{ name:item.name }">{{ item.name }}</router-link>

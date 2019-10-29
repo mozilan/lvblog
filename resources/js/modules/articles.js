@@ -49,7 +49,7 @@ export const articles = {
     actions:{
         loadArticles({commit,state},data ){
             commit('setArticlesLoadStatus',1);
-            if(data.user === ''){
+            if(data.user == ''){
                 ArticleAPI.getArticles(data.page !== '' ? data.page : 1)
                     .then(function (response) {
                         if(state.articles.data !== undefined){

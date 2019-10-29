@@ -341,15 +341,6 @@ html,body{
   overflow: hidden;
   position: relative;
 }
-.el-scrollbar__wrap {
-  overflow: scroll;
-  overflow-x: scroll;
-  height: 100%;
-}
-.blog, .art, .home, .edit {
-  -webkit-overflow-scrolling: touch;
-  overflow-scrolling: touch;
-}
 @media only screen and (max-width: 683px) {
   .lv-container{
     margin-top: 94px;

@@ -205,6 +205,16 @@
             window.addEventListener('scroll', this.handleScroll);
             //console.log(this.$route.params.owner+' '+this.$route.params.draft+' '+this.$route.params.private);
             this.getArticles();
+            //smoothly scroll
+            this.$watch(this.$store.getters.getArticlesLoadStatus, function () {
+                if(this.$store.getters.getArticlesLoadStatus() === 2) {
+                    this.$nextTick(() => {
+                        this.scroll = new BScroll('.wrapper' ,{});
+                        console.log('已初始化better-scroll');
+                        console.log(this.scroll);
+                    });
+                }
+            });
             //第二次被废弃
             //this.infinite_box.maxHeight = this.infinite_side.maxHeight = window.innerHeight-212 +'px';
             //废弃
@@ -293,15 +303,18 @@
                     if(this.$route.params.owner !== undefined && this.$route.params.draft === undefined&& this.$route.params.private === undefined)
                     {
                         this.$store.dispatch('loadArticles',{
+                            user:this.$route.params.owner ? this.$route.params.owner : '',
                             page: this.$store.getters.getArticles.meta === undefined ? 1 : ++this.$store.getters.getArticles.meta.pagination.current_page,
 
                         });
                     }else if(this.$route.params.owner === undefined&& this.$route.params.draft === undefined && this.$route.params.private !== undefined){
                         this.$store.dispatch('loadPrivateArticles',{
+                            user:this.$route.params.owner ? this.$route.params.owner : '',
                             page: this.$store.getters.getArticles.meta === undefined ? 1 : ++this.$store.getters.getArticles.meta.pagination.current_page,
                         });
                     }else if(this.$route.params.owner === undefined && this.$route.params.draft !==undefined && this.$route.params.private === undefined){
                         this.$store.dispatch('loadDraftArticles',{
+                            user:this.$route.params.owner ? this.$route.params.owner : '',
                             page: this.$store.getters.getArticles.meta === undefined ? 1 : ++this.$store.getters.getArticles.meta.pagination.current_page,
                         });
                     }else{

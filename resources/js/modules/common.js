@@ -13,7 +13,7 @@ export const common = {
         blog: {
             gorgeous_art:{
                 body:{
-                    padding:'8px 0'
+                    padding:'8px'
                 },
                 title:{
                     marginTop:'5px',
@@ -45,7 +45,7 @@ export const common = {
             },
             simplify_art:{
                 body:{
-                    padding:'8px 0'
+                    padding:'8px'
                 },
                 title:{
                     marginTop:'5px',
@@ -64,7 +64,7 @@ export const common = {
                     display:'none'
                 },
                 simple_read:{
-                    color:'orange',
+                    customStylesor:'orange',
                     display:'block'
                 },
                 abstract:{
@@ -77,7 +77,7 @@ export const common = {
             },
             art:{
                 body:{
-                    padding:'8px 0'
+                    padding:'8px'
                 },
                 title:{
 
@@ -105,9 +105,15 @@ export const common = {
         },
         last_path:'',
         edit:{
-            col:{
-                width:'100%',
-                padding:'0 20px'
+            customStyles:{
+                col:{
+                    width:'100%',
+                    padding:'0 20px'
+                },
+                bread:{
+                    width:'100%',
+                    padding:'0 25px'
+                },
             },
             styles:{
 
@@ -133,7 +139,7 @@ export const common = {
             commit('setLastPath',data.params);
         },
         fullScreenEditor({commit,state}){
-            commit('setScreenEditor',state.edit.col);
+            commit('setScreenEditor',state.edit.customStyles);
         },
         cancelScreenEditor({commit}){
             commit('setScreenEditor','');

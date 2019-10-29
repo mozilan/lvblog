@@ -10,7 +10,8 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
     {{--css--}}
-    <link href="https://mozilan.geekadpt.cn/lvblog/public/css/app.css" rel="stylesheet" type="text/css"/>
+    <link href="{{ mix('css/app.css') }}" rel="stylesheet" type="text/css"/>
+    {{--<link href="https://mozilan.geekadpt.cn/lvblog/public/css/app.css" rel="stylesheet" type="text/css"/>--}}
     <!-- Favicon-->
     <link rel="shortcut icon" href=”https://mozilan.geekadpt.cn/www/img/favicon/favicon-64.ico” type=”image/x-icon”>
 </head>
@@ -30,7 +31,8 @@
     <router-view></router-view>
 </div>
 
-<script type="text/javascript" src="https://mozilan.geekadpt.cn/lvblog/public/js/app.js"></script>
+<script type="text/javascript" src="{{ mix('js/app.js') }}"></script>
+{{--<script type="text/javascript" src="https://mozilan.geekadpt.cn/lvblog/public/js/app.js"></script>--}}
 
 </body>
 </html>

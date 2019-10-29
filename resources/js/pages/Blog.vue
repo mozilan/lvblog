@@ -231,6 +231,15 @@
             document.getElementsByClassName("blog")[0].addEventListener('scroll', this.handleScroll);
         },
         created(){
+            this.$watch(this.$store.getters.getArticlesLoadStatus, function () {
+                if(this.$store.getters.getArticlesLoadStatus() === 2) {
+                    this.$nextTick(() => {
+                        this.scroll = new BScroll('.wrapper' ,{});
+                        console.log('已初始化btterscroll');
+                        console.log(this.scroll);
+                    });
+                }
+            });
             this.getArticles();
             //第二次被废弃
             // this.infinite_box.maxHeight = this.infinite_side.maxHeight = window.innerHeight-212 +'px';
