@@ -15,12 +15,12 @@
                                 trigger="hover"
                                 content="Hexo-Sakura 静态博客">
                             <a slot="reference" class="" href="https://mozilan.com" target="_blank" style="margin-top: 10px;display: block;border-top: 1px solid #d3e0e9;border-bottom: 1px solid #d3e0e9;">
-                                <img src="https://mozilan.geekadpt.cn//img/adsense/ad1.png" class="ui popover" data-variation="inverted" data-content="" width="100%">
+                                <img src="https://mozilan.geekadpt.cn/www/img/adsense/ad1.png" class="ui popover" data-variation="inverted" data-content="" width="100%">
                             </a>
                         </el-popover>
                         <el-tooltip class="item" effect="dark" content="Laravel-China 社区" placement="left">
                             <a class="" href="https://learnku.com" target="_blank" style="display: block;border-top: 1px solid #d3e0e9;border-bottom: 1px solid #d3e0e9;">
-                                <img src="https://mozilan.geekadpt.cn//img/adsense/ad2.png" class="ui popover" data-variation="inverted" data-content="" width="100%">
+                                <img src="https://mozilan.geekadpt.cn/www/img/adsense/ad2.png" class="ui popover" data-variation="inverted" data-content="" width="100%">
                             </a>
                         </el-tooltip>
                     </div>

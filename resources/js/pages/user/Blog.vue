@@ -196,25 +196,25 @@
             "$route": "getArticles"
         },
         mounted(){
-            this.$nextTick(() => {
-                this.scroll = new Bscroll(this.$refs.wrapper, {})
-            });
-            document.getElementsByClassName("blog")[0].addEventListener('scroll', this.handleScroll);
+            // this.$nextTick(() => {
+            //     this.scroll = new Bscroll(this.$refs.wrapper, {})
+            // });
+            // document.getElementsByClassName("blog")[0].addEventListener('scroll', this.handleScroll);
         },
         created(){
             window.addEventListener('scroll', this.handleScroll);
             //console.log(this.$route.params.owner+' '+this.$route.params.draft+' '+this.$route.params.private);
             this.getArticles();
             //smoothly scroll
-            this.$watch(this.$store.getters.getArticlesLoadStatus, function () {
-                if(this.$store.getters.getArticlesLoadStatus() === 2) {
-                    this.$nextTick(() => {
-                        this.scroll = new BScroll('.wrapper' ,{});
-                        console.log('已初始化better-scroll');
-                        console.log(this.scroll);
-                    });
-                }
-            });
+            // this.$watch(this.$store.getters.getArticlesLoadStatus, function () {
+            //     if(this.$store.getters.getArticlesLoadStatus() === 2) {
+            //         this.$nextTick(() => {
+            //             this.scroll = new BScroll('.wrapper' ,{});
+            //             console.log('已初始化better-scroll');
+            //             console.log(this.scroll);
+            //         });
+            //     }
+            // });
             //第二次被废弃
             //this.infinite_box.maxHeight = this.infinite_side.maxHeight = window.innerHeight-212 +'px';
             //废弃
@@ -363,6 +363,7 @@
             }
         },
         destroyed() {
+            this.$store.dispatch('clearArticles');
             document.getElementsByClassName("blog")[0].removeEventListener('scroll', this.handleScroll);
         }
     }
