@@ -40,8 +40,12 @@
                     <i class="el-icon-caret-right"></i>
                     {{configs.copyright}}
 					<!--© 2019-2022·蓝默空间·版权所有--><br>
-                   Powered by <span><a href="https://mozilan.com">{{configs.author}}</a></span>
+
                 </el-col>
+                <el-col :span="24" class="copyright">
+                    Powered by <span><a href="https://mozilan.com">{{configs.author}}</a></span>
+                </el-col>
+
                 <template>
                     <el-col :span="24" class="copyright run">
                         <i class="el-icon-loading"></i>

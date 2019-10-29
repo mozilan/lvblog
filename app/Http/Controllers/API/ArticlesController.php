@@ -99,19 +99,19 @@ class ArticlesController extends Controller
                         $tag -> num = 1;
                     }
                     $tag->save();
-                    //添加分类表
-                    $article_map_tag = new ArticleMapTag();
-                    $article_map_tag-> tag_id = $tag->id;
-                    $article_map_tag-> article_id = $article->id;
-                    $article_map_tag->save();
-                    //发布归档
-                    $archieve = new Archive();
-                    $archieve->user_id = $this->user()->id;
-                    $archieve->article_id = $article->id;
-                    $archieve->title = $article->title;
-                    $archieve->save();
                 }
             }
+            //添加分类表
+            $article_map_tag = new ArticleMapTag();
+            $article_map_tag-> tag_id = $tag->id;
+            $article_map_tag-> article_id = $article->id;
+            $article_map_tag->save();
+            //发布归档
+            $archieve = new Archive();
+            $archieve->user_id = $this->user()->id;
+            $archieve->article_id = $article->id;
+            $archieve->title = $article->title;
+            $archieve->save();
         }
         return response()->json(['message' => '更新成功'], 201);
     }

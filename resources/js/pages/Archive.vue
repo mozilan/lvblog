@@ -1,5 +1,5 @@
 <template>
-    <div class="archive">
+    <div class="archive el-scrollbar__wrap">
         <el-row type="flex" justify="center">
             <el-col :xs="24" :sm="24" :md="16" :lg="16">
                 <div class="count">归档：{{archives.meta.count}}篇</div>
