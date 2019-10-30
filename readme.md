@@ -1,6 +1,6 @@
 <p align="center"><img src="https://images.gitee.com/uploads/images/2019/1030/103313_1b97b016_2215545.png"></p>
 
-### <p align="center">蓝默空间のLvBlog-V1.1.1</p>
+### <p align="center">蓝默空间のLvBlog-1.1.2.20191030_release</p>
 
 
 ## 关于
