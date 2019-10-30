@@ -38,6 +38,7 @@
     }
     @media only screen and (max-width: 683px){
         .breadcrumb{
+            left: 0;
             padding-top:0;
         }
         .content{

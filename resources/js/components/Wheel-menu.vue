@@ -129,6 +129,9 @@
    @import "../../sass/wheel-menu/animate.min.css";
    /*@import "../../sass/wheel-menu/normalize.css";*/
    @import "../../sass/wheel-menu/styles.css";
+   #ss_menu{
+       z-index: 1100;
+   }
    #ss_menu > div{
        cursor: pointer;
    }

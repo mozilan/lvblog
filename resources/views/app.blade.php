@@ -13,7 +13,7 @@
     {{--<link href="{{ mix('css/app.css') }}" rel="stylesheet" type="text/css"/>--}}
     <link href="https://mozilan.geekadpt.cn/lvblog/public/css/app.css" rel="stylesheet" type="text/css"/>
     <!-- Favicon-->
-    <link rel="shortcut icon" href="https://mozilan.geekadpt.cn/www/img/favicon/favicon-64.ico" type="image/x-icon">
+    <link rel="icon" type="image/x-icon" href="https://mozilan.geekadpt.cn/www/img/favicon/favicon-64.ico">
 </head>
 <body>
 {{--

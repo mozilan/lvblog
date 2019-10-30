@@ -99,6 +99,7 @@
                     </el-form>
             </el-col>
         </el-row>
+        <WhellMenu></WhellMenu>
     </div>
 </template>
 <script>
@@ -107,11 +108,13 @@
      import 'mavon-editor/dist/css/index.css'
      import { EventBus } from '../event-bus'
      import floating_form_labels from 'floating-form-labels'
+     import WhellMenu from '../components/Wheel-menu'
      export default {
           name: 'editor',
           components: {
               floating_form_labels,
               mavonEditor,
+              WhellMenu
           },
           data() {
                return {
