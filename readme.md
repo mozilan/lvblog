@@ -1,72 +1,102 @@
-<p align="center"><img src="https://laravel.com/assets/img/components/logo-laravel.svg"></p>
+<p align="center"><img src="https://images.gitee.com/uploads/images/2019/1030/103313_1b97b016_2215545.png"></p>
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/d/total.svg" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/v/stable.svg" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/license.svg" alt="License"></a>
-</p>
+### <p align="center">蓝默空间のLvBlog-V1.1.1</p>
 
-## About Laravel
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## 关于
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+LvBlog 是我们应用的名称，“L” 是 Laravel 的缩写 , “v” 是 Vue 的缩写，本项目是基于 Laravel 5.8 + Vue 2 开发， 实现了 API 驱动、前后端分离和响应式的单页面博客类 Web 应用。 
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## 安装
 
-## Learning Laravel
+- composer install
+- yarn install
+- php artisan storage:link 
+- php artisan key:generate
+- php artisan jwt:secret 
+- php artisan migrate 
+- php artisan admin:install 
+- php artisan up 
+- npm run production
+- sudo chmod -R 777 storage
+- sudo chown -R www-data:www-data /var/www/www.mozilan.com
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+## 配置
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1400 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+-  [Laravel-admin](https://laravel-admin.org/docs/zh/) 初始化应用配置表
 
-## Laravel Sponsors
+## 特性
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+1. 首页、博客园
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[British Software Development](https://www.britishsoftware.co)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- [UserInsights](https://userinsights.com)
-- [Fragrantica](https://www.fragrantica.com)
-- [SOFTonSOFA](https://softonsofa.com/)
-- [User10](https://user10.com)
-- [Soumettre.fr](https://soumettre.fr/)
-- [CodeBrisk](https://codebrisk.com)
-- [1Forge](https://1forge.com)
-- [TECPRESSO](https://tecpresso.co.jp/)
-- [Runtime Converter](http://runtimeconverter.com/)
-- [WebL'Agence](https://weblagence.com/)
-- [Invoice Ninja](https://www.invoiceninja.com)
-- [iMi digital](https://www.imi-digital.de/)
-- [Earthlink](https://www.earthlink.ro/)
-- [Steadfast Collective](https://steadfastcollective.com/)
-- [We Are The Robots Inc.](https://watr.mx/)
-- [Understand.io](https://www.understand.io/)
-- [Abdel Elrafa](https://abdelelrafa.com)
-- [Hyper Host](https://hyper.host)
+- 小白板
+- 今日推荐
+- 友情链接
+- 广告位
+- 联系我们
+- 标签云
+- Ta的标签、分类
 
-## Contributing
+2. 登陆、注册
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+- 第三方登录（GitHub、微博、微信，QQ）
+- 手机号注册，使用云片、腾讯云、阿里云短信服务
 
-## Security Vulnerabilities
+3. 文章
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+- 动态添加标签和分类
+- Popover 博主信息弹出框
+- 一键切换精简、大图模式
+- mavonEditor | 基于Vue的markdown 编辑器插件
+- 无限懒加载
+- 随机图片 API
+
+4. 评论系统
+
+
+- 仿简书二级评论系统
+- 邮件通知
+- 消息队列
+
+
+5. 个人空间
+
+- 引导页
+- 个人主页
+- 我的简历
+- 更新资料
+
+
+6. 其它
+
+- 面包屑导航
+- 站内搜索
+- 小屏幕 Collapse 折叠菜单
+- 友好的错误提醒界面
+- 响应式设计，全面适配小屏幕
+- wheelMenu-右下角功能菜单(回到顶部，QQ客服)
+- 简约风格，精雕细琢，返璞归真
+
+
+## Demo
+
+- https://www.mozilan.com
+
+## 交流
+
+- QQ群: 670494430
+- 公众号: LAMPer 技术栈
+
+
+## 支持
+
+- 大三学生党编写开源项目不容易，如果你觉得这个项目帮你节约了时间，不妨支持一下请我喝杯咖啡!  :blush: 
+
+![输入图片说明](https://images.gitee.com/uploads/images/2019/1030/113332_665b0874_2215545.png "在这里输入图片标题")
 
 ## License
 
-The Laravel framework is open-source software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+The LvBlog Application is open-source software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+
+
+
