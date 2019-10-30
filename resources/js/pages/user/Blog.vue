@@ -200,9 +200,9 @@
             //     this.scroll = new Bscroll(this.$refs.wrapper, {})
             // });
             // document.getElementsByClassName("blog")[0].addEventListener('scroll', this.handleScroll);
+            document.getElementsByClassName("blog")[0].addEventListener('scroll', this.handleScroll);
         },
         created(){
-            window.addEventListener('scroll', this.handleScroll);
             //console.log(this.$route.params.owner+' '+this.$route.params.draft+' '+this.$route.params.private);
             this.getArticles();
             //smoothly scroll
@@ -230,6 +230,8 @@
                 // if((_judge_bottom.getScrollTop() +_judge_bottom.getWindowHeight() == _judge_bottom.getScrollHeight()) && !this.disabled){
                 //     this.load();
                 // }
+                console.log(document.getElementById('art-side').getBoundingClientRect().bottom);
+                console.log(_judge_bottom.getWindowHeight());
                 if(((document.getElementById('art-side').getBoundingClientRect().bottom-115) <= _judge_bottom.getWindowHeight()) && !this.disabled){
                     this.load();
                 }
