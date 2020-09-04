@@ -32,7 +32,7 @@
     "floating-form-labels": "^1.2.4",
     "highlight.js": "^9.15.10",
     "mavon-editor": "^2.7.6",
-    "node-sass": "^4.12.0",
+    "node-sass": "^4.13.1",
     "vue-seamless-scroll": "^1.1.17"
   }
 }
