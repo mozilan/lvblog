@@ -30,7 +30,7 @@
     "effect-input": "^0.1.1",
     "element-ui": "^2.12.0",
     "floating-form-labels": "^1.2.4",
-    "highlight.js": "^9.15.10",
+    "highlight.js": "^10.4.1",
     "mavon-editor": "^2.7.6",
     "node-sass": "^4.12.0",
     "vue-seamless-scroll": "^1.1.17"
