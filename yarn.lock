@@ -582,6 +582,109 @@
     lodash "^4.17.13"
     to-fast-properties "^2.0.0"
 
+"@better-scroll/core@^2.2.1":
+  version "2.2.1"
+  resolved "https://registry.yarnpkg.com/@better-scroll/core/-/core-2.2.1.tgz#3e35b1f6886c712cd9a6baf6aa0b31c754721414"
+  integrity sha512-5Uap8j9tdatTVGnWKLCqzp1yEzmRKxaciURYrgng7FkjkBst5hR8YyS+YbBocUT1pAjeGS6c5Az2vaSmvN3yug==
+  dependencies:
+    "@better-scroll/shared-utils" "^2.2.1"
+
+"@better-scroll/indicators@^2.2.1":
+  version "2.2.1"
+  resolved "https://registry.yarnpkg.com/@better-scroll/indicators/-/indicators-2.2.1.tgz#cad03021f952c4191d4953bf3c4fbd8dee7b3263"
+  integrity sha512-xiOa1Ksseg2Iurvh7Q/Zt6s97FGl9s4afd0uDFsja/LiXLTOGb/IBIIqMR/WxZSrfFUpYPwQLjqmJvYYnUqopA==
+  dependencies:
+    "@better-scroll/core" "^2.2.1"
+
+"@better-scroll/infinity@^2.2.1":
+  version "2.2.1"
+  resolved "https://registry.yarnpkg.com/@better-scroll/infinity/-/infinity-2.2.1.tgz#d5aa9efdc37fe5bc388c62fe1d723826cf911d7c"
+  integrity sha512-z2TspGWE3MnN9p2r19mn5JP7I6sXZt6cwVGZtjW98T1dpJCq0gkLEfXBpD8KvLfNMuwTR8QP3TCPe9ERnDaT7Q==
+  dependencies:
+    "@better-scroll/core" "^2.2.1"
+
+"@better-scroll/mouse-wheel@^2.2.1":
+  version "2.2.1"
+  resolved "https://registry.yarnpkg.com/@better-scroll/mouse-wheel/-/mouse-wheel-2.2.1.tgz#ae4ed3c75d26724da3aa6f0ecdb7b7fdfc5cdf2d"
+  integrity sha512-u+P4Jl9Gfz/Ke0TdDrAa8GMr4tJxnseNPJmnDv879EoW31K5iVt0gCcB7Jx4A+xb9U5HWxkR/JleLdlY5Hg+pA==
+  dependencies:
+    "@better-scroll/core" "^2.2.1"
+
+"@better-scroll/movable@^2.2.1":
+  version "2.2.1"
+  resolved "https://registry.yarnpkg.com/@better-scroll/movable/-/movable-2.2.1.tgz#8bd55bf3e55275f3cea0b61a8d0ffbfab62d9a8d"
+  integrity sha512-UzQCROMbtsRhGSahdzvqUkKyyRr2ecHrtV5ZYNDRUb1q4iLjIF4Lxh3TYUBYAJYX/a5ysnZiypNmdcuPIu0E/g==
+  dependencies:
+    "@better-scroll/core" "^2.2.1"
+
+"@better-scroll/nested-scroll@^2.2.1":
+  version "2.2.1"
+  resolved "https://registry.yarnpkg.com/@better-scroll/nested-scroll/-/nested-scroll-2.2.1.tgz#61f86d113dccff49a598199c07a564c765337285"
+  integrity sha512-U87kbxOcnX9dYJ+yZDKBP/MNz9fy1JR3gVvVUlmZJO90Hwih/WXPr54QBD475RPgeVL4BLOYQ95HlEKsObdOSA==
+  dependencies:
+    "@better-scroll/core" "^2.2.1"
+
+"@better-scroll/observe-dom@^2.2.1":
+  version "2.2.1"
+  resolved "https://registry.yarnpkg.com/@better-scroll/observe-dom/-/observe-dom-2.2.1.tgz#8b206e01077ae4e84a806cfd298e9104fb1729c6"
+  integrity sha512-R2ZnvGJEVTNga907kr2KTgfuX7hyO1Coc3K8e2OXima6d1LU+2iuNEC2GwiUVlgR/XtwnhfTBvy7gGg9gChZ3w==
+  dependencies:
+    "@better-scroll/core" "^2.2.1"
+
+"@better-scroll/observe-image@^2.2.1":
+  version "2.2.1"
+  resolved "https://registry.yarnpkg.com/@better-scroll/observe-image/-/observe-image-2.2.1.tgz#6ecbc12f370b1fcd9926b17d412edad2c8e0bb8e"
+  integrity sha512-AwkqSNO6Tw2FN5N/clD490wcRw1TliLd2CnOrOke8pC3CSzzNL67Nco/PBZ5GX/sIIB/nRZMTO8iHnktVxNdoA==
+  dependencies:
+    "@better-scroll/core" "^2.2.1"
+
+"@better-scroll/pull-down@^2.2.1":
+  version "2.2.1"
+  resolved "https://registry.yarnpkg.com/@better-scroll/pull-down/-/pull-down-2.2.1.tgz#4c6b63612b595e6e1b9ea98e178f952f98e667fe"
+  integrity sha512-gaTcIGgY3B9hwGymvZIk7YJra3uFgwLYn0JwnZzWvQfLklptjQ2MK2p2VliJV+B5vDf7xuOtfxEp7sdadskQoA==
+  dependencies:
+    "@better-scroll/core" "^2.2.1"
+
+"@better-scroll/pull-up@^2.2.1":
+  version "2.2.1"
+  resolved "https://registry.yarnpkg.com/@better-scroll/pull-up/-/pull-up-2.2.1.tgz#373027d2be81844dd7c5a1ab59f3dc43f6d7a08a"
+  integrity sha512-6oXR1NZJKsePBqyiA1bJShp2gTrorAOYP8gBzotWwyC8rPUaJW9Q86VBnciVqry1MPCTXeMWNsatAYUiCCYyGw==
+  dependencies:
+    "@better-scroll/core" "^2.2.1"
+
+"@better-scroll/scroll-bar@^2.2.1":
+  version "2.2.1"
+  resolved "https://registry.yarnpkg.com/@better-scroll/scroll-bar/-/scroll-bar-2.2.1.tgz#f1f277b35dac4e1d5e40723a95aae92dc5047024"
+  integrity sha512-ryyAMKXuo3eQ9zrl1DRBNBR1iduCRxGhkBw56PYzG+Vk8D4rqHzVIFpwPVow0ZhNixGLvvSg6wzKGP+lDVc+wg==
+  dependencies:
+    "@better-scroll/core" "^2.2.1"
+
+"@better-scroll/shared-utils@^2.2.1":
+  version "2.2.1"
+  resolved "https://registry.yarnpkg.com/@better-scroll/shared-utils/-/shared-utils-2.2.1.tgz#eb024feee1d37598a9b04fc18ca0d8b31f34f704"
+  integrity sha512-EDkIp/93CcdMYyVfdIqga1edErmolEQvi9xI0lmBxYl1dSBGZxVQgAmBunqw7zXODwJOAWcS7mhcIGu0H/oS5Q==
+
+"@better-scroll/slide@^2.2.1":
+  version "2.2.1"
+  resolved "https://registry.yarnpkg.com/@better-scroll/slide/-/slide-2.2.1.tgz#165d80d7b0673b715226ee87ee722755be1241ef"
+  integrity sha512-RoYytgKue38EJP0u3Lk8fnW9hbggNg2x8FDVGbvNzkTy4T0rMdfkls5DisnCFuZaC8O6t/mCM/FWZabVVkDG3A==
+  dependencies:
+    "@better-scroll/core" "^2.2.1"
+
+"@better-scroll/wheel@^2.2.1":
+  version "2.2.1"
+  resolved "https://registry.yarnpkg.com/@better-scroll/wheel/-/wheel-2.2.1.tgz#d86732a5aeaf338a77f1790923c22936089db3b2"
+  integrity sha512-/b247FVHRfm0OWusdeIU0xeASOho7tHSiYf6HJtmdD1YuDGZJBzzrt90JMslqs7sr6oqOJ1VCsCOK7C3pOYJmQ==
+  dependencies:
+    "@better-scroll/core" "^2.2.1"
+
+"@better-scroll/zoom@^2.2.1":
+  version "2.2.1"
+  resolved "https://registry.yarnpkg.com/@better-scroll/zoom/-/zoom-2.2.1.tgz#2af518c17ed3e75c6a3155c70b673d33a75fc399"
+  integrity sha512-Sy5BY7W7/civJKFa2roINNhbM+Mz2Mefsd9vNKWIeQbe5FtpKd85RpjsmEPHvzZdT8SJhpAQRQoynui3gH4llQ==
+  dependencies:
+    "@better-scroll/core" "^2.2.1"
+
 "@mrmlnc/readdir-enhanced@^2.2.1":
   version "2.2.1"
   resolved "https://registry.npm.taobao.org/@mrmlnc/readdir-enhanced/download/@mrmlnc/readdir-enhanced-2.2.1.tgz#524af240d1a360527b730475ecfa1344aa540dde"
@@ -1100,6 +1203,26 @@ bcrypt-pbkdf@^1.0.0:
   dependencies:
     tweetnacl "^0.14.3"
 
+better-scroll@^2.0.0-beta.2:
+  version "2.2.1"
+  resolved "https://registry.yarnpkg.com/better-scroll/-/better-scroll-2.2.1.tgz#12a4226e48335eb6b749b1882cfa32036aecde89"
+  integrity sha512-yoQdvxJx8+02E1erR9sJvwnYAEGf2ullY5AQWmF9qRuJutQzpT+9nTsvX0lsgUr+xKnOeg8kCK29j6aqsYwj+A==
+  dependencies:
+    "@better-scroll/core" "^2.2.1"
+    "@better-scroll/indicators" "^2.2.1"
+    "@better-scroll/infinity" "^2.2.1"
+    "@better-scroll/mouse-wheel" "^2.2.1"
+    "@better-scroll/movable" "^2.2.1"
+    "@better-scroll/nested-scroll" "^2.2.1"
+    "@better-scroll/observe-dom" "^2.2.1"
+    "@better-scroll/observe-image" "^2.2.1"
+    "@better-scroll/pull-down" "^2.2.1"
+    "@better-scroll/pull-up" "^2.2.1"
+    "@better-scroll/scroll-bar" "^2.2.1"
+    "@better-scroll/slide" "^2.2.1"
+    "@better-scroll/wheel" "^2.2.1"
+    "@better-scroll/zoom" "^2.2.1"
+
 big.js@^5.2.2:
   version "5.2.2"
   resolved "https://registry.npm.taobao.org/big.js/download/big.js-5.2.2.tgz#65f0af382f578bcdc742bd9c281e9cb2d7768328"
@@ -1123,9 +1246,10 @@ bluebird@^3.1.1, bluebird@^3.5.5:
   version "3.5.5"
   resolved "https://registry.npm.taobao.org/bluebird/download/bluebird-3.5.5.tgz#a8d0afd73251effbbd5fe384a77d73003c17a71f"
 
-bn.js@^4.0.0, bn.js@^4.1.0, bn.js@^4.1.1, bn.js@^4.4.0:
-  version "4.11.8"
-  resolved "https://registry.npm.taobao.org/bn.js/download/bn.js-4.11.8.tgz#2cde09eb5ee341f484746bb0309b3253b1b1442f"
+bn.js@^4.0.0, bn.js@^4.1.0, bn.js@^4.1.1, bn.js@^4.11.9:
+  version "4.12.0"
+  resolved "https://registry.yarnpkg.com/bn.js/-/bn.js-4.12.0.tgz#775b3f278efbb9718eec7361f483fb36fbbfea88"
+  integrity sha512-c98Bf3tPniI+scsdk237ku1Dc3ujXQTSgyiPUDEOe7tRkhrqridvh8klBv0HCEso1OLOYcHuCv/cS6DNxKH+ZA==
 
 body-parser@1.19.0:
   version "1.19.0"
@@ -1185,9 +1309,10 @@ braces@^3.0.2:
   dependencies:
     fill-range "^7.0.1"
 
-brorand@^1.0.1:
+brorand@^1.0.1, brorand@^1.1.0:
   version "1.1.0"
-  resolved "https://registry.npm.taobao.org/brorand/download/brorand-1.1.0.tgz#12c25efe40a45e3c323eb8675a0a0ce57b22371f"
+  resolved "https://registry.yarnpkg.com/brorand/-/brorand-1.1.0.tgz#12c25efe40a45e3c323eb8675a0a0ce57b22371f"
+  integrity sha1-EsJe/kCkXjwyPrhnWgoM5XsiNx8=
 
 browserify-aes@^1.0.0, browserify-aes@^1.0.4:
   version "1.2.0"
@@ -2224,16 +2349,17 @@ element-ui@^2.12.0:
     throttle-debounce "^1.0.1"
 
 elliptic@^6.0.0:
-  version "6.5.0"
-  resolved "https://registry.npm.taobao.org/elliptic/download/elliptic-6.5.0.tgz?cache=0&sync_timestamp=1561521858170&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Felliptic%2Fdownload%2Felliptic-6.5.0.tgz#2b8ed4c891b7de3200e14412a5b8248c7af505ca"
+  version "6.5.4"
+  resolved "https://registry.yarnpkg.com/elliptic/-/elliptic-6.5.4.tgz#da37cebd31e79a1367e941b592ed1fbebd58abbb"
+  integrity sha512-iLhC6ULemrljPZb+QutR5TQGB+pdW6KGD5RSegS+8sorOZT+rdQFbsQFJgvN3eRqNALqJer4oQ16YvJHlU8hzQ==
   dependencies:
-    bn.js "^4.4.0"
-    brorand "^1.0.1"
+    bn.js "^4.11.9"
+    brorand "^1.1.0"
     hash.js "^1.0.0"
-    hmac-drbg "^1.0.0"
-    inherits "^2.0.1"
-    minimalistic-assert "^1.0.0"
-    minimalistic-crypto-utils "^1.0.0"
+    hmac-drbg "^1.0.1"
+    inherits "^2.0.4"
+    minimalistic-assert "^1.0.1"
+    minimalistic-crypto-utils "^1.0.1"
 
 emoji-regex@^7.0.1:
   version "7.0.3"
@@ -2968,7 +3094,8 @@ hash-sum@^1.0.2:
 
 hash.js@^1.0.0, hash.js@^1.0.3:
   version "1.1.7"
-  resolved "https://registry.npm.taobao.org/hash.js/download/hash.js-1.1.7.tgz#0babca538e8d4ee4a0f8988d68866537a003cf42"
+  resolved "https://registry.yarnpkg.com/hash.js/-/hash.js-1.1.7.tgz#0babca538e8d4ee4a0f8988d68866537a003cf42"
+  integrity sha512-taOaskGt4z4SOANNseOviYDvjEJinIkRgmp7LbKP2YTTmVxWBl87s/uzK9r+44BclBSp2X7K1hqeNfz9JbBeXA==
   dependencies:
     inherits "^2.0.3"
     minimalistic-assert "^1.0.1"
@@ -2990,9 +3117,10 @@ highlight.js@^9.11.0, highlight.js@^9.15.10:
   resolved "https://registry.yarnpkg.com/highlight.js/-/highlight.js-9.15.10.tgz#7b18ed75c90348c045eef9ed08ca1319a2219ad2"
   integrity sha512-RoV7OkQm0T3os3Dd2VHLNMoaoDVx77Wygln3n9l5YV172XonWG6rgQD3XnF/BuFFZw9A0TJgmMSO8FEWQgvcXw==
 
-hmac-drbg@^1.0.0:
+hmac-drbg@^1.0.1:
   version "1.0.1"
-  resolved "https://registry.npm.taobao.org/hmac-drbg/download/hmac-drbg-1.0.1.tgz#d2745701025a6c775a6c545793ed502fc0c649a1"
+  resolved "https://registry.yarnpkg.com/hmac-drbg/-/hmac-drbg-1.0.1.tgz#d2745701025a6c775a6c545793ed502fc0c649a1"
+  integrity sha1-0nRXAQJabHdabFRXk+1QL8DGSaE=
   dependencies:
     hash.js "^1.0.3"
     minimalistic-assert "^1.0.0"
@@ -3231,7 +3359,7 @@ inflight@^1.0.4:
     once "^1.3.0"
     wrappy "1"
 
-inherits@2, inherits@2.0.4, inherits@^2.0.1, inherits@^2.0.3, inherits@~2.0.0, inherits@~2.0.1, inherits@~2.0.3:
+inherits@2, inherits@2.0.4, inherits@^2.0.1, inherits@^2.0.3, inherits@^2.0.4, inherits@~2.0.0, inherits@~2.0.1, inherits@~2.0.3:
   version "2.0.4"
   resolved "https://registry.npm.taobao.org/inherits/download/inherits-2.0.4.tgz#0fa2c64f932917c3433a0ded55363aae37416b7c"
 
@@ -4043,11 +4171,13 @@ mimic-fn@^2.0.0:
 
 minimalistic-assert@^1.0.0, minimalistic-assert@^1.0.1:
   version "1.0.1"
-  resolved "https://registry.npm.taobao.org/minimalistic-assert/download/minimalistic-assert-1.0.1.tgz#2e194de044626d4a10e7f7fbc00ce73e83e4d5c7"
+  resolved "https://registry.yarnpkg.com/minimalistic-assert/-/minimalistic-assert-1.0.1.tgz#2e194de044626d4a10e7f7fbc00ce73e83e4d5c7"
+  integrity sha512-UtJcAD4yEaGtjPezWuO9wC4nwUnVH/8/Im3yEHQP4b67cXlD/Qr9hdITCU1xDbSEXg2XKNaP8jsReV7vQd00/A==
 
-minimalistic-crypto-utils@^1.0.0, minimalistic-crypto-utils@^1.0.1:
+minimalistic-crypto-utils@^1.0.1:
   version "1.0.1"
-  resolved "https://registry.npm.taobao.org/minimalistic-crypto-utils/download/minimalistic-crypto-utils-1.0.1.tgz#f6c00c1c0b082246e5c4d99dfb8c7c083b2b582a"
+  resolved "https://registry.yarnpkg.com/minimalistic-crypto-utils/-/minimalistic-crypto-utils-1.0.1.tgz#f6c00c1c0b082246e5c4d99dfb8c7c083b2b582a"
+  integrity sha1-9sAMHAsIIkblxNmd+4x8CDsrWCo=
 
 minimatch@^3.0.4, minimatch@~3.0.2:
   version "3.0.4"
