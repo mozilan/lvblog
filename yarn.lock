@@ -582,6 +582,109 @@
     lodash "^4.17.13"
     to-fast-properties "^2.0.0"
 
+"@better-scroll/core@^2.3.1":
+  version "2.3.1"
+  resolved "https://registry.yarnpkg.com/@better-scroll/core/-/core-2.3.1.tgz#4c29a3b7ea462c659dba0a288a060ddb1a4dde14"
+  integrity sha512-X/10f+1Rxxpad4h8NmToVToED3+vRJIAhMaoXDIOUJ6Glq+ruImxpKStuZ663Ceu+yk2j3TtBwHeOBHWtx8rxA==
+  dependencies:
+    "@better-scroll/shared-utils" "^2.3.1"
+
+"@better-scroll/indicators@^2.3.1":
+  version "2.3.1"
+  resolved "https://registry.yarnpkg.com/@better-scroll/indicators/-/indicators-2.3.1.tgz#e9ef087f38d16ced3e873f80b41d9ab07d4224d3"
+  integrity sha512-ovIFMfHM98meTemsQXNQLJQgqjYIku3eSo5b6Dopiu+ha2oD8mnPjD9SdcOLd6OrIaWdIEyxfMMfz65oqIWJKw==
+  dependencies:
+    "@better-scroll/core" "^2.3.1"
+
+"@better-scroll/infinity@^2.3.1":
+  version "2.3.1"
+  resolved "https://registry.yarnpkg.com/@better-scroll/infinity/-/infinity-2.3.1.tgz#862d5afeb51224dbff4d7ed477cefd94fecff164"
+  integrity sha512-0Whvyv7tTNEb5R+8A493Br9L3T2hB1bpYGcWjDPMyD/vNJn8NfgqBShIYdkqqoZywd/cI6WcEf7wfTqC2W1kGw==
+  dependencies:
+    "@better-scroll/core" "^2.3.1"
+
+"@better-scroll/mouse-wheel@^2.3.1":
+  version "2.3.1"
+  resolved "https://registry.yarnpkg.com/@better-scroll/mouse-wheel/-/mouse-wheel-2.3.1.tgz#486f72cac74d8bdf46524d4aac68bb6f273016dd"
+  integrity sha512-IN1EH23y/RoGk4NB93uruoFltbL0DCa45tLy0npCCAwf2dy5ZppJfXjP5Z+L2165AKN7tCjST551yOh5ZPlSvA==
+  dependencies:
+    "@better-scroll/core" "^2.3.1"
+
+"@better-scroll/movable@^2.3.1":
+  version "2.3.1"
+  resolved "https://registry.yarnpkg.com/@better-scroll/movable/-/movable-2.3.1.tgz#82bfbccf5fad84443b465616b2d14a40b13995a1"
+  integrity sha512-4wDvTbtmNar/0y0WJEY0hAOjFcyqz7qFChP4jeHvufcDHW1lKDzY3MZKs5NXiskdHvz68q1AItKxVLRZNPwjhQ==
+  dependencies:
+    "@better-scroll/core" "^2.3.1"
+
+"@better-scroll/nested-scroll@^2.3.1":
+  version "2.3.1"
+  resolved "https://registry.yarnpkg.com/@better-scroll/nested-scroll/-/nested-scroll-2.3.1.tgz#d8ca13cec7e36449a1536c26b52fe633dc68c914"
+  integrity sha512-w/qbUtZRoeTZTHQ3KlMCDB0rA51jiJpWvJKsM8k/wM5WC+hin5VE2jq90PP8vIrNhH5gJlRbrK70Da12hd4lbQ==
+  dependencies:
+    "@better-scroll/core" "^2.3.1"
+
+"@better-scroll/observe-dom@^2.3.1":
+  version "2.3.1"
+  resolved "https://registry.yarnpkg.com/@better-scroll/observe-dom/-/observe-dom-2.3.1.tgz#bfb09456305b8a47dae60804d7647f9db36ae104"
+  integrity sha512-d1syBdrRuhdkUcNSwfu/fEIcWKlxeVgfUiMAbVw4iUp7jLQVZe8hKsBXU0zHy+CMW++mqoeuPK6owBjIohH8eQ==
+  dependencies:
+    "@better-scroll/core" "^2.3.1"
+
+"@better-scroll/observe-image@^2.3.1":
+  version "2.3.1"
+  resolved "https://registry.yarnpkg.com/@better-scroll/observe-image/-/observe-image-2.3.1.tgz#85bc754dcd88cdcba358897376715fac3150329a"
+  integrity sha512-aVj6T/HqIn/QOfGMd3+ofvf+QRTKR1whLySPRkwKQYv8nVy9gjvsKwH6dp3EfTvASP1xGD0jC+Th7dh8oN4X4Q==
+  dependencies:
+    "@better-scroll/core" "^2.3.1"
+
+"@better-scroll/pull-down@^2.3.1":
+  version "2.3.1"
+  resolved "https://registry.yarnpkg.com/@better-scroll/pull-down/-/pull-down-2.3.1.tgz#275ac78f83e9207dbc5a374173375b7df763d09c"
+  integrity sha512-R4Q0Ce1Mv2s3TtPzhAVdMEoDLn7qXmr7qUVZjlr4mlLIGmY1Fmk/PzO65kSiDL4PylFfHusUnguJVRcWxjB3oA==
+  dependencies:
+    "@better-scroll/core" "^2.3.1"
+
+"@better-scroll/pull-up@^2.3.1":
+  version "2.3.1"
+  resolved "https://registry.yarnpkg.com/@better-scroll/pull-up/-/pull-up-2.3.1.tgz#9b167d8e28455c112e6098b6ce9656a67c07b090"
+  integrity sha512-e4RY2ANG4DFMCw7twvDD68pWtgSFwCJiPekAQoep+2z3j5319Z82kFMsPKa22UEpVLUcvuOhzKH2v0Kwb0l9Lg==
+  dependencies:
+    "@better-scroll/core" "^2.3.1"
+
+"@better-scroll/scroll-bar@^2.3.1":
+  version "2.3.1"
+  resolved "https://registry.yarnpkg.com/@better-scroll/scroll-bar/-/scroll-bar-2.3.1.tgz#f66efc342f771ade52016a721a2a6154833b51cf"
+  integrity sha512-WlXpp1cG53djcht7FMs76w1TR1w/xrPTuSjYWgYGjl0z9LbNL4ednFbWECS34yNyWxi3g2R+IrboCxueNyUJYg==
+  dependencies:
+    "@better-scroll/core" "^2.3.1"
+
+"@better-scroll/shared-utils@^2.3.1":
+  version "2.3.1"
+  resolved "https://registry.yarnpkg.com/@better-scroll/shared-utils/-/shared-utils-2.3.1.tgz#e863a6ed32aa79d37870dafe26b052827017a88f"
+  integrity sha512-w0VjSDAYArTnq1PyDoikdHlOTNrNVgWeYZCej3iVC/JQuhHH/wpROPUFjdF9hz8REF4+ACluX9Y+fMYy5do5vA==
+
+"@better-scroll/slide@^2.3.1":
+  version "2.3.1"
+  resolved "https://registry.yarnpkg.com/@better-scroll/slide/-/slide-2.3.1.tgz#9177028ff6dcd866ba4fdd4ca87d5cf54bf57684"
+  integrity sha512-MZACjWABJ/pKdpns42LUXjNbXGAcEaWWQalukZgL870XF6Bd2qNTsXfz1ykNUuoaDcY9Ruh7iCwa7gZ078oKBw==
+  dependencies:
+    "@better-scroll/core" "^2.3.1"
+
+"@better-scroll/wheel@^2.3.1":
+  version "2.3.1"
+  resolved "https://registry.yarnpkg.com/@better-scroll/wheel/-/wheel-2.3.1.tgz#f64776724f3287a7c420d238a175a7b3c8c85685"
+  integrity sha512-ANmKSsY8IKnyPgcCDamMi+MNRvNbtGmu13wcv/GgVhNMGem9fwf/BtWEE2TFxga3xR98cESJAqqrWgdl9oGCvg==
+  dependencies:
+    "@better-scroll/core" "^2.3.1"
+
+"@better-scroll/zoom@^2.3.1":
+  version "2.3.1"
+  resolved "https://registry.yarnpkg.com/@better-scroll/zoom/-/zoom-2.3.1.tgz#0addef4a5dacd3d3b8f23fa6a937bdec05338b0e"
+  integrity sha512-29d8GxVxUo2v3rTwhJBKvI9sUWWQPiRGeKq7Nl3rXwY8iDeRlI4XDpy0vW6zxdgTjskl1P3VvzpnJKXVlZpmaA==
+  dependencies:
+    "@better-scroll/core" "^2.3.1"
+
 "@mrmlnc/readdir-enhanced@^2.2.1":
   version "2.2.1"
   resolved "https://registry.npm.taobao.org/@mrmlnc/readdir-enhanced/download/@mrmlnc/readdir-enhanced-2.2.1.tgz#524af240d1a360527b730475ecfa1344aa540dde"
@@ -1100,6 +1203,26 @@ bcrypt-pbkdf@^1.0.0:
   dependencies:
     tweetnacl "^0.14.3"
 
+better-scroll@^2.0.0-beta.2:
+  version "2.3.1"
+  resolved "https://registry.yarnpkg.com/better-scroll/-/better-scroll-2.3.1.tgz#56acf254adc09528c5f6d6e0be216932674944e9"
+  integrity sha512-/J6HI8pWbrj3GzhJsXIlczogTuhlJIFVzhWWXXpDrm0Rbm1xHl1eVNHMaIESlXU2xNp57nTgInRqPPcdSm0xag==
+  dependencies:
+    "@better-scroll/core" "^2.3.1"
+    "@better-scroll/indicators" "^2.3.1"
+    "@better-scroll/infinity" "^2.3.1"
+    "@better-scroll/mouse-wheel" "^2.3.1"
+    "@better-scroll/movable" "^2.3.1"
+    "@better-scroll/nested-scroll" "^2.3.1"
+    "@better-scroll/observe-dom" "^2.3.1"
+    "@better-scroll/observe-image" "^2.3.1"
+    "@better-scroll/pull-down" "^2.3.1"
+    "@better-scroll/pull-up" "^2.3.1"
+    "@better-scroll/scroll-bar" "^2.3.1"
+    "@better-scroll/slide" "^2.3.1"
+    "@better-scroll/wheel" "^2.3.1"
+    "@better-scroll/zoom" "^2.3.1"
+
 big.js@^5.2.2:
   version "5.2.2"
   resolved "https://registry.npm.taobao.org/big.js/download/big.js-5.2.2.tgz#65f0af382f578bcdc742bd9c281e9cb2d7768328"
@@ -1243,12 +1366,15 @@ browserify-zlib@^0.2.0:
     pako "~1.0.5"
 
 browserslist@^4.0.0, browserslist@^4.6.0, browserslist@^4.6.3, browserslist@^4.6.6:
-  version "4.7.0"
-  resolved "https://registry.npm.taobao.org/browserslist/download/browserslist-4.7.0.tgz?cache=0&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fbrowserslist%2Fdownload%2Fbrowserslist-4.7.0.tgz#9ee89225ffc07db03409f2fee524dc8227458a17"
+  version "4.16.6"
+  resolved "https://registry.yarnpkg.com/browserslist/-/browserslist-4.16.6.tgz#d7901277a5a88e554ed305b183ec9b0c08f66fa2"
+  integrity sha512-Wspk/PqO+4W9qp5iUTJsa1B/QrYn1keNCcEP5OvP7WBwT4KaDly0uONYmC6Xa3Z5IqnUgS0KcgLYu1l74x0ZXQ==
   dependencies:
-    caniuse-lite "^1.0.30000989"
-    electron-to-chromium "^1.3.247"
-    node-releases "^1.1.29"
+    caniuse-lite "^1.0.30001219"
+    colorette "^1.2.2"
+    electron-to-chromium "^1.3.723"
+    escalade "^3.1.1"
+    node-releases "^1.1.71"
 
 buffer-from@^1.0.0:
   version "1.1.1"
@@ -1382,9 +1508,10 @@ caniuse-api@^3.0.0:
     lodash.memoize "^4.1.2"
     lodash.uniq "^4.5.0"
 
-caniuse-lite@^1.0.0, caniuse-lite@^1.0.30000980, caniuse-lite@^1.0.30000989:
-  version "1.0.30000989"
-  resolved "https://registry.npm.taobao.org/caniuse-lite/download/caniuse-lite-1.0.30000989.tgz#b9193e293ccf7e4426c5245134b8f2a56c0ac4b9"
+caniuse-lite@^1.0.0, caniuse-lite@^1.0.30000980, caniuse-lite@^1.0.30001219:
+  version "1.0.30001228"
+  resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30001228.tgz#bfdc5942cd3326fa51ee0b42fbef4da9d492a7fa"
+  integrity sha512-QQmLOGJ3DEgokHbMSA8cj2a+geXqmnpyOFT0lhQV6P3/YOJvGDEwoedcwxEQ30gJIwIIunHIicunJ2rzK5gB2A==
 
 caseless@~0.12.0:
   version "0.12.0"
@@ -1557,6 +1684,11 @@ color@^3.0.0:
   dependencies:
     color-convert "^1.9.1"
     color-string "^1.5.2"
+
+colorette@^1.2.2:
+  version "1.2.2"
+  resolved "https://registry.yarnpkg.com/colorette/-/colorette-1.2.2.tgz#cbcc79d5e99caea2dbf10eb3a26fd8b3e6acfa94"
+  integrity sha512-MKGMzyfeuutC/ZJ1cba9NqcNpfeqMUcYmyF1ZFY6/Cn7CNSAKx6a+s48sqLqyAiZuaP2TcqMhoo+dlwFnVxT9w==
 
 combined-stream@^1.0.6, combined-stream@~1.0.6:
   version "1.0.8"
@@ -2208,9 +2340,10 @@ effect-input@^0.1.1:
   dependencies:
     vue "^2.5.0"
 
-electron-to-chromium@^1.3.247:
-  version "1.3.251"
-  resolved "https://registry.npm.taobao.org/electron-to-chromium/download/electron-to-chromium-1.3.251.tgz?cache=0&sync_timestamp=1567483368396&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Felectron-to-chromium%2Fdownload%2Felectron-to-chromium-1.3.251.tgz#8dbfe0d5c5d884c456d3d8d83fcb3258ab9eba3a"
+electron-to-chromium@^1.3.723:
+  version "1.3.738"
+  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.3.738.tgz#aec24b091c82acbfabbdcce08076a703941d17ca"
+  integrity sha512-vCMf4gDOpEylPSLPLSwAEsz+R3ShP02Y3cAKMZvTqule3XcPp7tgc/0ESI7IS6ZeyBlGClE50N53fIOkcIVnpw==
 
 element-ui@^2.12.0:
   version "2.12.0"
@@ -2317,6 +2450,11 @@ es6-templates@^0.2.3:
   dependencies:
     recast "~0.11.12"
     through "~2.3.6"
+
+escalade@^3.1.1:
+  version "3.1.1"
+  resolved "https://registry.yarnpkg.com/escalade/-/escalade-3.1.1.tgz#d8cfdc7000965c5a0174b4a82eaa5c0552742e40"
+  integrity sha512-k0er2gUkLf8O0zKJiAhmkTnJlTvINGv7ygDNPbeIsX/TJjGJZHuh9B2UxbsaEkmlEo9MfhrSzmhIlhRlI2GXnw==
 
 escape-html@~1.0.3:
   version "1.0.3"
@@ -4261,11 +4399,10 @@ node-pre-gyp@^0.12.0:
     semver "^5.3.0"
     tar "^4"
 
-node-releases@^1.1.29:
-  version "1.1.29"
-  resolved "https://registry.npm.taobao.org/node-releases/download/node-releases-1.1.29.tgz#86a57c6587a30ecd6726449e5d293466b0a0bb86"
-  dependencies:
-    semver "^5.3.0"
+node-releases@^1.1.71:
+  version "1.1.72"
+  resolved "https://registry.yarnpkg.com/node-releases/-/node-releases-1.1.72.tgz#14802ab6b1039a79a0c7d662b610a5bbd76eacbe"
+  integrity sha512-LLUo+PpH3dU6XizX3iVoubUNheF/owjXCZZ5yACDxNnPtgFuludV1ZL3ayK1kVep42Rmm0+R9/Y60NQbZ2bifw==
 
 node-sass@^4.12.0:
   version "4.12.0"
